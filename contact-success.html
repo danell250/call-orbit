@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thank You — CallOrbit</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Thank You</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
@@ -11,65 +11,103 @@
   </svg>">
   <style>
     body {
-      display:flex; justify-content:center; align-items:center;
-      height:100vh; text-align:center; background:#f0f4ff;
-      font-family:sans-serif; overflow:hidden;
+      text-align: center;
+      padding: 4rem 1rem;
+      font-family: Arial, sans-serif;
     }
-    h1 { font-size:2rem; color:#1e3a8a; margin-bottom:0.5rem; }
-    p { font-size:1.1rem; margin-bottom:1rem; }
     .checkmark {
-      width:80px; height:80px; border-radius:50%;
-      display:inline-block; border: 4px solid #3b82f6;
-      position:relative; animation: pop 0.6s ease-out forwards;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 2rem;
+      border-radius: 50%;
+      display: inline-block;
+      border: 4px solid #3b82f6;
+      position: relative;
+      animation: pop 0.6s ease forwards;
     }
-    .checkmark:after {
-      content:''; position:absolute; left:22px; top:40px;
-      width:18px; height:8px; border-left:4px solid #3b82f6;
-      border-bottom:4px solid #3b82f6; transform: rotate(-45deg);
+    .checkmark::after {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 50px;
+      width: 25px;
+      height: 12px;
+      border-left: 4px solid #3b82f6;
+      border-bottom: 4px solid #3b82f6;
+      transform: rotate(-45deg);
+      opacity: 0;
+      animation: check 0.5s 0.5s forwards;
     }
     @keyframes pop {
       0% { transform: scale(0); }
       70% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
-    .btn-home {
-      display:inline-block; margin-top:1rem;
-      padding:0.6rem 1.2rem; background:#3b82f6;
-      color:#fff; text-decoration:none; border-radius:6px;
-      transition:0.3s;
+    @keyframes check {
+      to { opacity: 1; }
     }
-    .btn-home:hover { background:#2563eb; }
-
-    /* Simple confetti animation */
-    .confetti {
-      position: absolute; width:8px; height:8px; background:#f59e0b;
-      top:0; animation: fall 3s linear infinite;
-      opacity:0.8;
-    }
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
+    #confetti-canvas {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:9999;
     }
   </style>
 </head>
 <body>
-  <div>
-    <div class="checkmark"></div>
-    <h1>Thanks for contacting us!</h1>
-    <p>We’ve received your message and will get back to you shortly.</p>
-    <a href="/" class="btn-home">Return to Home</a>
-  </div>
+  <canvas id="confetti-canvas"></canvas>
 
-  <!-- Generate some confetti -->
+  <div class="checkmark"></div>
+  <h1>Thank You!</h1>
+  <p>Your message has been sent successfully. Our team will contact you shortly.</p>
+  <a href="/" class="btn primary">Back to Home</a>
+
   <script>
-    for(let i=0;i<50;i++){
-      let c = document.createElement('div');
-      c.className='confetti';
-      c.style.left=Math.random()*100+'vw';
-      c.style.background=['#f59e0b','#10b981','#3b82f6','#ef4444'][Math.floor(Math.random()*4)];
-      c.style.animationDuration=(2+Math.random()*3)+'s';
-      document.body.appendChild(c);
+    // Confetti animation
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confettiCount = 150;
+    const confetti = [];
+
+    for(let i=0;i<confettiCount;i++){
+      confetti.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height - canvas.height,
+        r: Math.random()*6+4,
+        d: Math.random()*confettiCount,
+        color: `hsl(${Math.random()*360},100%,50%)`,
+        tilt: Math.random()*10-10
+      });
     }
+
+    function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      confetti.forEach(c=>{
+        ctx.beginPath();
+        ctx.lineWidth=c.r;
+        ctx.strokeStyle=c.color;
+        ctx.moveTo(c.x+c.tilt+c.r/2,c.y);
+        ctx.lineTo(c.x+c.tilt,c.y+c.tilt+c.r/2);
+        ctx.stroke();
+      });
+      update();
+    }
+
+    function update() {
+      confetti.forEach(c=>{
+        c.y += (Math.cos(c.d)+3+c.r/2)/2;
+        c.x += Math.sin(c.d);
+        if(c.y>canvas.height){ c.y=-10; c.x=Math.random()*canvas.width; }
+      });
+    }
+
+    const interval = setInterval(draw,20);
+    setTimeout(()=>clearInterval(interval),2000);
   </script>
 </body>
 </html>
