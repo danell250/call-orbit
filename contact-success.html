@@ -1,31 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Thank You!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact Submitted — CallOrbit</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    .success {text-align:center; padding:5rem; animation: fadeIn 1s ease-in;}
-    .checkmark {
-      font-size:4rem; color:#34D399; animation: bounce 1s ease-in-out;
-    }
-    @keyframes bounce { 0%,100%{transform:scale(0)} 50%{transform:scale(1)} }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  </style>
 </head>
 <body>
-  <header class="hero fade-in">
-    <div class="success">
-      <div class="checkmark">✔️</div>
-      <h1>Thank you for contacting us!</h1>
-      <p>We’ve received your message and will get back to you shortly.</p>
-      <a href="/" class="btn primary">Back to Home</a>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/" >Home</a>
+      <a href="/features" >Features</a>
+      <a href="/pricing" >Pricing</a>
+      <a href="/about" >About</a>
+      <a href="/contact" class="active-page">Contact</a>
+      <a href="/coverage" >Coverage</a>
+      <a href="/platform" >Platform</a>
     </div>
-  </header>
+  </nav>
+
+  <section class="hero fade-in success" style="text-align:center; padding:4rem 2rem;">
+    <div class="checkmark">✔️</div>
+    <h1>Thank You!</h1>
+    <p>Your message has been sent successfully. Our team will contact you shortly.</p>
+    <a href="/" class="btn primary">Back to Home</a>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
