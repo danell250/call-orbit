@@ -10,17 +10,25 @@
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
   <style>
-    .contact-iframe-container {
-      max-width: 700px;
+    .contact-section {
+      max-width: 800px;
       margin: 2rem auto;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      text-align: center;
     }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: 0;
+    .contact-section h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    .contact-section p {
+      margin-bottom: 2rem;
+      color: #374151;
+    }
+    .youform-container {
+      background:#f9f9f9;
+      padding:2rem;
+      border-radius:1rem;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -40,19 +48,14 @@
 
   <header class="hero fade-in">
     <h1>Contact Us</h1>
-    <p>We’d love to hear from you. Fill in your details and we’ll be in touch within 24 hours.</p>
+    <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
   </header>
 
-  <section class="fade-in">
-    <div class="contact-iframe-container">
-      <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfcPvBTnvat5yS4_c4CVPqMO1u5QSgTw0kvxZ4dy2zk391yzg/viewform?embedded=true"
-        marginheight="0" 
-        marginwidth="0"
-        title="Contact Form">
-        Loading…
-      </iframe>
+  <section class="contact-section fade-in">
+    <div class="youform-container">
+      <div data-youform-embed data-form='fijvax5k' data-width='100%' data-height='700'></div>
     </div>
+    <script src="https://app.youform.com/embed.js"></script>
   </section>
 
   <footer>
