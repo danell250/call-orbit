@@ -5,10 +5,66 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Contact</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
+  <style>
+    header.hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff;
+      border-radius: 1rem;
+      margin: 2rem;
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #1e1e2f;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+    .contact-form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.25rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background: #2c2c3e;
+      color: #fff;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 2px solid #3b82f6;
+    }
+    .contact-form button {
+      background: #3b82f6;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #2563eb;
+    }
+    .thank-you {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .thank-you.visible {
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -25,18 +81,38 @@
   </nav>
 
   <header class="hero fade-in">
-    <h1>Contact CallOrbit</h1>
-    <p>Get in touch with our team for support or inquiries.</p>
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
   </header>
 
   <section class="fade-in">
-    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg" class="contact-form">
-      <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html" />
-      <input required name="name" placeholder="Your Name" />
-      <input required type="email" name="email" placeholder="Your Email" />
-      <textarea required name="message" placeholder="Your Message"></textarea>
-      <button type="submit" class="btn primary">Send Message</button>
+    <form 
+      class="contact-form"
+      action="https://formspree.io/f/your-form-id" 
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="showThankYou()"
+    >
+      <input type="hidden" name="_next" value="https://callorbit.netlify.app/contact.html#thank-you" />
+      
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
     </form>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <div id="thank-you" class="thank-you">
+      <h2>✅ Thank you!</h2>
+      <p>Your message has been sent. We’ll get back to you shortly.</p>
+    </div>
   </section>
 
   <footer>
@@ -45,6 +121,15 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    function showThankYou() {
+      setTimeout(() => {
+        document.querySelector('.contact-form').style.display = 'none';
+        document.getElementById('thank-you').classList.add('visible');
+      }, 800);
+    }
+
+    // Fade-in effect
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {

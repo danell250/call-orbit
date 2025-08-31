@@ -9,38 +9,97 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    .feature img.flag {
+      width: 24px;
+      height: 16px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      transition: transform 0.3s;
+    }
+    .feature img.flag:hover {
+      transform: scale(1.3);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .feature {
+      background: #1e1e2f;
+      color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    header.hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      color: #fff;
+      border-radius: 1rem;
+      margin: 2rem;
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage" class="active-page">Coverage</a>
-      <a href="/platform">Platform</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="coverage.html" class="active-page">Coverage</a>
+      <a href="platform.html">Platform</a>
     </div>
   </nav>
 
   <header class="hero fade-in">
-    <h1>Coverage</h1>
-    <p>Our services are available across multiple regions to support your teams anywhere.</p>
+    <h1>Global Coverage</h1>
+    <p>CallOrbit connects your contact center with customers everywhere.</p>
   </header>
 
   <section class="features features-grid fade-in">
     <div class="feature">
-      <h3>North America</h3>
-      <p>Full service for U.S. and Canada contact centers.</p>
+      <h3><img src="https://flagcdn.com/us.svg" class="flag">North America</h3>
+      <p>Reliable numbers and infrastructure across the U.S. and Canada.</p>
     </div>
     <div class="feature">
-      <h3>Europe</h3>
-      <p>Supporting teams across EU countries with local numbers.</p>
+      <h3><img src="https://flagcdn.com/eu.svg" class="flag">Europe</h3>
+      <p>Coverage in major European cities with local number support.</p>
     </div>
     <div class="feature">
-      <h3>Asia-Pacific</h3>
-      <p>Extensive coverage and number porting capabilities.</p>
+      <h3><img src="https://flagcdn.com/jp.svg" class="flag">Asia-Pacific</h3>
+      <p>Seamless connectivity in APAC regions for global teams.</p>
+    </div>
+    <div class="feature">
+      <h3><img src="https://flagcdn.com/br.svg" class="flag">Latin America</h3>
+      <p>Local numbers and support to expand your reach across South and Central America.</p>
+    </div>
+    <div class="feature">
+      <h3><img src="https://flagcdn.com/za.svg" class="flag">Africa</h3>
+      <p>Growing infrastructure with key hubs in South Africa, Nigeria, and Kenya.</p>
+    </div>
+    <div class="feature">
+      <h3><img src="https://flagcdn.com/ae.svg" class="flag">Middle East</h3>
+      <p>Connect with customers in UAE, Saudi Arabia, and beyond with ease.</p>
+    </div>
+    <div class="feature">
+      <h3><img src="https://flagcdn.com/au.svg" class="flag">Oceania</h3>
+      <p>Reliable numbers in Australia, New Zealand, and the Pacific islands.</p>
+    </div>
+    <div class="feature">
+      <h3>🌍 Global Roaming</h3>
+      <p>Keep your business connected worldwide with virtual numbers and porting options.</p>
     </div>
   </section>
 
