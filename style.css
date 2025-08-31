@@ -1,0 +1,175 @@
+/* ===== Base Styles ===== */
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  color: #e6eef8;
+  background: #0f172a;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(11,18,32,0.95);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  margin-left: 24px;
+  font-weight: 500;
+}
+
+nav a.active-page {
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 2px;
+}
+
+header, section {
+  padding: 64px 32px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  color: #3b82f6;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: #94a3b8;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn.primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn.primary:hover {
+  transform: scale(1.05);
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+}
+
+.btn.secondary:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Features & Plans Grids ===== */
+.features-grid,
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.feature, .plan {
+  background: rgba(255,255,255,0.03);
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.feature:hover, .plan:hover {
+  transform: translateY(-4px);
+  background: rgba(59,130,246,0.1);
+}
+
+.plan p {
+  margin: 12px 0;
+}
+
+/* ===== Forms ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: inherit;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ===== Footer ===== */
+footer {
+  padding: 32px;
+  text-align: center;
+  color: #94a3b8;
+  background: #071428;
+  margin-top: 32px;
+}
+
+/* ===== Animations ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav div:nth-child(2) {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav a {
+    margin-left: 0;
+    margin-right: 16px;
+    margin-bottom: 8px;
+  }
+}

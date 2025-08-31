@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%2300d8ff'/>
+  </svg>">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="logo"><a href="index.html"><strong>CallOrbit</strong></a></div>
+    <div class="nav-links">
+      <a href="index.html" class="active-page">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-content">
+      <h1>Separate and Simplify <span class="highlight">Contact Center Management</span></h1>
+      <p>Dedicated dashboards, portals, number porting, and analytics for each location.</p>
+      <a href="features.html" class="cta-btn">Explore Features</a>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features-grid">
+    <div class="feature-card">
+      <h3>Live Dashboards</h3>
+      <p>Track metrics, alerts, and trends in real-time.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Manage Contact Centers Easily</h3>
+      <p>Separate portals and access controls for each center.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Number Management & Porting</h3>
+      <p>Buy and port numbers globally without hassle.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Analytics & Reporting</h3>
+      <p>Custom reports and insights for every team.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fade-in animation
+    const faders = document.querySelectorAll('.feature-card, .hero-content');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Hero Canvas Animation: Abstract Globe & Lines
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 0.6;
+
+    const points = [];
+    const pointCount = 100;
+
+    for(let i=0; i<pointCount; i++){
+      points.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        vx: (Math.random()-0.5)*0.5,
+        vy: (Math.random()-0.5)*0.5
+      });
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // Draw lines between close points
+      for(let i=0;i<points.length;i++){
+        const p1 = points[i];
+        for(let j=i+1;j<points.length;j++){
+          const p2 = points[j];
+          const dist = Math.hypot(p1.x-p2.x,p1.y-p2.y);
+          if(dist<120){
+            ctx.strokeStyle = `rgba(0,216,255,${1-dist/120})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p1.x,p1.y);
+            ctx.lineTo(p2.x,p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // Draw points
+      points.forEach(p=>{
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x<0||p.x>canvas.width)p.vx*=-1;
+        if(p.y<0||p.y>canvas.height)p.vy*=-1;
+        ctx.fillStyle = '#00d8ff';
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    window.addEventListener('resize', ()=>{
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.6;
+    });
+  </script>
+</body>
+</html>

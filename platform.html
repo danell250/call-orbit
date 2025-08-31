@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
+</head>
+<body>
+  <nav>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html" class="active-page">Platform</a>
+    </div>
+  </nav>
+
+  <header class="hero fade-in">
+    <h1>CallOrbit Platform</h1>
+    <p>Centralize your contact center dashboards, portals, and analytics in one platform.</p>
+  </header>
+
+  <section class="features features-grid fade-in">
+    <div class="feature">
+      <h3>Portal Snippets</h3>
+      <p>Preview dashboards and portal layouts for your teams.</p>
+    </div>
+    <div class="feature">
+      <h3>Integrations</h3>
+      <p>Connect with CRM, analytics, and telephony systems easily.</p>
+    </div>
+    <div class="feature">
+      <h3>Custom Analytics</h3>
+      <p>Tailor reports and metrics per center or team.</p>
+    </div>
+    <div class="feature">
+      <h3>Real-time Updates</h3>
+      <p>Monitor performance and receive alerts instantly.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+</body>
+</html>

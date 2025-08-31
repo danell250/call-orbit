@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — About</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
+</head>
+<body>
+  <nav>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html" class="active-page">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
+    </div>
+  </nav>
+
+  <header class="hero fade-in">
+    <h1>About CallOrbit</h1>
+    <p>Our mission is to streamline contact center management with dedicated dashboards and portals.</p>
+  </header>
+
+  <section class="features features-grid fade-in">
+    <div class="feature">
+      <h3>Our Story</h3>
+      <p>Built for teams who want simple, effective, and beautiful contact center management tools.</p>
+    </div>
+    <div class="feature">
+      <h3>Our Team</h3>
+      <p>Experienced engineers, designers, and operations specialists dedicated to your success.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+</body>
+</html>
