@@ -10,53 +10,24 @@
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
   <style>
-    form {
-      max-width: 500px;
-      margin: 2rem auto;
-      background: #1e293b;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    input, textarea {
-      padding: 0.8rem;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      width: 100%;
-    }
-    input:focus, textarea:focus {
-      outline: 2px solid #3b82f6;
-    }
-    button {
-      background: #3b82f6;
-      color: white;
-      font-size: 1.1rem;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #2563eb;
-    }
+    .contact-form { max-width: 600px; margin: 2rem auto; display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input, .contact-form textarea { padding: 0.8rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; width: 100%; transition: 0.3s; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 10px rgba(59,130,246,0.3); }
+    .contact-form button { padding: 0.8rem; border: none; border-radius: 8px; background-color: #3b82f6; color: white; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+    .contact-form button:hover { background-color: #2563eb; }
   </style>
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/" class="active-page">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active-page">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
     </div>
   </nav>
 
@@ -66,11 +37,10 @@
   </header>
 
   <section class="fade-in">
-    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
-      <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html" />
-
+    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg" class="contact-form">
+      <input type="hidden" name="_next" value="/contact-success.html" />
       <input required name="name" placeholder="Your Name" />
-      <input required type="email" name="email" placeholder="Email" />
+      <input required type="email" name="email" placeholder="Your Email" />
       <textarea required name="message" placeholder="Your Message"></textarea>
       <button type="submit">Send Message</button>
     </form>

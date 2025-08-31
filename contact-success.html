@@ -3,58 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Thank You</title>
+  <title>CallOrbit — Message Sent</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: #1e293b;
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-size: 2.5rem;
-      color: #3b82f6;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
-    .checkmark {
-      font-size: 5rem;
-      color: #10b981;
-      animation: pop 0.6s ease-out;
-    }
-    @keyframes pop {
-      0% { transform: scale(0); }
-      70% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    a {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 1.5rem;
-      background: #3b82f6;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    a:hover {
-      background: #2563eb;
-    }
+    body { text-align: center; padding: 3rem; font-family: sans-serif; }
+    .checkmark { font-size: 4rem; color: #3b82f6; animation: pop 0.5s ease forwards; }
+    @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    .message { font-size: 1.2rem; margin: 1rem 0; }
+    a.button { display: inline-block; padding: 0.8rem 1.5rem; margin-top: 1rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px; transition: 0.3s; }
+    a.button:hover { background: #2563eb; }
   </style>
 </head>
 <body>
-  <div class="checkmark">✔️</div>
-  <h1>Thanks!</h1>
-  <p>Your message has been sent successfully. Our team will contact you shortly.</p>
-  <a href="/">Back to Home</a>
+  <div class="checkmark">✅</div>
+  <div class="message">Thanks! Your message has been sent. We'll get back to you soon.</div>
+  <a href="/" class="button">Back to Home</a>
 </body>
 </html>
