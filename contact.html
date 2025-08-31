@@ -12,15 +12,15 @@
 </head>
 <body>
   <nav>
-    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="index.html">Home</a>
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="active-page">Contact</a>
-      <a href="coverage.html">Coverage</a>
-      <a href="platform.html">Platform</a>
+      <a href="/" >Home</a>
+      <a href="/features" >Features</a>
+      <a href="/pricing" >Pricing</a>
+      <a href="/about" >About</a>
+      <a href="/contact" class="active-page">Contact</a>
+      <a href="/coverage" >Coverage</a>
+      <a href="/platform" >Platform</a>
     </div>
   </nav>
 
@@ -30,12 +30,30 @@
   </header>
 
   <section class="fade-in contact-section">
-    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
+    <form
+      action="https://formspree.io/f/xgvlyygg"
+      method="POST"
+      enctype="multipart/form-data"
+      class="contact-form"
+    >
       <input type="hidden" name="_next" value="/contact-success.html" />
-      <input required name="name" placeholder="Your name" class="contact-input"/>
-      <input required type="email" name="email" placeholder="Email" class="contact-input"/>
-      <textarea required name="message" placeholder="Your message" class="contact-input"></textarea>
-      <button class="btn primary" type="submit">Send Message</button>
+
+      <label>
+        Your Name
+        <input type="text" name="name" placeholder="Enter your name" required>
+      </label>
+
+      <label>
+        Your Email
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </label>
+
+      <label>
+        Your Message
+        <textarea name="message" placeholder="Write your message here..." required></textarea>
+      </label>
+
+      <button type="submit" class="btn primary">Send Message</button>
     </form>
   </section>
 
@@ -45,6 +63,7 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {
