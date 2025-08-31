@@ -1,85 +1,62 @@
-/* -----------------------------
-   GLOBAL STYLES
------------------------------ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-
+/* --- Global Styles --- */
 body {
-  background: #121212;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f0f1a;
   color: #fff;
   line-height: 1.6;
-  font-size: 16px;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-h1, h2, h3, h4 {
-  color: #fff;
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-/* -----------------------------
-   NAVIGATION
------------------------------ */
+/* --- Navigation --- */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #1f1f2e;
+  background-color: #1a1a2e;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
-nav div a {
+nav a {
+  color: #fff;
+  text-decoration: none;
   margin-left: 1.5rem;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-nav div a:hover,
-nav div a.active-page {
+nav a:hover {
   color: #3b82f6;
 }
 
-nav .brand {
-  font-size: 1.5rem;
+nav .active-page {
+  color: #3b82f6;
 }
 
-/* -----------------------------
-   HEADER / HERO
------------------------------ */
+/* --- Hero Section --- */
 .hero {
   text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #1f1f2e, #2c2c3e);
-  border-bottom: 2px solid #3b82f6;
+  padding: 6rem 2rem 4rem 2rem;
+  background: linear-gradient(to bottom, #111122, #1a1a2e);
 }
 
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  color: #3b82f6;
 }
 
 .hero p {
   font-size: 1.2rem;
-  color: #cfcfcf;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #cbd5e1;
 }
 
-/* -----------------------------
-   FEATURES GRID
------------------------------ */
+/* --- Features Grid --- */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -88,26 +65,28 @@ nav .brand {
 }
 
 .feature {
-  background: #1f1f2e;
+  background-color: #1e1e2f;
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  text-align: center;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .feature:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
 .feature h3 {
-  margin-bottom: 1rem;
+  margin-top: 0;
   color: #3b82f6;
 }
 
-/* -----------------------------
-   PLANS GRID (Pricing)
------------------------------ */
+.feature p {
+  color: #cbd5e1;
+}
+
+/* --- Pricing Plans --- */
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -116,30 +95,49 @@ nav .brand {
 }
 
 .plan {
-  background: #1f1f2e;
+  background-color: #1e1e2f;
+  text-align: center;
   padding: 2rem;
   border-radius: 1rem;
-  text-align: center;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .plan:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
 .plan h3 {
   color: #3b82f6;
-  margin-bottom: 1rem;
 }
 
 .plan p {
-  margin-bottom: 0.5rem;
+  color: #cbd5e1;
+  margin: 1rem 0;
 }
 
-/* -----------------------------
-   CONTACT FORM
------------------------------ */
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #1a1a2e;
+  color: #9ca3af;
+}
+
+/* --- Fade-in Animation --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Forms (Contact Page) --- */
 .contact-form {
   max-width: 600px;
   margin: 2rem auto;
@@ -198,45 +196,13 @@ nav .brand {
   display: block;
 }
 
-/* -----------------------------
-   FOOTER
------------------------------ */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #1f1f2e;
-  margin-top: 2rem;
-  color: #cfcfcf;
-}
-
-/* -----------------------------
-   ANIMATIONS
------------------------------ */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* -----------------------------
-   MEDIA QUERIES
------------------------------ */
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  nav div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  nav div a {
-    margin-left: 0;
-    margin-bottom: 0.5rem;
-  }
   .features-grid, .plans-grid {
-    padding: 2rem 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
   }
 }
