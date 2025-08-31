@@ -31,10 +31,10 @@
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.75rem 1rem;
       margin-bottom: 1.25rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       font-size: 1rem;
       background: #2c2c3e;
       color: #fff;
@@ -44,14 +44,16 @@
       outline: 2px solid #3b82f6;
     }
     .contact-form button {
+      width: 100%;
       background: #3b82f6;
       color: #fff;
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
+      font-weight: 600;
+      transition: all 0.3s ease;
     }
     .contact-form button:hover {
       background: #2563eb;
@@ -60,6 +62,12 @@
       display: none;
       text-align: center;
       padding: 3rem 1rem;
+      background: #1e1e2f;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      margin: 2rem auto;
+      max-width: 600px;
+      color: #fff;
     }
     .thank-you.visible {
       display: block;
@@ -88,21 +96,21 @@
   <section class="fade-in">
     <form 
       class="contact-form"
-      action="https://formspree.io/f/your-form-id" 
+      action="https://formspree.io/f/xgvlyygg" 
       method="POST"
       target="hidden_iframe"
       onsubmit="showThankYou()"
     >
-      <input type="hidden" name="_next" value="https://callorbit.netlify.app/contact.html#thank-you" />
+      <input type="hidden" name="_next" value="/contact-success.html" />
       
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+      <input type="email" id="email" name="email" placeholder="Your Email" required />
 
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+      <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
 
       <button type="submit">Send Message</button>
     </form>
