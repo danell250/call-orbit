@@ -29,14 +29,21 @@
     <p>Get in touch with our team for support or inquiries.</p>
   </header>
 
-  <section class="fade-in">
+  <section class="fade-in contact-form">
     <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
-      <!-- Redirect to your Vercel success page -->
+      <!-- Redirect to success page -->
       <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html" />
-      <input required name="name" placeholder="Your name" />
-      <input required type="email" name="email" placeholder="Email" />
-      <textarea required name="message" placeholder="Your message"></textarea>
-      <button class="btn primary" type="submit">Send Message</button>
+
+      <label>Name</label>
+      <input type="text" name="name" required placeholder="Your name">
+
+      <label>Email</label>
+      <input type="email" name="email" required placeholder="Your email">
+
+      <label>Message</label>
+      <textarea name="message" required placeholder="Your message"></textarea>
+
+      <button type="submit" class="btn primary">Send Message</button>
     </form>
   </section>
 
