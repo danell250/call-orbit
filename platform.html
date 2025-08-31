@@ -1,125 +1,76 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Platform</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
-    .feature {
-      background: #1e1e2f;
-      color: #fff;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      text-align: center;
-    }
-    .testimonial {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: #2c2c3e;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      color: #fff;
-      text-align: center;
-      font-style: italic;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    }
-    .integrations {
-      max-width: 800px;
-      margin: 2rem auto;
-      text-align: center;
-    }
-    .integrations span {
-      display: inline-block;
-      background: #3b82f6;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      margin: 0.25rem;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Platform</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
 </head>
 <body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform" class="active-page">Platform</a>
-    </div>
-  </nav>
-
-  <header class="hero fade-in">
-    <h1>CallOrbit Platform</h1>
-    <p>Centralize your contact center dashboards, portals, and analytics in one platform.</p>
-  </header>
-
-  <section class="fade-in features-grid">
-    <div class="feature">
-      <h3>Portal Snippets</h3>
-      <p>Preview dashboards and portal layouts for your teams to save setup time.</p>
-    </div>
-    <div class="feature">
-      <h3>Integrations</h3>
-      <p>Connect with CRM, analytics, and telephony systems easily for seamless operations.</p>
-    </div>
-    <div class="feature">
-      <h3>Custom Analytics</h3>
-      <p>Tailor reports and metrics per center to drive insights and improve performance.</p>
-    </div>
-    <div class="feature">
-      <h3>Global Access</h3>
-      <p>Manage multiple centers across regions with a single platform securely.</p>
-    </div>
-  </section>
-
-  <section class="fade-in integrations">
-    <h3>Compatible With:</h3>
-    <span>Salesforce</span>
-    <span>HubSpot</span>
-    <span>Google Analytics</span>
-    <span>Twilio</span>
-    <span>Microsoft Teams</span>
-  </section>
-
-  <div class="fade-in testimonial">
-    <p>“CallOrbit transformed how we manage multiple centers—everything is faster, clearer, and more reliable. Highly recommended!”</p>
-    <strong>- Alex J., Operations Manager</strong>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform" class="active-page">Platform</a>
   </div>
+</nav>
 
-  <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+<header class="hero fade-in">
+  <h1>CallOrbit Platform</h1>
+  <p>Centralize your contact center dashboards, portals, and analytics in one platform.</p>
+</header>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
+<section class="features features-grid fade-in">
+  <div class="feature">
+    <h3>Portal Snippets</h3>
+    <p>Preview dashboards and portal layouts for your teams with ease and clarity.</p>
+  </div>
+  <div class="feature">
+    <h3>Integrations</h3>
+    <p>Connect seamlessly with CRM, analytics, telephony, and other essential systems.</p>
+  </div>
+  <div class="feature">
+    <h3>Custom Analytics</h3>
+    <p>Create reports and metrics tailored for each center to make smarter decisions.</p>
+  </div>
+  <div class="feature">
+    <h3>Global Access</h3>
+    <p>Manage multiple centers across regions with one platform login.</p>
+  </div>
+</section>
+
+<section class="fade-in" style="text-align:center; margin:3rem 0;">
+  <h3>Customer Testimonial</h3>
+  <blockquote style="font-style:italic; color:#fff; background:#1e1e2f; padding:1rem; border-radius:0.5rem; display:inline-block;">
+    "CallOrbit transformed how we manage our contact centers globally — intuitive, fast, and reliable!" — Alex R., Operations Manager
+  </blockquote>
+</section>
+
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
 </body>
 </html>

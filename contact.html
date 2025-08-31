@@ -1,167 +1,105 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Contact</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    .contact-form {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    }
-    .contact-form label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1.25rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      background: #2c2c3e;
-      color: #fff;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: 2px solid #3b82f6;
-    }
-    .contact-form button {
-      background: #3b82f6;
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .contact-form button:hover {
-      background: #2563eb;
-    }
-    .thank-you {
-      display: none;
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-    .thank-you.visible {
-      display: block;
-    }
-    .response-time {
-      text-align: center;
-      margin-top: 1rem;
-      font-style: italic;
-      color: #a0a0a0;
-    }
-    .cta-button {
-      display: block;
-      margin: 2rem auto 0 auto;
-      background: #f59e0b;
-      color: #fff;
-      padding: 0.75rem 2rem;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .cta-button:hover {
-      background: #d97706;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Contact</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
+<style>
+.contact-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #1e1e2f;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.contact-form label { display: block; font-weight: bold; margin-bottom: 0.5rem; color: #fff; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 0.75rem; margin-bottom: 1.25rem; border: none; border-radius: 0.5rem; font-size: 1rem; background: #2c2c3e; color: #fff;
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: 2px solid #3b82f6; }
+.contact-form button {
+  background: #3b82f6; color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; font-size: 1rem; cursor: pointer; transition: background 0.3s;
+}
+.contact-form button:hover { background: #2563eb; }
+.thank-you { display: none; text-align: center; padding: 3rem 1rem; }
+.thank-you.visible { display: block; }
+</style>
 </head>
 <body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact" class="active-page">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
-    </div>
-  </nav>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact" class="active-page">Contact</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+  </div>
+</nav>
 
-  <header class="hero fade-in">
-    <h1>Contact Us</h1>
-    <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
-  </header>
+<header class="hero fade-in">
+  <h1>Contact Us</h1>
+  <p>We reply within 24 hours. Fill in your details and we’ll be in touch.</p>
+</header>
 
-  <section class="fade-in">
-    <form 
-      class="contact-form"
-      action="https://formspree.io/f/xgvlyygg" 
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="showThankYou()"
-    >
-      <input type="hidden" name="_next" value="/contact-success.html" />
-      
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required />
+<section class="fade-in">
+  <form 
+    class="contact-form"
+    action="https://formspree.io/f/xgvlyygg" 
+    method="POST"
+    target="hidden_iframe"
+    onsubmit="showThankYou()"
+  >
+    <input type="hidden" name="_next" value="/contact-success.html" />
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required />
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+  <div id="thank-you" class="thank-you">
+    <h2>✅ Thank you!</h2>
+    <p>Your message has been sent. We’ll get back to you shortly.</p>
+  </div>
+</section>
 
-      <button type="submit">Send Message</button>
-    </form>
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
 
-    <div class="response-time">We reply within 24 hours.</div>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
+function showThankYou() {
+  setTimeout(() => {
+    document.querySelector('.contact-form').style.display = 'none';
+    document.getElementById('thank-you').classList.add('visible');
+  }, 800);
+}
 
-    <div id="thank-you" class="thank-you">
-      <h2>✅ Thank you!</h2>
-      <p>Your message has been sent. We’ll get back to you shortly.</p>
-    </div>
-
-    <a href="/pricing" class="cta-button">Get Started</a>
-  </section>
-
-  <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    function showThankYou() {
-      setTimeout(() => {
-        document.querySelector('.contact-form').style.display = 'none';
-        document.getElementById('thank-you').classList.add('visible');
-      }, 800);
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
-
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
 </body>
 </html>

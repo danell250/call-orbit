@@ -1,81 +1,69 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Features</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    .feature-icon {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 0.5rem;
-      color: #3b82f6;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Features</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
 </head>
 <body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/features" class="active-page">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
-    </div>
-  </nav>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features" class="active-page">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+  </div>
+</nav>
 
-  <header class="hero fade-in">
-    <h1>Features</h1>
-    <p>Everything you need to manage your contact centers efficiently.</p>
-  </header>
+<header class="hero fade-in">
+  <h1>Features</h1>
+  <p>Everything you need to manage your contact centers efficiently.</p>
+</header>
 
-  <section class="features features-grid fade-in">
-    <div class="feature">
-      <span class="feature-icon">📊</span>
-      <h3>Live Dashboards</h3>
-      <p>Real-time metrics, alerts, and KPIs for every center, helping teams act quickly and stay informed.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🖥️</span>
-      <h3>Manage Contact Centers</h3>
-      <p>Separate portals with role-based access and controls, ensuring smooth operations and security across teams.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📞</span>
-      <h3>Number Management & Porting</h3>
-      <p>Buy, port, and manage numbers globally without hassle, keeping your communications seamless.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📈</span>
-      <h3>Analytics & Reporting</h3>
-      <p>Generate custom reports and insights for each team, helping managers make informed decisions.</p>
-    </div>
-  </section>
+<section class="features features-grid fade-in">
+  <div class="feature">
+    <h3>Live Dashboards</h3>
+    <p>Real-time metrics, alerts, and KPIs for every center so you can take action immediately.</p>
+  </div>
+  <div class="feature">
+    <h3>Manage Contact Centers</h3>
+    <p>Separate portals with role-based access and controls for smooth operations across teams.</p>
+  </div>
+  <div class="feature">
+    <h3>Number Management & Porting</h3>
+    <p>Buy, port, and manage global numbers easily without downtime.</p>
+  </div>
+  <div class="feature">
+    <h3>Analytics & Reporting</h3>
+    <p>Generate custom reports, track performance, and make data-driven decisions faster.</p>
+  </div>
+</section>
 
-  <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
 </body>
 </html>
