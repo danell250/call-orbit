@@ -9,18 +9,95 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #1e293b;
+    }
+    nav a {
+      color: #f8fafc;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a.active-page { color: #3b82f6; font-weight: bold; }
+    header.hero {
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      background: #1e293b;
+    }
+    header.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #3b82f6; }
+    header.hero p { font-size: 1.2rem; }
+    section {
+      display: flex;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    form input, form textarea {
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #3b82f6;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 1rem;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 5px #2563eb;
+    }
+    form textarea { resize: vertical; min-height: 120px; }
+    button.btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button.btn:hover { background: #2563eb; }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1e293b;
+      color: #f8fafc;
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/" >Home</a>
-      <a href="/features" >Features</a>
-      <a href="/pricing" >Pricing</a>
-      <a href="/about" >About</a>
-      <a href="/contact" class="active-page">Contact</a>
-      <a href="/coverage" >Coverage</a>
-      <a href="/platform" >Platform</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active-page">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
     </div>
   </nav>
 
@@ -29,31 +106,13 @@
     <p>Get in touch with our team for support or inquiries.</p>
   </header>
 
-  <section class="fade-in contact-section">
-    <form
-      action="https://formspree.io/f/xgvlyygg"
-      method="POST"
-      enctype="multipart/form-data"
-      class="contact-form"
-    >
+  <section class="fade-in">
+    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
       <input type="hidden" name="_next" value="/contact-success.html" />
-
-      <label>
-        Your Name
-        <input type="text" name="name" placeholder="Enter your name" required>
-      </label>
-
-      <label>
-        Your Email
-        <input type="email" name="email" placeholder="Enter your email" required>
-      </label>
-
-      <label>
-        Your Message
-        <textarea name="message" placeholder="Write your message here..." required></textarea>
-      </label>
-
-      <button type="submit" class="btn primary">Send Message</button>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
     </form>
   </section>
 
@@ -63,7 +122,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {
