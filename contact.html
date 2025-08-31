@@ -10,80 +10,45 @@
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f172a;
-      color: #f8fafc;
-      margin: 0;
-      padding: 0;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      background: #1e293b;
-    }
-    nav a {
-      color: #f8fafc;
-      margin-left: 1rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    nav a.active-page { color: #3b82f6; font-weight: bold; }
-    header.hero {
-      padding: 4rem 2rem 2rem;
-      text-align: center;
-      background: #1e293b;
-    }
-    header.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #3b82f6; }
-    header.hero p { font-size: 1.2rem; }
-    section {
-      display: flex;
-      justify-content: center;
-      padding: 3rem 2rem;
-    }
+    /* Sleek form styling */
     form {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      gap: 1rem;
       max-width: 500px;
-      background: #1e293b;
+      margin: 2rem auto;
+      background: #1f2937; /* Dark background */
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      border-radius: 10px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-    form input, form textarea {
-      margin-bottom: 1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #3b82f6;
-      background: #0f172a;
-      color: #f8fafc;
-      font-size: 1rem;
-    }
-    form input:focus, form textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 5px #2563eb;
-    }
-    form textarea { resize: vertical; min-height: 120px; }
-    button.btn {
-      padding: 0.75rem 1.5rem;
+    input, textarea {
+      padding: 0.8rem;
+      border-radius: 6px;
       border: none;
-      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+    }
+    input:focus, textarea:focus {
+      box-shadow: 0 0 0 2px #3b82f6;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button.btn.primary {
       background: #3b82f6;
       color: #fff;
-      font-size: 1rem;
       font-weight: bold;
+      border-radius: 6px;
+      padding: 0.8rem;
       cursor: pointer;
-      transition: background 0.2s ease;
+      border: none;
+      transition: background 0.3s;
     }
-    button.btn:hover { background: #2563eb; }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1e293b;
-      color: #f8fafc;
+    button.btn.primary:hover {
+      background: #2563eb;
     }
   </style>
 </head>
@@ -91,7 +56,7 @@
   <nav>
     <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="index.html">Home</a>
+      <a href="/">Home</a>
       <a href="features.html">Features</a>
       <a href="pricing.html">Pricing</a>
       <a href="about.html">About</a>
@@ -108,11 +73,13 @@
 
   <section class="fade-in">
     <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
-      <input type="hidden" name="_next" value="/contact-success.html" />
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
+      <!-- This ensures redirect to your custom thank-you page -->
+      <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html" />
+
+      <input required name="name" placeholder="Your Name" />
+      <input required type="email" name="email" placeholder="Your Email" />
+      <textarea required name="message" placeholder="Your Message"></textarea>
+      <button class="btn primary" type="submit">Send Message</button>
     </form>
   </section>
 
