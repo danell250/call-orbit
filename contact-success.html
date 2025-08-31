@@ -10,118 +10,73 @@
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
   <style>
-    body {
+    .success-container {
       text-align: center;
-      font-family: Arial, sans-serif;
-      padding: 4rem 1rem;
+      padding: 5rem 2rem;
     }
-
-    h1 {
-      font-size: 3rem;
+    .checkmark {
+      font-size: 4rem;
       color: #3b82f6;
-      margin-bottom: 1rem;
+      animation: pop 0.5s ease forwards;
     }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0.5rem auto;
+    @keyframes pop {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      padding: 0.8rem 2rem;
-      background: #3b82f6;
-      color: white;
-      border-radius: 8px;
-      margin-top: 2rem;
-      transition: transform 0.2s;
+    .confetti {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
-
-    .btn:hover {
-      transform: scale(1.05);
+    .confetti-piece {
+      position: absolute;
+      width: 10px; height: 10px;
+      background-color: #3b82f6;
+      animation: fall 3s linear infinite;
     }
-
-    /* Confetti canvas full-screen */
-    #confetti {
-      position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      z-index:9999;
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
+  <div class="success-container fade-in">
+    <div class="checkmark">✔</div>
+    <h1>Thanks for contacting us!</h1>
+    <p>We received your message and will get back to you shortly.</p>
+    <a href="/" class="btn primary">Return Home</a>
+  </div>
 
-  <h1>🎉 Thank You!</h1>
-  <p>Your message has been successfully sent. Our team at <strong>CallOrbit</strong> will review your inquiry and get back to you shortly.</p>
-  <p>We appreciate you reaching out — your contact means a lot to us!</p>
-  <a href="/contact" class="btn">Back to Contact Page</a>
-
-  <footer style="margin-top:4rem; font-size:0.9rem; color:#555;">
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+  <div class="confetti" id="confetti"></div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple Confetti Effect
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-
-    const confettiCount = 150;
-    const confetti = [];
-
-    function random(min, max) {
-      return Math.random() * (max - min) + min;
+    // Confetti animation
+    const confettiContainer = document.getElementById('confetti');
+    for(let i=0; i<100; i++){
+      const piece = document.createElement('div');
+      piece.classList.add('confetti-piece');
+      piece.style.left = Math.random() * window.innerWidth + 'px';
+      piece.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+      piece.style.animationDuration = 2 + Math.random()*3 + 's';
+      piece.style.animationDelay = Math.random()*2 + 's';
+      confettiContainer.appendChild(piece);
     }
 
-    class Confetto {
-      constructor(){
-        this.x = random(0, W);
-        this.y = random(-H, 0);
-        this.radius = random(5, 10);
-        this.color = `hsl(${random(0,360)}, 70%, 60%)`;
-        this.speed = random(1, 3);
-        this.angle = random(0, Math.PI*2);
-        this.spin = random(0.02, 0.1);
-      }
-      update() {
-        this.y += this.speed;
-        this.angle += this.spin;
-        if(this.y > H) this.y = -10;
-      }
-      draw() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.radius/2, -this.radius/2, this.radius, this.radius);
-        ctx.restore();
-      }
-    }
-
-    for(let i=0;i<confettiCount;i++) confetti.push(new Confetto());
-
-    function animate(){
-      ctx.clearRect(0,0,W,H);
-      confetti.forEach(c => { c.update(); c.draw(); });
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    window.addEventListener('resize', ()=>{
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    });
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
   </script>
 </body>
 </html>

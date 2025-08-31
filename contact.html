@@ -30,8 +30,9 @@
   </header>
 
   <section class="fade-in">
-    <form name="callorbit-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="callorbit-contact" />
+      <input type="hidden" name="_next" value="/contact-success.html" />
       <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
       <input required name="name" placeholder="Your name" />
       <input required type="email" name="email" placeholder="Email" />
