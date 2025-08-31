@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Contact</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
   <style>
-    header.hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
-      color: #fff;
-      border-radius: 1rem;
-      margin: 2rem;
-    }
     .contact-form {
       max-width: 600px;
       margin: 2rem auto;
@@ -31,10 +27,10 @@
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem;
       margin-bottom: 1.25rem;
       border: none;
-      border-radius: 0.75rem;
+      border-radius: 0.5rem;
       font-size: 1rem;
       background: #2c2c3e;
       color: #fff;
@@ -44,16 +40,14 @@
       outline: 2px solid #3b82f6;
     }
     .contact-form button {
-      width: 100%;
       background: #3b82f6;
       color: #fff;
       padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 0.75rem;
+      border-radius: 0.5rem;
       font-size: 1rem;
       cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      transition: background 0.3s;
     }
     .contact-form button:hover {
       background: #2563eb;
@@ -62,12 +56,6 @@
       display: none;
       text-align: center;
       padding: 3rem 1rem;
-      background: #1e1e2f;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      margin: 2rem auto;
-      max-width: 600px;
-      color: #fff;
     }
     .thank-you.visible {
       display: block;
@@ -104,13 +92,13 @@
       <input type="hidden" name="_next" value="/contact-success.html" />
       
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required />
+      <input type="text" id="name" name="name" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Your Email" required />
+      <input type="email" id="email" name="email" required />
 
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
       <button type="submit">Send Message</button>
     </form>
@@ -137,7 +125,6 @@
       }, 800);
     }
 
-    // Fade-in effect
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {

@@ -5,50 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Coverage</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    header.hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
-      color: #fff;
-      border-radius: 1rem;
-      margin: 2rem;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
-    .feature {
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      text-align: center;
-      color: #fff;
-      transition: transform 0.3s;
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
-    .feature h3 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .feature img {
-      width: 24px;
-      height: auto;
-    }
-    .feature p {
-      font-size: 1rem;
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
 </head>
 <body>
   <nav>
@@ -66,37 +26,33 @@
 
   <header class="hero fade-in">
     <h1>Global Coverage</h1>
-    <p>CallOrbit provides extensive contact center coverage worldwide, ensuring your teams stay connected.</p>
+    <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
   </header>
 
-  <section class="features-grid fade-in">
+  <section class="features features-grid fade-in">
     <div class="feature">
-      <h3><img src="flags/us.png" alt="US"> North America</h3>
-      <p>Reliable numbers and infrastructure across the U.S. and Canada.</p>
+      <h3>North America 🇺🇸🇨🇦</h3>
+      <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
     </div>
     <div class="feature">
-      <h3><img src="flags/uk.png" alt="UK"> Europe</h3>
-      <p>Coverage in major European cities with local number support.</p>
+      <h3>Europe 🇬🇧🇩🇪🇫🇷</h3>
+      <p>Coverage in major European cities with local numbers and full support for EU contact centers.</p>
     </div>
     <div class="feature">
-      <h3><img src="flags/jp.png" alt="Japan"> Asia-Pacific</h3>
-      <p>Seamless connectivity in APAC regions for global teams.</p>
+      <h3>Asia-Pacific 🇯🇵🇦🇺🇸🇬</h3>
+      <p>Seamless connectivity in APAC regions, helping your team reach customers efficiently and reliably.</p>
     </div>
     <div class="feature">
-      <h3><img src="flags/br.png" alt="Brazil"> Latin America</h3>
-      <p>Local numbers and support to expand your reach.</p>
+      <h3>Latin America 🇧🇷🇲🇽🇦🇷</h3>
+      <p>Local numbers and support for growing your reach across LATAM countries.</p>
     </div>
     <div class="feature">
-      <h3><img src="flags/au.png" alt="Australia"> Australia</h3>
-      <p>Regional coverage with dedicated support for Oceania teams.</p>
+      <h3>Africa 🇿🇦🇳🇬🇪🇬</h3>
+      <p>Expanding coverage to major African hubs with robust local telephony solutions.</p>
     </div>
     <div class="feature">
-      <h3><img src="flags/in.png" alt="India"> India</h3>
-      <p>Robust numbers and portals for South Asian markets.</p>
-    </div>
-    <div class="feature">
-      <h3><img src="flags/za.png" alt="South Africa"> Africa</h3>
-      <p>Coverage in key African countries with local infrastructure.</p>
+      <h3>Middle East 🇦🇪🇸🇦🇶🇦</h3>
+      <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
     </div>
   </section>
 
@@ -106,8 +62,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fade-in effect
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {

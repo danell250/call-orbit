@@ -5,42 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — About</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    header.hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
-      color: #fff;
-      border-radius: 1rem;
-      margin: 2rem;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto;
-    }
-    .feature {
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      text-align: center;
-      color: #fff;
-      transition: transform 0.3s;
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
-    .feature h3 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    .feature p {
-      font-size: 1rem;
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
 </head>
 <body>
   <nav>
@@ -58,17 +26,17 @@
 
   <header class="hero fade-in">
     <h1>About CallOrbit</h1>
-    <p>We streamline contact center management with beautiful dashboards and portals built for real teams.</p>
+    <p>Our mission is to streamline contact center management with dedicated dashboards and portals.</p>
   </header>
 
-  <section class="features-grid fade-in">
+  <section class="features features-grid fade-in">
     <div class="feature">
       <h3>Our Story</h3>
-      <p>Founded with a vision to simplify contact center operations, CallOrbit started as a small project and quickly grew into a platform used by teams worldwide. Our passion is turning complex workflows into intuitive experiences.</p>
+      <p>CallOrbit was born from the frustration of managing multiple dashboards and portals. We wanted a unified, intuitive, and beautiful system that makes contact center management effortless. Every feature is designed with real teams in mind, so your workflow is seamless and productive.</p>
     </div>
     <div class="feature">
       <h3>Our Team</h3>
-      <p>Our team is a mix of engineers, designers, and operations specialists who are dedicated to making your contact center efficient, modern, and user-friendly. We thrive on innovation, clarity, and delivering real results.</p>
+      <p>We are a group of engineers, designers, and operations specialists passionate about simplifying complex processes. With diverse experience in global contact centers, we ensure that every dashboard, report, and portal adds value to your daily workflow.</p>
     </div>
   </section>
 
@@ -78,8 +46,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fade-in effect
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {
