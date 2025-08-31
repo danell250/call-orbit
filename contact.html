@@ -9,25 +9,10 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
-  <style>
-    body { font-family:'Inter', sans-serif; background:#f4f6f8; margin:0; }
-    nav { display:flex; justify-content:space-between; padding:1rem 2rem; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
-    nav a { margin-left:1rem; text-decoration:none; color:#333; font-weight:500; }
-    nav a.active-page { color:#3b82f6; }
-    header.hero { max-width:900px; margin:3rem auto; padding:2rem; border-radius:16px; background:rgba(255,255,255,0.95); box-shadow:0 8px 24px rgba(0,0,0,0.1); text-align:center; }
-    form { max-width:600px; margin:3rem auto; display:flex; flex-direction:column; gap:1.2rem; }
-    input, textarea { padding:0.8rem 1rem; border-radius:12px; border:1px solid #ccc; font-size:1rem; width:100%; transition:all 0.3s ease; }
-    input:focus, textarea:focus { border-color:#3b82f6; box-shadow:0 4px 12px rgba(59,130,246,0.2); outline:none; }
-    button { padding:0.9rem 1.5rem; border:none; border-radius:12px; background:#3b82f6; color:#fff; font-size:1rem; cursor:pointer; transition:all 0.3s ease; }
-    button:hover { background:#2563eb; }
-    footer { text-align:center; padding:2rem; color:#666; font-size:0.9rem; }
-    .fade-in { opacity:0; transform:translateY(20px); transition:all 0.6s ease; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
-  </style>
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="/" class="brand"><strong>CallOrbit</strong></a></div>
     <div>
       <a href="/">Home</a>
       <a href="/features">Features</a>
@@ -41,16 +26,18 @@
 
   <header class="hero fade-in">
     <h1>Contact CallOrbit</h1>
-    <p>Reach out to our team for support or inquiries — we’ll get back to you quickly!</p>
+    <p>Get in touch with our team for support or inquiries.</p>
   </header>
 
-  <form class="fade-in" name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
-    <input type="hidden" name="_next" value="/contact-success.html" />
-    <input required name="name" placeholder="Your Name" />
-    <input required type="email" name="email" placeholder="Your Email" />
-    <textarea required name="message" placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+  <section class="fade-in">
+    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
+      <input type="hidden" name="_next" value="/contact-success.html" />
+      <input required name="name" placeholder="Your Name" class="input-field" />
+      <input required type="email" name="email" placeholder="Email" class="input-field" />
+      <textarea required name="message" placeholder="Your Message" class="input-field"></textarea>
+      <button class="btn primary" type="submit">Send Message</button>
+    </form>
+  </section>
 
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
