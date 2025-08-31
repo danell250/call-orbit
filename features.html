@@ -5,74 +5,56 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Features</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%2300d8ff'/>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="logo"><a href="index.html"><strong>CallOrbit</strong></a></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="features.html" class="active-page">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="coverage.html">Coverage</a>
-      <a href="platform.html">Platform</a>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/">Home</a>
+      <a href="/features.html" class="active-page">Features</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/coverage.html">Coverage</a>
+      <a href="/platform.html">Platform</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Powerful <span class="highlight">Features</span></h1>
-      <p>Everything you need to manage your contact centers efficiently, globally and effortlessly.</p>
-      <a href="index.html" class="cta-btn">Back to Home</a>
-    </div>
-    <div class="hero-graphic"></div>
+  <header class="hero fade-in">
+    <h1>Features</h1>
+    <p>Everything you need to manage your contact centers efficiently.</p>
   </header>
 
-  <!-- Features Section -->
-  <section class="features-grid">
-    <div class="feature-card">
+  <section class="features features-grid fade-in">
+    <div class="feature">
       <h3>Live Dashboards</h3>
-      <p>Real-time metrics, alerts, and KPIs for every center. Stay on top of your operations 24/7.</p>
+      <p>Real-time metrics, alerts, and KPIs for every center.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature">
       <h3>Manage Contact Centers</h3>
-      <p>Separate portals with role-based access, allowing you full control over each location.</p>
+      <p>Separate portals with role-based access and controls.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature">
       <h3>Number Management & Porting</h3>
-      <p>Buy and port numbers globally without hassle. Keep your communication streamlined and flexible.</p>
+      <p>Buy, port, and manage numbers globally without hassle.</p>
     </div>
-    <div class="feature-card">
+    <div class="feature">
       <h3>Analytics & Reporting</h3>
-      <p>Generate advanced custom reports and gain insights to improve efficiency and performance.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Call Center Automation</h3>
-      <p>Automate routine tasks and workflows to save time and reduce human error.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Security & Compliance</h3>
-      <p>Built-in compliance tools and security measures to protect your data worldwide.</p>
+      <p>Generate custom reports and insights for each team.</p>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
   </footer>
 
-  <!-- Scripts -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const faders = document.querySelectorAll('.feature-card, .hero-content');
+    const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {
         if(entry.isIntersecting){
