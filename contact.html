@@ -30,10 +30,8 @@
   </header>
 
   <section class="fade-in">
-    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="callorbit-contact" />
+    <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
       <input type="hidden" name="_next" value="/contact-success.html" />
-      <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
       <input required name="name" placeholder="Your name" />
       <input required type="email" name="email" placeholder="Email" />
       <textarea required name="message" placeholder="Your message"></textarea>
@@ -47,16 +45,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
   </script>
 </body>
 </html>
