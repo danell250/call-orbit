@@ -1,29 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact Submitted — CallOrbit</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thank You — CallOrbit</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
+  <style>
+    .success-container {
+      text-align:center;
+      padding: 4rem 2rem;
+      animation: fadeIn 1s ease-in;
+    }
+    .checkmark {
+      font-size: 5rem;
+      color: #3b82f6;
+      animation: bounce 0.8s ease;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  </style>
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/" >Home</a>
-      <a href="/features" >Features</a>
-      <a href="/pricing" >Pricing</a>
-      <a href="/about" >About</a>
-      <a href="/contact" class="active-page">Contact</a>
-      <a href="/coverage" >Coverage</a>
-      <a href="/platform" >Platform</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active-page">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
     </div>
   </nav>
 
-  <section class="hero fade-in success" style="text-align:center; padding:4rem 2rem;">
+  <section class="success-container">
     <div class="checkmark">✔️</div>
-    <h1>Thank You!</h1>
-    <p>Your message has been sent successfully. Our team will contact you shortly.</p>
+    <h1>Thank you for contacting us!</h1>
+    <p>We've received your message and will reach out to you shortly.</p>
     <a href="/" class="btn primary">Back to Home</a>
   </section>
 

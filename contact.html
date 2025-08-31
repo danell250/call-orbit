@@ -12,15 +12,15 @@
 </head>
 <body>
   <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/" >Home</a>
-      <a href="/features" >Features</a>
-      <a href="/pricing" >Pricing</a>
-      <a href="/about" >About</a>
-      <a href="/contact" class="active-page">Contact</a>
-      <a href="/coverage" >Coverage</a>
-      <a href="/platform" >Platform</a>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active-page">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
     </div>
   </nav>
 
@@ -29,13 +29,13 @@
     <p>Get in touch with our team for support or inquiries.</p>
   </header>
 
-  <section class="fade-in">
+  <section class="fade-in contact-section">
     <form name="callorbit-contact" method="POST" action="https://formspree.io/f/xgvlyygg">
       <input type="hidden" name="_next" value="/contact-success.html" />
-      <input type="text" name="name" placeholder="Your Name" class="form-block" required>
-      <input type="email" name="email" placeholder="Email" class="form-block" required>
-      <textarea name="message" placeholder="Your Message" class="form-block" required></textarea>
-      <button type="submit" class="btn primary">Send Message</button>
+      <input required name="name" placeholder="Your name" class="contact-input"/>
+      <input required type="email" name="email" placeholder="Email" class="contact-input"/>
+      <textarea required name="message" placeholder="Your message" class="contact-input"></textarea>
+      <button class="btn primary" type="submit">Send Message</button>
     </form>
   </section>
 
