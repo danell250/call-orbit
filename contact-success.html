@@ -3,24 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Message Sent</title>
+  <title>Thank You — CallOrbit</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    body { text-align: center; padding: 3rem; font-family: sans-serif; }
-    .checkmark { font-size: 4rem; color: #3b82f6; animation: pop 0.5s ease forwards; }
-    @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-    .message { font-size: 1.2rem; margin: 1rem 0; }
-    a.button { display: inline-block; padding: 0.8rem 1.5rem; margin-top: 1rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px; transition: 0.3s; }
-    a.button:hover { background: #2563eb; }
-  </style>
 </head>
 <body>
-  <div class="checkmark">✅</div>
-  <div class="message">Thanks! Your message has been sent. We'll get back to you soon.</div>
-  <a href="/" class="button">Back to Home</a>
+  <nav>
+    <div><a href="index.html"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="coverage.html">Coverage</a>
+      <a href="platform.html">Platform</a>
+    </div>
+  </nav>
+
+  <header class="hero fade-in">
+    <h1>Thanks for Contacting Us!</h1>
+    <p>Your message has been received. We’ll get back to you shortly.</p>
+    <div class="checkmark">&#10004;</div>
+  </header>
+
+  <section class="fade-in">
+    <p>In the meantime, feel free to explore our <a href="index.html">home page</a> or check our <a href="features.html">features</a>.</p>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+
+  <style>
+    .checkmark {
+      font-size: 4rem;
+      color: #3b82f6;
+      animation: pop 0.6s ease-out forwards;
+      margin-top: 1rem;
+    }
+    @keyframes pop {
+      0% { transform: scale(0); }
+      60% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </body>
 </html>
