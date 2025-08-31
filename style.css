@@ -1,10 +1,24 @@
-/* --- Global Styles --- */
-body {
+/* --- Reset / Base Styles --- */
+* {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0f0f1a;
-  color: #fff;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f9fafb; /* light page background */
+  color: #1f2937; /* dark text */
   line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
 }
 
 /* --- Navigation --- */
@@ -13,145 +27,125 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #1a1a2e;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
+nav div:first-child a {
+  font-size: 1.5rem;
+  color: #3b82f6; /* brand blue */
+}
+
+nav div:last-child a {
   margin-left: 1.5rem;
-  font-weight: 500;
-  transition: color 0.3s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s;
 }
 
-nav a:hover {
-  color: #3b82f6;
+nav div:last-child a:hover {
+  background-color: #e0f2fe;
 }
 
-nav .active-page {
-  color: #3b82f6;
+nav div:last-child a.active-page {
+  color: #1e40af;
+  font-weight: 600;
 }
 
 /* --- Hero Section --- */
 .hero {
   text-align: center;
-  padding: 6rem 2rem 4rem 2rem;
-  background: linear-gradient(to bottom, #111122, #1a1a2e);
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+  border-radius: 0.5rem;
+  margin: 2rem;
 }
 
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #3b82f6;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto;
-  color: #cbd5e1;
+  font-size: 1.25rem;
 }
 
-/* --- Features Grid --- */
+/* --- Features Section --- */
+.features {
+  padding: 4rem 2rem;
+}
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  padding: 3rem 2rem;
 }
 
 .feature {
-  background-color: #1e1e2f;
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
 }
 
 .feature:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
 .feature h3 {
-  margin-top: 0;
-  color: #3b82f6;
+  margin-bottom: 1rem;
+  color: #1e3a8a;
 }
 
 .feature p {
-  color: #cbd5e1;
+  color: #374151;
 }
 
-/* --- Pricing Plans --- */
+/* --- Pricing / Plans --- */
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
 }
 
 .plan {
-  background-color: #1e1e2f;
-  text-align: center;
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.plan:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 .plan h3 {
-  color: #3b82f6;
+  margin-bottom: 1rem;
+  color: #1e3a8a;
 }
 
 .plan p {
-  color: #cbd5e1;
-  margin: 1rem 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
-/* --- Footer --- */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background-color: #1a1a2e;
-  color: #9ca3af;
-}
-
-/* --- Fade-in Animation --- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* --- Forms (Contact Page) --- */
+/* --- Contact Form --- */
 .contact-form {
   max-width: 600px;
   margin: 2rem auto;
-  background: #1e1e2f;
+  background: #f3f4f6;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 .contact-form label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #fff;
 }
 
 .contact-form input,
@@ -159,11 +153,9 @@ footer {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1.25rem;
-  border: none;
+  border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   font-size: 1rem;
-  background: #2c2c3e;
-  color: #fff;
 }
 
 .contact-form input:focus,
@@ -196,13 +188,32 @@ footer {
   display: block;
 }
 
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f3f4f6;
+  margin-top: 2rem;
+}
+
+/* --- Fade In Animation --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  .features-grid, .plans-grid {
-    grid-template-columns: 1fr;
-  }
-
   .hero h1 {
     font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
   }
 }
