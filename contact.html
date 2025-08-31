@@ -60,6 +60,29 @@
     .thank-you.visible {
       display: block;
     }
+    .response-time {
+      text-align: center;
+      margin-top: 1rem;
+      font-style: italic;
+      color: #a0a0a0;
+    }
+    .cta-button {
+      display: block;
+      margin: 2rem auto 0 auto;
+      background: #f59e0b;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-button:hover {
+      background: #d97706;
+    }
   </style>
 </head>
 <body>
@@ -103,12 +126,16 @@
       <button type="submit">Send Message</button>
     </form>
 
+    <div class="response-time">We reply within 24 hours.</div>
+
     <iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <div id="thank-you" class="thank-you">
       <h2>✅ Thank you!</h2>
       <p>Your message has been sent. We’ll get back to you shortly.</p>
     </div>
+
+    <a href="/pricing" class="cta-button">Get Started</a>
   </section>
 
   <footer>

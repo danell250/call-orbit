@@ -9,6 +9,48 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+    }
+    .feature {
+      background: #1e1e2f;
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .testimonial {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #2c2c3e;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      color: #fff;
+      text-align: center;
+      font-style: italic;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+    .integrations {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .integrations span {
+      display: inline-block;
+      background: #3b82f6;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      margin: 0.25rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -29,24 +71,38 @@
     <p>Centralize your contact center dashboards, portals, and analytics in one platform.</p>
   </header>
 
-  <section class="features features-grid fade-in">
+  <section class="fade-in features-grid">
     <div class="feature">
       <h3>Portal Snippets</h3>
-      <p>Preview dashboards and portal layouts for your teams.</p>
+      <p>Preview dashboards and portal layouts for your teams to save setup time.</p>
     </div>
     <div class="feature">
       <h3>Integrations</h3>
-      <p>Connect with CRM, analytics, and telephony systems easily.</p>
+      <p>Connect with CRM, analytics, and telephony systems easily for seamless operations.</p>
     </div>
     <div class="feature">
       <h3>Custom Analytics</h3>
-      <p>Tailor reports and metrics per center to drive insights and decisions.</p>
+      <p>Tailor reports and metrics per center to drive insights and improve performance.</p>
     </div>
     <div class="feature">
       <h3>Global Access</h3>
-      <p>Manage multiple centers across regions with a single platform.</p>
+      <p>Manage multiple centers across regions with a single platform securely.</p>
     </div>
   </section>
+
+  <section class="fade-in integrations">
+    <h3>Compatible With:</h3>
+    <span>Salesforce</span>
+    <span>HubSpot</span>
+    <span>Google Analytics</span>
+    <span>Twilio</span>
+    <span>Microsoft Teams</span>
+  </section>
+
+  <div class="fade-in testimonial">
+    <p>“CallOrbit transformed how we manage multiple centers—everything is faster, clearer, and more reliable. Highly recommended!”</p>
+    <strong>- Alex J., Operations Manager</strong>
+  </div>
 
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.

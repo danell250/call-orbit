@@ -9,6 +9,41 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+    }
+    .coverage-grid .feature {
+      background: #1e1e2f;
+      color: #fff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .coverage-map {
+      max-width: 1000px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    .coverage-map iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+    .expansion-note {
+      text-align: center;
+      margin: 2rem auto;
+      font-style: italic;
+      color: #3b82f6;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -29,7 +64,7 @@
     <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
   </header>
 
-  <section class="features features-grid fade-in">
+  <section class="fade-in coverage-grid">
     <div class="feature">
       <h3>North America 🇺🇸🇨🇦</h3>
       <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
@@ -55,6 +90,16 @@
       <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
     </div>
   </section>
+
+  <section class="fade-in coverage-map">
+    <h3>Coverage Map</h3>
+    <iframe 
+      src="https://www.google.com/maps/d/embed?mid=1E0pJH6Kx0vF0J7L9mFqxJ5vKxzF1kN0&hl=en" 
+      allowfullscreen
+    ></iframe>
+  </section>
+
+  <p class="expansion-note">We are continuously expanding into new regions to serve you better!</p>
 
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
