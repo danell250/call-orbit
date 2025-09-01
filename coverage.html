@@ -1,69 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Coverage</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Coverage</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
+  <style>
+    /* Map container styling */
+    #coverage-map {
+      width: 100%;
+      height: 500px;
+      border-radius: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .features-grid iframe {
+      width: 100%;
+      border-radius: 1rem;
+      border: 0;
+      height: 500px;
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/coverage" class="active-page">Coverage</a>
-    <a href="/platform">Platform</a>
-  </div>
-</nav>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/coverage" class="active-page">Coverage</a>
+      <a href="/platform">Platform</a>
+    </div>
+  </nav>
 
-<header class="hero fade-in">
-  <h1>Coverage</h1>
-  <p>We provide dedicated contact center services across multiple regions.</p>
-</header>
+  <header class="hero fade-in">
+    <h1>Global Coverage</h1>
+    <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
+  </header>
 
-<section class="features features-grid fade-in">
-  <div class="feature">
-    <h3>Key Regions</h3>
-    <ul>
-      <li>New York, USA</li>
-      <li>London, UK</li>
-      <li>Paris, France</li>
-      <li>Berlin, Germany</li>
-      <li>Sydney, Australia</li>
-      <li>Johannesburg, South Africa</li>
-      <li>Toronto, Canada</li>
-      <li>Tokyo, Japan</li>
-      <li>Singapore</li>
-      <li>Dubai, UAE</li>
-    </ul>
-    <p>Expanding to more regions soon to support global growth.</p>
-  </div>
-</section>
+  <section class="features features-grid fade-in">
+    <div class="feature">
+      <h3>North America 🇺🇸🇨🇦</h3>
+      <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
+    </div>
+    <div class="feature">
+      <h3>Europe 🇬🇧🇩🇪🇫🇷</h3>
+      <p>Coverage in major European cities with local numbers and full support for EU contact centers.</p>
+    </div>
+    <div class="feature">
+      <h3>Asia-Pacific 🇯🇵🇦🇺🇸🇬</h3>
+      <p>Seamless connectivity in APAC regions, helping your team reach customers efficiently and reliably.</p>
+    </div>
+    <div class="feature">
+      <h3>Latin America 🇧🇷🇲🇽🇦🇷</h3>
+      <p>Local numbers and support for growing your reach across LATAM countries.</p>
+    </div>
+    <div class="feature">
+      <h3>Africa 🇿🇦🇳🇬🇪🇬</h3>
+      <p>Expanding coverage to major African hubs with robust local telephony solutions.</p>
+    </div>
+    <div class="feature">
+      <h3>Middle East 🇦🇪🇸🇦🇶🇦</h3>
+      <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
+    </div>
+  </section>
 
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-</footer>
+  <section class="fade-in">
+    <h2 style="text-align:center; margin-top:2rem;">Interactive Coverage Map</h2>
+    <div id="coverage-map">
+      <iframe 
+        src="https://www.google.com/maps/d/u/0/embed?mid=1pQwF8rEmYx7fZ1fP5FJ0KxD5wT3X6B2i" 
+        width="100%" height="500"></iframe>
+    </div>
+    <p style="text-align:center; font-style:italic;">We’re continuously expanding our regions to serve you better.</p>
+  </section>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
-</script>
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
 </body>
 </html>
