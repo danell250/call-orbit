@@ -30,13 +30,22 @@
 </header>
 
 <section class="fade-in">
-  <div data-youform-embed data-form='fijvax5k' data-width='100%' data-height='700'></div>
-  <script src="https://app.youform.com/embed.js"></script>
+  <form class="contact-form"
+    action="https://formsubmit.co/your-email@example.com"
+    method="POST"
+  >
+    <input type="hidden" name="_next" value="/contact-success.html">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
 
-  <div id="thank-you" class="thank-you" style="display:none; text-align:center; margin-top:2rem;">
-    <h2>✅ Thank you!</h2>
-    <p>Your message has been sent. CallOrbit will get back to you shortly.</p>
-  </div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
 </section>
 
 <footer>
@@ -45,7 +54,6 @@
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
