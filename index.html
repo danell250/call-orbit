@@ -1,69 +1,79 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Home</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
 </head>
 <body>
-<nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/" class="active-page">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-  </div>
-</nav>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/" class="active-page">Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/coverage">Coverage</a>
+      <a href="/platform">Platform</a>
+    </div>
+  </nav>
 
-<header class="hero fade-in">
-  <h1>Separate and Simplify Contact Center Management</h1>
-  <p>Dedicated dashboards, portals, number porting, and analytics for each location.</p>
-</header>
+  <header class="hero fade-in">
+    <h1>Separate and Simplify Contact Center Management</h1>
+    <p>Dedicated dashboards, portals, number porting, and analytics for each location.</p>
+  </header>
 
-<section class="features features-grid fade-in">
-  <div class="feature">
-    <h3>Live Dashboards</h3>
-    <p>Track metrics, alerts, and trends in real-time so your team can act immediately.</p>
-  </div>
-  <div class="feature">
-    <h3>Manage Contact Centers Easily</h3>
-    <p>Separate portals and access controls for smooth operations across multiple teams.</p>
-  </div>
-  <div class="feature">
-    <h3>Number Management & Porting</h3>
-    <p>Buy, port, and manage global numbers effortlessly without downtime.</p>
-  </div>
-  <div class="feature">
-    <h3>Analytics & Reporting</h3>
-    <p>Custom reports and insights to make data-driven decisions faster and smarter.</p>
-  </div>
-</section>
+  <section class="features features-grid fade-in">
+    <div class="feature">
+      <h3>Live Dashboards</h3>
+      <p>Track metrics, alerts, and trends in real-time.</p>
+    </div>
+    <div class="feature">
+      <h3>Manage Contact Centers Easily</h3>
+      <p>Separate portals and access controls for each center.</p>
+    </div>
+    <div class="feature">
+      <h3>Number Management & Porting</h3>
+      <p>Buy and port numbers globally without hassle.</p>
+    </div>
+    <div class="feature">
+      <h3>Analytics & Reporting</h3>
+      <p>Custom reports and insights for every team.</p>
+    </div>
+  </section>
 
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-</footer>
+  <section class="why-callorbit fade-in">
+    <h2>Why CallOrbit?</h2>
+    <ul>
+      <li>Centralized dashboards for all locations</li>
+      <li>Global number management</li>
+      <li>Custom analytics for data-driven decisions</li>
+      <li>Easy-to-use portals for your team</li>
+    </ul>
+  </section>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
-</script>
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
 </body>
 </html>
