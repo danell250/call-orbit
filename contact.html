@@ -26,11 +26,11 @@
 
   <header class="hero fade-in">
     <h1>Contact Us</h1>
-    <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
+    <p>We reply within 24 hours.</p>
   </header>
 
   <section class="fade-in">
-    <div data-youform-embed data-form='fijvax5k' data-width='100%' data-height='700'></div>
+    <div data-youform-embed data-form="fijvax5k" data-width="100%" data-height="700"></div>
     <script src="https://app.youform.com/embed.js"></script>
   </section>
 
@@ -40,7 +40,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function(entries, observer){
       entries.forEach(entry => {
