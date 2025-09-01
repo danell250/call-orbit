@@ -1,69 +1,72 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Contact</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
 </head>
 <body>
-<nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact" class="active-page">Contact</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-  </div>
-</nav>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/">Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/contact" class="active-page">Contact</a>
+      <a href="/coverage">Coverage</a>
+      <a href="/platform">Platform</a>
+    </div>
+  </nav>
 
-<header class="hero fade-in">
-  <h1>Contact Us</h1>
-  <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
-</header>
+  <header class="hero fade-in">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you. Fill in your details and we’ll be in touch.</p>
+  </header>
 
-<section class="fade-in">
-  <form class="contact-form"
-    action="https://formsubmit.co/danelloosthuizen3@gmail.com"
-    method="POST"
-  >
-    <input type="hidden" name="_next" value="/contact-success.html">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
+  <section class="fade-in">
+    <form 
+      class="contact-form"
+      action="https://formsubmit.co/1343b0c03ba3be4fb50e044cf9fc0b4b" 
+      method="POST"
+    >
+      <input type="hidden" name="_next" value="/contact-success.html" />
+      
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-</footer>
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
-</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
 </body>
 </html>
