@@ -9,6 +9,50 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #f7f7f7;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .contact-form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background: #fff;
+      color: #111;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 2px solid #3b82f6;
+    }
+    .contact-form button {
+      background: #3b82f6;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #2563eb;
+    }
+  </style>
 </head>
 <body>
   <nav>
@@ -32,11 +76,11 @@
   <section class="fade-in">
     <form 
       class="contact-form"
-      action="https://formsubmit.co/1343b0c03ba3be4fb50e044cf9fc0b4b" 
+      action="https://formsubmit.co/1343b0c03ba3be4fb50e044cf9fc0b4b"
       method="POST"
     >
-      <input type="hidden" name="_next" value="/contact-success.html" />
-      
+      <!-- Redirect to your custom thank-you page -->
+      <input type="hidden" name="_next" value="/contact-success.html">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required />
 
