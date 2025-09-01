@@ -13,7 +13,7 @@
     .contact-form {
       max-width: 600px;
       margin: 2rem auto;
-      background: #f9f9f9;
+      background: #f7f7f7;
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -22,7 +22,7 @@
       display: block;
       font-weight: bold;
       margin-bottom: 0.5rem;
-      color: #111;
+      color: #333;
     }
     .contact-form input,
     .contact-form textarea {
@@ -33,7 +33,7 @@
       border-radius: 0.5rem;
       font-size: 1rem;
       background: #fff;
-      color: #111;
+      color: #333;
     }
     .contact-form input:focus,
     .contact-form textarea:focus {
@@ -74,20 +74,21 @@
   </header>
 
   <section class="fade-in">
-    <form class="contact-form" 
-          action="https://formsubmit.co/1343b0c03ba3be4fb50e044cf9fc0b4b" 
-          method="POST">
-      <input type="hidden" name="_next" value="/contact-success.html">
-      <input type="hidden" name="_captcha" value="false">
-
+    <form 
+      class="contact-form"
+      action="https://formsubmit.co/danelloosthuizen3@gmail.com" 
+      method="POST"
+    >
+      <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html">
+      
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" required>
+      <input type="text" id="name" name="name" required />
 
       <label for="email">Email</label>
-      <input type="email" name="email" id="email" required>
+      <input type="email" id="email" name="email" required />
 
       <label for="message">Message</label>
-      <textarea name="message" id="message" rows="5" required></textarea>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
       <button type="submit">Send Message</button>
     </form>
