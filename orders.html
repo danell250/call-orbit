@@ -188,8 +188,15 @@
     function openCart(){cartWrapper.style.display='block'; cartOpen=true;}
     function closeCart(){cartWrapper.style.display='none'; cartOpen=false;}
 
-    cartButton.addEventListener('click',()=>{
-      cartOpen ? closeCart() : openCart();
+    // Fixed cart toggle
+    cartButton.addEventListener('click', () => {
+      if(cartWrapper.style.display === 'block') {
+        cartWrapper.style.display = 'none';
+        cartOpen = false;
+      } else {
+        cartWrapper.style.display = 'block';
+        cartOpen = true;
+      }
     });
 
     function renderPayPal(){
