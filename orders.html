@@ -1,181 +1,80 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Buy Numbers & Plans</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
-  <style>
-    main{max-width:1120px;margin:20px auto;padding:0}
-    header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
-    header.hero h1{margin-bottom:1rem}
-    header.hero p{margin-bottom:2rem}
-    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
-    .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
-    .plan:hover{transform:translateY(-5px)}
-    .plan h3{color:#1e3a8a;margin-bottom:1rem}
-    .plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
-    .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05)}
-    .forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
-    .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
-    .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
-    .buy-now:hover{filter:brightness(0.95)}
-    /* Cart sliding in */
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
-    .cart-wrapper.active{right:0}
-    .cart h2{margin-bottom:1rem;color:#1e3a8a}
-    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
-    .checkout-btn:hover{filter:brightness(0.95)}
-  </style>
-</head>
-<body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
-    <div>
-      <a href="/" >Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
+<!-- Cart -->
+<div class="cart-wrapper" id="cart-wrapper">
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
+      <span>Total:</span><span id="cart-total">$0.00</span>
     </div>
-  </nav>
-
-  <header class="hero fade-in">
-    <h1>Choose Your Plan & Number</h1>
-    <p>Pick your country, plan, and forwarding number to get started.</p>
-  </header>
-
-  <main>
-    <div class="forwarding">
-      <label for="country">Select Country</label>
-      <select id="country">
-        <option value="US">United States</option>
-        <option value="ZA">South Africa</option>
-        <option value="GB">United Kingdom</option>
-        <option value="IN">India</option>
-        <option value="AU">Australia</option>
-        <!-- Add remaining countries here -->
-      </select>
-      <label for="forward">Forwarding Number / Device</label>
-      <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
-    </div>
-
-    <div class="plans-grid" id="plans-container"></div>
-  </main>
-
-  <!-- Cart -->
-  <div class="cart-wrapper" id="cart-wrapper">
-    <div class="cart">
-      <h2>Your Cart</h2>
-      <div id="cart-items"></div>
-      <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-        <span>Total:</span><span id="cart-total">$0.00</span>
-      </div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;">
+      <button id="clear-cart" class="clear-cart-btn" style="background:#ef4444;color:#fff;padding:10px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;transition:filter .2s;">Clear Cart</button>
       <button id="checkout" class="checkout-btn">Checkout with PayPal</button>
     </div>
   </div>
+</div>
 
-  <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+<style>
+  /* Modernized cart items */
+  .cart-item {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    padding:10px;
+    background:#fff;
+    border-radius:0.75rem;
+    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+    transition:transform .2s;
+  }
+  .cart-item:hover { transform: translateY(-2px); }
+  .cart-item span { flex:1; }
+  .remove-item {
+    background:transparent;
+    border:none;
+    color:#ef4444;
+    font-weight:700;
+    font-size:1.2rem;
+    cursor:pointer;
+    margin-left:10px;
+  }
+</style>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Sample global country data with plans
-    const countryData = {
-      US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
-      ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
-      GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
-      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
-      AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
-    };
-
-    const countrySelect = document.getElementById('country');
-    const forwardInput = document.getElementById('forward');
-    const plansContainer = document.getElementById('plans-container');
-    const cartWrapper = document.getElementById('cart-wrapper');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotalEl = document.getElementById('cart-total');
-    const checkoutBtn = document.getElementById('checkout');
-
-    let cart = [];
-
-    function renderPlans(){
-      plansContainer.innerHTML='';
-      const c = countrySelect.value;
-      const plans = countryData[c];
-      for(const plan in plans){
-        const data = plans[plan];
-        const div = document.createElement('div');
-        div.className='plan';
-        div.innerHTML=`
-          <h3>${plan}</h3>
-          <div class="price">$${data.price} /mo</div>
-          <div class="minutes">${data.minutes} included minutes</div>
-          <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
-          <button class="buy-now">Add to Cart</button>
-        `;
-        div.querySelector('button').addEventListener('click',()=>{
-          addToCart(c,plan,data);
-        });
-        plansContainer.appendChild(div);
-      }
+<script>
+  function renderCart(){
+    cartItems.innerHTML='';
+    if(cart.length>0){
+      cartWrapper.classList.add('active');
+    } else {
+      cartWrapper.classList.remove('active');
     }
 
-    function addToCart(country,plan,data){
-      const forward = forwardInput.value || '—';
-      cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
-      renderCart();
-    }
-
-    function renderCart(){
-      cartItems.innerHTML='';
-      if(cart.length>0){
-        cartWrapper.classList.add('active');
-      }else{
-        cartWrapper.classList.remove('active');
-      }
-      let total = 0;
-      cart.forEach((item)=>{
-        total+=item.price;
-        const div = document.createElement('div');
-        div.className='cart-item';
-        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
-        cartItems.appendChild(div);
-      });
-      cartTotalEl.textContent=`$${total.toFixed(2)}`;
-    }
-
-    checkoutBtn.addEventListener('click',()=>{
-      if(cart.length===0){alert('Cart is empty'); return;}
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      paypal.Buttons({
-        createOrder:function(data,actions){
-          return actions.order.create({purchase_units:[{amount:{value:total}}]});
-        },
-        onApprove:function(data,actions){
-          return actions.order.capture().then(function(details){
-            alert('Payment completed by '+details.payer.name.given_name);
-            cart=[];
-            renderCart();
-          });
-        }
-      }).render('body'); // temporary render to body
+    let total = 0;
+    cart.forEach((item,index)=>{
+      total+=item.price;
+      const div = document.createElement('div');
+      div.className='cart-item';
+      div.innerHTML=`
+        <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
+        <span>$${item.price.toFixed(2)}</span>
+        <button class="remove-item" data-index="${index}">&times;</button>
+      `;
+      cartItems.appendChild(div);
     });
+    cartTotalEl.textContent=`$${total.toFixed(2)}`;
 
-    countrySelect.addEventListener('change',renderPlans);
-    forwardInput.addEventListener('input',renderPlans);
+    // Remove individual item
+    document.querySelectorAll('.remove-item').forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        const idx = e.target.getAttribute('data-index');
+        cart.splice(idx,1);
+        renderCart();
+      });
+    });
+  }
 
-    renderPlans();
-  </script>
-</body>
-</html>
+  // Clear entire cart
+  document.getElementById('clear-cart').addEventListener('click',()=>{
+    cart=[];
+    renderCart();
+  });
+</script>
