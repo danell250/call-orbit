@@ -26,12 +26,12 @@
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
     /* Cart sliding in */
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
+    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;display:none}
     .cart-wrapper.active{right:0}
     .cart h2{margin-bottom:1rem;color:#1e3a8a}
     .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
-    .checkout-btn:hover{filter:brightness(0.95)}
+    .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
+    #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
   </style>
 </head>
 <body>
@@ -69,25 +69,27 @@
 
     <div class="plans-grid" id="plans-container"></div>
 
-    <div style="margin-top:20px;padding:10px;background:#fef3c7;border-radius:10px;color:#b45309;">
-      <strong>Important:</strong> You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal. Check <a href="/pricing">portal pricing</a> for more details.
-    </div>
+    <!-- Portal Notice -->
+    <p style="text-align:center;color:red;font-weight:bold;margin-top:20px;">
+      You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal. 
+      <a href="/pricing">See portal pricing here</a>.
+    </p>
   </main>
 
-  <!-- Cart Button -->
-  <button id="cart-toggle" style="position:fixed;bottom:20px;right:20px;padding:15px;border-radius:50%;background:#3b82f6;color:#fff;border:none;cursor:pointer;z-index:1001;">🛒</button>
-
   <!-- Cart -->
-  <div class="cart-wrapper" id="cart-wrapper" style="right:-400px;">
+  <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
       <h2>Your Cart</h2>
       <div id="cart-items"></div>
       <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
-      <div id="checkout"></div>
+      <div id="paypal-button-container" style="margin-top:15px;"></div>
     </div>
   </div>
+
+  <!-- Cart Summary Button -->
+  <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
   <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
@@ -96,17 +98,25 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    const countryData = {
+      US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
+      ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
+      GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
+      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
+      AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
+    };
+
     const countrySelect = document.getElementById('country');
     const forwardInput = document.getElementById('forward');
     const plansContainer = document.getElementById('plans-container');
-
     const cartWrapper = document.getElementById('cart-wrapper');
-    const cartToggle = document.getElementById('cart-toggle');
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
-    const checkoutContainer = document.getElementById('checkout');
+    const cartButton = document.getElementById('cart-button');
+    const paypalContainer = document.getElementById('paypal-button-container');
 
     let cart = [];
+    let cartOpen = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -134,70 +144,78 @@
       const forward = forwardInput.value || '—';
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       renderCart();
-      cartWrapper.classList.add('active'); // keep cart open when adding
+      updateCartButton();
+      openCart();
+    }
+
+    function removeFromCart(index){
+      cart.splice(index,1);
+      renderCart();
+      updateCartButton();
     }
 
     function renderCart(){
       cartItems.innerHTML='';
-      let total=0;
+      if(cart.length>0){
+        cartWrapper.style.display='block';
+        cartOpen=true;
+      } else {
+        cartWrapper.style.display='none';
+        cartOpen=false;
+      }
+      let total = 0;
       cart.forEach((item,index)=>{
         total+=item.price;
-        const div=document.createElement('div');
+        const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)} <button style="margin-left:10px;color:red;border:none;background:none;cursor:pointer;" onclick="removeItem(${index})">✖</button></span>`;
+        div.innerHTML=`
+          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
+          <span>$${item.price.toFixed(2)}
+            <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
+          </span>
+        `;
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
+      renderPayPal();
     }
 
-    function removeItem(index){
-      cart.splice(index,1);
-      renderCart();
+    function updateCartButton(){
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
     }
 
-    // Toggle cart open/close
-    cartToggle.addEventListener('click',()=>{
-      cartWrapper.classList.toggle('active');
+    function openCart(){cartWrapper.style.display='block'; cartOpen=true;}
+    function closeCart(){cartWrapper.style.display='none'; cartOpen=false;}
+
+    cartButton.addEventListener('click',()=>{
+      cartOpen ? closeCart() : openCart();
     });
 
-    // PayPal button
     function renderPayPal(){
-      checkoutContainer.innerHTML=''; // remove duplicates
-      if(cart.length>0){
-        paypal.Buttons({
-          createOrder:function(data,actions){
-            const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-            return actions.order.create({purchase_units:[{amount:{value:total}}]});
-          },
-          onApprove:function(data,actions){
-            return actions.order.capture().then(function(details){
-              alert('Payment completed by '+details.payer.name.given_name);
-              cart=[];
-              renderCart();
-              renderPayPal();
-            });
-          }
-        }).render('#checkout');
-      }
+      paypalContainer.innerHTML='';
+      if(cart.length===0) return;
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      paypal.Buttons({
+        createOrder: function(data, actions){
+          return actions.order.create({purchase_units:[{amount:{value:total}}]});
+        },
+        onApprove: function(data, actions){
+          return actions.order.capture().then(function(details){
+            alert('Payment completed by '+details.payer.name.given_name);
+            cart=[];
+            renderCart();
+            updateCartButton();
+          });
+        }
+      }).render('#paypal-button-container');
     }
 
     countrySelect.addEventListener('change',renderPlans);
     forwardInput.addEventListener('input',renderPlans);
 
     renderPlans();
-    renderPayPal();
-  </script>
-
-  <script>
-    // Sample global country data with plans
-    const countryData = {
-      US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
-      ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
-      GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
-      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
-      AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
-    };
+    updateCartButton();
   </script>
 </body>
 </html>
