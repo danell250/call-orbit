@@ -5,146 +5,149 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Buy Numbers & Plans</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
   <style>
-    main { max-width: 1120px; margin: auto; padding: 2rem; }
-    .plans-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); }
-    .plan { background:#fff; border-radius:1rem; padding:2rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition: transform .2s; cursor:pointer; }
-    .plan:hover { transform: translateY(-5px); }
-    .plan h3 { color:#1e3a8a; margin-bottom:1rem; }
-    .plan .price { font-size:1.5rem; font-weight:700; margin-bottom:0.5rem; }
-    .plan .minutes, .plan .overage { font-size:0.9rem; margin-bottom:0.5rem; color:#374151; }
-    .plan p { font-size:0.95rem; margin-bottom:1rem; color:#374151; }
-    .select { margin-top:10px;background:#22c55e;color:#fff;font-weight:700;border:none;border-radius:10px;padding:10px;cursor:pointer }
-    .select:hover{filter:brightness(.95)}
-    .review { margin-top:30px; padding:16px; border:1px dashed #e2e8f0; background:#fff; border-radius:1rem; }
-    .summary-row { display:flex; justify-content:space-between; margin-bottom:8px; }
-    label { display:block; margin-bottom:1rem; font-weight:600; }
-    input, select { width:100%; padding:0.5rem; margin-top:4px; border-radius:0.5rem; border:1px solid #d1d5db; }
+    main { max-width:1120px; margin:auto; padding:20px; }
+    .plan { border:1px solid #e2e8f0; border-radius:14px; padding:20px; margin-bottom:20px; background:#fff; cursor:pointer; transition:0.2s; }
+    .plan:hover { box-shadow:0 8px 24px rgba(0,0,0,0.08); transform:translateY(-3px);}
+    .plan h3 { margin:0 0 10px; color:#1e3a8a;}
+    .plan .price { font-size:20px; font-weight:700; margin-bottom:5px;}
+    .plan .minutes, .plan .overage { font-size:14px; margin-bottom:5px;}
+    .cart { border:1px dashed #e2e8f0; padding:20px; background:#fff; border-radius:14px; margin-top:20px;}
+    .summary-row { display:flex; justify-content:space-between; margin-bottom:10px;}
+    select, input { padding:10px; border-radius:10px; border:1px solid #d1d5db; margin-top:5px; width:100%; margin-bottom:15px; }
+    .buy-now { background:#1e3a8a; color:#fff; padding:12px 20px; border:none; border-radius:10px; font-weight:700; cursor:pointer; width:100%; transition:0.2s;}
+    .buy-now:hover { filter:brightness(0.95);}
   </style>
 </head>
 <body>
-  <header style="text-align:center; padding:2rem 1rem;">
-    <h1>Choose Your Plan</h1>
-    <p>Pick a plan and set your forwarding number to get started.</p>
+  <header style="text-align:center; margin:2rem;">
+    <h1>Choose Your Plan & Country</h1>
+    <p>Select your country and plan to see pricing and included minutes.</p>
   </header>
 
   <main>
-    <div class="plans-grid">
-      <!-- BASIC -->
-      <div class="plan" id="basic-plan">
-        <h3>BASIC</h3>
-        <div class="price">$16.99 /mo</div>
-        <div class="minutes">100 included minutes</div>
-        <div class="overage">$0.321 per extra minute</div>
-        <p>Perfect for individuals or small teams just getting started. Includes essential features and enough minutes to start making calls right away.</p>
-        <div id="paypal-container-D3RVF4626URRQ"></div>
-      </div>
-
-      <!-- PLUS -->
-      <div class="plan" id="plus-plan">
-        <h3>PLUS</h3>
-        <div class="price">$25.99 /mo</div>
-        <div class="minutes">156 included minutes</div>
-        <div class="overage">$0.316 per extra minute</div>
-        <p>Great for growing teams that need more minutes and features for multiple agents.</p>
-        <div id="paypal-container-AHZT9B8R76YSY"></div>
-      </div>
-
-      <!-- PRO -->
-      <div class="plan" id="pro-plan">
-        <h3>PRO</h3>
-        <div class="price">$43.99 /mo</div>
-        <div class="minutes">215 included minutes</div>
-        <div class="overage">$0.307 per extra minute</div>
-        <p>Advanced plan for larger teams needing analytics, dashboards, and priority support.</p>
-        <div id="paypal-container-M3MTFMBP6NUA8"></div>
-      </div>
-
-      <!-- MAX -->
-      <div class="plan" id="max-plan">
-        <h3>MAX</h3>
-        <div class="price">$70.99 /mo</div>
-        <div class="minutes">346 included minutes</div>
-        <div class="overage">$0.304 per extra minute</div>
-        <p>Full-featured plan for enterprises requiring maximum minutes and premium support.</p>
-        <div id="paypal-container-DXLHHXVJQS95Q"></div>
-      </div>
-    </div>
-
-    <!-- Forwarding Info -->
-    <div style="margin-top:30px; padding:16px; border:1px solid #e2e8f0; border-radius:1rem; background:#fff;">
-      <h2>Forward Calls To</h2>
-      <label>Country
-        <select id="forward-country">
-          <option>United States</option>
-          <option>South Africa</option>
-          <option>United Kingdom</option>
-          <option>India</option>
-          <option>Australia</option>
-        </select>
-      </label>
-      <label>Forwarding Number / Device
-        <input type="text" id="forward-to" placeholder="+27 10 500 1234 or SIP URI">
+    <!-- Country Selection -->
+    <div style="margin-bottom:20px;">
+      <label>Country:
+        <select id="country-select"></select>
       </label>
     </div>
 
-    <!-- Review Section -->
-    <div class="review" id="review">
-      <div class="summary-row"><span>Plan</span><strong id="summary-plan">—</strong></div>
-      <div class="summary-row"><span>Price</span><strong id="summary-price">—</strong></div>
-      <div class="summary-row"><span>Included minutes</span><strong id="summary-minutes">—</strong></div>
-      <div class="summary-row"><span>Forwarding to</span><strong id="summary-forward">—</strong></div>
+    <!-- Plans -->
+    <div id="plans-container">
+      <!-- Plan cards will be generated dynamically -->
+    </div>
+
+    <!-- Cart -->
+    <div class="cart" id="cart">
+      <h2>Cart Summary</h2>
+      <div class="summary-row"><span>Country</span><strong id="cart-country">—</strong></div>
+      <div class="summary-row"><span>Plan</span><strong id="cart-plan">—</strong></div>
+      <div class="summary-row"><span>Price</span><strong id="cart-price">—</strong></div>
+      <div class="summary-row"><span>Included Minutes</span><strong id="cart-minutes">—</strong></div>
+      <div id="paypal-button-container" style="margin-top:20px;"></div>
     </div>
   </main>
 
-  <footer style="text-align:center; padding:2rem; margin-top:2rem; background:#f3f4f6;">
+  <footer style="text-align:center; margin-top:40px;">
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const plans = {
-      BASIC: {name:"BASIC", price:16.99, minutes:100, overage:0.321},
-      PLUS: {name:"PLUS", price:25.99, minutes:156, overage:0.316},
-      PRO: {name:"PRO", price:43.99, minutes:215, overage:0.307},
-      MAX: {name:"MAX", price:70.99, minutes:346, overage:0.304}
+    // Sample countries and rates (fixed + mobile). Full list should include all countries except North Korea.
+    const countries = {
+      "United States": { fixed: {BASIC:16.99, PLUS:25.99, PRO:43.99, MAX:70.99}, mobile: {BASIC:0.05, PLUS:0.04, PRO:0.03, MAX:0.025}, minutes: {BASIC:100, PLUS:156, PRO:215, MAX:346} },
+      "United Kingdom": { fixed: {BASIC:18.99, PLUS:27.99, PRO:45.99, MAX:72.99}, mobile: {BASIC:0.06, PLUS:0.05, PRO:0.04, MAX:0.03}, minutes: {BASIC:100, PLUS:156, PRO:215, MAX:346} },
+      "India": { fixed: {BASIC:14.99, PLUS:23.99, PRO:41.99, MAX:68.99}, mobile: {BASIC:0.03, PLUS:0.025, PRO:0.02, MAX:0.018}, minutes: {BASIC:100, PLUS:156, PRO:215, MAX:346} },
+      "Australia": { fixed: {BASIC:19.99, PLUS:28.99, PRO:46.99, MAX:74.99}, mobile: {BASIC:0.05, PLUS:0.045, PRO:0.035, MAX:0.03}, minutes: {BASIC:100, PLUS:156, PRO:215, MAX:346} },
+      "South Africa": { fixed: {BASIC:15.99, PLUS:24.99, PRO:42.99, MAX:69.99}, mobile: {BASIC:0.04, PLUS:0.035, PRO:0.03, MAX:0.025}, minutes: {BASIC:100, PLUS:156, PRO:215, MAX:346} }
     };
 
-    const forwardInput = document.getElementById('forward-to');
-    const forwardCountry = document.getElementById('forward-country');
-    const summaryPlan = document.getElementById('summary-plan');
-    const summaryPrice = document.getElementById('summary-price');
-    const summaryMinutes = document.getElementById('summary-minutes');
-    const summaryForward = document.getElementById('summary-forward');
+    const plansData = {
+      BASIC: {name:"BASIC"},
+      PLUS: {name:"PLUS"},
+      PRO: {name:"PRO"},
+      MAX: {name:"MAX"}
+    };
 
-    let selectedPlanId = null;
+    const countrySelect = document.getElementById('country-select');
+    const plansContainer = document.getElementById('plans-container');
+    let selectedPlan = null;
+    let selectedCountry = null;
 
-    document.querySelectorAll('.plan').forEach(planEl=>{
-      planEl.addEventListener('click', ()=>{
-        selectedPlanId = planEl.id.split('-')[0].toUpperCase();
-        updateReview();
-      });
+    // Populate country dropdown
+    Object.keys(countries).forEach(c=>{
+      const opt = document.createElement('option'); opt.value=c; opt.textContent=c;
+      countrySelect.appendChild(opt);
+    });
+    selectedCountry = countrySelect.value;
+
+    countrySelect.addEventListener('change', ()=>{
+      selectedCountry = countrySelect.value;
+      selectedPlan = null;
+      renderPlans();
+      updateCart();
     });
 
-    function updateReview(){
-      if(!selectedPlanId) return;
-      const p = plans[selectedPlanId];
-      summaryPlan.textContent = p.name;
-      summaryPrice.textContent = `$${p.price} /mo`;
-      summaryMinutes.textContent = `${p.minutes} included • $${p.overage.toFixed(3)}/extra min`;
-      summaryForward.textContent = `${forwardCountry.value}: ${forwardInput.value || '—'}`;
+    function renderPlans(){
+      plansContainer.innerHTML='';
+      const countryRates = countries[selectedCountry];
+      Object.keys(plansData).forEach(planKey=>{
+        const plan = plansData[planKey];
+        const price = countryRates.fixed[planKey];
+        const minutes = countryRates.minutes[planKey];
+        const planEl = document.createElement('div');
+        planEl.className='plan';
+        planEl.innerHTML = `
+          <h3>${plan.name}</h3>
+          <div class="price">$${price} /mo</div>
+          <div class="minutes">${minutes} included minutes</div>
+          <div class="overage">Fixed rate: $${countryRates.fixed[planKey]}/mo</div>
+          <button class="buy-now" data-plan="${planKey}">Select & Checkout</button>
+        `;
+        plansContainer.appendChild(planEl);
+
+        planEl.querySelector('button').addEventListener('click', ()=>{
+          selectedPlan=planKey;
+          updateCart();
+          renderPayPalButton(price);
+        });
+      });
     }
 
-    forwardInput.addEventListener('input', updateReview);
-    forwardCountry.addEventListener('change', updateReview);
+    function updateCart(){
+      document.getElementById('cart-country').textContent=selectedCountry || '—';
+      document.getElementById('cart-plan').textContent=selectedPlan || '—';
+      document.getElementById('cart-price').textContent=selectedPlan ? `$${countries[selectedCountry].fixed[selectedPlan]}/mo` : '—';
+      document.getElementById('cart-minutes').textContent=selectedPlan ? countries[selectedCountry].minutes[selectedPlan] : '—';
+    }
 
-    // Render PayPal Hosted Buttons
-    paypal.HostedButtons({hostedButtonId:"D3RVF4626URRQ"}).render("#paypal-container-D3RVF4626URRQ");
-    paypal.HostedButtons({hostedButtonId:"AHZT9B8R76YSY"}).render("#paypal-container-AHZT9B8R76YSY");
-    paypal.HostedButtons({hostedButtonId:"M3MTFMBP6NUA8"}).render("#paypal-container-M3MTFMBP6NUA8");
-    paypal.HostedButtons({hostedButtonId:"DXLHHXVJQS95Q"}).render("#paypal-container-DXLHHXVJQS95Q");
+    function renderPayPalButton(amount){
+      // Clear previous button
+      document.getElementById('paypal-button-container').innerHTML='';
+      paypal.Buttons({
+        createOrder: function(data, actions){
+          return actions.order.create({
+            purchase_units:[{amount:{value:amount.toFixed(2)}}]
+          });
+        },
+        onApprove: function(data, actions){
+          return actions.order.capture().then(function(details){
+            alert('Transaction completed by ' + details.payer.name.given_name);
+            // Optionally redirect to thank-you page
+          });
+        },
+        onError: function(err){
+          alert('Something went wrong. Please contact support.');
+          console.error(err);
+        }
+      }).render('#paypal-button-container');
+    }
+
+    renderPlans();
   </script>
 </body>
 </html>
