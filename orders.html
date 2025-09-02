@@ -28,13 +28,10 @@
     /* Cart sliding in */
     .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
     .cart-wrapper.active{right:0}
-    .cart h2{margin-bottom:1rem;color:#1e3a8a;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
     .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .cart-item span.remove{color:red;cursor:pointer;margin-left:10px;font-weight:bold}
     .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
     .checkout-btn:hover{filter:brightness(0.95)}
-    .clear-cart-btn{background:#ef4444;color:#fff;padding:8px 16px;border:none;border-radius:999px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:filter .2s;margin-top:10px;width:100%}
-    .clear-cart-btn:hover{filter:brightness(0.95)}
   </style>
 </head>
 <body>
@@ -48,6 +45,11 @@
       <a href="/contact">Contact</a>
       <a href="/coverage">Coverage</a>
       <a href="/platform">Platform</a>
+      <!-- Cart Icon -->
+      <button id="cart-toggle" style="background:none;border:none;cursor:pointer;font-size:1.5rem;position:relative;">
+        🛒
+        <span id="cart-count" style="position:absolute;top:-8px;right:-8px;background:#22c55e;color:#fff;border-radius:50%;padding:2px 6px;font-size:0.8rem;">0</span>
+      </button>
     </div>
   </nav>
 
@@ -76,12 +78,14 @@
   <!-- Cart -->
   <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
-      <h2 id="cart-header">Your Cart <span id="toggle-cart">▼</span></h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2>Your Cart</h2>
+        <button id="clear-cart" style="background:none;border:none;color:#ef4444;cursor:pointer;">Clear Cart</button>
+      </div>
       <div id="cart-items"></div>
       <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
-      <button class="clear-cart-btn" id="clear-cart">Clear Cart</button>
       <button id="checkout" class="checkout-btn">Checkout with PayPal</button>
     </div>
   </div>
@@ -108,12 +112,11 @@
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
     const checkoutBtn = document.getElementById('checkout');
+    const cartToggle = document.getElementById('cart-toggle');
+    const cartCount = document.getElementById('cart-count');
     const clearCartBtn = document.getElementById('clear-cart');
-    const toggleCart = document.getElementById('toggle-cart');
-    const cartHeader = document.getElementById('cart-header');
 
     let cart = [];
-    let cartCollapsed = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -147,31 +150,43 @@
       cartItems.innerHTML='';
       if(cart.length>0){
         cartWrapper.classList.add('active');
-      }else{
+      } else {
         cartWrapper.classList.remove('active');
       }
+
       let total = 0;
       cart.forEach((item,index)=>{
-        total+=item.price;
+        total += item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`
+        div.innerHTML = `
           <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)}<span class="remove" data-index="${index}">×</span></span>
+          <span>$${item.price.toFixed(2)}</span>
+          <button class="remove-item" data-index="${index}" style="background:none;border:none;color:#ef4444;font-weight:bold;cursor:pointer;">×</button>
         `;
         cartItems.appendChild(div);
       });
-      cartTotalEl.textContent=`$${total.toFixed(2)}`;
 
-      // Add remove functionality
-      document.querySelectorAll('.cart-item .remove').forEach(btn=>{
-        btn.addEventListener('click',e=>{
-          const idx = parseInt(e.target.dataset.index);
-          cart.splice(idx,1);
+      document.querySelectorAll('.remove-item').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const i = e.target.getAttribute('data-index');
+          cart.splice(i,1);
           renderCart();
         });
       });
+
+      cartTotalEl.textContent = `$${cart.reduce((sum,item)=>sum+item.price,0).toFixed(2)}`;
+      cartCount.textContent = cart.length;
     }
+
+    cartToggle.addEventListener('click', ()=>{
+      cartWrapper.classList.toggle('active');
+    });
+
+    clearCartBtn.addEventListener('click', ()=>{
+      cart = [];
+      renderCart();
+    });
 
     checkoutBtn.addEventListener('click',()=>{
       if(cart.length===0){alert('Cart is empty'); return;}
@@ -187,29 +202,11 @@
             renderCart();
           });
         }
-      }).render('body'); // temporary render to body
+      }).render('body');
     });
 
-    // Clear cart
-    clearCartBtn.addEventListener('click',()=>{
-      cart = [];
-      renderCart();
-    });
-
-    // Expand/collapse cart
-    cartHeader.addEventListener('click',()=>{
-      cartCollapsed = !cartCollapsed;
-      if(cartCollapsed){
-        cartItems.style.display = 'none';
-        toggleCart.textContent = '▲';
-      } else {
-        cartItems.style.display = 'block';
-        toggleCart.textContent = '▼';
-      }
-    });
-
-    countrySelect.addEventListener('change',renderPlans);
-    forwardInput.addEventListener('input',renderPlans);
+    countrySelect.addEventListener('change', renderPlans);
+    forwardInput.addEventListener('input', renderPlans);
 
     renderPlans();
   </script>
