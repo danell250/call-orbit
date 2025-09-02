@@ -28,10 +28,13 @@
     /* Cart sliding in */
     .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
     .cart-wrapper.active{right:0}
-    .cart h2{margin-bottom:1rem;color:#1e3a8a}
-    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .cart h2{margin-bottom:1rem;color:#1e3a8a;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .cart-item span.remove{color:red;cursor:pointer;margin-left:10px;font-weight:bold}
     .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
     .checkout-btn:hover{filter:brightness(0.95)}
+    .clear-cart-btn{background:#ef4444;color:#fff;padding:8px 16px;border:none;border-radius:999px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:filter .2s;margin-top:10px;width:100%}
+    .clear-cart-btn:hover{filter:brightness(0.95)}
   </style>
 </head>
 <body>
@@ -62,7 +65,6 @@
         <option value="GB">United Kingdom</option>
         <option value="IN">India</option>
         <option value="AU">Australia</option>
-        <!-- Add remaining countries here -->
       </select>
       <label for="forward">Forwarding Number / Device</label>
       <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
@@ -74,11 +76,12 @@
   <!-- Cart -->
   <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
-      <h2>Your Cart</h2>
+      <h2 id="cart-header">Your Cart <span id="toggle-cart">▼</span></h2>
       <div id="cart-items"></div>
       <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
+      <button class="clear-cart-btn" id="clear-cart">Clear Cart</button>
       <button id="checkout" class="checkout-btn">Checkout with PayPal</button>
     </div>
   </div>
@@ -90,7 +93,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Sample global country data with plans
     const countryData = {
       US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
       ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
@@ -106,8 +108,12 @@
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
     const checkoutBtn = document.getElementById('checkout');
+    const clearCartBtn = document.getElementById('clear-cart');
+    const toggleCart = document.getElementById('toggle-cart');
+    const cartHeader = document.getElementById('cart-header');
 
     let cart = [];
+    let cartCollapsed = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -145,14 +151,26 @@
         cartWrapper.classList.remove('active');
       }
       let total = 0;
-      cart.forEach((item)=>{
+      cart.forEach((item,index)=>{
         total+=item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
+        div.innerHTML=`
+          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
+          <span>$${item.price.toFixed(2)}<span class="remove" data-index="${index}">×</span></span>
+        `;
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
+
+      // Add remove functionality
+      document.querySelectorAll('.cart-item .remove').forEach(btn=>{
+        btn.addEventListener('click',e=>{
+          const idx = parseInt(e.target.dataset.index);
+          cart.splice(idx,1);
+          renderCart();
+        });
+      });
     }
 
     checkoutBtn.addEventListener('click',()=>{
@@ -170,6 +188,24 @@
           });
         }
       }).render('body'); // temporary render to body
+    });
+
+    // Clear cart
+    clearCartBtn.addEventListener('click',()=>{
+      cart = [];
+      renderCart();
+    });
+
+    // Expand/collapse cart
+    cartHeader.addEventListener('click',()=>{
+      cartCollapsed = !cartCollapsed;
+      if(cartCollapsed){
+        cartItems.style.display = 'none';
+        toggleCart.textContent = '▲';
+      } else {
+        cartItems.style.display = 'block';
+        toggleCart.textContent = '▼';
+      }
     });
 
     countrySelect.addEventListener('change',renderPlans);
