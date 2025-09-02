@@ -28,15 +28,10 @@
     /* Cart sliding in */
     .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
     .cart-wrapper.active{right:0}
-    .cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .cart h2{margin-bottom:1rem;color:#1e3a8a}
+    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
     .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
     .checkout-btn:hover{filter:brightness(0.95)}
-
-    /* Cart enhancements */
-    .cart-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:10px}
-    .cart-item button.remove-item{background:none;border:none;color:#ef4444;font-weight:bold;cursor:pointer;margin-left:10px;font-size:1.1rem}
-    .clear-cart{background:#ef4444;color:#fff;border:none;border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;margin-top:10px;width:100%;transition:filter .2s}
-    .clear-cart:hover{filter:brightness(0.9);}
   </style>
 </head>
 <body>
@@ -67,6 +62,7 @@
         <option value="GB">United Kingdom</option>
         <option value="IN">India</option>
         <option value="AU">Australia</option>
+        <!-- Add remaining countries here -->
       </select>
       <label for="forward">Forwarding Number / Device</label>
       <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
@@ -78,7 +74,7 @@
   <!-- Cart -->
   <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
-      <!-- Cart header dynamically inserted by JS -->
+      <h2>Your Cart</h2>
       <div id="cart-items"></div>
       <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
@@ -94,6 +90,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Sample global country data with plans
     const countryData = {
       US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
       ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
@@ -111,7 +108,6 @@
     const checkoutBtn = document.getElementById('checkout');
 
     let cart = [];
-    let cartCollapsed = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -128,7 +124,9 @@
           <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
           <button class="buy-now">Add to Cart</button>
         `;
-        div.querySelector('button').addEventListener('click',()=>{ addToCart(c,plan,data); });
+        div.querySelector('button').addEventListener('click',()=>{
+          addToCart(c,plan,data);
+        });
         plansContainer.appendChild(div);
       }
     }
@@ -141,61 +139,21 @@
 
     function renderCart(){
       cartItems.innerHTML='';
-      if(cart.length>0) cartWrapper.classList.add('active'); else cartWrapper.classList.remove('active');
-
+      if(cart.length>0){
+        cartWrapper.classList.add('active');
+      }else{
+        cartWrapper.classList.remove('active');
+      }
       let total = 0;
-      cart.forEach((item,index)=>{
+      cart.forEach((item)=>{
         total+=item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`
-          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)}</span>
-          <button class="remove-item" data-index="${index}">×</button>
-        `;
-        div.querySelector('button.remove-item').addEventListener('click',()=>{
-          cart.splice(index,1);
-          renderCart();
-        });
+        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
-
-      // Clear Cart button
-      if(cart.length>0){
-        if(!document.querySelector('.clear-cart')){
-          const clearBtn = document.createElement('button');
-          clearBtn.className='clear-cart';
-          clearBtn.textContent='Clear Cart';
-          clearBtn.addEventListener('click',()=>{
-            cart=[];
-            renderCart();
-          });
-          cartWrapper.querySelector('.cart').appendChild(clearBtn);
-        }
-      } else {
-        const existingClear = document.querySelector('.clear-cart');
-        if(existingClear) existingClear.remove();
-      }
     }
-
-    // Expand/collapse cart header
-    const cartHeader = document.createElement('div');
-    cartHeader.className = 'cart-header';
-    cartHeader.innerHTML = `<h2>Your Cart</h2><span id="cart-toggle">▼</span>`;
-    const cartDiv = cartWrapper.querySelector('.cart');
-    const oldH2 = cartDiv.querySelector('h2');
-    cartDiv.insertBefore(cartHeader, oldH2);
-    oldH2.remove();
-
-    cartHeader.addEventListener('click', () => {
-      cartCollapsed = !cartCollapsed;
-      cartItems.style.display = cartCollapsed ? 'none' : 'block';
-      const clearBtn = document.querySelector('.clear-cart');
-      if(clearBtn) clearBtn.style.display = cartCollapsed ? 'none' : 'block';
-      checkoutBtn.style.display = cartCollapsed ? 'none' : 'block';
-      document.getElementById('cart-toggle').textContent = cartCollapsed ? '▲' : '▼';
-    });
 
     checkoutBtn.addEventListener('click',()=>{
       if(cart.length===0){alert('Cart is empty'); return;}
@@ -211,7 +169,7 @@
             renderCart();
           });
         }
-      }).render('body');
+      }).render('body'); // temporary render to body
     });
 
     countrySelect.addEventListener('change',renderPlans);
