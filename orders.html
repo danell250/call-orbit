@@ -25,75 +25,13 @@
     .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
-    
-    /* Floating cart button */
-    .cart-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #3b82f6;
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: 50px;
-      font-weight: 700;
-      cursor: pointer;
-      z-index: 1001;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: background .2s;
-    }
-    .cart-btn:hover{background:#2563eb;}
-    
-    /* Cart sliding panel */
-    .cart-wrapper{
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 350px;
-      height: 100%;
-      background:#f9fafb;
-      box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-      padding:20px;
-      transition:right 0.3s;
-      overflow-y:auto;
-      z-index:1000;
-    }
-    .cart-wrapper.active{right:0;}
-    
-    .cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center}
-    .cart-item{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:10px;
-      padding:10px;
-      background:#fff;
-      border-radius:0.5rem;
-      box-shadow:0 2px 10px rgba(0,0,0,0.05);
-    }
-    .cart-item button{
-      background:red;
-      color:#fff;
-      border:none;
-      border-radius:50%;
-      width:20px;
-      height:20px;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .clear-cart{
-      background:#ef4444;
-      color:#fff;
-      border:none;
-      padding:10px;
-      border-radius:999px;
-      width:100%;
-      font-weight:700;
-      cursor:pointer;
-      margin-top:10px;
-    }
-    .clear-cart:hover{background:#dc2626;}
-    .total{display:flex;justify-content:space-between;font-weight:700;margin-top:10px;margin-bottom:10px;}
+    /* Cart sliding in */
+    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
+    .cart-wrapper.active{right:0}
+    .cart h2{margin-bottom:1rem;color:#1e3a8a}
+    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
+    .checkout-btn:hover{filter:brightness(0.95)}
   </style>
 </head>
 <body>
@@ -132,21 +70,20 @@
     <div class="plans-grid" id="plans-container"></div>
   </main>
 
-  <!-- Floating Cart Button -->
-  <button class="cart-btn" id="cart-btn">Cart 🛒</button>
+  <!-- Cart Button (bottom-right) -->
+  <button id="cart-toggle" style="position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;border:none;padding:12px 20px;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;">
+    Cart (<span id="cart-count">0</span>)
+  </button>
 
-  <!-- Cart Panel -->
+  <!-- Cart Wrapper -->
   <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
-      <h2>
-        Your Cart
-        <span id="close-cart" style="cursor:pointer;font-weight:normal;">[X]</span>
-      </h2>
+      <h2>Your Cart <button id="cart-close" style="float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;">&times;</button></h2>
       <div id="cart-items"></div>
-      <div class="total">
+      <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
-      <button class="clear-cart" id="clear-cart">Clear Cart</button>
+      <button id="clear-cart" class="checkout-btn" style="background:#ef4444;margin-top:10px;">Clear Cart</button>
       <div id="paypal-button-container" style="margin-top:10px;"></div>
     </div>
   </div>
@@ -169,14 +106,21 @@
     const countrySelect = document.getElementById('country');
     const forwardInput = document.getElementById('forward');
     const plansContainer = document.getElementById('plans-container');
+
     const cartWrapper = document.getElementById('cart-wrapper');
+    const cartToggle = document.getElementById('cart-toggle');
+    const cartClose = document.getElementById('cart-close');
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
-    const cartBtn = document.getElementById('cart-btn');
-    const closeCart = document.getElementById('close-cart');
     const clearCartBtn = document.getElementById('clear-cart');
+    const cartCount = document.getElementById('cart-count');
+    const paypalContainer = document.getElementById('paypal-button-container');
 
     let cart = [];
+
+    cartToggle.addEventListener('click', () => cartWrapper.classList.toggle('active'));
+    cartClose.addEventListener('click', () => cartWrapper.classList.remove('active'));
+    clearCartBtn.addEventListener('click', () => { cart = []; renderCart(); });
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -193,9 +137,7 @@
           <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
           <button class="buy-now">Add to Cart</button>
         `;
-        div.querySelector('button').addEventListener('click',()=>{
-          addToCart(c,plan,data);
-        });
+        div.querySelector('button').addEventListener('click',()=> addToCart(c,plan,data));
         plansContainer.appendChild(div);
       }
     }
@@ -204,7 +146,6 @@
       const forward = forwardInput.value || '—';
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       renderCart();
-      cartWrapper.classList.add('active'); // always show cart when adding
     }
 
     function renderCart(){
@@ -214,52 +155,43 @@
         total+=item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent='×';
-        removeBtn.addEventListener('click',()=>{
-          cart.splice(index,1);
-          renderCart();
-        });
-        div.appendChild(removeBtn);
+        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)} <button class="remove-item" data-index="${index}" style="background:none;border:none;color:#ef4444;font-weight:bold;cursor:pointer;margin-left:10px;">&times;</button></span>`;
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
+      cartCount.textContent = cart.length;
+
+      document.querySelectorAll('.remove-item').forEach(btn=>{
+        btn.addEventListener('click',e=>{
+          const idx = e.target.dataset.index;
+          cart.splice(idx,1);
+          renderCart();
+        });
+      });
     }
 
-    cartBtn.addEventListener('click',()=>{
-      cartWrapper.classList.toggle('active');
-    });
-    closeCart.addEventListener('click',()=>{cartWrapper.classList.remove('active');});
-    clearCartBtn.addEventListener('click',()=>{
-      cart=[];
-      renderCart();
-    });
+    // PayPal Button
+    paypalContainer.innerHTML = '';
+    paypal.Buttons({
+      fundingSource: paypal.FUNDING.PAYPAL,
+      createOrder: function(data, actions){
+        if(cart.length===0){ alert('Cart is empty'); return; }
+        const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+        return actions.order.create({ purchase_units:[{amount:{value:total}}] });
+      },
+      onApprove: function(data, actions){
+        return actions.order.capture().then(function(details){
+          alert('Payment completed by '+details.payer.name.given_name);
+          cart=[];
+          renderCart();
+        });
+      }
+    }).render('#paypal-button-container');
 
-    countrySelect.addEventListener('change',renderPlans);
-    forwardInput.addEventListener('input',renderPlans);
+    countrySelect.addEventListener('change', renderPlans);
+    forwardInput.addEventListener('input', renderPlans);
 
     renderPlans();
-
-    // Render single PayPal button
-    function renderPaypalButton(){
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      paypal.Buttons({
-        createOrder:function(data,actions){
-          return actions.order.create({purchase_units:[{amount:{value:total}}]});
-        },
-        onApprove:function(data,actions){
-          return actions.order.capture().then(function(details){
-            alert('Payment completed by '+details.payer.name.given_name);
-            cart=[];
-            renderCart();
-            renderPaypalButton(); // re-render button after payment
-          });
-        }
-      }).render('#paypal-button-container');
-    }
-
-    renderPaypalButton();
   </script>
 </body>
 </html>
