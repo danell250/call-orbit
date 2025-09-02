@@ -26,8 +26,8 @@
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
     /* Cart sliding in */
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;display:none}
-    .cart-wrapper.active{right:0}
+    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
+    .cart-wrapper.active{right:0;}
     .cart h2{margin-bottom:1rem;color:#1e3a8a}
     .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
     .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
@@ -116,7 +116,6 @@
     const paypalContainer = document.getElementById('paypal-button-container');
 
     let cart = [];
-    let cartOpen = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -145,7 +144,7 @@
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       renderCart();
       updateCartButton();
-      openCart();
+      cartWrapper.classList.add('active'); // open cart on add
     }
 
     function removeFromCart(index){
@@ -156,13 +155,6 @@
 
     function renderCart(){
       cartItems.innerHTML='';
-      if(cart.length>0){
-        cartWrapper.style.display='block';
-        cartOpen=true;
-      } else {
-        cartWrapper.style.display='none';
-        cartOpen=false;
-      }
       let total = 0;
       cart.forEach((item,index)=>{
         total+=item.price;
@@ -185,18 +177,8 @@
       cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
     }
 
-    function openCart(){cartWrapper.style.display='block'; cartOpen=true;}
-    function closeCart(){cartWrapper.style.display='none'; cartOpen=false;}
-
-    // Fixed cart toggle
     cartButton.addEventListener('click', () => {
-      if(cartWrapper.style.display === 'block') {
-        cartWrapper.style.display = 'none';
-        cartOpen = false;
-      } else {
-        cartWrapper.style.display = 'block';
-        cartOpen = true;
-      }
+      cartWrapper.classList.toggle('active');
     });
 
     function renderPayPal(){
@@ -213,6 +195,7 @@
             cart=[];
             renderCart();
             updateCartButton();
+            cartWrapper.classList.remove('active'); // close cart after payment
           });
         }
       }).render('#paypal-button-container');
