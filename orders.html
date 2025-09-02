@@ -25,19 +25,75 @@
     .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
-    /* Cart sliding in */
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
-    .cart-wrapper.active{right:0}
-    .cart-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .cart-header h2{margin:0;color:#1e3a8a}
-    .cart-toggle{font-weight:700;font-size:1.2rem}
-    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05);align-items:center}
-    .cart-item button.remove-item{background:red;color:#fff;border:none;padding:2px 6px;border-radius:4px;cursor:pointer;font-weight:700;margin-left:5px}
-    .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
-    .checkout-btn:hover{filter:brightness(0.95)}
-    #paypal-button-container{margin-top:10px}
-    .clear-cart{background:#ef4444;color:#fff;padding:8px 12px;border:none;border-radius:999px;font-weight:700;font-size:0.9rem;cursor:pointer;margin-top:10px;width:100%}
-    .clear-cart:hover{filter:brightness(0.9)}
+    
+    /* Floating cart button */
+    .cart-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background .2s;
+    }
+    .cart-btn:hover{background:#2563eb;}
+    
+    /* Cart sliding panel */
+    .cart-wrapper{
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background:#f9fafb;
+      box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+      padding:20px;
+      transition:right 0.3s;
+      overflow-y:auto;
+      z-index:1000;
+    }
+    .cart-wrapper.active{right:0;}
+    
+    .cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center}
+    .cart-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:10px;
+      padding:10px;
+      background:#fff;
+      border-radius:0.5rem;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    }
+    .cart-item button{
+      background:red;
+      color:#fff;
+      border:none;
+      border-radius:50%;
+      width:20px;
+      height:20px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .clear-cart{
+      background:#ef4444;
+      color:#fff;
+      border:none;
+      padding:10px;
+      border-radius:999px;
+      width:100%;
+      font-weight:700;
+      cursor:pointer;
+      margin-top:10px;
+    }
+    .clear-cart:hover{background:#dc2626;}
+    .total{display:flex;justify-content:space-between;font-weight:700;margin-top:10px;margin-bottom:10px;}
   </style>
 </head>
 <body>
@@ -76,22 +132,22 @@
     <div class="plans-grid" id="plans-container"></div>
   </main>
 
-  <!-- Cart -->
+  <!-- Floating Cart Button -->
+  <button class="cart-btn" id="cart-btn">Cart 🛒</button>
+
+  <!-- Cart Panel -->
   <div class="cart-wrapper" id="cart-wrapper">
     <div class="cart">
-      <div class="cart-header">
-        <h2>Your Cart</h2>
-        <span class="cart-toggle" id="cart-toggle">▼</span>
+      <h2>
+        Your Cart
+        <span id="close-cart" style="cursor:pointer;font-weight:normal;">[X]</span>
+      </h2>
+      <div id="cart-items"></div>
+      <div class="total">
+        <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
-      <div id="cart-content">
-        <div id="cart-items"></div>
-        <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-          <span>Total:</span><span id="cart-total">$0.00</span>
-        </div>
-        <button class="clear-cart" id="clear-cart">Clear Cart</button>
-        <button id="pay-now" class="checkout-btn">Pay Now</button>
-        <div id="paypal-button-container"></div>
-      </div>
+      <button class="clear-cart" id="clear-cart">Clear Cart</button>
+      <div id="paypal-button-container" style="margin-top:10px;"></div>
     </div>
   </div>
 
@@ -116,13 +172,11 @@
     const cartWrapper = document.getElementById('cart-wrapper');
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
-    const cartContent = document.getElementById('cart-content');
-    const cartToggle = document.getElementById('cart-toggle');
+    const cartBtn = document.getElementById('cart-btn');
+    const closeCart = document.getElementById('close-cart');
     const clearCartBtn = document.getElementById('clear-cart');
-    const payNowBtn = document.getElementById('pay-now');
 
     let cart = [];
-    let cartExpanded = true;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -139,7 +193,9 @@
           <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
           <button class="buy-now">Add to Cart</button>
         `;
-        div.querySelector('button').addEventListener('click',()=> addToCart(c,plan,data));
+        div.querySelector('button').addEventListener('click',()=>{
+          addToCart(c,plan,data);
+        });
         plansContainer.appendChild(div);
       }
     }
@@ -148,7 +204,7 @@
       const forward = forwardInput.value || '—';
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       renderCart();
-      if(cartExpanded) cartWrapper.classList.add('active');
+      cartWrapper.classList.add('active'); // always show cart when adding
     }
 
     function renderCart(){
@@ -158,60 +214,52 @@
         total+=item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`
-          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)}</span>
-          <button class="remove-item">X</button>
-        `;
-        div.querySelector('.remove-item').addEventListener('click',()=>{
+        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent='×';
+        removeBtn.addEventListener('click',()=>{
           cart.splice(index,1);
           renderCart();
         });
+        div.appendChild(removeBtn);
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
     }
 
-    cartToggle.addEventListener('click',()=>{
-      cartExpanded = !cartExpanded;
-      if(cartExpanded){
-        cartContent.style.display='block';
-        cartToggle.textContent='▼';
-      } else {
-        cartContent.style.display='none';
-        cartToggle.textContent='▲';
-      }
+    cartBtn.addEventListener('click',()=>{
+      cartWrapper.classList.toggle('active');
     });
-
+    closeCart.addEventListener('click',()=>{cartWrapper.classList.remove('active');});
     clearCartBtn.addEventListener('click',()=>{
-      cart = [];
+      cart=[];
       renderCart();
     });
-
-    payNowBtn.addEventListener('click',()=>{
-      if(cart.length === 0) return alert('Cart is empty');
-      document.getElementById('paypal-button-container').scrollIntoView({behavior:'smooth'});
-    });
-
-    // Render PayPal button only once
-    paypal.Buttons({
-      createOrder:function(data,actions){
-        const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-        return actions.order.create({purchase_units:[{amount:{value:total}}]});
-      },
-      onApprove:function(data,actions){
-        return actions.order.capture().then(function(details){
-          alert('Payment completed by '+details.payer.name.given_name);
-          cart=[];
-          renderCart();
-        });
-      }
-    }).render('#paypal-button-container');
 
     countrySelect.addEventListener('change',renderPlans);
     forwardInput.addEventListener('input',renderPlans);
 
     renderPlans();
+
+    // Render single PayPal button
+    function renderPaypalButton(){
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      paypal.Buttons({
+        createOrder:function(data,actions){
+          return actions.order.create({purchase_units:[{amount:{value:total}}]});
+        },
+        onApprove:function(data,actions){
+          return actions.order.capture().then(function(details){
+            alert('Payment completed by '+details.payer.name.given_name);
+            cart=[];
+            renderCart();
+            renderPaypalButton(); // re-render button after payment
+          });
+        }
+      }).render('#paypal-button-container');
+    }
+
+    renderPaypalButton();
   </script>
 </body>
 </html>
