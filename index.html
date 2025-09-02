@@ -9,6 +9,45 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
+  <style>
+    /* Buy Now button styles */
+    .buy-now-pill {
+      background:#1e3a8a;
+      color:#fff;
+      padding:10px 20px;
+      border-radius:999px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      margin-top:16px;
+      transition: filter .2s;
+    }
+    .buy-now-pill:hover { filter:brightness(.95); }
+
+    /* Floating Buy Now button */
+    .floating-buy-now {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1e3a8a;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: filter 0.2s, transform 0.2s;
+      z-index: 1000;
+    }
+    .floating-buy-now:hover {
+      filter: brightness(0.95);
+      transform: translateY(-2px);
+    }
+
+    .center { text-align:center; }
+  </style>
 </head>
 <body>
   <nav>
@@ -24,9 +63,11 @@
     </div>
   </nav>
 
-  <header class="hero fade-in">
+  <header class="hero fade-in center">
     <h1>Separate and Simplify Contact Center Management</h1>
     <p>Dedicated dashboards, portals, number porting, and analytics for each location.</p>
+    <!-- Hero Buy Now Button -->
+    <a href="/orders.html" class="buy-now-pill">🛒 Buy Now</a>
   </header>
 
   <section class="features features-grid fade-in">
@@ -46,7 +87,14 @@
       <h3>Analytics & Reporting</h3>
       <p>Generate custom reports and actionable insights for every team.</p>
     </div>
+    <!-- Feature Section Buy Now Button -->
+    <div class="center" style="grid-column:1/-1">
+      <a href="/orders.html" class="buy-now-pill">🛒 Buy Now</a>
+    </div>
   </section>
+
+  <!-- Floating Buy Now -->
+  <a href="/orders.html" class="floating-buy-now">🛒 Buy Now</a>
 
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
