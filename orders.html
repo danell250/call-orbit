@@ -26,12 +26,15 @@
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
     /* Cart sliding in */
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;display:none}
+    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
     .cart-wrapper.active{right:0}
     .cart h2{margin-bottom:1rem;color:#1e3a8a}
     .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
-    #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+    .checkout-btn{background:#22c55e;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;width:100%;margin-top:10px}
+    .checkout-btn:hover{filter:brightness(0.95)}
+    /* Cart toggle button */
+    #cart-toggle{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;border:none;border-radius:50%;width:60px;height:60px;font-size:24px;cursor:pointer;z-index:1100;}
+    .portal-note{margin:20px 10px;padding:15px;background:#fef3c7;border-left:4px solid #f59e0b;border-radius:0.5rem;font-weight:600}
   </style>
 </head>
 <body>
@@ -69,11 +72,9 @@
 
     <div class="plans-grid" id="plans-container"></div>
 
-    <!-- Portal Notice -->
-    <p style="text-align:center;color:red;font-weight:bold;margin-top:20px;">
-      You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal. 
-      <a href="/pricing">See portal pricing here</a>.
-    </p>
+    <div class="portal-note">
+      You cannot purchase numbers alone. All numbers must be used with the <a href="/pricing#portal" style="font-weight:bold;color:#1e3a8a;">CallOrbit portal</a>.
+    </div>
   </main>
 
   <!-- Cart -->
@@ -84,12 +85,12 @@
       <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
         <span>Total:</span><span id="cart-total">$0.00</span>
       </div>
-      <div id="paypal-button-container" style="margin-top:15px;"></div>
+      <div id="paypal-button-container" style="margin-top:10px;"></div>
     </div>
   </div>
 
-  <!-- Cart Summary Button -->
-  <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
+  <!-- Cart toggle button -->
+  <button id="cart-toggle">🛒</button>
 
   <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
@@ -112,11 +113,9 @@
     const cartWrapper = document.getElementById('cart-wrapper');
     const cartItems = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
-    const cartButton = document.getElementById('cart-button');
-    const paypalContainer = document.getElementById('paypal-button-container');
+    const cartToggle = document.getElementById('cart-toggle');
 
     let cart = [];
-    let cartOpen = false;
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -144,78 +143,53 @@
       const forward = forwardInput.value || '—';
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       renderCart();
-      updateCartButton();
-      openCart();
-    }
-
-    function removeFromCart(index){
-      cart.splice(index,1);
-      renderCart();
-      updateCartButton();
     }
 
     function renderCart(){
       cartItems.innerHTML='';
-      if(cart.length>0){
-        cartWrapper.style.display='block';
-        cartOpen=true;
-      } else {
-        cartWrapper.style.display='none';
-        cartOpen=false;
-      }
       let total = 0;
-      cart.forEach((item,index)=>{
+      cart.forEach((item)=>{
         total+=item.price;
         const div = document.createElement('div');
         div.className='cart-item';
-        div.innerHTML=`
-          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)}
-            <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
-          </span>
-        `;
+        div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span><span>$${item.price.toFixed(2)}</span>`;
         cartItems.appendChild(div);
       });
       cartTotalEl.textContent=`$${total.toFixed(2)}`;
-      renderPayPal();
+      renderPayPalButton();
     }
 
-    function updateCartButton(){
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
-    }
-
-    function openCart(){cartWrapper.style.display='block'; cartOpen=true;}
-    function closeCart(){cartWrapper.style.display='none'; cartOpen=false;}
-
-    cartButton.addEventListener('click',()=>{
-      cartOpen ? closeCart() : openCart();
+    // Toggle cart visibility
+    cartToggle.addEventListener('click', () => {
+      cartWrapper.classList.toggle('active');
     });
-
-    function renderPayPal(){
-      paypalContainer.innerHTML='';
-      if(cart.length===0) return;
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      paypal.Buttons({
-        createOrder: function(data, actions){
-          return actions.order.create({purchase_units:[{amount:{value:total}}]});
-        },
-        onApprove: function(data, actions){
-          return actions.order.capture().then(function(details){
-            alert('Payment completed by '+details.payer.name.given_name);
-            cart=[];
-            renderCart();
-            updateCartButton();
-          });
-        }
-      }).render('#paypal-button-container');
-    }
 
     countrySelect.addEventListener('change',renderPlans);
     forwardInput.addEventListener('input',renderPlans);
 
     renderPlans();
-    updateCartButton();
+
+    // PayPal integration
+    function renderPayPalButton() {
+      const container = document.getElementById('paypal-button-container');
+      container.innerHTML = ''; // clear previous buttons
+      if(cart.length === 0) return; // do not show if cart empty
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      paypal.Buttons({
+        createOrder: function(data, actions){
+          return actions.order.create({
+            purchase_units:[{amount:{value:total}}]
+          });
+        },
+        onApprove: function(data, actions){
+          return actions.order.capture().then(function(details){
+            alert('Payment completed by '+details.payer.name.given_name);
+            cart = [];
+            renderCart();
+          });
+        }
+      }).render('#paypal-button-container');
+    }
   </script>
 </body>
 </html>
