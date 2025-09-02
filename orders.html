@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CallOrbit — Buy Numbers & Plans</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+  <style>
+    body{font-family:Inter, sans-serif; margin:0; background:#f8fafc; color:#0b1220}
+    header, main{max-width:1120px; margin:auto; padding:20px}
+    .plan{border:1px solid #e2e8f0; border-radius:14px; padding:16px; margin-bottom:16px; background:#fff; cursor:pointer}
+    .plan h3{margin:0 0 8px;}
+    .plan .price{font-size:20px; font-weight:700;}
+    .plan .minutes, .plan .overage{font-size:14px;}
+    .select{margin-top:10px;background:#22c55e;color:#fff;font-weight:700;border:none;border-radius:10px;padding:10px;cursor:pointer}
+    .select:hover{filter:brightness(.95)}
+    .review{margin-top:20px; padding:16px; border:1px dashed #e2e8f0; background:#fff}
+    .summary-row{display:flex; justify-content:space-between; margin-bottom:8px;}
+    .country-section{margin-bottom:32px;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Choose Your Plan</h1>
+    <p>Pick a plan, select your country, and set your forwarding number to get started.</p>
+  </header>
+
+  <main>
+    <div>
+      <label>Forwarding Country
+        <select id="forward-country"></select>
+      </label>
+      <label>Forwarding Number / Device
+        <input type="text" id="forward-to" placeholder="+27 10 500 1234 or SIP URI">
+      </label>
+    </div>
+
+    <div id="plans-container"></div>
+
+    <div class="review" id="review">
+      <div class="summary-row"><span>Plan</span><strong id="summary-plan">—</strong></div>
+      <div class="summary-row"><span>Price</span><strong id="summary-price">—</strong></div>
+      <div class="summary-row"><span>Included minutes</span><strong id="summary-minutes">—</strong></div>
+      <div class="summary-row"><span>Forwarding to</span><strong id="summary-forward">—</strong></div>
+    </div>
+  </main>
+
+  <footer style="text-align:center; margin-top:40px;">
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // --- Example plans (update your PayPal HostedButtonIds) ---
+  const plans = [
+    {id:"BASIC", name:"Basic", price:16.99, minutes:100, overage:0.321, paypalId:"D3RVF4626URRQ"},
+    {id:"PLUS", name:"Plus", price:25.99, minutes:156, overage:0.316, paypalId:"AHZT9B8R76YSY"},
+    {id:"PRO", name:"Pro", price:43.99, minutes:215, overage:0.307, paypalId:"M3MTFMBP6NUA8"},
+    {id:"MAX", name:"Max", price:70.99, minutes:346, overage:0.304, paypalId:"DXLHHXVJQS95Q"}
+  ];
+
+  // --- Example countries and rates (replace with full real data) ---
+  const countries = [
+    {name:"United States", rates:{landline:0.03, mobile:0.08}},
+    {name:"Canada", rates:{landline:0.03, mobile:0.08}},
+    {name:"United Kingdom", rates:{landline:0.10, mobile:0.20}},
+    {name:"South Africa", rates:{landline:0.12, mobile:0.18}},
+    {name:"India", rates:{landline:0.08, mobile:0.12}},
+    {name:"Australia", rates:{landline:0.11, mobile:0.17}},
+    // ... Add all other countries except North Korea
+  ];
+
+  const forwardCountry = document.getElementById('forward-country');
+  countries.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.name;
+    option.textContent = c.name;
+    forwardCountry.appendChild(option);
+  });
+
+  const forwardInput = document.getElementById('forward-to');
+  const summaryPlan = document.getElementById('summary-plan');
+  const summaryPrice = document.getElementById('summary-price');
+  const summaryMinutes = document.getElementById('summary-minutes');
+  const summaryForward = document.getElementById('summary-forward');
+
+  let selectedPlanId = null;
+
+  function renderPlans(){
+    const container = document.getElementById('plans-container');
+    container.innerHTML = '';
+    plans.forEach(p=>{
+      const planDiv = document.createElement('div');
+      planDiv.className = 'plan';
+      planDiv.id = p.id;
+      planDiv.innerHTML = `
+        <h3>${p.name.toUpperCase()}</h3>
+        <div class="price">$${p.price} /mo</div>
+        <div class="minutes">${p.minutes} included minutes</div>
+        <div class="overage">$${p.overage.toFixed(3)} per extra minute</div>
+        <div id="paypal-container-${p.paypalId}"></div>
+      `;
+      planDiv.addEventListener('click', ()=>{
+        selectedPlanId = p.id;
+        updateReview();
+      });
+      container.appendChild(planDiv);
+
+      // Render PayPal button
+      paypal.HostedButtons({hostedButtonId:p.paypalId}).render(`#paypal-container-${p.paypalId}`);
+    });
+  }
+
+  function updateReview(){
+    if(!selectedPlanId) return;
+    const plan = plans.find(p=>p.id===selectedPlanId);
+    summaryPlan.textContent = plan.name;
+    summaryPrice.textContent = `$${plan.price} /mo`;
+    summaryMinutes.textContent = `${plan.minutes} included • $${plan.overage.toFixed(3)} overage`;
+    summaryForward.textContent = `${forwardCountry.value}: ${forwardInput.value || '—'}`;
+  }
+
+  forwardInput.addEventListener('input', updateReview);
+  forwardCountry.addEventListener('change', updateReview);
+
+  renderPlans();
+</script>
+</body>
+</html>
