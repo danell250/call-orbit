@@ -63,7 +63,7 @@
       <div>
         <label for="number-type">Number Type</label>
         <select id="number-type">
-          <option value="toll-free">Toll-Free</option>
+          <option value="tollFree">Toll-Free</option>
           <option value="national">National</option>
           <option value="did">DID</option>
         </select>
@@ -108,11 +108,28 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Country + Number Type Data
     const countryData = {
-      US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
-      ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
-      GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
-      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.28},Pro:{price:39.99,minutes:250,overage:0.27},Max:{price:65.99,minutes:400,overage:0.265}}
+      US: {
+        tollFree: { Basic:{price:18.99,minutes:120,overage:0.33},Plus:{price:28.99,minutes:180,overage:0.31},Pro:{price:48.99,minutes:240,overage:0.30},Max:{price:75.99,minutes:360,overage:0.29} },
+        national: { Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304} },
+        did: { Basic:{price:15.99,minutes:90,overage:0.34},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30} }
+      },
+      ZA: {
+        tollFree: { Basic:{price:17.99,minutes:110,overage:0.34},Plus:{price:27.99,minutes:170,overage:0.32},Pro:{price:45.99,minutes:230,overage:0.31},Max:{price:73.99,minutes:350,overage:0.30} },
+        national: { Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30} },
+        did: { Basic:{price:14.99,minutes:80,overage:0.36},Plus:{price:23.99,minutes:130,overage:0.34},Pro:{price:40.99,minutes:190,overage:0.32},Max:{price:65.99,minutes:310,overage:0.30} }
+      },
+      GB: {
+        tollFree: { Basic:{price:19.99,minutes:130,overage:0.32},Plus:{price:29.99,minutes:190,overage:0.30},Pro:{price:47.99,minutes:250,overage:0.29},Max:{price:76.99,minutes:370,overage:0.28} },
+        national: { Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298} },
+        did: { Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:27.99,minutes:150,overage:0.31},Pro:{price:44.99,minutes:210,overage:0.305},Max:{price:72.99,minutes:340,overage:0.30} }
+      },
+      IN: {
+        tollFree: { Basic:{price:15.99,minutes:140,overage:0.30},Plus:{price:24.99,minutes:200,overage:0.28},Pro:{price:42.99,minutes:270,overage:0.27},Max:{price:70.99,minutes:420,overage:0.26} },
+        national: { Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.28},Pro:{price:39.99,minutes:250,overage:0.27},Max:{price:65.99,minutes:400,overage:0.265} },
+        did: { Basic:{price:13.99,minutes:100,overage:0.31},Plus:{price:22.99,minutes:160,overage:0.30},Pro:{price:38.99,minutes:230,overage:0.28},Max:{price:63.99,minutes:380,overage:0.265} }
+      }
     };
 
     const plansContainer = document.getElementById('plans-container');
@@ -126,20 +143,23 @@
     function renderPlans() {
       plansContainer.innerHTML = '';
       const country = document.getElementById('country').value || 'US';
-      const plans = countryData[country];
-      Object.keys(plans).forEach(name=>{
+      const numberType = document.getElementById('number-type').value || 'national';
+      const plans = countryData[country][numberType];
+
+      Object.keys(plans).forEach(name => {
         const plan = plans[name];
         const div = document.createElement('div');
         div.className = 'plan';
-        div.innerHTML = `<h3>${name}</h3>
-                         <div class="price">$${plan.price.toFixed(2)}</div>
-                         <div class="minutes">${plan.minutes} Minutes</div>
-                         <div class="overage">Overage: $${plan.overage.toFixed(3)}/min</div>
-                         <button class="buy-now">Buy Now</button>`;
-        div.querySelector('button').addEventListener('click',()=>{
-          const numberType = document.getElementById('number-type').value || 'national';
+        div.innerHTML = `
+          <h3>${name}</h3>
+          <div class="price">$${plan.price.toFixed(2)}</div>
+          <div class="minutes">${plan.minutes} Minutes</div>
+          <div class="overage">Overage: $${plan.overage.toFixed(3)}/min</div>
+          <button class="buy-now">Buy Now</button>
+        `;
+        div.querySelector('button').addEventListener('click', () => {
           const forward = document.getElementById('forward').value || '';
-          cart.push({plan:name,country,price:plan.price,numberType,forward});
+          cart.push({ plan: name, country, numberType, price: plan.price, forward });
           updateCart();
         });
         plansContainer.appendChild(div);
@@ -148,39 +168,41 @@
 
     function updateCart() {
       cartItemsEl.innerHTML = '';
-      let total=0;
+      let total = 0;
       cart.forEach((item,i)=>{
-        total+=item.price;
-        const div=document.createElement('div');
-        div.className='cart-item';
-        div.innerHTML=`<span>${item.plan} (${item.country})</span>
-                       <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `<span>${item.plan} (${item.country} - ${item.numberType})</span>
+                         <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
         cartItemsEl.appendChild(div);
       });
-      document.querySelectorAll('.remove-btn').forEach(btn=>{
-        btn.addEventListener('click',e=>{
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
           cart.splice(e.target.dataset.index,1);
           updateCart();
         });
       });
-      cartTotalEl.textContent=`$${total.toFixed(2)}`;
-      cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
+      cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
     }
 
-    cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
-    document.getElementById('country').addEventListener('change',renderPlans);
+    cartButton.addEventListener('click', () => cartWrapper.classList.toggle('active'));
+    document.getElementById('country').addEventListener('change', renderPlans);
+    document.getElementById('number-type').addEventListener('change', renderPlans);
+
     renderPlans();
 
     // PayPal
     paypal.Buttons({
-      createOrder: (data,actions)=>{
-        const total = cart.reduce((sum,p)=>sum+p.price,0);
-        return actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]});
+      createOrder: (data, actions) => {
+        const total = cart.reduce((sum, p) => sum + p.price, 0);
+        return actions.order.create({ purchase_units:[{ amount:{ value:total.toFixed(2) } }] });
       },
-      onApprove: (data,actions)=>{
-        return actions.order.capture().then(details=>{
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(details => {
           alert('Transaction completed by ' + details.payer.name.given_name);
-          cart=[];
+          cart = [];
           updateCart();
         });
       }
