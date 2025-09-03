@@ -8,6 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <style>
+/* Styles kept same as before */
 main{max-width:1120px;margin:20px auto;padding:0}
 header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
 header.hero h1{margin-bottom:1rem}
@@ -25,10 +26,11 @@ header.hero p{margin-bottom:1rem}
 .buy-now:hover{filter:brightness(0.95)}
 .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
 .cart-wrapper.active{right:0;}
-.cart h2{margin-bottom:1rem;color:#1e3a8a}
+.cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center;}
 .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
 .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
 #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+#close-cart{background:none;border:none;color:#1e3a8a;font-size:1.2rem;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -129,12 +131,16 @@ header.hero p{margin-bottom:1rem}
     </div>
   </div>
 
+  <div style="text-align:center;margin:20px;">
+    <button id="buy-numbers" class="buy-now">Buy Numbers</button>
+  </div>
+
   <div class="plans-grid" id="plans-container"></div>
 </main>
 
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
-    <h2>Your Cart</h2>
+    <h2>Your Cart <button id="close-cart">✖</button></h2>
     <div id="cart-items"></div>
     <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
       <span>Total:</span><span id="cart-total">$0.00</span>
@@ -152,9 +158,11 @@ header.hero p{margin-bottom:1rem}
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Packages and profit margin
 const profitMargin = 1.25;
 const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
 
+// Local areas
 const localAreas = {
   US:["New York","Los Angeles","Chicago","Houston","Miami"],
   ZA:["Johannesburg","Cape Town","Durban","Pretoria"],
@@ -166,47 +174,10 @@ const localAreas = {
   FR:["Paris","Lyon","Marseille"],
   JP:["Tokyo","Osaka","Nagoya"],
   BR:["Sao Paulo","Rio de Janeiro","Brasilia"],
-  MX:["Mexico City","Guadalajara","Monterrey"],
-  IT:["Rome","Milan","Naples"],
-  ES:["Madrid","Barcelona","Valencia"],
-  KR:["Seoul","Busan"],
-  SG:["Singapore"],
-  NL:["Amsterdam","Rotterdam"],
-  CH:["Zurich","Geneva"],
-  SE:["Stockholm","Gothenburg"],
-  BE:["Brussels","Antwerp"],
-  GR:["Athens","Thessaloniki"],
-  PT:["Lisbon","Porto"],
-  IE:["Dublin","Cork"],
-  IL:["Tel Aviv","Jerusalem"],
-  PL:["Warsaw","Krakow"],
-  RO:["Bucharest","Cluj"],
-  HU:["Budapest","Debrecen"],
-  SK:["Bratislava","Kosice"],
-  CZ:["Prague","Brno"],
-  EE:["Tallinn"],
-  LV:["Riga"],
-  LT:["Vilnius"],
-  LU:["Luxembourg"],
-  MO:["Macau"],
-  MY:["Kuala Lumpur","Penang"],
-  MT:["Valletta"],
-  MC:["Monaco"],
-  AN:["Willemstad"],
-  NZ:["Auckland","Wellington"],
-  NO:["Oslo","Bergen"],
-  PA:["Panama City"],
-  PE:["Lima"],
-  PH:["Manila"],
-  TW:["Taipei"],
-  TH:["Bangkok"],
-  TT:["Port of Spain"],
-  TR:["Istanbul","Ankara"],
-  UY:["Montevideo"],
-  VE:["Caracas"],
-  VN:["Hanoi","Ho Chi Minh City"]
+  MX:["Mexico City","Guadalajara","Monterrey"]
 };
 
+// Cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const plansContainer = document.getElementById('plans-container');
 const cartItemsEl = document.getElementById('cart-items');
@@ -214,8 +185,12 @@ const cartTotalEl = document.getElementById('cart-total');
 const cartWrapper = document.getElementById('cart-wrapper');
 const cartButton = document.getElementById('cart-button');
 
+// Load rates.json
 let countryData = {};
-fetch('rates.json').then(r=>r.json()).then(d=>{countryData=d; generatePlans();}).catch(e=>console.error(e));
+fetch('/rates.json')
+  .then(res=>res.json())
+  .then(data=>{countryData=data;})
+  .catch(err=>console.error("Error loading rates.json:",err));
 
 function generatePlans(){
   const country = document.getElementById('country').value;
@@ -278,11 +253,15 @@ function updateCart(){
 }
 
 cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
-document.getElementById('country').addEventListener('change',generatePlans);
-document.getElementById('number-type').addEventListener('change',generatePlans);
+document.getElementById('close-cart').addEventListener('click',()=>cartWrapper.classList.remove('active'));
 
+// Trigger packages on Buy Numbers
+document.getElementById('buy-numbers').addEventListener('click',generatePlans);
+
+// Initialize cart
 updateCart();
 
+// PayPal
 paypal.Buttons({
   createOrder:(data,actions)=>{
     const total = cart.reduce((sum,p)=>sum+p.price,0);

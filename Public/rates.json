@@ -1,354 +1,51 @@
 {
-  "US": {
-    "areas": ["New York","Los Angeles","Chicago","Houston","Miami"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.82,"overage":0.0882},"Plus":{"minutes":500,"price":44.10,"overage":0.0882},"Pro":{"minutes":1000,"price":88.20,"overage":0.0882},"Max":{"minutes":2500,"price":220.50,"overage":0.0882}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "ZA": {
-    "areas": ["Johannesburg","Cape Town","Durban","Pretoria","Port Elizabeth"],
-    "ITFS": {"Basic":{"minutes":100,"price":60.54,"overage":0.6054},"Plus":{"minutes":500,"price":302.70,"overage":0.6054},"Pro":{"minutes":1000,"price":605.40,"overage":0.6054},"Max":{"minutes":2500,"price":1513.50,"overage":0.6054}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "GB": {
-    "areas": ["London","Manchester","Birmingham","Liverpool","Edinburgh"],
-    "ITFS": {"Basic":{"minutes":100,"price":14.59,"overage":0.1459},"Plus":{"minutes":500,"price":72.95,"overage":0.1459},"Pro":{"minutes":1000,"price":145.90,"overage":0.1459},"Max":{"minutes":2500,"price":364.75,"overage":0.1459}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "IN": {
-    "areas": ["Mumbai","Delhi","Bangalore","Chennai","Kolkata"],
-    "ITFS": {"Basic":{"minutes":100,"price":38.48,"overage":0.3848},"Plus":{"minutes":500,"price":192.40,"overage":0.3848},"Pro":{"minutes":1000,"price":384.80,"overage":0.3848},"Max":{"minutes":2500,"price":962.00,"overage":0.3848}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "AU": {
-    "areas": ["Sydney","Melbourne","Brisbane","Perth","Adelaide"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.82,"overage":0.0882},"Plus":{"minutes":500,"price":44.10,"overage":0.0882},"Pro":{"minutes":1000,"price":88.20,"overage":0.0882},"Max":{"minutes":2500,"price":220.50,"overage":0.0882}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "CA": {
-    "areas": ["Toronto","Vancouver","Montreal","Calgary","Ottawa"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.82,"overage":0.0882},"Plus":{"minutes":500,"price":44.10,"overage":0.0882},"Pro":{"minutes":1000,"price":88.20,"overage":0.0882},"Max":{"minutes":2500,"price":220.50,"overage":0.0882}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "DE": {
-    "areas": ["Berlin","Munich","Hamburg","Frankfurt","Cologne"],
-    "ITFS": {"Basic":{"minutes":100,"price":10.40,"overage":0.104},"Plus":{"minutes":500,"price":52.00,"overage":0.104},"Pro":{"minutes":1000,"price":104.00,"overage":0.104},"Max":{"minutes":2500,"price":260.00,"overage":0.104}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
-}
-{
-  "FR": {
-    "areas": ["Paris","Marseille","Lyon","Toulouse","Nice"],
-    "ITFS": {"Basic":{"minutes":100,"price":17.84,"overage":0.1784},"Plus":{"minutes":500,"price":89.20,"overage":0.1784},"Pro":{"minutes":1000,"price":178.40,"overage":0.1784},"Max":{"minutes":2500,"price":446.00,"overage":0.1784}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "JP": {
-    "areas": ["Tokyo","Osaka","Nagoya","Sapporo","Fukuoka"],
-    "ITFS": {"Basic":{"minutes":100,"price":15.69,"overage":0.1569},"Plus":{"minutes":500,"price":78.45,"overage":0.1569},"Pro":{"minutes":1000,"price":156.90,"overage":0.1569},"Max":{"minutes":2500,"price":392.25,"overage":0.1569}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "BR": {
-    "areas": ["Sao Paulo","Rio de Janeiro","Brasilia","Salvador","Fortaleza"],
-    "ITFS": {"Basic":{"minutes":100,"price":26.23,"overage":0.2623},"Plus":{"minutes":500,"price":131.15,"overage":0.2623},"Pro":{"minutes":1000,"price":262.30,"overage":0.2623},"Max":{"minutes":2500,"price":655.75,"overage":0.2623}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "MX": {
-    "areas": ["Mexico City","Guadalajara","Monterrey","Puebla","Tijuana"],
-    "ITFS": {"Basic":{"minutes":100,"price":31.29,"overage":0.3129},"Plus":{"minutes":500,"price":156.45,"overage":0.3129},"Pro":{"minutes":1000,"price":312.90,"overage":0.3129},"Max":{"minutes":2500,"price":782.25,"overage":0.3129}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "IT": {
-    "areas": ["Rome","Milan","Naples","Turin","Palermo"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.50,"overage":0.085},"Plus":{"minutes":500,"price":42.50,"overage":0.085},"Pro":{"minutes":1000,"price":85.00,"overage":0.085},"Max":{"minutes":2500,"price":212.50,"overage":0.085}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "ES": {
-    "areas": ["Madrid","Barcelona","Valencia","Seville","Bilbao"],
-    "ITFS": {"Basic":{"minutes":100,"price":27.09,"overage":0.2709},"Plus":{"minutes":500,"price":135.45,"overage":0.2709},"Pro":{"minutes":1000,"price":270.90,"overage":0.2709},"Max":{"minutes":2500,"price":677.25,"overage":0.2709}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "KR": {
-    "areas": ["Seoul","Busan","Incheon","Daegu","Daejeon"],
-    "ITFS": {"Basic":{"minutes":100,"price":40.94,"overage":0.4094},"Plus":{"minutes":500,"price":204.70,"overage":0.4094},"Pro":{"minutes":1000,"price":409.40,"overage":0.4094},"Max":{"minutes":2500,"price":1023.50,"overage":0.4094}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "SG": {
-    "areas": ["Singapore"],
-    "ITFS": {"Basic":{"minutes":100,"price":6.66,"overage":0.0666},"Plus":{"minutes":500,"price":33.30,"overage":0.0666},"Pro":{"minutes":1000,"price":66.60,"overage":0.0666},"Max":{"minutes":2500,"price":166.50,"overage":0.0666}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "NL": {
-    "areas": ["Amsterdam","Rotterdam","The Hague","Utrecht","Eindhoven"],
-    "ITFS": {"Basic":{"minutes":100,"price":12.10,"overage":0.121},"Plus":{"minutes":500,"price":60.50,"overage":0.121},"Pro":{"minutes":1000,"price":121.00,"overage":0.121},"Max":{"minutes":2500,"price":302.50,"overage":0.121}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "CH": {
-    "areas": ["Zurich","Geneva","Basel","Lausanne","Bern"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.34,"overage":0.0834},"Plus":{"minutes":500,"price":41.70,"overage":0.0834},"Pro":{"minutes":1000,"price":83.40,"overage":0.0834},"Max":{"minutes":2500,"price":208.50,"overage":0.0834}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
-}
-{
-  "SE": {
-    "areas": ["Stockholm","Gothenburg","Malmö","Uppsala","Västerås"],
-    "ITFS": {"Basic":{"minutes":100,"price":26.06,"overage":0.2606},"Plus":{"minutes":500,"price":130.30,"overage":0.2606},"Pro":{"minutes":1000,"price":260.60,"overage":0.2606},"Max":{"minutes":2500,"price":651.50,"overage":0.2606}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "BE": {
-    "areas": ["Brussels","Antwerp","Ghent","Charleroi","Liège"],
-    "ITFS": {"Basic":{"minutes":100,"price":18.44,"overage":0.1844},"Plus":{"minutes":500,"price":92.20,"overage":0.1844},"Pro":{"minutes":1000,"price":184.40,"overage":0.1844},"Max":{"minutes":2500,"price":461.00,"overage":0.1844}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "GR": {
-    "areas": ["Athens","Thessaloniki","Patras","Heraklion","Larissa"],
-    "ITFS": {"Basic":{"minutes":100,"price":14.63,"overage":0.1463},"Plus":{"minutes":500,"price":73.15,"overage":0.1463},"Pro":{"minutes":1000,"price":146.30,"overage":0.1463},"Max":{"minutes":2500,"price":365.75,"overage":0.1463}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "PT": {
-    "areas": ["Lisbon","Porto","Coimbra","Faro","Braga"],
-    "ITFS": {"Basic":{"minutes":100,"price":19.40,"overage":0.1940},"Plus":{"minutes":500,"price":97.00,"overage":0.1940},"Pro":{"minutes":1000,"price":194.00,"overage":0.1940},"Max":{"minutes":2500,"price":485.00,"overage":0.1940}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "IE": {
-    "areas": ["Dublin","Cork","Limerick","Galway","Waterford"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.85,"overage":0.0885},"Plus":{"minutes":500,"price":44.25,"overage":0.0885},"Pro":{"minutes":1000,"price":88.50,"overage":0.0885},"Max":{"minutes":2500,"price":221.25,"overage":0.0885}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "IL": {
-    "areas": ["Tel Aviv","Jerusalem","Haifa","Rishon LeZion","Petah Tikva"],
-    "ITFS": {"Basic":{"minutes":100,"price":13.23,"overage":0.1323},"Plus":{"minutes":500,"price":66.15,"overage":0.1323},"Pro":{"minutes":1000,"price":132.30,"overage":0.1323},"Max":{"minutes":2500,"price":330.75,"overage":0.1323}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "PL": {
-    "areas": ["Warsaw","Krakow","Lodz","Wroclaw","Poznan"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.41,"overage":0.0841},"Plus":{"minutes":500,"price":42.05,"overage":0.0841},"Pro":{"minutes":1000,"price":84.10,"overage":0.0841},"Max":{"minutes":2500,"price":210.25,"overage":0.0841}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "RO": {
-    "areas": ["Bucharest","Cluj-Napoca","Timisoara","Iasi","Constanta"],
-    "ITFS": {"Basic":{"minutes":100,"price":25.46,"overage":0.2546},"Plus":{"minutes":500,"price":127.30,"overage":0.2546},"Pro":{"minutes":1000,"price":254.60,"overage":0.2546},"Max":{"minutes":2500,"price":636.50,"overage":0.2546}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "HU": {
-    "areas": ["Budapest","Debrecen","Szeged","Miskolc","Pecs"],
-    "ITFS": {"Basic":{"minutes":100,"price":15.40,"overage":0.1540},"Plus":{"minutes":500,"price":77.00,"overage":0.1540},"Pro":{"minutes":1000,"price":154.00,"overage":0.1540},"Max":{"minutes":2500,"price":385.00,"overage":0.1540}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "SK": {
-    "areas": ["Bratislava","Kosice","Presov","Zilina","Nitra"],
-    "ITFS": {"Basic":{"minutes":100,"price":17.91,"overage":0.1791},"Plus":{"minutes":500,"price":89.55,"overage":0.1791},"Pro":{"minutes":1000,"price":179.10,"overage":0.1791},"Max":{"minutes":2500,"price":447.75,"overage":0.1791}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
-}
-{
-  "CZ": {
-    "areas": ["Prague","Brno","Ostrava","Plzen","Liberec"],
-    "ITFS": {"Basic":{"minutes":100,"price":25.67,"overage":0.2567},"Plus":{"minutes":500,"price":128.35,"overage":0.2567},"Pro":{"minutes":1000,"price":256.70,"overage":0.2567},"Max":{"minutes":2500,"price":641.75,"overage":0.2567}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "EE": {
-    "areas": ["Tallinn","Tartu","Narva","Parnu","Kohtla-Jarve"],
-    "ITFS": {"Basic":{"minutes":100,"price":6.17,"overage":0.0617},"Plus":{"minutes":500,"price":30.85,"overage":0.0617},"Pro":{"minutes":1000,"price":61.70,"overage":0.0617},"Max":{"minutes":2500,"price":154.25,"overage":0.0617}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "LV": {
-    "areas": ["Riga","Daugavpils","Liepaja","Jelgava","Jurmala"],
-    "ITFS": {"Basic":{"minutes":100,"price":71.18,"overage":0.2847},"Plus":{"minutes":500,"price":355.85,"overage":0.2847},"Pro":{"minutes":1000,"price":711.80,"overage":0.2847},"Max":{"minutes":2500,"price":1779.50,"overage":0.2847}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "LT": {
-    "areas": ["Vilnius","Kaunas","Klaipeda","Šiauliai","Panevezys"],
-    "ITFS": {"Basic":{"minutes":100,"price":101.35,"overage":1.0108},"Plus":{"minutes":500,"price":506.50,"overage":1.0108},"Pro":{"minutes":1000,"price":1013.00,"overage":1.0108},"Max":{"minutes":2500,"price":2532.50,"overage":1.0108}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "LU": {
-    "areas": ["Luxembourg City","Esch-sur-Alzette","Differdange","Dudelange","Ettelbruck"],
-    "ITFS": {"Basic":{"minutes":100,"price":8.85,"overage":0.0885},"Plus":{"minutes":500,"price":44.25,"overage":0.0885},"Pro":{"minutes":1000,"price":88.50,"overage":0.0885},"Max":{"minutes":2500,"price":221.25,"overage":0.0885}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "MO": {
-    "areas": ["Macau Peninsula","Taipa","Coloane","Cotai","NAPE"],
-    "ITFS": {"Basic":{"minutes":100,"price":45.10,"overage":0.1804},"Plus":{"minutes":500,"price":225.50,"overage":0.1804},"Pro":{"minutes":1000,"price":451.00,"overage":0.1804},"Max":{"minutes":2500,"price":1127.50,"overage":0.1804}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "MY": {
-    "areas": ["Kuala Lumpur","George Town","Johor Bahru","Ipoh","Kota Kinabalu"],
-    "ITFS": {"Basic":{"minutes":100,"price":15.63,"overage":0.1250},"Plus":{"minutes":500,"price":78.13,"overage":0.1250},"Pro":{"minutes":1000,"price":156.25,"overage":0.1250},"Max":{"minutes":2500,"price":390.63,"overage":0.1250}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "MT": {
-    "areas": ["Valletta","Birkirkara","Sliema","Mosta","Mdina"],
-    "ITFS": {"Basic":{"minutes":100,"price":11.46,"overage":0.0917},"Plus":{"minutes":500,"price":57.30,"overage":0.0917},"Pro":{"minutes":1000,"price":114.60,"overage":0.0917},"Max":{"minutes":2500,"price":286.50,"overage":0.0917}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "MC": {
-    "areas": ["Monte Carlo","La Condamine","Fontvieille","Monaco-Ville","Moneghetti"],
-    "ITFS": {"Basic":{"minutes":100,"price":9.61,"overage":0.0961},"Plus":{"minutes":500,"price":48.05,"overage":0.0961},"Pro":{"minutes":1000,"price":96.10,"overage":0.0961},"Max":{"minutes":2500,"price":240.25,"overage":0.0961}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "AN": {
-    "areas": ["Curacao","Bonaire","Aruba","Sint Maarten","Saba"],
-    "ITFS": {"Basic":{"minutes":100,"price":99.00,"overage":0.3960},"Plus":{"minutes":500,"price":495.00,"overage":0.3960},"Pro":{"minutes":1000,"price":990.00,"overage":0.3960},"Max":{"minutes":2500,"price":2475.00,"overage":0.3960}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
-}
-{
-  "NZ": {
-    "areas": ["Auckland","Wellington","Christchurch","Hamilton","Dunedin"],
-    "ITFS": {"Basic":{"minutes":100,"price":5.33,"overage":0.0533},"Plus":{"minutes":500,"price":26.65,"overage":0.0533},"Pro":{"minutes":1000,"price":53.30,"overage":0.0533},"Max":{"minutes":2500,"price":133.25,"overage":0.0533}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "NO": {
-    "areas": ["Oslo","Bergen","Trondheim","Stavanger","Drammen"],
-    "ITFS": {"Basic":{"minutes":100,"price":19.02,"overage":0.1902},"Plus":{"minutes":500,"price":95.10,"overage":0.1902},"Pro":{"minutes":1000,"price":190.20,"overage":0.1902},"Max":{"minutes":2500,"price":475.50,"overage":0.1902}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "PA": {
-    "areas": ["Panama City","Colón","David","Santiago","La Chorrera"],
-    "ITFS": {"Basic":{"minutes":100,"price":12.16,"overage":0.1216},"Plus":{"minutes":500,"price":60.80,"overage":0.1216},"Pro":{"minutes":1000,"price":121.60,"overage":0.1216},"Max":{"minutes":2500,"price":304.00,"overage":0.1216}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "PE": {
-    "areas": ["Lima","Arequipa","Trujillo","Chiclayo","Cusco"],
-    "ITFS": {"Basic":{"minutes":100,"price":40.59,"overage":0.4059},"Plus":{"minutes":500,"price":202.95,"overage":0.4059},"Pro":{"minutes":1000,"price":405.90,"overage":0.4059},"Max":{"minutes":2500,"price":1014.75,"overage":0.4059}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "PH": {
-    "areas": ["Manila","Cebu","Davao","Quezon City","Makati"],
-    "ITFS": {"Basic":{"minutes":100,"price":39.92,"overage":0.3992},"Plus":{"minutes":500,"price":199.60,"overage":0.3992},"Pro":{"minutes":1000,"price":399.20,"overage":0.3992},"Max":{"minutes":2500,"price":998.00,"overage":0.3992}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "TW": {
-    "areas": ["Taipei","Kaohsiung","Taichung","Tainan","Hsinchu"],
-    "ITFS": {"Basic":{"minutes":100,"price":22.94,"overage":0.2294},"Plus":{"minutes":500,"price":114.70,"overage":0.2294},"Pro":{"minutes":1000,"price":229.40,"overage":0.2294},"Max":{"minutes":2500,"price":573.50,"overage":0.2294}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "TH": {
-    "areas": ["Bangkok","Chiang Mai","Phuket","Khon Kaen","Hat Yai"],
-    "ITFS": {"Basic":{"minutes":100,"price":22.94,"overage":0.2294},"Plus":{"minutes":500,"price":114.70,"overage":0.2294},"Pro":{"minutes":1000,"price":229.40,"overage":0.2294},"Max":{"minutes":2500,"price":573.50,"overage":0.2294}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "TT": {
-    "areas": ["Port of Spain","San Fernando","Arima","Chaguanas","Point Fortin"],
-    "ITFS": {"Basic":{"minutes":100,"price":13.33,"overage":0.1333},"Plus":{"minutes":500,"price":66.65,"overage":0.1333},"Pro":{"minutes":1000,"price":133.30,"overage":0.1333},"Max":{"minutes":2500,"price":333.25,"overage":0.1333}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "TR": {
-    "areas": ["Istanbul","Ankara","Izmir","Antalya","Bursa"],
-    "ITFS": {"Basic":{"minutes":100,"price":22.86,"overage":0.2286},"Plus":{"minutes":500,"price":114.30,"overage":0.2286},"Pro":{"minutes":1000,"price":228.60,"overage":0.2286},"Max":{"minutes":2500,"price":571.50,"overage":0.2286}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "UY": {
-    "areas": ["Montevideo","Salto","Paysandú","Maldonado","Rivera"],
-    "ITFS": {"Basic":{"minutes":100,"price":10.42,"overage":0.1042},"Plus":{"minutes":500,"price":52.10,"overage":0.1042},"Pro":{"minutes":1000,"price":104.20,"overage":0.1042},"Max":{"minutes":2500,"price":260.50,"overage":0.1042}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
-}
-{
-  "VE": {
-    "areas": ["Caracas","Maracaibo","Valencia","Barquisimeto","Maracay"],
-    "ITFS": {"Basic":{"minutes":100,"price":32.75,"overage":0.3275},"Plus":{"minutes":500,"price":163.75,"overage":0.3275},"Pro":{"minutes":1000,"price":327.50,"overage":0.3275},"Max":{"minutes":2500,"price":818.75,"overage":0.3275}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "VN": {
-    "areas": ["Hanoi","Ho Chi Minh City","Da Nang","Hai Phong","Can Tho"],
-    "ITFS": {"Basic":{"minutes":100,"price":46.47,"overage":0.4647},"Plus":{"minutes":500,"price":232.35,"overage":0.4647},"Pro":{"minutes":1000,"price":464.70,"overage":0.4647},"Max":{"minutes":2500,"price":1_161.75,"overage":0.4647}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "US": {
-    "areas": ["New York","Los Angeles","Chicago","Houston","Miami"],
-    "ITFS": {"Basic":{"minutes":100,"price":7.06,"overage":0.0706},"Plus":{"minutes":500,"price":35.30,"overage":0.0706},"Pro":{"minutes":1000,"price":70.60,"overage":0.0706},"Max":{"minutes":2500,"price":176.50,"overage":0.0706}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "ZA": {
-    "areas": ["Johannesburg","Cape Town","Durban","Pretoria","Port Elizabeth"],
-    "ITFS": {"Basic":{"minutes":100,"price":48.43,"overage":0.4843},"Plus":{"minutes":500,"price":242.15,"overage":0.4843},"Pro":{"minutes":1000,"price":484.30,"overage":0.4843},"Max":{"minutes":2500,"price":1_210.75,"overage":0.4843}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "GB": {
-    "areas": ["London","Manchester","Birmingham","Liverpool","Leeds"],
-    "ITFS": {"Basic":{"minutes":100,"price":11.67,"overage":0.1167},"Plus":{"minutes":500,"price":58.35,"overage":0.1167},"Pro":{"minutes":1000,"price":116.70,"overage":0.1167},"Max":{"minutes":2500,"price":291.75,"overage":0.1167}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "IN": {
-    "areas": ["Mumbai","Delhi","Bangalore","Chennai","Kolkata"],
-    "ITFS": {"Basic":{"minutes":100,"price":30.78,"overage":0.3078},"Plus":{"minutes":500,"price":153.90,"overage":0.3078},"Pro":{"minutes":1000,"price":307.80,"overage":0.3078},"Max":{"minutes":2500,"price":769.50,"overage":0.3078}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "AU": {
-    "areas": ["Sydney","Melbourne","Brisbane","Perth","Adelaide"],
-    "ITFS": {"Basic":{"minutes":100,"price":7.06,"overage":0.0706},"Plus":{"minutes":500,"price":35.30,"overage":0.0706},"Pro":{"minutes":1000,"price":70.60,"overage":0.0706},"Max":{"minutes":2500,"price":176.50,"overage":0.0706}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "CA": {
-    "areas": ["Toronto","Vancouver","Montreal","Calgary","Ottawa"],
-    "ITFS": {"Basic":{"minutes":100,"price":7.06,"overage":0.0706},"Plus":{"minutes":500,"price":35.30,"overage":0.0706},"Pro":{"minutes":1000,"price":70.60,"overage":0.0706},"Max":{"minutes":2500,"price":176.50,"overage":0.0706}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "DE": {
-    "areas": ["Berlin","Hamburg","Munich","Cologne","Frankfurt"],
-    "ITFS": {"Basic":{"minutes":100,"price":10.32,"overage":0.1032},"Plus":{"minutes":500,"price":51.60,"overage":0.1032},"Pro":{"minutes":1000,"price":103.20,"overage":0.1032},"Max":{"minutes":2500,"price":258.00,"overage":0.1032}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  },
-  "FR": {
-    "areas": ["Paris","Marseille","Lyon","Toulouse","Nice"],
-    "ITFS": {"Basic":{"minutes":100,"price":14.27,"overage":0.1427},"Plus":{"minutes":500,"price":71.35,"overage":0.1427},"Pro":{"minutes":1000,"price":142.70,"overage":0.1427},"Max":{"minutes":2500,"price":356.75,"overage":0.1427}},
-    "Local": {"Basic":{"minutes":100,"price":12.50,"overage":0.125},"Plus":{"minutes":500,"price":62.50,"overage":0.125},"Pro":{"minutes":1000,"price":125.00,"overage":0.125},"Max":{"minutes":2500,"price":312.50,"overage":0.125}},
-    "National": {"Basic":{"minutes":100,"price":9.38,"overage":0.0938},"Plus":{"minutes":500,"price":46.90,"overage":0.0938},"Pro":{"minutes":1000,"price":93.80,"overage":0.0938},"Max":{"minutes":2500,"price":234.50,"overage":0.0938}}
-  }
+  "US": { "tollFree": 0.03, "local": 0.02, "national": 0.025 },
+  "ZA": { "tollFree": 0.05, "local": 0.04, "national": 0.045 },
+  "GB": { "tollFree": 0.04, "local": 0.03, "national": 0.035 },
+  "IN": { "tollFree": 0.02, "local": 0.015, "national": 0.018 },
+  "AU": { "tollFree": 0.04, "local": 0.03, "national": 0.035 },
+  "CA": { "tollFree": 0.03, "local": 0.025, "national": 0.03 },
+  "DE": { "tollFree": 0.045, "local": 0.035, "national": 0.04 },
+  "FR": { "tollFree": 0.045, "local": 0.035, "national": 0.04 },
+  "JP": { "tollFree": 0.05, "local": 0.04, "national": 0.045 },
+  "BR": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "MX": { "tollFree": 0.03, "local": 0.025, "national": 0.028 },
+  "IT": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "ES": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "KR": { "tollFree": 0.05, "local": 0.045, "national": 0.048 },
+  "SG": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "NL": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "CH": { "tollFree": 0.05, "local": 0.045, "national": 0.048 },
+  "SE": { "tollFree": 0.045, "local": 0.04, "national": 0.043 },
+  "BE": { "tollFree": 0.045, "local": 0.04, "national": 0.043 },
+  "GR": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "PT": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "IE": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "IL": { "tollFree": 0.05, "local": 0.045, "national": 0.048 },
+  "PL": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "RO": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "HU": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "SK": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "CZ": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "EE": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "LV": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "LT": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "LU": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "MO": { "tollFree": 0.05, "local": 0.045, "national": 0.048 },
+  "MY": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "MT": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "MC": { "tollFree": 0.05, "local": 0.045, "national": 0.048 },
+  "AN": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "NZ": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "NO": { "tollFree": 0.045, "local": 0.04, "national": 0.043 },
+  "PA": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "PE": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "PH": { "tollFree": 0.03, "local": 0.025, "national": 0.028 },
+  "TW": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "TH": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "TT": { "tollFree": 0.045, "local": 0.04, "national": 0.042 },
+  "TR": { "tollFree": 0.04, "local": 0.035, "national": 0.038 },
+  "UY": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "VE": { "tollFree": 0.035, "local": 0.03, "national": 0.032 },
+  "VN": { "tollFree": 0.035, "local": 0.03, "national": 0.032 }
 }
