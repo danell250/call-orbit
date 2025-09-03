@@ -12,9 +12,11 @@
   <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
   <style>
     main{max-width:1120px;margin:20px auto;padding:0}
-    header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
-    header.hero h1{margin-bottom:1rem}
-    header.hero p{margin-bottom:2rem}
+    /* Banner / Hero */
+    header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+    header.hero h1{margin-bottom:1rem;font-size:2.5rem}
+    header.hero p{margin-bottom:2rem;font-size:1.2rem}
+
     .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
     .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
     .plan:hover{transform:translateY(-5px)}
@@ -48,6 +50,7 @@
     </div>
   </nav>
 
+  <!-- ✅ Banner Added -->
   <header class="hero fade-in">
     <h1>Choose Your Plan & Number</h1>
     <p>Pick your country, plan, and forwarding number to get started.</p>
@@ -79,7 +82,7 @@
         <a href="/pricing" class="buy-now">🆕 New Customers — Get Portal + Number</a>
       </div>
       <div style="margin-top:10px;">
-        <button class="buy-now" style="background:#10b981;">🔁 Existing Customers — Add Numbers Only</button>
+        <a href="/orders.html" class="buy-now" style="background:#10b981;">🔁 Existing Customers — Add Numbers Only</a>
       </div>
     </div>
   </main>
