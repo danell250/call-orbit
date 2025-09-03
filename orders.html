@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Buy Numbers & Plans</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
+  <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'> <circle cx='32' cy='32' r='30' fill='%233b82f6'/> </svg>">
   <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
   <style>
     main{max-width:1120px;margin:20px auto;padding:0}
@@ -25,9 +22,6 @@
     .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
     .buy-now:hover{filter:brightness(0.95)}
-    .existing-btn{background:#10b981;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
-    .existing-btn:hover{filter:brightness(0.95)}
-
     /* Cart sliding in */
     .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
     .cart-wrapper.active{right:0;}
@@ -35,33 +29,13 @@
     .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
     .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
     #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
-
-    /* Banner */
-    .banner{
-      background: linear-gradient(135deg,#3b82f6,#60a5fa);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      font-weight: 700;
-      border-radius: 10px;
-      margin: 20px auto;
-      max-width: 1120px;
-      font-size: 1.2rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    }
-
-    /* Customer notice */
-    .customer-notice{max-width:1120px;margin:30px auto;text-align:center;}
-    .customer-notice h2{margin-bottom:1rem;}
-    .customer-notice p{color:red;font-weight:bold;margin-bottom:1rem;}
-    .customer-notice .buy-now, .customer-notice .existing-btn{margin-top:10px;}
   </style>
 </head>
 <body>
   <nav>
     <div><a href="/"><strong>CallOrbit</strong></a></div>
     <div>
-      <a href="/" >Home</a>
+      <a href="/">Home</a>
       <a href="/features">Features</a>
       <a href="/pricing">Pricing</a>
       <a href="/about">About</a>
@@ -71,14 +45,10 @@
     </div>
   </nav>
 
-  <!-- Banner -->
-  <div class="banner fade-in">
-    🚀 Special Offer: Get your portal and numbers today with easy setup!
-  </div>
-
+  <!-- Top Banner -->
   <header class="hero fade-in">
-    <h1>Choose Your Plan & Number</h1>
-    <p>Pick your country, plan, and forwarding number to get started.</p>
+    <h1>Welcome to CallOrbit</h1>
+    <p>Get your numbers and portal subscription quickly and securely.</p>
   </header>
 
   <main>
@@ -91,6 +61,7 @@
         <option value="IN">India</option>
         <option value="AU">Australia</option>
       </select>
+
       <label for="forward">Forwarding Number / Device</label>
       <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
     </div>
@@ -98,14 +69,16 @@
     <div class="plans-grid" id="plans-container"></div>
 
     <!-- Customer Notice -->
-    <div class="customer-notice fade-in">
+    <div style="text-align:center;margin-top:30px;">
       <h2>⚠️ Important</h2>
-      <p>You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal.</p>
-      <div>
+      <p style="color:red;font-weight:bold;">
+        You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal.
+      </p>
+      <div style="margin-top:15px;">
         <a href="/pricing" class="buy-now">🆕 New Customers — Get Portal + Number</a>
       </div>
-      <div>
-        <button class="existing-btn">🔁 Existing Customers — Add Numbers Only</button>
+      <div style="margin-top:10px;">
+        <button class="buy-now" style="background:#10b981;">🔁 Existing Customers — Add Numbers Only</button>
       </div>
     </div>
   </main>
@@ -122,7 +95,6 @@
     </div>
   </div>
 
-  <!-- Cart Summary Button -->
   <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
   <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
@@ -166,7 +138,7 @@
           <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
           <button class="buy-now">Add to Cart</button>
         `;
-        div.querySelector('button').addEventListener('click',()=>addToCart(c,plan,data));
+        div.querySelector('button').addEventListener('click',()=>{ addToCart(c,plan,data); });
         plansContainer.appendChild(div);
       }
     }
@@ -200,7 +172,7 @@
         `;
         cartItems.appendChild(div);
       });
-      cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      cartTotalEl.textContent='$'+total.toFixed(2);
       renderPayPal();
     }
 
@@ -209,28 +181,30 @@
       cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
     }
 
-    cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
+    cartButton.addEventListener('click', () => { cartWrapper.classList.toggle('active'); });
 
     function renderPayPal(){
       paypalContainer.innerHTML='';
       if(cart.length===0) return;
       const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
       paypal.Buttons({
-        createOrder: (data, actions) => actions.order.create({purchase_units:[{amount:{value:total}}]}),
-        onApprove: (data, actions) => actions.order.capture().then(details=>{
-          alert(`Transaction completed by ${details.payer.name.given_name}`);
-          cart = [];
-          localStorage.setItem('cart', JSON.stringify(cart));
-          renderCart();
-          updateCartButton();
-          cartWrapper.classList.remove('active');
-        })
+        createOrder: function(data, actions){ return actions.order.create({purchase_units:[{amount:{value:total}}]}); },
+        onApprove: function(data, actions){
+          return actions.order.capture().then(function(details){
+            alert('Payment completed by '+details.payer.name.given_name);
+            cart=[];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCartButton();
+            cartWrapper.classList.remove('active');
+          });
+        }
       }).render('#paypal-button-container');
     }
 
-    countrySelect.addEventListener('change', renderPlans);
+    countrySelect.addEventListener('change',renderPlans);
+    forwardInput.addEventListener('input',renderPlans);
     renderPlans();
-    renderCart();
     updateCartButton();
   </script>
 </body>
