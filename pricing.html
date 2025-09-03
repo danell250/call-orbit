@@ -13,7 +13,7 @@
 /* Banner / Hero */
 header.hero {
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 60px 20px;
   text-align: center;
   background: linear-gradient(135deg, #3b82f6, #60a5fa);
   color: #fff;
@@ -22,11 +22,11 @@ header.hero {
 }
 header.hero h1 {
   margin-bottom: 1rem;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
 }
 header.hero p {
   margin-bottom: 2rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 /* Navbar Buy Button */
@@ -47,12 +47,12 @@ header.hero p {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:1.5rem;
-  margin:20px 0;
+  margin:40px 0;
   padding:0 10px;
 }
 .plan {
   background:#fff;
-  padding:20px;
+  padding:25px 20px;
   border-radius:1rem;
   box-shadow:0 5px 20px rgba(0,0,0,0.05);
   text-align:center;
@@ -60,69 +60,21 @@ header.hero p {
   cursor:pointer;
 }
 .plan:hover { transform:translateY(-5px) }
-.plan h3 { color:#1e3a8a;margin-bottom:1rem }
-.plan .price, .plan .setup { margin-bottom:0.5rem; }
+.plan h3 { color:#1e3a8a;margin-bottom:1rem;font-size:1.3rem }
+.plan .price, .plan .setup { margin-bottom:0.5rem; font-weight:700 }
 .buy-now {
   background:#3b82f6;
   color:#fff;
-  padding:12px 24px;
+  padding:12px 30px;
   border:none;
   border-radius:999px;
   font-weight:700;
   font-size:1rem;
   cursor:pointer;
   transition:filter .2s;
-  margin-top:10px;
+  margin-top:15px;
 }
 .buy-now:hover { filter:brightness(0.95) }
-
-/* Cart */
-.cart-wrapper {
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:350px;
-  height:100%;
-  background:#f9fafb;
-  box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-  padding:20px;
-  transition:right 0.3s;
-  overflow-y:auto;
-  z-index:1000;
-}
-.cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a }
-.cart-item {
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-  padding:10px;
-  background:#fff;
-  border-radius:0.5rem;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
-.remove-btn {
-  background:none;
-  border:none;
-  color:red;
-  font-weight:bold;
-  cursor:pointer;
-  margin-left:10px;
-}
-#cart-button {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#3b82f6;
-  color:#fff;
-  padding:12px 20px;
-  border:none;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-  z-index:1001;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
@@ -132,71 +84,58 @@ header.hero p {
     <a href="/"><strong>CallOrbit</strong></a>
   </div>
   <div>
-    <a href="/" class="active-page">Home</a>
+    <a href="/">Home</a>
     <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
+    <a href="/pricing" class="active-page">Pricing</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
-    <a href="/orders.html" class="navbar-buy">🛒 Buy Numbers</a>
+    <a href="/orders" class="navbar-buy">🛒 Buy Numbers</a>
   </div>
 </nav>
 
-<!-- ✅ Banner Added -->
+<!-- ✅ Hero Banner -->
 <header class="hero fade-in">
-  <h1>Pricing</h1>
-  <p>Flexible plans + simple usage pricing to fit every business.</p>
+  <h1>Pricing Plans</h1>
+  <p>Flexible, transparent, and scalable pricing for every business size.</p>
 </header>
 
 <main>
-  <section class="plans-grid">
-    <div class="plan" data-minutes="3">
+  <section class="plans-grid fade-in">
+    <div class="plan">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included.</p>
-      <p class="price"><strong>$19/mo flat</strong></p>
+      <p class="price">$19/mo</p>
       <p class="setup">One-time setup: $99</p>
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan" data-minutes="20">
+    <div class="plan">
       <h3>Team</h3>
-      <p>Unlimited dashboards, up to 20 agents, call recordings.</p>
-      <p class="price"><strong>$29/user · mo</strong></p>
+      <p>Unlimited dashboards, up to 20 agents.</p>
+      <p class="price">$29/user · mo</p>
       <p class="setup">One-time setup: $149</p>
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan popular" data-minutes="50">
+    <div class="plan">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents, custom branding.</p>
-      <p class="price"><strong>$49/user · mo</strong></p>
+      <p class="price">$49/user · mo</p>
       <p class="setup">One-time setup: $199</p>
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan" data-minutes="Unlimited">
+    <div class="plan">
       <h3>Enterprise</h3>
-      <p>Global scale, custom SLAs, unlimited agents, dedicated success manager.</p>
-      <p class="price"><strong>$99/user · mo</strong></p>
-      <p class="setup">Setup: tailored onboarding package</p>
+      <p>Global scale, unlimited agents, dedicated success manager.</p>
+      <p class="price">$99/user · mo</p>
+      <p class="setup">Tailored onboarding package</p>
       <button class="buy-now">Add to Cart</button>
     </div>
   </section>
 </main>
-
-<!-- Cart -->
-<div class="cart-wrapper" id="cart-wrapper">
-  <div class="cart">
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-      <span>Total:</span><span id="cart-total">$0.00</span>
-    </div>
-    <div id="paypal-button-container" style="margin-top:15px;"></div>
-  </div>
-</div>
-<button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
@@ -204,14 +143,6 @@ header.hero p {
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-function renderCart(){ const cartItems=document.getElementById('cart-items'); const cartTotalEl=document.getElementById('cart-total'); cartItems.innerHTML=''; let total=0; cart.forEach((item,index)=>{ total+=item.price||0; const div=document.createElement('div'); div.className='cart-item'; div.innerHTML=`<span>${item.plan} Platform Plan</span><span>$${(item.price||0).toFixed(2)}<button class="remove-btn" onclick="removeFromCart(${index})">X</button></span>`; cartItems.appendChild(div); }); cartTotalEl.textContent=`$${total.toFixed(2)}`; renderPayPal(); }
-function removeFromCart(index){ cart.splice(index,1); localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); updateCartButton(); }
-function updateCartButton(){ const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2); document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`; }
-document.getElementById('cart-button').addEventListener('click',()=>{ document.getElementById('cart-wrapper').classList.toggle('active'); });
-function renderPayPal(){ const paypalContainer=document.getElementById('paypal-button-container'); paypalContainer.innerHTML=''; if(cart.length===0) return; const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2); paypal.Buttons({ createOrder:function(data,actions){ return actions.order.create({purchase_units:[{amount:{value:total}}]}); }, onApprove:function(data,actions){ return actions.order.capture().then(function(details){ alert('Payment completed by '+details.payer.name.given_name); cart=[]; localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); updateCartButton(); document.getElementById('cart-wrapper').classList.remove('active'); }); } }).render('#paypal-button-container'); }
-document.querySelectorAll('.buy-now').forEach((btn)=>{ btn.addEventListener('click',()=>{ const planDiv=btn.closest('.plan'); const planName=planDiv.querySelector('h3').textContent; const price=parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,'')); cart.push({plan:planName,price}); localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); updateCartButton(); }); });
-renderCart(); updateCartButton();
 </script>
 </body>
 </html>
