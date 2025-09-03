@@ -10,47 +10,87 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-  header.hero{
+  /* Banner / Hero */
+  header.hero {
     margin:0 auto;
     padding:40px 20px;
     text-align:center;
     background:linear-gradient(135deg,#3b82f6,#60a5fa);
     color:#fff;
     border-radius:10px;
-    position: relative;
   }
   header.hero h1{margin-bottom:1rem}
   header.hero p{margin-bottom:2rem}
 
-  /* Hero Buy Numbers Button */
-  .hero-button{
-    display:inline-block;
-    margin-top:15px;
-    background:#10b981;
-    color:#fff;
-    padding:10px 20px;
-    border-radius:999px;
-    font-weight:700;
-    text-decoration:none;
-    transition: filter 0.2s;
+  .plans-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+    margin:20px 0;
+    padding:0 10px;
   }
-  .hero-button:hover{filter:brightness(0.9)}
 
-  .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
-  .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
+  .plan {
+    background:#fff;
+    padding:20px;
+    border-radius:1rem;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    text-align:center;
+    transition:transform .2s;
+    cursor:pointer;
+  }
   .plan:hover{transform:translateY(-5px)}
   .plan h3{color:#1e3a8a;margin-bottom:1rem}
   .plan .price,.plan .setup{margin-bottom:0.5rem}
-  .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
+
+  .buy-now {
+    background:#3b82f6;
+    color:#fff;
+    padding:12px 24px;
+    border:none;
+    border-radius:999px;
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    transition:filter .2s;
+    margin-top:10px;
+  }
   .buy-now:hover{filter:brightness(0.95)}
 
   /* Cart sliding in */
-  .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
+  .cart-wrapper{
+    position:fixed;
+    top:0;
+    right:-400px;
+    width:350px;
+    height:100%;
+    background:#f9fafb;
+    box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+    padding:20px;
+    transition:right 0.3s;
+    overflow-y:auto;
+    z-index:1000;
+  }
   .cart-wrapper.active{right:0;}
   .cart h2{margin-bottom:1rem;color:#1e3a8a}
   .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
   .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
   #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+
+  /* Navbar Buy Numbers button */
+  .navbar-buy {
+    background: #10b981;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-left: 10px;
+    text-decoration: none;
+    transition: filter 0.2s;
+  }
+  .navbar-buy:hover {
+    filter: brightness(0.9);
+  }
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
@@ -65,14 +105,13 @@
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
+    <a href="/orders.html" class="navbar-buy">🛒 Buy Numbers</a>
   </div>
 </nav>
 
-<!-- Banner Hero with Buy Numbers Button -->
 <header class="hero fade-in">
   <h1>Pricing</h1>
   <p>Flexible plans + simple usage pricing to fit every business.</p>
-  <a href="/orders.html" class="hero-button">🛒 Buy Numbers</a>
 </header>
 
 <main>
@@ -133,7 +172,7 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Cart logic (unchanged)
+// Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function renderCart(){
