@@ -10,7 +10,7 @@
     <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
   </svg>">
   <style>
-    /* Fixed Buy Numbers in navbar */
+    /* Navbar Buy Numbers button */
     .navbar-buy {
       background: #10b981;
       color: #fff;
@@ -24,9 +24,43 @@
     .navbar-buy:hover { filter: brightness(0.9); }
 
     .center { text-align:center; }
-    header.hero { margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-    header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
-    header.hero p{margin-bottom:2rem;font-size:1.2rem;}
+
+    /* Hero / Banner */
+    header.hero {
+      margin:0 auto;
+      padding:60px 20px;
+      text-align:center;
+      background: linear-gradient(135deg,#3b82f6,#60a5fa);
+      color:#fff;
+      border-radius:10px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    }
+    header.hero h1 { margin-bottom:1rem; font-size:2.8rem; }
+    header.hero p { margin-bottom:2rem; font-size:1.3rem; }
+    .hero-cta { display:inline-block; padding:12px 30px; background:#10b981; color:#fff; border-radius:999px; font-weight:700; text-decoration:none; transition: filter 0.2s; }
+    .hero-cta:hover { filter:brightness(0.9); }
+
+    /* Quick Stats */
+    .stats { display:flex; justify-content:center; gap:2rem; margin:40px 0; flex-wrap:wrap; text-align:center; }
+    .stat { background:#fff; padding:20px 30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); min-width:150px; }
+    .stat h2 { font-size:2rem; color:#1e3a8a; margin-bottom:0.5rem; }
+    .stat p { margin:0; font-weight:600; }
+
+    /* Feature Teasers */
+    .feature-teasers { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin:20px 10px; }
+    .feature-teasers .feature { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); transition:transform 0.2s; cursor:pointer; text-align:center; }
+    .feature-teasers .feature:hover { transform:translateY(-5px); }
+    .feature-teasers h3 { color:#1e3a8a; margin-bottom:0.5rem; }
+    .feature-teasers p { font-size:0.95rem; margin-bottom:10px; }
+    .feature-teasers a { text-decoration:none; color:#3b82f6; font-weight:700; }
+
+    /* Testimonials */
+    .testimonials { background:#f3f4f6; padding:50px 20px; text-align:center; border-radius:10px; margin:40px 10px; }
+    .testimonial { max-width:600px; margin:20px auto; font-style:italic; color:#1f2937; }
+    .testimonial-author { margin-top:8px; font-weight:700; color:#1e3a8a; }
+
+    /* Footer */
+    footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
   </style>
 </head>
 <body>
@@ -42,32 +76,61 @@
       <a href="/contact">Contact</a>
       <a href="/coverage">Coverage</a>
       <a href="/platform">Platform</a>
-      <!-- Buy Numbers button always visible -->
       <a href="/orders.html" class="navbar-buy">🛒 Buy Numbers</a>
     </div>
   </nav>
 
+  <!-- Hero / Banner -->
   <header class="hero fade-in center">
-    <h1>Separate and Simplify Contact Center Management</h1>
-    <p>Dedicated dashboards, portals, number porting, and analytics for each location.</p>
+    <h1>Separate. Simplify. Scale Your Contact Center.</h1>
+    <p>Powerful dashboards, portals, number management, and analytics—all in one platform.</p>
+    <a href="/features" class="hero-cta">Explore Features</a>
   </header>
 
-  <section class="features features-grid fade-in">
+  <!-- Quick Stats -->
+  <section class="stats fade-in">
+    <div class="stat">
+      <h2>100+</h2>
+      <p>Contact Centers Managed</p>
+    </div>
+    <div class="stat">
+      <h2>5000+</h2>
+      <p>Agents Connected</p>
+    </div>
+    <div class="stat">
+      <h2>99.9%</h2>
+      <p>Uptime Guarantee</p>
+    </div>
+  </section>
+
+  <!-- Feature Teasers -->
+  <section class="feature-teasers fade-in">
     <div class="feature">
       <h3>Live Dashboards</h3>
-      <p>Track metrics, alerts, and trends in real-time to act quickly.</p>
+      <p>Get real-time insights instantly.</p>
+      <a href="/features">Learn More →</a>
     </div>
     <div class="feature">
-      <h3>Manage Contact Centers Easily</h3>
-      <p>Separate portals with role-based access for smooth operations.</p>
-    </div>
-    <div class="feature">
-      <h3>Number Management & Porting</h3>
-      <p>Buy and port numbers globally without downtime.</p>
+      <h3>Number Management</h3>
+      <p>Buy, port, and manage numbers globally.</p>
+      <a href="/features">Learn More →</a>
     </div>
     <div class="feature">
       <h3>Analytics & Reporting</h3>
-      <p>Generate custom reports and actionable insights for every team.</p>
+      <p>Generate actionable reports for every team.</p>
+      <a href="/features">Learn More →</a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials fade-in">
+    <div class="testimonial">
+      "CallOrbit saved us hours every week managing multiple contact centers."
+      <div class="testimonial-author">— Alex P., Operations Manager</div>
+    </div>
+    <div class="testimonial">
+      "The dashboards and analytics are game changers for our teams!"
+      <div class="testimonial-author">— Maria L., Contact Center Director</div>
     </div>
   </section>
 
