@@ -10,90 +10,21 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-  /* Hero */
-  header.hero {
-    margin: 0 auto;
-    padding: 60px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #3b82f6, #60a5fa);
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  }
-  header.hero h1 { margin-bottom: 1rem; font-size: 2.5rem; }
-  header.hero p { margin-bottom: 2rem; font-size: 1.2rem; }
+  header.hero { margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+  header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
+  header.hero p{margin-bottom:2rem;font-size:1.2rem;}
 
-  /* Features Grid */
-  .features-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:1.5rem;
-    margin:40px 20px;
-  }
-  .feature {
-    background:#fff;
-    padding:20px;
-    border-radius:1rem;
-    box-shadow:0 5px 20px rgba(0,0,0,0.05);
-    text-align:center;
-    transition:transform .2s;
-  }
-  .feature:hover { transform:translateY(-5px); }
-  .feature h3 { color:#1e3a8a; margin-bottom:1rem; }
-  .feature p { font-size:1rem; }
+  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:40px 20px; }
+  .feature { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; }
+  .feature:hover { transform:translateY(-5px) }
 
-  /* Stats Section */
-  .stats-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:2rem;
-    margin:40px 20px;
-    text-align:center;
-  }
-  .stat {
-    background:#10b981;
-    color:#fff;
-    padding:20px;
-    border-radius:1rem;
-    font-weight:700;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-  }
-  .stat:hover { transform:translateY(-5px); }
-  .stat .number {
-    font-size:2rem;
-    margin-bottom:0.5rem;
-  }
+  .stats { display:flex; justify-content:center; gap:3rem; margin:50px 0; text-align:center; }
+  .stats .stat h2 { font-size:3rem; color:#3b82f6; }
+  .stats .stat p { font-size:1.2rem; color:#1f2937; }
 
-  /* CTA Section */
-  .cta-section {
-    text-align:center;
-    margin:60px 20px;
-    padding:40px 20px;
-    background: linear-gradient(135deg, #10b981, #3b82f6);
-    border-radius:10px;
-    color:#fff;
-  }
-  .cta-section h2 {
-    font-size:2rem;
-    margin-bottom:1rem;
-  }
-  .cta-section p {
-    font-size:1.2rem;
-    margin-bottom:2rem;
-  }
-  .cta-section a {
-    display:inline-block;
-    background:#fff;
-    color:#10b981;
-    padding:12px 30px;
-    border-radius:999px;
-    font-weight:700;
-    text-decoration:none;
-    transition:filter 0.2s;
-  }
-  .cta-section a:hover { filter:brightness(0.9); }
-
+  .cta { text-align:center; margin:60px 20px; background:#10b981; color:#fff; padding:40px 20px; border-radius:10px; }
+  .cta a { display:inline-block; margin-top:20px; padding:12px 24px; background:#fff; color:#10b981; font-weight:700; border-radius:999px; text-decoration:none; transition:filter 0.2s;}
+  .cta a:hover { filter:brightness(0.9);}
 </style>
 </head>
 <body>
@@ -113,71 +44,55 @@
 
 <header class="hero fade-in">
   <h1>CallOrbit Platform</h1>
-  <p>Centralize dashboards, analytics, and integrations in one seamless platform.</p>
+  <p>Centralize dashboards, portals, and analytics with seamless integrations.</p>
 </header>
 
-<section class="features-grid fade-in">
+<!-- Stats Section -->
+<section class="stats fade-in">
+  <div class="stat">
+    <h2 class="counter" data-target="100">0</h2>
+    <p>Contact Centers Managed</p>
+  </div>
+  <div class="stat">
+    <h2 class="counter" data-target="5000">0</h2>
+    <p>Agents Connected</p>
+  </div>
+  <div class="stat">
+    <h2 class="counter" data-target="99.9">0</h2>
+    <p>Uptime Guarantee</p>
+  </div>
+</section>
+
+<section class="features features-grid fade-in">
   <div class="feature">
     <h3>Integrations</h3>
-    <p>Connect effortlessly with your CRM, telephony, and analytics tools.</p>
+    <p>Works with CRM, telephony, and analytics systems to keep your operations connected.</p>
   </div>
   <div class="feature">
     <h3>Custom Analytics</h3>
-    <p>Create tailored reports and KPIs for every center to optimize performance.</p>
+    <p>Tailor reports and KPIs per center to drive actionable insights.</p>
   </div>
   <div class="feature">
     <h3>Global Access</h3>
-    <p>Manage multiple contact centers across regions from a single platform.</p>
+    <p>Manage multiple centers across regions from a single, centralized platform.</p>
   </div>
-  <div class="feature">
-    <h3>AI Insights</h3>
-    <p>Leverage AI-driven analytics to spot trends and improve customer satisfaction.</p>
-  </div>
-  <div class="feature">
-    <h3>Security & Compliance</h3>
-    <p>Enterprise-level security ensuring data privacy and compliance across all centers.</p>
-  </div>
-</section>
-
-<!-- Stats Counters -->
-<section class="stats-grid fade-in">
-  <div class="stat">
-    <div class="number" data-target="1200">0</div>
-    <div>Agents Supported</div>
-  </div>
-  <div class="stat">
-    <div class="number" data-target="500000">0</div>
-    <div>Calls Processed</div>
-  </div>
-  <div class="stat">
-    <div class="number" data-target="35">0</div>
-    <div>Global Offices</div>
-  </div>
-  <div class="stat">
-    <div class="number" data-target="98">0</div>
-    <div>% Customer Satisfaction</div>
-  </div>
-</section>
-
-<section style="text-align:center; margin:60px 20px;">
-  <h2>Why Choose CallOrbit?</h2>
-  <p style="max-width:700px;margin:0 auto;">Our platform simplifies multi-center management, saves time with intelligent automation, and provides actionable insights to drive business growth.</p>
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section fade-in">
+<section class="cta fade-in">
   <h2>Ready to Transform Your Contact Centers?</h2>
-  <p>Get started with CallOrbit today and experience seamless multi-center management.</p>
-  <a href="/orders">Buy Numbers & Start Now</a>
+  <p>Start using CallOrbit Platform today and manage everything from one dashboard.</p>
+  <a href="/orders">Get Started</a>
 </section>
 
-<footer style="text-align:center; padding:2rem; background:#f3f4f6; margin-top:40px;">
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Fade-in observer
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -189,23 +104,34 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Animated Stats Counters
-const counters = document.querySelectorAll('.number');
-counters.forEach(counter => {
-  counter.innerText = '0';
-  const updateCounter = () => {
-    const target = +counter.getAttribute('data-target');
-    const current = +counter.innerText;
-    const increment = target / 200; // speed
-    if(current < target){
-      counter.innerText = Math.ceil(current + increment);
-      setTimeout(updateCounter, 10);
-    } else {
-      counter.innerText = target.toLocaleString();
+// Stats Counter
+function animateCounters() {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const target = parseFloat(counter.getAttribute('data-target'));
+    let count = 0;
+    const increment = target / 200;
+    const updateCounter = () => {
+      count += increment;
+      if(count < target){
+        counter.textContent = target % 1 !== 0 ? count.toFixed(1) : Math.floor(count);
+        requestAnimationFrame(updateCounter);
+      } else { counter.textContent = target; }
+    };
+    updateCounter();
+  });
+}
+
+const statsSection = document.querySelector('.stats');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      animateCounters();
+      observer.unobserve(entry.target);
     }
-  };
-  updateCounter();
-});
+  });
+}, { threshold: 0.5 });
+if(statsSection) observer.observe(statsSection);
 </script>
 </body>
 </html>
