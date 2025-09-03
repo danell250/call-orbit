@@ -10,97 +10,131 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-  /* Banner / Hero */
-  header.hero {
-    margin:0 auto;
-    padding:40px 20px;
-    text-align:center;
-    background:linear-gradient(135deg,#3b82f6,#60a5fa);
-    color:#fff;
-    border-radius:10px;
-  }
-  header.hero h1{margin-bottom:1rem}
-  header.hero p{margin-bottom:2rem}
+/* Banner / Hero */
+header.hero {
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+header.hero p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
 
-  .plans-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:1.5rem;
-    margin:20px 0;
-    padding:0 10px;
-  }
+/* Navbar Buy Button */
+.navbar-buy {
+  background: #10b981;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+.navbar-buy:hover { filter: brightness(0.9); }
 
-  .plan {
-    background:#fff;
-    padding:20px;
-    border-radius:1rem;
-    box-shadow:0 5px 20px rgba(0,0,0,0.05);
-    text-align:center;
-    transition:transform .2s;
-    cursor:pointer;
-  }
-  .plan:hover{transform:translateY(-5px)}
-  .plan h3{color:#1e3a8a;margin-bottom:1rem}
-  .plan .price,.plan .setup{margin-bottom:0.5rem}
+/* Plans Grid */
+.plans-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.5rem;
+  margin:20px 0;
+  padding:0 10px;
+}
+.plan {
+  background:#fff;
+  padding:20px;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:transform .2s;
+  cursor:pointer;
+}
+.plan:hover { transform:translateY(-5px) }
+.plan h3 { color:#1e3a8a;margin-bottom:1rem }
+.plan .price, .plan .setup { margin-bottom:0.5rem; }
+.buy-now {
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 24px;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  transition:filter .2s;
+  margin-top:10px;
+}
+.buy-now:hover { filter:brightness(0.95) }
 
-  .buy-now {
-    background:#3b82f6;
-    color:#fff;
-    padding:12px 24px;
-    border:none;
-    border-radius:999px;
-    font-weight:700;
-    font-size:1rem;
-    cursor:pointer;
-    transition:filter .2s;
-    margin-top:10px;
-  }
-  .buy-now:hover{filter:brightness(0.95)}
-
-  /* Cart sliding in */
-  .cart-wrapper{
-    position:fixed;
-    top:0;
-    right:-400px;
-    width:350px;
-    height:100%;
-    background:#f9fafb;
-    box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-    padding:20px;
-    transition:right 0.3s;
-    overflow-y:auto;
-    z-index:1000;
-  }
-  .cart-wrapper.active{right:0;}
-  .cart h2{margin-bottom:1rem;color:#1e3a8a}
-  .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-  .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
-  #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
-
-  /* Navbar Buy Numbers button */
-  .navbar-buy {
-    background: #10b981;
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-weight: 700;
-    margin-left: 10px;
-    text-decoration: none;
-    transition: filter 0.2s;
-  }
-  .navbar-buy:hover {
-    filter: brightness(0.9);
-  }
+/* Cart */
+.cart-wrapper {
+  position:fixed;
+  top:0;
+  right:-400px;
+  width:350px;
+  height:100%;
+  background:#f9fafb;
+  box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+  padding:20px;
+  transition:right 0.3s;
+  overflow-y:auto;
+  z-index:1000;
+}
+.cart-wrapper.active { right:0; }
+.cart h2 { margin-bottom:1rem;color:#1e3a8a }
+.cart-item {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  padding:10px;
+  background:#fff;
+  border-radius:0.5rem;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+.remove-btn {
+  background:none;
+  border:none;
+  color:red;
+  font-weight:bold;
+  cursor:pointer;
+  margin-left:10px;
+}
+#cart-button {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 20px;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  z-index:1001;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
 <body>
 <nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
-    <a href="/">Home</a>
+    <a href="/"><strong>CallOrbit</strong></a>
+  </div>
+  <div>
+    <a href="/" class="active-page">Home</a>
     <a href="/features">Features</a>
-    <a href="/pricing" class="active-page">Pricing</a>
+    <a href="/pricing">Pricing</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
@@ -115,8 +149,8 @@
 </header>
 
 <main>
-  <section class="plans-grid" id="plans-container">
-    <div class="plan">
+  <section class="plans-grid">
+    <div class="plan" data-minutes="3">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included.</p>
       <p class="price"><strong>$19/mo flat</strong></p>
@@ -124,7 +158,7 @@
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan">
+    <div class="plan" data-minutes="20">
       <h3>Team</h3>
       <p>Unlimited dashboards, up to 20 agents, call recordings.</p>
       <p class="price"><strong>$29/user · mo</strong></p>
@@ -132,7 +166,7 @@
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan popular">
+    <div class="plan popular" data-minutes="50">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents, custom branding.</p>
       <p class="price"><strong>$49/user · mo</strong></p>
@@ -140,7 +174,7 @@
       <button class="buy-now">Add to Cart</button>
     </div>
 
-    <div class="plan">
+    <div class="plan" data-minutes="Unlimited">
       <h3>Enterprise</h3>
       <p>Global scale, custom SLAs, unlimited agents, dedicated success manager.</p>
       <p class="price"><strong>Custom pricing</strong></p>
@@ -161,8 +195,6 @@
     <div id="paypal-button-container" style="margin-top:15px;"></div>
   </div>
 </div>
-
-<!-- Cart Summary Button -->
 <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
@@ -187,7 +219,7 @@ function renderCart(){
     const div=document.createElement('div');
     div.className='cart-item';
     div.innerHTML=`
-      <span>${item.name || item.plan || item.title}</span>
+      <span>${item.plan} (${item.minutes} min)</span>
       <span>$${(item.price||0).toFixed(2)}
         <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
       </span>
@@ -238,12 +270,13 @@ function renderPayPal(){
 }
 
 // Attach Add to Cart buttons
-document.querySelectorAll('.buy-now').forEach((btn,index)=>{
+document.querySelectorAll('.buy-now').forEach((btn)=>{
   btn.addEventListener('click',()=>{
     const planDiv = btn.closest('.plan');
     const planName = planDiv.querySelector('h3').textContent;
     const price = parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,''));
-    cart.push({plan:planName,price});
+    const minutes = planDiv.getAttribute('data-minutes') || 0;
+    cart.push({plan:planName,price,minutes});
     localStorage.setItem('cart',JSON.stringify(cart));
     renderCart();
     updateCartButton();
