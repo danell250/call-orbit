@@ -23,15 +23,13 @@ header.hero {
 header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
 header.hero p { margin-bottom:2rem; font-size:1.2rem; }
 
-/* Features / Coverage Cards with Gradient Background */
+/* Features / Coverage Cards */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:1.5rem;
   margin:30px 0;
-  padding:20px 10px;
-  background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-radius:10px;
+  padding:0 10px;
 }
 .feature {
   background:#fff;
@@ -40,15 +38,14 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   box-shadow:0 5px 20px rgba(0,0,0,0.05);
   text-align:center;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  cursor:pointer;
 }
 .feature:hover {
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+  transform:translateY(-8px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.1);
   background:#f0f9ff;
 }
-.feature h3 { color:#1e3a8a; margin-bottom:1rem; font-size:1.3rem; }
-.feature p { color:#374151; font-size:1rem; }
+.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
+.feature p { color:#374151; }
 
 /* CTA Section (matches features style) */
 .cta {
@@ -61,8 +58,8 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .cta:hover {
-  transform:translateY(-5px) scale(1.01);
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 .cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
 .cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
@@ -74,12 +71,9 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   border-radius:999px;
   font-weight:700;
   text-decoration:none;
-  transition:filter 0.2s, transform 0.2s;
+  transition:filter 0.2s;
 }
-.cta a:hover { 
-  filter:brightness(0.95);
-  transform:scale(1.05);
-}
+.cta a:hover { filter:brightness(0.95); }
 </style>
 </head>
 <body>
@@ -132,7 +126,7 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   <p style="font-style:italic;">We’re continuously expanding our regions to serve you better.</p>
 </section>
 
-<!-- CTA Section -->
+<!-- ✅ CTA Section -->
 <section class="cta fade-in">
   <h2>Get Your Numbers Anywhere</h2>
   <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
