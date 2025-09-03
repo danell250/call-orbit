@@ -12,16 +12,21 @@
   <style>
     /* Navbar Buy Numbers button same as platform page */
     .navbar-buy {
-      background: #3b82f6;
-      color: #fff;
+      background: none;
+      color: #3b82f6;
       padding: 10px 20px;
       border-radius: 999px;
       font-weight: 700;
       margin-left: 10px;
       text-decoration: none;
       transition: all 0.2s;
+      border: 2px solid #3b82f6;
     }
-    .navbar-buy:hover { background:#2563eb; transform:scale(1.05); }
+    .navbar-buy:hover { 
+      background:#3b82f6; 
+      color: #fff; 
+      transform:scale(1.05); 
+    }
 
     .center { text-align:center; }
 
@@ -72,11 +77,11 @@
       <a href="/" class="active-page">Home</a>
       <a href="/features">Features</a>
       <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
       <a href="/coverage">Coverage</a>
       <a href="/platform">Platform</a>
+      <a href="/orders" class="navbar-buy">Buy Numbers</a>
       <a href="/contact">Contact</a>
-      <a href="/orders" class="navbar-buy">🛒 Buy Numbers</a>
+      <a href="/about">About</a>
     </div>
   </nav>
 
