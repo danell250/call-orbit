@@ -10,7 +10,7 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-/* Hero section */
+/* Hero */
 header.hero {
   margin:0 auto;
   padding:50px 20px;
@@ -20,26 +20,56 @@ header.hero {
   border-radius:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
-header.hero h1{ margin-bottom:1rem; font-size:2.5rem; }
-header.hero p{ margin-bottom:2rem; font-size:1.2rem; }
+header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
+header.hero p { margin-bottom:2rem; font-size:1.2rem; }
 
-/* Features Grid */
+/* Features / Cards */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:2rem;
-  margin:40px 10px;
+  gap:1.5rem;
+  margin:30px 0;
+  padding:0 10px;
 }
 .feature {
   background:#fff;
-  padding:25px;
+  padding:25px 20px;
   border-radius:1rem;
   box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  transition:transform .2s;
+  text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor:pointer;
 }
-.feature:hover { transform:translateY(-5px); }
-.feature h3 { color:#1e3a8a; margin-bottom:1rem; font-size:1.4rem; }
-.feature p { font-size:1rem; color:#1f2937; line-height:1.5; }
+.feature:hover {
+  transform:translateY(-8px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.1);
+  background:#f0f9ff;
+}
+.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
+.feature p { color:#374151; }
+
+/* CTA Section */
+.cta {
+  background:#10b981;
+  color:#fff;
+  padding:40px 20px;
+  text-align:center;
+  border-radius:10px;
+  margin:40px 10px;
+}
+.cta h2 { margin-bottom:1rem; font-size:2rem; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; }
+.cta a {
+  display:inline-block;
+  background:#fff;
+  color:#10b981;
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  transition:filter 0.2s;
+}
+.cta a:hover { filter:brightness(0.95); }
 </style>
 </head>
 <body>
@@ -57,37 +87,41 @@ header.hero p{ margin-bottom:2rem; font-size:1.2rem; }
 </nav>
 
 <header class="hero fade-in">
-  <h1>About CallOrbit</h1>
-  <p>Empowering businesses with tools that simplify and elevate contact center management.</p>
+  <h1>Our Mission at CallOrbit</h1>
+  <p>Empowering teams worldwide to manage contact centers effortlessly, intelligently, and beautifully.</p>
 </header>
 
 <section class="features features-grid fade-in">
   <div class="feature">
-    <h3>Our Journey</h3>
-    <p>CallOrbit began with a simple mission: make contact center management effortless, transparent, and insightful for every team.</p>
+    <h3>Our Story</h3>
+    <p>Founded by industry experts, we built CallOrbit to simplify complex contact center operations and give teams clarity and control.</p>
+  </div>
+  <div class="feature">
+    <h3>Our Values</h3>
+    <p>Innovation, transparency, and reliability drive everything we do. Your success is our mission.</p>
   </div>
   <div class="feature">
     <h3>Our Team</h3>
-    <p>Passionate engineers, designers, and support specialists dedicated to building solutions that truly make a difference.</p>
+    <p>From engineers to operations specialists, every member of our team is dedicated to making your contact center experience seamless.</p>
   </div>
   <div class="feature">
-    <h3>Our Philosophy</h3>
-    <p>We believe in clarity, simplicity, and empowering businesses to focus on what matters most — connecting with their customers.</p>
-  </div>
-  <div class="feature">
-    <h3>Our Vision</h3>
-    <p>To be the leading platform for seamless, scalable, and insightful contact center operations worldwide.</p>
+    <h3>Why Choose Us?</h3>
+    <p>CallOrbit brings everything together—dashboards, portals, analytics—so your teams can focus on what matters most: connecting with customers.</p>
   </div>
 </section>
 
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+<section class="cta fade-in">
+  <h2>Join the future of contact center management</h2>
+  <p>Discover the difference a powerful, intuitive platform can make for your business.</p>
+  <a href="/orders.html">Get Started Today</a>
+</section>
+
+<footer>
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Fade-in animation
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -96,7 +130,7 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
       observer.unobserve(entry.target);
     }
   });
-},{threshold:0.1});
+}, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 </body>

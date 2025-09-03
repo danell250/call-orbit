@@ -10,21 +10,66 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-  header.hero { margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-  header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
-  header.hero p{margin-bottom:2rem;font-size:1.2rem;}
+/* Hero */
+header.hero {
+  margin:0 auto;
+  padding:40px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
+header.hero p{margin-bottom:2rem;font-size:1.2rem;}
 
-  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:40px 20px; }
-  .feature { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; }
-  .feature:hover { transform:translateY(-5px) }
+/* Features Card Hover Animation */
+.features-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.5rem;
+  margin:20px 0;
+  padding:0 10px;
+}
+.feature {
+  background:#fff;
+  padding:20px;
+  border-radius:1rem;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor:pointer;
+}
+.feature:hover {
+  transform:translateY(-8px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.1);
+  background:#f0f9ff;
+}
+.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
+.feature p { color:#374151; }
 
-  .stats { display:flex; justify-content:center; gap:3rem; margin:50px 0; text-align:center; }
-  .stats .stat h2 { font-size:3rem; color:#3b82f6; }
-  .stats .stat p { font-size:1.2rem; color:#1f2937; }
-
-  .cta { text-align:center; margin:60px 20px; background:#10b981; color:#fff; padding:40px 20px; border-radius:10px; }
-  .cta a { display:inline-block; margin-top:20px; padding:12px 24px; background:#fff; color:#10b981; font-weight:700; border-radius:999px; text-decoration:none; transition:filter 0.2s;}
-  .cta a:hover { filter:brightness(0.9);}
+/* CTA Section */
+.cta {
+  background:#10b981;
+  color:#fff;
+  padding:40px 20px;
+  text-align:center;
+  border-radius:10px;
+  margin:40px 10px;
+}
+.cta h2 { margin-bottom:1rem; font-size:2rem; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; }
+.cta a {
+  display:inline-block;
+  background:#fff;
+  color:#10b981;
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  transition:filter 0.2s;
+}
+.cta a:hover { filter:brightness(0.95); }
 </style>
 </head>
 <body>
@@ -38,7 +83,6 @@
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform" class="active-page">Platform</a>
-    <a href="/orders" class="navbar-buy">🛒 Buy Numbers</a>
   </div>
 </nav>
 
@@ -46,22 +90,6 @@
   <h1>CallOrbit Platform</h1>
   <p>Centralize dashboards, portals, and analytics with seamless integrations.</p>
 </header>
-
-<!-- Stats Section -->
-<section class="stats fade-in">
-  <div class="stat">
-    <h2 class="counter" data-target="100">0</h2>
-    <p>Contact Centers Managed</p>
-  </div>
-  <div class="stat">
-    <h2 class="counter" data-target="5000">0</h2>
-    <p>Agents Connected</p>
-  </div>
-  <div class="stat">
-    <h2 class="counter" data-target="99.9">0</h2>
-    <p>Uptime Guarantee</p>
-  </div>
-</section>
 
 <section class="features features-grid fade-in">
   <div class="feature">
@@ -78,21 +106,18 @@
   </div>
 </section>
 
-<!-- CTA Section -->
 <section class="cta fade-in">
-  <h2>Ready to Transform Your Contact Centers?</h2>
-  <p>Start using CallOrbit Platform today and manage everything from one dashboard.</p>
-  <a href="/orders">Get Started</a>
+  <h2>Ready to streamline your contact center?</h2>
+  <p>Start your journey with CallOrbit today and experience seamless management.</p>
+  <a href="/orders.html">Get Started</a>
 </section>
 
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+<footer>
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Fade-in observer
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -103,35 +128,6 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
   });
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
-
-// Stats Counter
-function animateCounters() {
-  const counters = document.querySelectorAll('.counter');
-  counters.forEach(counter => {
-    const target = parseFloat(counter.getAttribute('data-target'));
-    let count = 0;
-    const increment = target / 200;
-    const updateCounter = () => {
-      count += increment;
-      if(count < target){
-        counter.textContent = target % 1 !== 0 ? count.toFixed(1) : Math.floor(count);
-        requestAnimationFrame(updateCounter);
-      } else { counter.textContent = target; }
-    };
-    updateCounter();
-  });
-}
-
-const statsSection = document.querySelector('.stats');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      animateCounters();
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-if(statsSection) observer.observe(statsSection);
 </script>
 </body>
 </html>
