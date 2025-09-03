@@ -1,158 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Buy Numbers & Plans</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
-  <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
-  <style>
-    main{max-width:1120px;margin:20px auto;padding:0}
-    header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
-    header.hero h1{margin-bottom:1rem}
-    header.hero p{margin-bottom:2rem}
-    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
-    .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
-    .plan:hover{transform:translateY(-5px)}
-    .plan h3{color:#1e3a8a;margin-bottom:1rem}
-    .plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
-    .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
-    .forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
-    .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
-    .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
-    .buy-now:hover{filter:brightness(0.95)}
-    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
-    .cart-wrapper.active{right:0;}
-    .cart h2{margin-bottom:1rem;color:#1e3a8a}
-    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
-    #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Buy Numbers & Plans</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
+<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
+<style>
+main{max-width:1120px;margin:20px auto;padding:0}
+header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
+header.hero h1{margin-bottom:1rem}
+header.hero p{margin-bottom:1rem}
+.customer-notice{margin:15px auto;text-align:center;font-size:1.1rem;color:#1e3a8a}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
+.plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
+.plan:hover{transform:translateY(-5px)}
+.plan h3{color:#1e3a8a;margin-bottom:1rem}
+.plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
+.forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
+.forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
+.forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
+.buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
+.buy-now:hover{filter:brightness(0.95)}
+.cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
+.cart-wrapper.active{right:0;}
+.cart h2{margin-bottom:1rem;color:#1e3a8a}
+.cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
+#cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+</style>
 </head>
 <body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+  </div>
+</nav>
+
+<header class="hero fade-in">
+  <h1>Get Started with CallOrbit</h1>
+  <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.</p>
+</header>
+
+<p class="customer-notice">Please choose a country and number type to see available packages.</p>
+
+<main>
+  <div class="forwarding">
     <div>
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
-    </div>
-  </nav>
-
-  <header class="hero fade-in">
-    <h1>Get Started with CallOrbit</h1>
-    <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.</p>
-  </header>
-
-  <main>
-    <div class="forwarding">
-      <div>
-        <label for="country">Select Country</label>
-        <select id="country">
-          <option value="US">United States</option>
-          <option value="ZA">South Africa</option>
-          <option value="GB">United Kingdom</option>
-          <option value="IN">India</option>
-          <option value="AU">Australia</option>
-          <option value="CA">Canada</option>
-          <option value="DE">Germany</option>
-          <option value="FR">France</option>
-          <option value="JP">Japan</option>
-          <option value="BR">Brazil</option>
-          <option value="MX">Mexico</option>
-          <option value="IT">Italy</option>
-          <option value="ES">Spain</option>
-          <option value="KR">South Korea</option>
-          <option value="SG">Singapore</option>
-          <option value="NL">Netherlands</option>
-          <option value="CH">Switzerland</option>
-          <option value="SE">Sweden</option>
-          <option value="BE">Belgium</option>
-          <option value="GR">Greece</option>
-          <option value="PT">Portugal</option>
-          <option value="IE">Ireland</option>
-          <option value="IL">Israel</option>
-          <option value="PL">Poland</option>
-          <option value="RO">Romania</option>
-          <option value="HU">Hungary</option>
-          <option value="SK">Slovakia</option>
-          <option value="CZ">Czech Republic</option>
-          <option value="EE">Estonia</option>
-          <option value="LV">Latvia</option>
-          <option value="LT">Lithuania</option>
-          <option value="LU">Luxembourg</option>
-          <option value="MO">Macau</option>
-          <option value="MY">Malaysia</option>
-          <option value="MT">Malta</option>
-          <option value="MC">Monaco</option>
-          <option value="AN">Netherlands Antilles</option>
-          <option value="NZ">New Zealand</option>
-          <option value="NO">Norway</option>
-          <option value="PA">Panama</option>
-          <option value="PE">Peru</option>
-          <option value="PH">Philippines</option>
-          <option value="TW">Taiwan</option>
-          <option value="TH">Thailand</option>
-          <option value="TT">Trinidad & Tobago</option>
-          <option value="TR">Turkey</option>
-          <option value="UY">Uruguay</option>
-          <option value="VE">Venezuela</option>
-          <option value="VN">Vietnam</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="number-type">Number Type</label>
-        <select id="number-type">
-          <option value="tollFree">Toll-Free</option>
-          <option value="local">Local</option>
-          <option value="national">National</option>
-        </select>
-      </div>
-
-      <div id="area-container" style="display:none">
-        <label for="area">Select Area</label>
-        <select id="area"></select>
-      </div>
-
-      <div style="grid-column:1/-1">
-        <label for="forward">Forwarding Number / Device</label>
-        <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
-      </div>
+      <label for="country">Select Country</label>
+      <select id="country">
+        <option value="US">United States</option>
+        <option value="ZA">South Africa</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+        <option value="AU">Australia</option>
+        <option value="CA">Canada</option>
+        <option value="DE">Germany</option>
+        <option value="FR">France</option>
+        <option value="JP">Japan</option>
+        <option value="BR">Brazil</option>
+        <option value="MX">Mexico</option>
+        <option value="IT">Italy</option>
+        <option value="ES">Spain</option>
+        <option value="KR">South Korea</option>
+        <option value="SG">Singapore</option>
+        <option value="NL">Netherlands</option>
+        <option value="CH">Switzerland</option>
+        <option value="SE">Sweden</option>
+        <option value="BE">Belgium</option>
+        <option value="GR">Greece</option>
+        <option value="PT">Portugal</option>
+        <option value="IE">Ireland</option>
+        <option value="IL">Israel</option>
+        <option value="PL">Poland</option>
+        <option value="RO">Romania</option>
+        <option value="HU">Hungary</option>
+        <option value="SK">Slovakia</option>
+        <option value="CZ">Czech Republic</option>
+        <option value="EE">Estonia</option>
+        <option value="LV">Latvia</option>
+        <option value="LT">Lithuania</option>
+        <option value="LU">Luxembourg</option>
+        <option value="MO">Macau</option>
+        <option value="MY">Malaysia</option>
+        <option value="MT">Malta</option>
+        <option value="MC">Monaco</option>
+        <option value="AN">Netherlands Antilles</option>
+        <option value="NZ">New Zealand</option>
+        <option value="NO">Norway</option>
+        <option value="PA">Panama</option>
+        <option value="PE">Peru</option>
+        <option value="PH">Philippines</option>
+        <option value="TW">Taiwan</option>
+        <option value="TH">Thailand</option>
+        <option value="TT">Trinidad & Tobago</option>
+        <option value="TR">Turkey</option>
+        <option value="UY">Uruguay</option>
+        <option value="VE">Venezuela</option>
+        <option value="VN">Vietnam</option>
+      </select>
     </div>
 
-    <div class="plans-grid" id="plans-container"></div>
-  </main>
+    <div>
+      <label for="number-type">Number Type</label>
+      <select id="number-type">
+        <option value="tollFree">Toll-Free</option>
+        <option value="local">Local</option>
+        <option value="national">National</option>
+      </select>
+    </div>
 
-  <div class="cart-wrapper" id="cart-wrapper">
-    <div class="cart">
-      <h2>Your Cart</h2>
-      <div id="cart-items"></div>
-      <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-        <span>Total:</span><span id="cart-total">$0.00</span>
-      </div>
-      <div id="paypal-button-container" style="margin-top:15px;"></div>
+    <div id="area-container" style="display:none">
+      <label for="area">Select Area</label>
+      <select id="area"></select>
+    </div>
+
+    <div style="grid-column:1/-1">
+      <label for="forward">Forwarding Number / Device</label>
+      <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
     </div>
   </div>
 
-  <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
+  <div class="plans-grid" id="plans-container"></div>
+</main>
 
-  <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+<div class="cart-wrapper" id="cart-wrapper">
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
+      <span>Total:</span><span id="cart-total">$0.00</span>
+    </div>
+    <div id="paypal-button-container" style="margin-top:15px;"></div>
+  </div>
+</div>
+
+<button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
+
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const profitMargin = 1.25; // 25% profit
+const profitMargin = 1.25;
 const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
 
-// Hardcoded Local Areas
 const localAreas = {
   US:["New York","Los Angeles","Chicago","Houston","Miami"],
   ZA:["Johannesburg","Cape Town","Durban","Pretoria"],
@@ -205,101 +207,81 @@ const localAreas = {
   VN:["Hanoi","Ho Chi Minh City"]
 };
 
-// Load rates from JSON
-let countryData = {};
-fetch('rates.json')
-  .then(res => res.json())
-  .then(data => {
-    countryData = data;
-    generatePlans();
-  })
-  .catch(err => console.error("Error loading rates.json:", err));
-
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const plansContainer = document.getElementById('plans-container');
 const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
 const cartWrapper = document.getElementById('cart-wrapper');
 const cartButton = document.getElementById('cart-button');
-let cart = [];
 
-// Load shared cart from localStorage
-window.addEventListener('DOMContentLoaded', () => {
-  const savedCart = localStorage.getItem('callOrbitCart');
-  if(savedCart){
-    cart = JSON.parse(savedCart);
-    updateCart();
-  }
-});
+let countryData = {};
+fetch('rates.json').then(r=>r.json()).then(d=>{countryData=d; generatePlans();}).catch(e=>console.error(e));
 
-function generatePlans() {
+function generatePlans(){
   const country = document.getElementById('country').value;
   const numberType = document.getElementById('number-type').value;
-
-  // Show area dropdown only for Local
   const areaContainer = document.getElementById('area-container');
   const areaSelect = document.getElementById('area');
-  if(numberType === 'local'){
+
+  if(numberType==='local'){
     areaContainer.style.display='block';
-    areaSelect.innerHTML = '';
-    localAreas[country].forEach(a=>{
-      const opt = document.createElement('option');
-      opt.value = a; opt.textContent = a;
+    areaSelect.innerHTML='';
+    (localAreas[country]||[]).forEach(a=>{
+      const opt=document.createElement('option'); opt.value=a; opt.textContent=a;
       areaSelect.appendChild(opt);
     });
-  } else {
-    areaContainer.style.display='none';
-  }
+  } else { areaContainer.style.display='none'; }
 
-  plansContainer.innerHTML = '';
+  plansContainer.innerHTML='';
   Object.keys(packages).forEach(pkg=>{
-    let mins = packages[pkg];
-    let rate = countryData[country][numberType];
-    let price = +(rate * mins * profitMargin).toFixed(2);
-    let overage = +(rate * profitMargin).toFixed(3);
+    const mins = packages[pkg];
+    const rate = countryData[country]?.[numberType]||0;
+    const price = +(rate*mins*profitMargin).toFixed(2);
+    const overage = +(rate*profitMargin).toFixed(3);
+
     const div = document.createElement('div');
-    div.className = 'plan';
-    div.innerHTML = `<h3>${pkg}</h3>
-                     <div class="price">$${price}</div>
-                     <div class="minutes">${mins} Minutes</div>
-                     <div class="overage">Overage: $${overage}/min</div>
-                     <button class="buy-now">Add to Cart</button>`;
+    div.className='plan';
+    div.innerHTML=`<h3>${pkg}</h3>
+                   <div class="price">$${price}</div>
+                   <div class="minutes">${mins} Minutes</div>
+                   <div class="overage">Overage: $${overage}/min</div>
+                   <button class="buy-now">Add to Cart</button>`;
     div.querySelector('button').addEventListener('click',()=>{
       const forward = document.getElementById('forward').value || '';
       const area = numberType==='local'?areaSelect.value:'';
       cart.push({plan:pkg,country,numberType,area,price,forward});
       updateCart();
+      localStorage.setItem('cart',JSON.stringify(cart));
     });
     plansContainer.appendChild(div);
   });
 }
 
 function updateCart(){
-  cartItemsEl.innerHTML='';
-  let total=0;
+  cartItemsEl.innerHTML=''; let total=0;
   cart.forEach((item,i)=>{
     total+=item.price;
-    const div = document.createElement('div');
-    div.className='cart-item';
-    div.innerHTML = `<span>${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})</span>
-                     <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+    const div=document.createElement('div'); div.className='cart-item';
+    div.innerHTML=`<span>${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})</span>
+                   <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
     cartItemsEl.appendChild(div);
   });
   document.querySelectorAll('.remove-btn').forEach(btn=>{
     btn.addEventListener('click',e=>{
       cart.splice(e.target.dataset.index,1);
       updateCart();
+      localStorage.setItem('cart',JSON.stringify(cart));
     });
   });
-  cartTotalEl.textContent = `$${total.toFixed(2)}`;
-  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
-
-  // Save shared cart
-  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
+  cartTotalEl.textContent=`$${total.toFixed(2)}`;
+  cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
 }
 
 cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
 document.getElementById('country').addEventListener('change',generatePlans);
 document.getElementById('number-type').addEventListener('change',generatePlans);
+
+updateCart();
 
 paypal.Buttons({
   createOrder:(data,actions)=>{
@@ -309,12 +291,10 @@ paypal.Buttons({
   onApprove:(data,actions)=>{
     return actions.order.capture().then(details=>{
       alert('Transaction completed by '+details.payer.name.given_name);
-      cart=[];
-      updateCart();
+      cart=[]; updateCart(); localStorage.setItem('cart',JSON.stringify(cart));
     });
   }
 }).render('#paypal-button-container');
-
 </script>
 </body>
 </html>
