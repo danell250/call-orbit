@@ -62,7 +62,7 @@
 
 </section>
 
-<!-- Cart copied from orders.html -->
+<!-- Cart copied exactly from orders.html -->
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
     <h2>Your Cart</h2>
@@ -83,7 +83,7 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Fade-in (no change)
+// fade-in logic unchanged
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -95,54 +95,57 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Shared Cart from orders.html
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const cartWrapperEl = document.getElementById('cart-wrapper');
-const cartItemsEl = document.getElementById('cart-items');
+// Shared cart from orders.html (unchanged)
+const cartWrapper = document.getElementById('cart-wrapper');
+const cartItems = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
-const cartButtonEl = document.getElementById('cart-button');
-const paypalContainerEl = document.getElementById('paypal-button-container');
+const cartButton = document.getElementById('cart-button');
+const paypalContainer = document.getElementById('paypal-button-container');
 
-function addToCart(planName, price){
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(country,plan,data){
   const forward = '—';
-  cart.push({plan: planName, price, forward});
+  cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
-  cartWrapperEl.classList.add('active');
+  updateCartButton();
+  cartWrapper.classList.add('active'); 
 }
 
 function removeFromCart(index){
   cart.splice(index,1);
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
+  updateCartButton();
 }
 
 function renderCart(){
-  cartItemsEl.innerHTML='';
+  cartItems.innerHTML='';
   let total=0;
   cart.forEach((item,index)=>{
     total+=item.price;
     const div=document.createElement('div');
     div.className='cart-item';
-    div.innerHTML=`<span>${item.plan}</span>
+    div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span>
       <span>$${item.price.toFixed(2)}
         <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
       </span>`;
-    cartItemsEl.appendChild(div);
+    cartItems.appendChild(div);
   });
   cartTotalEl.textContent=`$${total.toFixed(2)}`;
   renderPayPal();
-  updateCartButton();
 }
 
 function updateCartButton(){
   const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  cartButtonEl.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-// PayPal
+cartButton.addEventListener('click',()=>{cartWrapper.classList.toggle('active');});
+
 function renderPayPal(){
-  paypalContainerEl.innerHTML='';
+  paypalContainer.innerHTML='';
   if(cart.length===0) return;
   const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
   paypal.Buttons({
@@ -156,16 +159,13 @@ function renderPayPal(){
         localStorage.setItem('cart', JSON.stringify(cart));
         renderCart();
         updateCartButton();
-        cartWrapperEl.classList.remove('active');
+        cartWrapper.classList.remove('active'); 
       });
     }
   }).render('#paypal-button-container');
 }
 
-// Toggle cart
-cartButtonEl.addEventListener('click',()=>{cartWrapperEl.classList.toggle('active');});
-
-// Load cart on page load
+// initialize cart on page load
 renderCart();
 updateCartButton();
 </script>
