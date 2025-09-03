@@ -1,84 +1,160 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Coverage</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Coverage</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
+<style>
+/* Hero */
+header.hero {
+  margin:0 auto;
+  padding:50px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
+header.hero p { margin-bottom:2rem; font-size:1.2rem; }
+
+/* Features / Coverage Cards with Gradient Background */
+.features-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.5rem;
+  margin:30px 0;
+  padding:20px 10px;
+  background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius:10px;
+}
+.feature {
+  background:#fff;
+  padding:25px 20px;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor:pointer;
+}
+.feature:hover {
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+  background:#f0f9ff;
+}
+.feature h3 { color:#1e3a8a; margin-bottom:1rem; font-size:1.3rem; }
+.feature p { color:#374151; font-size:1rem; }
+
+/* CTA Section (matches features style) */
+.cta {
+  background:#fff;
+  padding:40px 20px;
+  text-align:center;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  margin:40px 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cta:hover {
+  transform:translateY(-5px) scale(1.01);
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
+.cta a {
+  display:inline-block;
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  transition:filter 0.2s, transform 0.2s;
+}
+.cta a:hover { 
+  filter:brightness(0.95);
+  transform:scale(1.05);
+}
+</style>
 </head>
 <body>
-  <nav>
-    <div><a href="/"><strong>CallOrbit</strong></a></div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/coverage" class="active-page">Coverage</a>
-      <a href="/platform">Platform</a>
-    </div>
-  </nav>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/coverage" class="active-page">Coverage</a>
+    <a href="/platform">Platform</a>
+  </div>
+</nav>
 
-  <header class="hero fade-in">
-    <h1>Global Coverage</h1>
-    <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
-  </header>
+<header class="hero fade-in">
+  <h1>Global Coverage</h1>
+  <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
+</header>
 
-  <section class="features features-grid fade-in">
-    <div class="feature">
-      <h3>North America 🇺🇸🇨🇦</h3>
-      <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
-    </div>
-    <div class="feature">
-      <h3>Europe 🇬🇧🇩🇪🇫🇷</h3>
-      <p>Coverage in major European cities with local numbers and full support for EU contact centers.</p>
-    </div>
-    <div class="feature">
-      <h3>Asia-Pacific 🇯🇵🇦🇺🇸🇬</h3>
-      <p>Seamless connectivity in APAC regions, helping your team reach customers efficiently and reliably.</p>
-    </div>
-    <div class="feature">
-      <h3>Latin America 🇧🇷🇲🇽🇦🇷</h3>
-      <p>Local numbers and support for growing your reach across LATAM countries.</p>
-    </div>
-    <div class="feature">
-      <h3>Africa 🇿🇦🇳🇬🇪🇬</h3>
-      <p>Expanding coverage to major African hubs with robust local telephony solutions.</p>
-    </div>
-    <div class="feature">
-      <h3>Middle East 🇦🇪🇸🇦🇶🇦</h3>
-      <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
-    </div>
-  </section>
+<section class="features features-grid fade-in">
+  <div class="feature">
+    <h3>USA 🇺🇸🇨🇦</h3>
+    <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
+  </div>
+  <div class="feature">
+    <h3>Europe 🇬🇧🇩🇪🇫🇷</h3>
+    <p>Coverage in major European cities with local numbers and full support for EU contact centers.</p>
+  </div>
+  <div class="feature">
+    <h3>Asia-Pacific 🇯🇵🇦🇺🇸🇬</h3>
+    <p>Seamless connectivity in APAC regions, helping your team reach customers efficiently and reliably.</p>
+  </div>
+  <div class="feature">
+    <h3>Latin America 🇧🇷🇲🇽🇦🇷</h3>
+    <p>Local numbers and support for growing your reach across LATAM countries.</p>
+  </div>
+  <div class="feature">
+    <h3>Africa 🇿🇦🇳🇬🇪🇬</h3>
+    <p>Expanding coverage to major African hubs with robust local telephony solutions.</p>
+  </div>
+  <div class="feature">
+    <h3>Middle East 🇦🇪🇸🇦🇶🇦</h3>
+    <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
+  </div>
+</section>
 
-  <section class="fade-in">
-    <p style="text-align:center; font-style:italic; margin-top:2rem;">
-      We’re continuously expanding our regions to serve you better.
-    </p>
-  </section>
+<section class="fade-in" style="text-align:center; margin-top:2rem;">
+  <p style="font-style:italic;">We’re continuously expanding our regions to serve you better.</p>
+</section>
 
-  <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  </footer>
+<!-- CTA Section -->
+<section class="cta fade-in">
+  <h2>Get Your Numbers Anywhere</h2>
+  <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
+  <a href="/orders.html">Get Started Today</a>
+</section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
 
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
 </body>
 </html>
