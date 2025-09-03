@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Buy Numbers & Plans</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'> <circle cx='32' cy='32' r='30' fill='%233b82f6'/> </svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
   <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
   <style>
     main{max-width:1120px;margin:20px auto;padding:0}
@@ -17,7 +17,7 @@
     .plan:hover{transform:translateY(-5px)}
     .plan h3{color:#1e3a8a;margin-bottom:1rem}
     .plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
-    .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
+    .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
     .forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
     .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
     .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
@@ -46,7 +46,7 @@
 
   <header class="hero fade-in">
     <h1>Get Started with CallOrbit</h1>
-    <p>Select your plan, country, number type, and forwarding number to start using your CallOrbit portal.</p>
+    <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.</p>
   </header>
 
   <main>
@@ -105,14 +105,21 @@
           <option value="VN">Vietnam</option>
         </select>
       </div>
+
       <div>
         <label for="number-type">Number Type</label>
         <select id="number-type">
           <option value="tollFree">Toll-Free</option>
+          <option value="local">Local</option>
           <option value="national">National</option>
-          <option value="did">DID</option>
         </select>
       </div>
+
+      <div id="area-container" style="display:none">
+        <label for="area">Select Area</label>
+        <select id="area"></select>
+      </div>
+
       <div style="grid-column:1/-1">
         <label for="forward">Forwarding Number / Device</label>
         <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
@@ -150,117 +157,205 @@
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    const tollFreeRates = {
-      US: 0.0706, ZA: 0.4843, GB: 0.1167, IN: 0.3078,
-      AU: 0.0706, CA: 0.0706, DE: 0.1032, FR: 0.1427,
-      JP: 0.1255, BR: 0.2098, MX: 0.2503, IT: 0.0680,
-      ES: 0.2167, KR: 0.3275, SG: 0.0533, NL: 0.1100,
-      CH: 0.0667, SE: 0.2085, BE: 0.1475, GR: 0.1170,
-      PT: 0.1552, IE: 0.0708, IL: 0.1058, PL: 0.0673,
-      RO: 0.2037, HU: 0.1032, SK: 0.1433, CZ: 0.2567,
-      EE: 0.0617, LV: 0.2847, LT: 1.0108, LU: 0.0708,
-      MO: 0.1804, MY: 0.1250, MT: 0.0917, MC: 0.0961,
-      AN: 0.3960, NZ: 0.0533, NO: 0.1902, PA: 0.1216,
-      PE: 0.4059, PH: 0.3992, TW: 0.2294, TH: 0.2294,
-      TT: 0.1333, TR: 0.2286, UY: 0.1042, VE: 0.3275, VN: 0.4647
-    };
+const profitMargin = 1.25; // 25% profit
+const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
 
-    const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
-    const profitMargin = 1.2;
+// Hardcoded Local Areas
+const localAreas = {
+  US:["New York","Los Angeles","Chicago","Houston","Miami"],
+  ZA:["Johannesburg","Cape Town","Durban","Pretoria"],
+  GB:["London","Manchester","Birmingham","Liverpool"],
+  IN:["Mumbai","Delhi","Bangalore","Chennai"],
+  AU:["Sydney","Melbourne","Brisbane"],
+  CA:["Toronto","Vancouver","Montreal"],
+  DE:["Berlin","Munich","Hamburg"],
+  FR:["Paris","Lyon","Marseille"],
+  JP:["Tokyo","Osaka","Nagoya"],
+  BR:["Sao Paulo","Rio de Janeiro","Brasilia"],
+  MX:["Mexico City","Guadalajara","Monterrey"],
+  IT:["Rome","Milan","Naples"],
+  ES:["Madrid","Barcelona","Valencia"],
+  KR:["Seoul","Busan"],
+  SG:["Singapore"],
+  NL:["Amsterdam","Rotterdam"],
+  CH:["Zurich","Geneva"],
+  SE:["Stockholm","Gothenburg"],
+  BE:["Brussels","Antwerp"],
+  GR:["Athens","Thessaloniki"],
+  PT:["Lisbon","Porto"],
+  IE:["Dublin","Cork"],
+  IL:["Tel Aviv","Jerusalem"],
+  PL:["Warsaw","Krakow"],
+  RO:["Bucharest","Cluj"],
+  HU:["Budapest","Debrecen"],
+  SK:["Bratislava","Kosice"],
+  CZ:["Prague","Brno"],
+  EE:["Tallinn"],
+  LV:["Riga"],
+  LT:["Vilnius"],
+  LU:["Luxembourg"],
+  MO:["Macau"],
+  MY:["Kuala Lumpur","Penang"],
+  MT:["Valletta"],
+  MC:["Monaco"],
+  AN:["Willemstad"],
+  NZ:["Auckland","Wellington"],
+  NO:["Oslo","Bergen"],
+  PA:["Panama City"],
+  PE:["Lima"],
+  PH:["Manila"],
+  TW:["Taipei"],
+  TH:["Bangkok"],
+  TT:["Port of Spain"],
+  TR:["Istanbul","Ankara"],
+  UY:["Montevideo"],
+  VE:["Caracas"],
+  VN:["Hanoi","Ho Chi Minh City"]
+};
 
-    const countryData = {};
-    Object.keys(tollFreeRates).forEach(code => {
-      const base = tollFreeRates[code];
-      countryData[code] = {
-        tollFree: {},
-        national: { Basic:{price:18,minutes:100,overage:0.35}, Plus:{price:28,minutes:200,overage:0.33}, Pro:{price:45,minutes:300,overage:0.31}, Max:{price:75,minutes:500,overage:0.29} },
-        did: { Basic:{price:15,minutes:90,overage:0.36}, Plus:{price:25,minutes:150,overage:0.34}, Pro:{price:40,minutes:250,overage:0.32}, Max:{price:70,minutes:400,overage:0.30} }
-      };
-      Object.keys(packages).forEach(pkg => {
-        const mins = packages[pkg];
-        countryData[code].tollFree[pkg] = {
-          minutes: mins,
-          price: +(base*mins*profitMargin).toFixed(2),
-          overage: +(base*profitMargin).toFixed(3)
-        };
-      });
+// Base Rates: Toll-Free, Local, National (USD/min)
+const countryData = {
+  US:{tollFree:0.0706,local:0.36,national:0.35},
+  ZA:{tollFree:0.4843,local:0.52,national:0.50},
+  GB:{tollFree:0.1167,local:0.41,national:0.40},
+  IN:{tollFree:0.3078,local:0.34,national:0.33},
+  AU:{tollFree:0.0706,local:0.33,national:0.32},
+  CA:{tollFree:0.0706,local:0.32,national:0.31},
+  DE:{tollFree:0.1032,local:0.31,national:0.30},
+  FR:{tollFree:0.1427,local:0.29,national:0.28},
+  JP:{tollFree:0.1255,local:0.33,national:0.32},
+  BR:{tollFree:0.2098,local:0.31,national:0.30},
+  MX:{tollFree:0.2503,local:0.30,national:0.29},
+  IT:{tollFree:0.0680,local:0.28,national:0.27},
+  ES:{tollFree:0.2167,local:0.29,national:0.28},
+  KR:{tollFree:0.3275,local:0.34,national:0.33},
+  SG:{tollFree:0.0533,local:0.26,national:0.25},
+  NL:{tollFree:0.1100,local:0.28,national:0.27},
+  CH:{tollFree:0.0667,local:0.27,national:0.26},
+  SE:{tollFree:0.2085,local:0.29,national:0.28},
+  BE:{tollFree:0.1475,local:0.28,national:0.27},
+  GR:{tollFree:0.1170,local:0.27,national:0.26},
+  PT:{tollFree:0.1552,local:0.28,national:0.27},
+  IE:{tollFree:0.0708,local:0.26,national:0.25},
+  IL:{tollFree:0.1058,local:0.28,national:0.27},
+  PL:{tollFree:0.0673,local:0.27,national:0.26},
+  RO:{tollFree:0.2037,local:0.28,national:0.27},
+  HU:{tollFree:0.1032,local:0.27,national:0.26},
+  SK:{tollFree:0.1433,local:0.27,national:0.26},
+  CZ:{tollFree:0.2567,local:0.28,national:0.27},
+  EE:{tollFree:0.0617,local:0.26,national:0.25},
+  LV:{tollFree:0.2847,local:0.28,national:0.27},
+  LT:{tollFree:1.0108,local:0.29,national:0.28},
+  LU:{tollFree:0.0708,local:0.26,national:0.25},
+  MO:{tollFree:0.1804,local:0.28,national:0.27},
+  MY:{tollFree:0.1250,local:0.27,national:0.26},
+  MT:{tollFree:0.0917,local:0.26,national:0.25},
+  MC:{tollFree:0.0961,local:0.26,national:0.25},
+  AN:{tollFree:0.3960,local:0.29,national:0.28},
+  NZ:{tollFree:0.0533,local:0.26,national:0.25},
+  NO:{tollFree:0.1902,local:0.28,national:0.27},
+  PA:{tollFree:0.1216,local:0.27,national:0.26},
+  PE:{tollFree:0.4059,local:0.29,national:0.28},
+  PH:{tollFree:0.3992,local:0.29,national:0.28},
+  TW:{tollFree:0.2294,local:0.28,national:0.27},
+  TH:{tollFree:0.2294,local:0.28,national:0.27},
+  TT:{tollFree:0.1333,local:0.27,national:0.26},
+  TR:{tollFree:0.2286,local:0.28,national:0.27},
+  UY:{tollFree:0.1042,local:0.27,national:0.26},
+  VE:{tollFree:0.3275,local:0.28,national:0.27},
+  VN:{tollFree:0.4647,local:0.29,national:0.28}
+};
+
+function generatePlans() {
+  const country = document.getElementById('country').value;
+  const numberType = document.getElementById('number-type').value;
+  const plansContainer = document.getElementById('plans-container');
+  plansContainer.innerHTML = '';
+
+  // Show area dropdown only for Local
+  const areaContainer = document.getElementById('area-container');
+  const areaSelect = document.getElementById('area');
+  if(numberType === 'local'){
+    areaContainer.style.display='block';
+    areaSelect.innerHTML = '';
+    localAreas[country].forEach(a=>{
+      const opt = document.createElement('option');
+      opt.value=a; opt.textContent=a;
+      areaSelect.appendChild(opt);
     });
+  } else { areaContainer.style.display='none'; }
 
-    const plansContainer = document.getElementById('plans-container');
-    const cartButton = document.getElementById('cart-button');
-    const cartWrapper = document.getElementById('cart-wrapper');
-    const cartItemsEl = document.getElementById('cart-items');
-    const cartTotalEl = document.getElementById('cart-total');
-    let cart = [];
+  Object.keys(packages).forEach(pkg=>{
+    let mins = packages[pkg];
+    let rate = countryData[country][numberType];
+    let price = +(rate*mins*profitMargin).toFixed(2);
+    let overage = +(rate*profitMargin).toFixed(3);
+    const div = document.createElement('div');
+    div.className='plan';
+    div.innerHTML=`<h3>${pkg}</h3>
+                   <div class="price">$${price}</div>
+                   <div class="minutes">${mins} Minutes</div>
+                   <div class="overage">Overage: $${overage}/min</div>
+                   <button class="buy-now">Buy Now</button>`;
+    div.querySelector('button').addEventListener('click',()=>{
+      const forward = document.getElementById('forward').value || '';
+      const area = numberType==='local'?areaSelect.value:'';
+      cart.push({plan:pkg,country,numberType,area,price,forward});
+      updateCart();
+    });
+    plansContainer.appendChild(div);
+  });
+}
 
-    function renderPlans() {
-      plansContainer.innerHTML = '';
-      const country = document.getElementById('country').value || 'US';
-      const numberType = document.getElementById('number-type').value || 'tollFree';
-      const plans = countryData[country][numberType];
-      Object.keys(plans).forEach(name => {
-        const plan = plans[name];
-        const div = document.createElement('div');
-        div.className = 'plan';
-        div.innerHTML = `
-          <h3>${name}</h3>
-          <div class="price">$${plan.price.toFixed(2)}</div>
-          <div class="minutes">${plan.minutes} Minutes</div>
-          <div class="overage">Overage: $${plan.overage.toFixed(3)}/min</div>
-          <button class="buy-now">Buy Now</button>
-        `;
-        div.querySelector('button').addEventListener('click', () => {
-          const forward = document.getElementById('forward').value || '';
-          cart.push({ plan: name, country, numberType, price: plan.price, forward });
-          updateCart();
-        });
-        plansContainer.appendChild(div);
-      });
-    }
+let cart=[];
+const cartItemsEl=document.getElementById('cart-items');
+const cartTotalEl=document.getElementById('cart-total');
+const cartWrapper=document.getElementById('cart-wrapper');
+const cartButton=document.getElementById('cart-button');
 
-    function updateCart() {
-      cartItemsEl.innerHTML = '';
-      let total = 0;
-      cart.forEach((item,i)=>{
-        total += item.price;
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        div.innerHTML = `<span>${item.plan} (${item.country} - ${item.numberType})</span>
-                         <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
-        cartItemsEl.appendChild(div);
-      });
-      document.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          cart.splice(e.target.dataset.index,1);
-          updateCart();
-        });
-      });
-      cartTotalEl.textContent = `$${total.toFixed(2)}`;
-      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
-    }
+function updateCart(){
+  cartItemsEl.innerHTML='';
+  let total=0;
+  cart.forEach((item,i)=>{
+    total+=item.price;
+    const div=document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`<span>${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})</span>
+                   <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+    cartItemsEl.appendChild(div);
+  });
+  document.querySelectorAll('.remove-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      cart.splice(e.target.dataset.index,1);
+      updateCart();
+    });
+  });
+  cartTotalEl.textContent=`$${total.toFixed(2)}`;
+  cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
+}
 
-    cartButton.addEventListener('click', () => cartWrapper.classList.toggle('active'));
-    document.getElementById('country').addEventListener('change', renderPlans);
-    document.getElementById('number-type').addEventListener('change', renderPlans);
+cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
+document.getElementById('country').addEventListener('change',generatePlans);
+document.getElementById('number-type').addEventListener('change',generatePlans);
 
-    renderPlans();
+generatePlans();
 
-    paypal.Buttons({
-      createOrder: (data, actions) => {
-        const total = cart.reduce((sum, p) => sum + p.price, 0);
-        return actions.order.create({ purchase_units:[{ amount:{ value:total.toFixed(2) } }] });
-      },
-      onApprove: (data, actions) => {
-        return actions.order.capture().then(details => {
-          alert('Transaction completed by ' + details.payer.name.given_name);
-          cart = [];
-          updateCart();
-        });
-      }
-    }).render('#paypal-button-container');
-  </script>
+paypal.Buttons({
+  createOrder:(data,actions)=>{
+    const total=cart.reduce((sum,p)=>sum+p.price,0);
+    return actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]});
+  },
+  onApprove:(data,actions)=>{
+    return actions.order.capture().then(details=>{
+      alert('Transaction completed by '+details.payer.name.given_name);
+      cart=[];
+      updateCart();
+    });
+  }
+}).render('#paypal-button-container');
+</script>
 </body>
 </html>
