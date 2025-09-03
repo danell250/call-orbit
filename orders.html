@@ -53,13 +53,245 @@
 
   <main>
     <div class="forwarding">
+      <!-- Number Type Selection -->
+      <label for="number-type">Select Number Type</label>
+      <select id="number-type" name="number_type" required>
+        <option value="" disabled selected>Select Number Type</option>
+        <option value="toll-free">Toll-Free</option>
+        <option value="national">National</option>
+        <option value="did">DID</option>
+      </select>
+
+      <!-- Country Selection -->
       <label for="country">Select Country</label>
       <select id="country">
-        <option value="US">United States</option>
-        <option value="ZA">South Africa</option>
-        <option value="GB">United Kingdom</option>
-        <option value="IN">India</option>
+        <!-- All countries except North Korea -->
+        <option value="AF">Afghanistan</option>
+        <option value="AL">Albania</option>
+        <option value="DZ">Algeria</option>
+        <option value="AS">American Samoa</option>
+        <option value="AD">Andorra</option>
+        <option value="AO">Angola</option>
+        <option value="AI">Anguilla</option>
+        <option value="AQ">Antarctica</option>
+        <option value="AG">Antigua and Barbuda</option>
+        <option value="AR">Argentina</option>
+        <option value="AM">Armenia</option>
+        <option value="AW">Aruba</option>
         <option value="AU">Australia</option>
+        <option value="AT">Austria</option>
+        <option value="AZ">Azerbaijan</option>
+        <option value="BS">Bahamas</option>
+        <option value="BH">Bahrain</option>
+        <option value="BD">Bangladesh</option>
+        <option value="BB">Barbados</option>
+        <option value="BY">Belarus</option>
+        <option value="BE">Belgium</option>
+        <option value="BZ">Belize</option>
+        <option value="BJ">Benin</option>
+        <option value="BM">Bermuda</option>
+        <option value="BT">Bhutan</option>
+        <option value="BO">Bolivia</option>
+        <option value="BA">Bosnia and Herzegovina</option>
+        <option value="BW">Botswana</option>
+        <option value="BR">Brazil</option>
+        <option value="IO">British Indian Ocean Territory</option>
+        <option value="VG">British Virgin Islands</option>
+        <option value="BN">Brunei</option>
+        <option value="BG">Bulgaria</option>
+        <option value="BF">Burkina Faso</option>
+        <option value="BI">Burundi</option>
+        <option value="KH">Cambodia</option>
+        <option value="CM">Cameroon</option>
+        <option value="CA">Canada</option>
+        <option value="CV">Cape Verde</option>
+        <option value="KY">Cayman Islands</option>
+        <option value="CF">Central African Republic</option>
+        <option value="TD">Chad</option>
+        <option value="CL">Chile</option>
+        <option value="CN">China</option>
+        <option value="CX">Christmas Island</option>
+        <option value="CC">Cocos (Keeling) Islands</option>
+        <option value="CO">Colombia</option>
+        <option value="KM">Comoros</option>
+        <option value="CD">Congo (DRC)</option>
+        <option value="CG">Congo (Republic)</option>
+        <option value="CK">Cook Islands</option>
+        <option value="CR">Costa Rica</option>
+        <option value="CI">Côte d’Ivoire</option>
+        <option value="HR">Croatia</option>
+        <option value="CU">Cuba</option>
+        <option value="CW">Curaçao</option>
+        <option value="CY">Cyprus</option>
+        <option value="CZ">Czech Republic</option>
+        <option value="DK">Denmark</option>
+        <option value="DJ">Djibouti</option>
+        <option value="DM">Dominica</option>
+        <option value="DO">Dominican Republic</option>
+        <option value="EC">Ecuador</option>
+        <option value="EG">Egypt</option>
+        <option value="SV">El Salvador</option>
+        <option value="GQ">Equatorial Guinea</option>
+        <option value="ER">Eritrea</option>
+        <option value="EE">Estonia</option>
+        <option value="SZ">Eswatini</option>
+        <option value="ET">Ethiopia</option>
+        <option value="FK">Falkland Islands</option>
+        <option value="FO">Faroe Islands</option>
+        <option value="FJ">Fiji</option>
+        <option value="FI">Finland</option>
+        <option value="FR">France</option>
+        <option value="PF">French Polynesia</option>
+        <option value="GA">Gabon</option>
+        <option value="GM">Gambia</option>
+        <option value="GE">Georgia</option>
+        <option value="DE">Germany</option>
+        <option value="GH">Ghana</option>
+        <option value="GI">Gibraltar</option>
+        <option value="GR">Greece</option>
+        <option value="GL">Greenland</option>
+        <option value="GD">Grenada</option>
+        <option value="GU">Guam</option>
+        <option value="GT">Guatemala</option>
+        <option value="GG">Guernsey</option>
+        <option value="GN">Guinea</option>
+        <option value="GW">Guinea-Bissau</option>
+        <option value="GY">Guyana</option>
+        <option value="HT">Haiti</option>
+        <option value="HN">Honduras</option>
+        <option value="HK">Hong Kong</option>
+        <option value="HU">Hungary</option>
+        <option value="IS">Iceland</option>
+        <option value="IN">India</option>
+        <option value="ID">Indonesia</option>
+        <option value="IR">Iran</option>
+        <option value="IQ">Iraq</option>
+        <option value="IE">Ireland</option>
+        <option value="IM">Isle of Man</option>
+        <option value="IL">Israel</option>
+        <option value="IT">Italy</option>
+        <option value="JM">Jamaica</option>
+        <option value="JP">Japan</option>
+        <option value="JE">Jersey</option>
+        <option value="JO">Jordan</option>
+        <option value="KZ">Kazakhstan</option>
+        <option value="KE">Kenya</option>
+        <option value="KI">Kiribati</option>
+        <option value="KW">Kuwait</option>
+        <option value="KG">Kyrgyzstan</option>
+        <option value="LA">Laos</option>
+        <option value="LV">Latvia</option>
+        <option value="LB">Lebanon</option>
+        <option value="LS">Lesotho</option>
+        <option value="LR">Liberia</option>
+        <option value="LY">Libya</option>
+        <option value="LI">Liechtenstein</option>
+        <option value="LT">Lithuania</option>
+        <option value="LU">Luxembourg</option>
+        <option value="MO">Macau</option>
+        <option value="MG">Madagascar</option>
+        <option value="MW">Malawi</option>
+        <option value="MY">Malaysia</option>
+        <option value="MV">Maldives</option>
+        <option value="ML">Mali</option>
+        <option value="MT">Malta</option>
+        <option value="MH">Marshall Islands</option>
+        <option value="MR">Mauritania</option>
+        <option value="MU">Mauritius</option>
+        <option value="MX">Mexico</option>
+        <option value="FM">Micronesia</option>
+        <option value="MD">Moldova</option>
+        <option value="MC">Monaco</option>
+        <option value="MN">Mongolia</option>
+        <option value="ME">Montenegro</option>
+        <option value="MS">Montserrat</option>
+        <option value="MA">Morocco</option>
+        <option value="MZ">Mozambique</option>
+        <option value="MM">Myanmar</option>
+        <option value="NA">Namibia</option>
+        <option value="NR">Nauru</option>
+        <option value="NP">Nepal</option>
+        <option value="NL">Netherlands</option>
+        <option value="NC">New Caledonia</option>
+        <option value="NZ">New Zealand</option>
+        <option value="NI">Nicaragua</option>
+        <option value="NE">Niger</option>
+        <option value="NG">Nigeria</option>
+        <option value="NU">Niue</option>
+        <option value="MK">North Macedonia</option>
+        <option value="NO">Norway</option>
+        <option value="OM">Oman</option>
+        <option value="PK">Pakistan</option>
+        <option value="PW">Palau</option>
+        <option value="PA">Panama</option>
+        <option value="PG">Papua New Guinea</option>
+        <option value="PY">Paraguay</option>
+        <option value="PE">Peru</option>
+        <option value="PH">Philippines</option>
+        <option value="PL">Poland</option>
+        <option value="PT">Portugal</option>
+        <option value="PR">Puerto Rico</option>
+        <option value="QA">Qatar</option>
+        <option value="RO">Romania</option>
+        <option value="RU">Russia</option>
+        <option value="RW">Rwanda</option>
+        <option value="BL">Saint Barthélemy</option>
+        <option value="KN">Saint Kitts and Nevis</option>
+        <option value="LC">Saint Lucia</option>
+        <option value="MF">Saint Martin</option>
+        <option value="VC">Saint Vincent and the Grenadines</option>
+        <option value="WS">Samoa</option>
+        <option value="SM">San Marino</option>
+        <option value="ST">São Tomé and Príncipe</option>
+        <option value="SA">Saudi Arabia</option>
+        <option value="SN">Senegal</option>
+        <option value="RS">Serbia</option>
+        <option value="SC">Seychelles</option>
+        <option value="SL">Sierra Leone</option>
+        <option value="SG">Singapore</option>
+        <option value="SX">Sint Maarten</option>
+        <option value="SK">Slovakia</option>
+        <option value="SI">Slovenia</option>
+        <option value="SB">Solomon Islands</option>
+        <option value="SO">Somalia</option>
+        <option value="ZA">South Africa</option>
+        <option value="KR">South Korea</option>
+        <option value="SS">South Sudan</option>
+        <option value="ES">Spain</option>
+        <option value="LK">Sri Lanka</option>
+        <option value="SD">Sudan</option>
+        <option value="SR">Suriname</option>
+        <option value="SE">Sweden</option>
+        <option value="CH">Switzerland</option>
+        <option value="SY">Syria</option>
+        <option value="TW">Taiwan</option>
+        <option value="TJ">Tajikistan</option>
+        <option value="TZ">Tanzania</option>
+        <option value="TH">Thailand</option>
+        <option value="TL">Timor-Leste</option>
+        <option value="TG">Togo</option>
+        <option value="TO">Tonga</option>
+        <option value="TT">Trinidad and Tobago</option>
+        <option value="TN">Tunisia</option>
+        <option value="TR">Turkey</option>
+        <option value="TM">Turkmenistan</option>
+        <option value="TV">Tuvalu</option>
+        <option value="UG">Uganda</option>
+        <option value="UA">Ukraine</option>
+        <option value="AE">United Arab Emirates</option>
+        <option value="GB">United Kingdom</option>
+        <option value="US">United States</option>
+        <option value="UY">Uruguay</option>
+        <option value="UZ">Uzbekistan</option>
+        <option value="VU">Vanuatu</option>
+        <option value="VA">Vatican City</option>
+        <option value="VE">Venezuela</option>
+        <option value="VN">Vietnam</option>
+        <option value="WF">Wallis and Futuna</option>
+        <option value="EH">Western Sahara</option>
+        <option value="YE">Yemen</option>
+        <option value="ZM">Zambia</option>
+        <option value="ZW">Zimbabwe</option>
       </select>
 
       <label for="forward">Forwarding Number / Device</label>
@@ -108,104 +340,67 @@
       US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
       ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
       GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
-      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
-      AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
+      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.28},Pro:{price:39.99,minutes:250,overage:0.27},Max:{price:65.99,minutes:400,overage:0.265}}
     };
 
-    const countrySelect = document.getElementById('country');
-    const forwardInput = document.getElementById('forward');
     const plansContainer = document.getElementById('plans-container');
-    const cartWrapper = document.getElementById('cart-wrapper');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotalEl = document.getElementById('cart-total');
     const cartButton = document.getElementById('cart-button');
-    const paypalContainer = document.getElementById('paypal-button-container');
+    const cartWrapper = document.getElementById('cart-wrapper');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = [];
 
-    function renderPlans(){
-      plansContainer.innerHTML='';
-      const c = countrySelect.value;
-      const plans = countryData[c];
-      for(const plan in plans){
-        const data = plans[plan];
+    const renderPlans = () => {
+      plansContainer.innerHTML = '';
+      const country = document.getElementById('country').value || 'US';
+      const types = countryData[country];
+      if(!types) return;
+
+      Object.keys(types).forEach(planName=>{
+        const plan = types[planName];
         const div = document.createElement('div');
-        div.className='plan';
-        div.innerHTML=`
-          <h3>${plan}</h3>
-          <div class="price">$${data.price} /mo</div>
-          <div class="minutes">${data.minutes} included minutes</div>
-          <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
-          <button class="buy-now">Add to Cart</button>
-        `;
-        div.querySelector('button').addEventListener('click',()=>{ addToCart(c,plan,data); });
+        div.className = 'plan';
+        div.innerHTML = `<h3>${planName}</h3>
+                         <div class="price">$${plan.price.toFixed(2)}</div>
+                         <div class="minutes">${plan.minutes} Minutes</div>
+                         <div class="overage">Overage: $${plan.overage.toFixed(3)}/min</div>
+                         <button class="buy-now">Buy Now</button>`;
+        div.querySelector('button').addEventListener('click',()=>{
+          const numberType = document.getElementById('number-type').value || 'national';
+          const forward = document.getElementById('forward').value || '';
+          cart.push({plan:planName,country,price:plan.price,numberType,forward});
+          updateCart();
+        });
         plansContainer.appendChild(div);
-      }
-    }
-
-    function addToCart(country,plan,data){
-      const forward = forwardInput.value || '—';
-      cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-      updateCartButton();
-      cartWrapper.classList.add('active');
-    }
-
-    function removeFromCart(index){
-      cart.splice(index,1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-      updateCartButton();
-    }
-
-    function renderCart(){
-      cartItems.innerHTML='';
-      let total = 0;
-      cart.forEach((item,index)=>{
-        total+=item.price;
-        const div = document.createElement('div');
-        div.className='cart-item';
-        div.innerHTML=`
-          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-          <span>$${item.price.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">X</button></span>
-        `;
-        cartItems.appendChild(div);
       });
-      cartTotalEl.textContent='$'+total.toFixed(2);
-      renderPayPal();
-    }
+    };
 
-    function updateCartButton(){
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
-    }
+    const updateCart = () => {
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+      cart.forEach((item,i)=>{
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `<span>${item.plan} (${item.country})</span>
+                         <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+        cartItemsEl.appendChild(div);
+      });
+      document.querySelectorAll('.remove-btn').forEach(btn=>{
+        btn.addEventListener('click',e=>{
+          cart.splice(e.target.dataset.index,1);
+          updateCart();
+        });
+      });
+      cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
+    };
 
-    cartButton.addEventListener('click', () => { cartWrapper.classList.toggle('active'); });
-
-    function renderPayPal(){
-      paypalContainer.innerHTML='';
-      if(cart.length===0) return;
-      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-      paypal.Buttons({
-        createOrder: function(data, actions){ return actions.order.create({purchase_units:[{amount:{value:total}}]}); },
-        onApprove: function(data, actions){
-          return actions.order.capture().then(function(details){
-            alert('Payment completed by '+details.payer.name.given_name);
-            cart=[];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-            updateCartButton();
-            cartWrapper.classList.remove('active');
-          });
-        }
-      }).render('#paypal-button-container');
-    }
-
-    countrySelect.addEventListener('change',renderPlans);
-    forwardInput.addEventListener('input',renderPlans);
+    cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
+    document.getElementById('country').addEventListener('change',renderPlans);
+    document.getElementById('number-type').addEventListener('change',()=>{});
     renderPlans();
-    updateCartButton();
   </script>
 </body>
 </html>
