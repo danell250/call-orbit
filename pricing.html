@@ -9,7 +9,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
-<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3r91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
 <body>
 <nav>
@@ -27,7 +27,7 @@
 
 <header class="hero fade-in">
   <h1>Pricing</h1>
-  <p>Flexible plans to fit every business.</p>
+  <p>Flexible plans + simple usage pricing to fit every business.</p>
 </header>
 
 <section class="plans-grid fade-in">
@@ -37,7 +37,6 @@
     <p>Dashboards + 3 agents included.</p>
     <p><strong>$19/mo flat</strong></p>
     <p class="setup">One-time setup: $99</p>
-    <button class="buy-now" onclick="addToCart('US','Starter',{price:19,minutes:0})">Add to Cart</button>
   </div>
 
   <div class="plan">
@@ -45,7 +44,6 @@
     <p>Unlimited dashboards, up to 20 agents, call recordings.</p>
     <p><strong>$29/user · mo</strong></p>
     <p class="setup">One-time setup: $149</p>
-    <button class="buy-now" onclick="addToCart('US','Team',{price:29,minutes:0})">Add to Cart</button>
   </div>
 
   <div class="plan popular">
@@ -53,7 +51,6 @@
     <p>Advanced analytics, AI insights, 50 agents, custom branding.</p>
     <p><strong>$49/user · mo</strong></p>
     <p class="setup">One-time setup: $199</p>
-    <button class="buy-now" onclick="addToCart('US','Business',{price:49,minutes:0})">Add to Cart</button>
   </div>
 
   <div class="plan">
@@ -61,7 +58,6 @@
     <p>Global scale, custom SLAs, unlimited agents, dedicated success manager.</p>
     <p><strong>Custom pricing</strong></p>
     <p class="setup">Setup: tailored onboarding package</p>
-    <button class="buy-now" onclick="addToCart('US','Enterprise',{price:0,minutes:0})">Add to Cart</button>
   </div>
 
 </section>
@@ -85,8 +81,9 @@
 </footer>
 
 <script>
-// Fade-in animation
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Fade-in (no change)
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -98,70 +95,75 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Shared cart setup
+// Shared Cart from orders.html
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartWrapperEl = document.getElementById('cart-wrapper');
-const cartItems = document.getElementById('cart-items');
+const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
-const cartButton = document.getElementById('cart-button');
-const paypalContainer = document.getElementById('paypal-button-container');
+const cartButtonEl = document.getElementById('cart-button');
+const paypalContainerEl = document.getElementById('paypal-button-container');
 
-// Add plan to cart
-function addToCart(country, plan, data){
-  const forward = '—'; // no forwarding input on pricing page
-  cart.push({country, plan, price:data.price, minutes:data.minutes, forward});
+function addToCart(planName, price){
+  const forward = '—';
+  cart.push({plan: planName, price, forward});
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
   cartWrapperEl.classList.add('active');
 }
 
-// Remove item from cart
 function removeFromCart(index){
   cart.splice(index,1);
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
 }
 
-// Render cart
 function renderCart(){
-  cartItems.innerHTML='';
+  cartItemsEl.innerHTML='';
   let total=0;
   cart.forEach((item,index)=>{
     total+=item.price;
     const div=document.createElement('div');
     div.className='cart-item';
-    div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-    <span>$${item.price.toFixed(2)}<button class="remove-btn" onclick="removeFromCart(${index})">X</button></span>`;
-    cartItems.appendChild(div);
+    div.innerHTML=`<span>${item.plan}</span>
+      <span>$${item.price.toFixed(2)}
+        <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
+      </span>`;
+    cartItemsEl.appendChild(div);
   });
   cartTotalEl.textContent=`$${total.toFixed(2)}`;
   renderPayPal();
   updateCartButton();
 }
 
-// Update cart button
 function updateCartButton(){
   const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+  cartButtonEl.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
 // PayPal
 function renderPayPal(){
-  paypalContainer.innerHTML='';
+  paypalContainerEl.innerHTML='';
   if(cart.length===0) return;
   const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
   paypal.Buttons({
-    createOrder:function(data,actions){return actions.order.create({purchase_units:[{amount:{value:total}}]});},
-    onApprove:function(data,actions){return actions.order.capture().then(function(details){
-      alert('Payment completed by '+details.payer.name.given_name);
-      cart=[]; localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart(); updateCartButton(); cartWrapperEl.classList.remove('active');
-    });}
+    createOrder:function(data,actions){
+      return actions.order.create({purchase_units:[{amount:{value:total}}]});
+    },
+    onApprove:function(data,actions){
+      return actions.order.capture().then(function(details){
+        alert('Payment completed by '+details.payer.name.given_name);
+        cart=[];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+        updateCartButton();
+        cartWrapperEl.classList.remove('active');
+      });
+    }
   }).render('#paypal-button-container');
 }
 
-// Cart toggle
-cartButton.addEventListener('click',()=>{cartWrapperEl.classList.toggle('active');});
+// Toggle cart
+cartButtonEl.addEventListener('click',()=>{cartWrapperEl.classList.toggle('active');});
 
 // Load cart on page load
 renderCart();
