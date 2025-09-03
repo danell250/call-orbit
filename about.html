@@ -23,21 +23,12 @@ header.hero {
 header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
 header.hero p { margin-bottom:2rem; font-size:1.2rem; }
 
-/* Section Titles */
-.section-title {
-  text-align:center;
-  font-size:2rem;
-  color:#1e3a8a;
-  margin:40px 0 20px 0;
-  font-weight:700;
-}
-
 /* Features / Cards */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:2rem;
-  margin:20px 0;
+  gap:1.5rem;
+  margin:30px 0;
   padding:0 10px;
 }
 .feature {
@@ -48,75 +39,48 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   text-align:center;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   cursor:pointer;
-  position:relative;
-}
-.feature::before {
-  content:'💡';
-  font-size:2rem;
-  position:absolute;
-  top:-20px;
-  left:50%;
-  transform:translateX(-50%);
 }
 .feature:hover {
   transform:translateY(-8px);
   box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:linear-gradient(135deg,#e0f2fe,#f0f9ff);
+  background:#f0f9ff;
 }
-.feature h3 { color:#1e3a8a; margin:1.5rem 0 0.5rem 0; }
+.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
 .feature p { color:#374151; }
 
-/* Alternating Sections */
-.alt-section {
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  margin:40px 0;
-  padding:0 10px;
+/* CTA Section same style as features */
+.cta-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.5rem;
+  margin:40px 10px;
 }
-.alt-section .text {
-  flex:1;
-  min-width:250px;
-  padding:20px;
-}
-.alt-section .image {
-  flex:1;
-  min-width:250px;
-  padding:20px;
-  text-align:center;
-}
-.alt-section img {
-  max-width:100%;
+.cta-card {
+  background:#fff;
+  padding:25px 20px;
   border-radius:1rem;
   box-shadow:0 5px 20px rgba(0,0,0,0.05);
-}
-
-/* CTA Section */
-.cta {
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);
-  color:#fff;
-  padding:50px 20px;
   text-align:center;
-  border-radius:10px;
-  margin:60px 10px;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
-.cta h2 { margin-bottom:1rem; font-size:2rem; }
-.cta p { margin-bottom:1.5rem; font-size:1.2rem; }
-.cta a {
+.cta-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.1);
+  background:#f0f9ff;
+}
+.cta-card h2 { color:#1e3a8a; margin-bottom:1rem; }
+.cta-card p { color:#374151; margin-bottom:1rem; }
+.cta-card a {
   display:inline-block;
-  background:#fff;
-  color:#3b82f6;
-  padding:14px 28px;
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 24px;
   border-radius:999px;
   font-weight:700;
   text-decoration:none;
   transition:filter 0.2s;
 }
-.cta a:hover { filter:brightness(0.95); }
-
-/* Animations */
-.fade-in { opacity:0; transform:translateY(20px); transition:all 0.6s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
+.cta-card a:hover { filter:brightness(0.95); }
 </style>
 </head>
 <body>
@@ -148,40 +112,21 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
     <p>Innovation, transparency, and reliability drive everything we do. Your success is our mission.</p>
   </div>
   <div class="feature">
-    <h3>Our Team</h3>
-    <p>From engineers to operations specialists, every member of our team is dedicated to making your contact center experience seamless.</p>
-  </div>
-  <div class="feature">
-    <h3>Why Choose Us?</h3>
-    <p>CallOrbit brings everything together—dashboards, portals, analytics—so your teams can focus on what matters most: connecting with customers.</p>
-  </div>
-</section>
-
-<!-- Alternating sections for more engagement -->
-<section class="alt-section fade-in">
-  <div class="text">
-    <h2>Innovative Technology</h2>
+    <h3>Innovative Technology</h3>
     <p>Our platform integrates dashboards, analytics, and AI insights to help your teams work smarter, not harder.</p>
   </div>
-  <div class="image">
-    <img src="https://via.placeholder.com/400x300?text=Technology+Image" alt="Innovative Technology">
-  </div>
-</section>
-
-<section class="alt-section fade-in">
-  <div class="image">
-    <img src="https://via.placeholder.com/400x300?text=Customer+Support+Team" alt="Customer Support Team">
-  </div>
-  <div class="text">
-    <h2>Dedicated Support</h2>
+  <div class="feature">
+    <h3>Customer Support Team</h3>
     <p>Our support team is always ready to ensure your contact center runs smoothly and efficiently.</p>
   </div>
 </section>
 
-<section class="cta fade-in">
-  <h2>Join the future of contact center management</h2>
-  <p>Discover the difference a powerful, intuitive platform can make for your business.</p>
-  <a href="/pricing">Get Started Today</a>
+<section class="cta-grid fade-in">
+  <div class="cta-card">
+    <h2>Join the Future of Contact Center Management</h2>
+    <p>Discover the difference a powerful, intuitive platform can make for your business.</p>
+    <a href="/pricing">Get Started Today</a>
+  </div>
 </section>
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
