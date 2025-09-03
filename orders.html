@@ -12,11 +12,9 @@
   <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
   <style>
     main{max-width:1120px;margin:20px auto;padding:0}
-    /* Banner / Hero */
     header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-    header.hero h1{margin-bottom:1rem;font-size:2.5rem}
-    header.hero p{margin-bottom:2rem;font-size:1.2rem}
-
+    header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
+    header.hero p{margin-bottom:2rem;font-size:1.2rem;}
     .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
     .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
     .plan:hover{transform:translateY(-5px)}
@@ -34,6 +32,37 @@
     .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
     .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
     #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+
+    /* Customer Notice / CTA Styled */
+    .customer-notice {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1rem;
+      margin:30px 10px;
+    }
+    .customer-card {
+      background:#fff;
+      padding:20px;
+      border-radius:1rem;
+      text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,0.05);
+      transition:transform .2s;
+    }
+    .customer-card:hover{transform:translateY(-5px)}
+    .customer-card a, .customer-card button{
+      display:inline-block;
+      margin-top:15px;
+      padding:12px 24px;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      cursor:pointer;
+      transition:filter .2s;
+    }
+    .customer-card a{background:#3b82f6;color:#fff}
+    .customer-card a:hover{filter:brightness(0.95);}
+    .customer-card button{background:#10b981;color:#fff;border:none;}
+    .customer-card button:hover{filter:brightness(0.95);}
   </style>
 </head>
 <body>
@@ -72,17 +101,17 @@
 
     <div class="plans-grid" id="plans-container"></div>
 
-    <!-- Customer Notice -->
-    <div style="text-align:center;margin-top:30px;">
-      <h2>⚠️ Important</h2>
-      <p style="color:red;font-weight:bold;">
-        You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal. 
-      </p>
-      <div style="margin-top:15px;">
-        <a href="/pricing" class="buy-now">🆕 New Customers — Get Portal + Number</a>
+    <!-- Customer Notice / CTA -->
+    <div class="customer-notice fade-in">
+      <div class="customer-card">
+        <h3>🆕 New Customers</h3>
+        <p>Get the CallOrbit portal + a number to start managing your contact center seamlessly.</p>
+        <a href="/pricing">Get Portal + Number</a>
       </div>
-      <div style="margin-top:10px;">
-        <a href="/orders.html" class="buy-now" style="background:#10b981;">🔁 Existing Customers — Add Numbers Only</a>
+      <div class="customer-card">
+        <h3>🔁 Existing Customers</h3>
+        <p>Add extra numbers to your existing portal account quickly and easily.</p>
+        <button>Add Numbers Only</button>
       </div>
     </div>
   </main>
@@ -99,7 +128,6 @@
     </div>
   </div>
 
-  <!-- Cart Summary Button -->
   <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
   <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
@@ -126,7 +154,6 @@
     const cartButton = document.getElementById('cart-button');
     const paypalContainer = document.getElementById('paypal-button-container');
 
-    // LOAD cart from localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function renderPlans(){
@@ -144,9 +171,7 @@
           <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
           <button class="buy-now">Add to Cart</button>
         `;
-        div.querySelector('button').addEventListener('click',()=>{
-          addToCart(c,plan,data);
-        });
+        div.querySelector('button').addEventListener('click',()=>{ addToCart(c,plan,data); });
         plansContainer.appendChild(div);
       }
     }
@@ -157,7 +182,7 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
       updateCartButton();
-      cartWrapper.classList.add('active'); // open cart on add
+      cartWrapper.classList.add('active');
     }
 
     function removeFromCart(index){
@@ -191,28 +216,19 @@
       cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
     }
 
-    cartButton.addEventListener('click', () => {
-      cartWrapper.classList.toggle('active');
-    });
+    cartButton.addEventListener('click',()=>{cartWrapper.classList.toggle('active');});
 
     function renderPayPal(){
       paypalContainer.innerHTML='';
       if(cart.length===0) return;
       const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
       paypal.Buttons({
-        createOrder: function(data, actions){
-          return actions.order.create({purchase_units:[{amount:{value:total}}]});
-        },
-        onApprove: function(data, actions){
-          return actions.order.capture().then(function(details){
-            alert('Payment completed by '+details.payer.name.given_name);
-            cart=[];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-            updateCartButton();
-            cartWrapper.classList.remove('active'); // close cart after payment
-          });
-        }
+        createOrder:(data,actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
+        onApprove:(data,actions)=>actions.order.capture().then(details=>{
+          alert('Payment completed by '+details.payer.name.given_name);
+          cart=[]; localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart(); updateCartButton(); cartWrapper.classList.remove('active');
+        })
       }).render('#paypal-button-container');
     }
 
