@@ -113,7 +113,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Shared cart across pages
+// Shared persistent cart across pages
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
 
 function renderCart(){
@@ -178,6 +178,12 @@ function renderPayPal(){
 
 // Initial render
 renderCart();
+
+// Listen to localStorage changes to sync cart across pages
+window.addEventListener('storage',()=>{
+  cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+  renderCart();
+});
 </script>
 </body>
 </html>
