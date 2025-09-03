@@ -10,30 +10,69 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-/* Features Card Hover Animation */
+/* Hero Section */
+header.hero {
+  margin:0 auto;
+  padding:50px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1 { font-size:2.5rem; margin-bottom:1rem; }
+header.hero p { font-size:1.2rem; margin-bottom:2rem; }
+
+/* Features Grid */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:1.5rem;
-  margin:20px 0;
-  padding:0 10px;
+  margin:30px 10px;
 }
 .feature {
   background:#fff;
-  padding:20px;
+  padding:25px 20px;
   border-radius:1rem;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
   text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  transition:transform .3s,box-shadow .3s;
   cursor:pointer;
 }
 .feature:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:#f0f9ff;
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 .feature h3 { color:#1e3a8a; margin-bottom:1rem; }
 .feature p { color:#374151; }
+
+/* CTA Section */
+.cta-section {
+  margin:50px 10px;
+  padding:40px 20px;
+  text-align:center;
+  border-radius:10px;
+  background:#f3f4f6;
+}
+.cta-section h2 { font-size:2rem; margin-bottom:1rem; color:#1e3a8a; }
+.cta-section p { font-size:1.1rem; margin-bottom:1.5rem; color:#374151; }
+.cta-section .cta-button {
+  background:#3b82f6;
+  color:#fff;
+  padding:14px 28px;
+  font-size:1rem;
+  font-weight:700;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  transition:filter .2s;
+}
+.cta-section .cta-button:hover { filter:brightness(0.9); }
+
+/* Fade-in */
+.fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease-out, transform 0.6s ease-out; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
 </style>
 </head>
 <body>
@@ -47,39 +86,57 @@
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
+    <a href="/orders.html" class="navbar-buy">🛒 Buy Numbers</a>
   </div>
 </nav>
 
 <header class="hero fade-in">
-  <h1>Features</h1>
-  <p>Everything you need to manage your contact centers efficiently.</p>
+  <h1>Everything Your Contact Center Needs, All in One Place</h1>
+  <p>Powerful dashboards, seamless integrations, and smart analytics to keep your teams ahead.</p>
 </header>
 
-<section class="features features-grid fade-in">
+<main>
+<section class="features-grid fade-in">
   <div class="feature">
     <h3>Live Dashboards</h3>
-    <p>Real-time metrics, alerts, and KPIs for every center so you can act immediately.</p>
+    <p>Track real-time metrics, alerts, and KPIs for every center.</p>
   </div>
   <div class="feature">
-    <h3>Manage Contact Centers</h3>
-    <p>Separate portals with role-based access for smooth team operations.</p>
+    <h3>Team Management</h3>
+    <p>Separate portals with role-based access for smooth operations.</p>
   </div>
   <div class="feature">
-    <h3>Number Management & Porting</h3>
-    <p>Buy, port, and manage global numbers easily with no downtime.</p>
+    <h3>Number Porting & Management</h3>
+    <p>Buy, port, and manage numbers globally without downtime.</p>
   </div>
   <div class="feature">
     <h3>Analytics & Reporting</h3>
-    <p>Generate custom reports, track performance, and make data-driven decisions faster.</p>
+    <p>Generate custom reports to make data-driven decisions faster.</p>
+  </div>
+  <div class="feature">
+    <h3>Integrations</h3>
+    <p>Seamlessly connect with CRM, telephony, and analytics platforms.</p>
+  </div>
+  <div class="feature">
+    <h3>Global Access</h3>
+    <p>Manage multiple centers across regions from a single platform.</p>
   </div>
 </section>
 
-<footer>
+<section class="cta-section fade-in">
+  <h2>Ready to Transform Your Contact Center?</h2>
+  <p>Start your journey today with CallOrbit and empower your team with the right tools.</p>
+  <button class="cta-button" onclick="location.href='/pricing'">See Pricing Plans</button>
+</section>
+</main>
+
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -88,7 +145,7 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
       observer.unobserve(entry.target);
     }
   });
-}, {threshold:0.1});
+},{threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 </body>
