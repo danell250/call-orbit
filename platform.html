@@ -10,26 +10,39 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-/* Hero */
-header.hero {
-  margin:0 auto;
-  padding:40px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);
-  color:#fff;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+/* CTA styling without green background */
+.cta {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: 2rem 0;
 }
-header.hero h1{margin-bottom:1rem;font-size:2.5rem;}
-header.hero p{margin-bottom:2rem;font-size:1.2rem;}
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+}
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.cta a {
+  display: inline-block;
+  background: #3b82f6;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+.cta a:hover { filter: brightness(0.9); }
 
-/* Features Card Hover Animation */
+/* Features grid */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:1.5rem;
-  margin:20px 0;
-  padding:0 10px;
+  margin:20px;
 }
 .feature {
   background:#fff;
@@ -37,39 +50,11 @@ header.hero p{margin-bottom:2rem;font-size:1.2rem;}
   border-radius:1rem;
   box-shadow:0 5px 15px rgba(0,0,0,0.05);
   text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  cursor:pointer;
+  transition:transform 0.2s;
 }
-.feature:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:#f0f9ff;
-}
-.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
-.feature p { color:#374151; }
-
-/* CTA Section */
-.cta {
-  background:#10b981;
-  color:#fff;
-  padding:40px 20px;
-  text-align:center;
-  border-radius:10px;
-  margin:40px 10px;
-}
-.cta h2 { margin-bottom:1rem; font-size:2rem; }
-.cta p { margin-bottom:1.5rem; font-size:1.2rem; }
-.cta a {
-  display:inline-block;
-  background:#fff;
-  color:#10b981;
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  transition:filter 0.2s;
-}
-.cta a:hover { filter:brightness(0.95); }
+.feature:hover { transform:translateY(-5px) }
+.feature h3 { color:#1e3a8a;margin-bottom:1rem }
+.feature p { font-size:0.95rem; line-height:1.5; }
 </style>
 </head>
 <body>
@@ -88,31 +73,35 @@ header.hero p{margin-bottom:2rem;font-size:1.2rem;}
 
 <header class="hero fade-in">
   <h1>CallOrbit Platform</h1>
-  <p>Centralize dashboards, portals, and analytics with seamless integrations.</p>
+  <p>Powerful, intuitive, and centralized management for your entire contact center ecosystem.</p>
 </header>
 
 <section class="features features-grid fade-in">
   <div class="feature">
-    <h3>Integrations</h3>
-    <p>Works with CRM, telephony, and analytics systems to keep your operations connected.</p>
-  </div>
-  <div class="feature">
     <h3>Custom Analytics</h3>
-    <p>Tailor reports and KPIs per center to drive actionable insights.</p>
+    <p>Turn your data into actionable insights with tailored dashboards and KPIs for every team.</p>
   </div>
   <div class="feature">
     <h3>Global Access</h3>
-    <p>Manage multiple centers across regions from a single, centralized platform.</p>
+    <p>Manage multiple centers across regions from a single, secure, centralized platform.</p>
+  </div>
+  <div class="feature">
+    <h3>Seamless Number Management</h3>
+    <p>Buy, port, and manage numbers globally without downtime, keeping your business connected.</p>
+  </div>
+  <div class="feature">
+    <h3>Enterprise Ready</h3>
+    <p>Scale effortlessly with role-based access, security controls, and dedicated support.</p>
   </div>
 </section>
 
 <section class="cta fade-in">
-  <h2>Ready to streamline your contact center?</h2>
-  <p>Start your journey with CallOrbit today and experience seamless management.</p>
-  <a href="/orders.html">Get Started</a>
+  <h2>Take Your Contact Center to the Next Level</h2>
+  <p>Everything you need to centralize, streamline, and supercharge your operations.</p>
+  <a href="/orders">Buy Numbers Now 🛒</a>
 </section>
 
-<footer>
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
