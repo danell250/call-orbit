@@ -1,306 +1,237 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Buy Numbers & Plans</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
-<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
-<style>
-/* --- Banner / Hero --- */
-header.hero {
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-header.hero h1 { margin-bottom: 1rem; font-size: 2.5rem; }
-header.hero p { margin-bottom: 2rem; font-size: 1.2rem; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Buy Numbers & Plans</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+  </svg>">
+  <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
+  <style>
+    main{max-width:1120px;margin:20px auto;padding:0}
+    header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
+    header.hero h1{margin-bottom:1rem}
+    header.hero p{margin-bottom:2rem}
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
+    .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
+    .plan:hover{transform:translateY(-5px)}
+    .plan h3{color:#1e3a8a;margin-bottom:1rem}
+    .plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
+    .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05)}
+    .forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
+    .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
+    .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
+    .buy-now:hover{filter:brightness(0.95)}
+    .existing-btn{background:#10b981;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
+    .existing-btn:hover{filter:brightness(0.95)}
 
-/* --- Plans Grid --- */
-.plans-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:1.5rem;
-  margin:20px 0;
-  padding:0 10px;
-}
-.plan {
-  background:#fff;
-  padding:20px;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  text-align:center;
-  transition:transform .2s;
-  cursor:pointer;
-}
-.plan:hover { transform:translateY(-5px) }
-.plan h3 { color:#1e3a8a;margin-bottom:1rem }
-.plan .price,.plan .minutes,.plan .overage { margin-bottom:0.5rem }
-.buy-now {
-  background:#3b82f6;
-  color:#fff;
-  padding:12px 24px;
-  border:none;
-  border-radius:999px;
-  font-weight:700;
-  font-size:1rem;
-  cursor:pointer;
-  transition:filter .2s;
-  margin-top:10px;
-}
-.buy-now:hover { filter:brightness(0.95) }
+    /* Cart sliding in */
+    .cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
+    .cart-wrapper.active{right:0;}
+    .cart h2{margin-bottom:1rem;color:#1e3a8a}
+    .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
+    #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
 
-/* --- Customer Notice Section --- */
-.customer-notice {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-  margin:30px 10px;
-}
-.notice-card {
-  background:#fff;
-  padding:20px;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.notice-card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-}
-.notice-card a, .notice-card button {
-  display:inline-block;
-  margin-top:10px;
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:1rem;
-  text-decoration:none;
-  cursor:pointer;
-}
-.notice-card a {
-  background:#3b82f6;
-  color:#fff;
-}
-.notice-card a:hover { filter:brightness(0.95) }
-.notice-card button {
-  background:#10b981;
-  color:#fff;
-  border:none;
-}
-.notice-card button:hover { filter:brightness(0.95) }
+    /* Banner */
+    .banner{
+      background: linear-gradient(135deg,#3b82f6,#60a5fa);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-weight: 700;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 1120px;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
 
-/* --- Cart Sliding --- */
-.cart-wrapper {
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:350px;
-  height:100%;
-  background:#f9fafb;
-  box-shadow:-2px 0 10px rgba(0,0,0,0.2);
-  padding:20px;
-  transition:right 0.3s;
-  overflow-y:auto;
-  z-index:1000;
-}
-.cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a }
-.cart-item { display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05) }
-.remove-btn { background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px }
-#cart-button { position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-</style>
+    /* Customer notice */
+    .customer-notice{max-width:1120px;margin:30px auto;text-align:center;}
+    .customer-notice h2{margin-bottom:1rem;}
+    .customer-notice p{color:red;font-weight:bold;margin-bottom:1rem;}
+    .customer-notice .buy-now, .customer-notice .existing-btn{margin-top:10px;}
+  </style>
 </head>
 <body>
-<nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/" >Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-  </div>
-</nav>
-
-<header class="hero fade-in">
-  <h1>Choose Your Plan & Number</h1>
-  <p>Pick your country, plan, and forwarding number to get started.</p>
-</header>
-
-<main>
-  <div class="forwarding">
-    <label for="country">Select Country</label>
-    <select id="country">
-      <option value="US">United States</option>
-      <option value="ZA">South Africa</option>
-      <option value="GB">United Kingdom</option>
-      <option value="IN">India</option>
-      <option value="AU">Australia</option>
-    </select>
-    <label for="forward">Forwarding Number / Device</label>
-    <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
-  </div>
-
-  <div class="plans-grid" id="plans-container"></div>
-
-  <!-- ✅ Customer Notice Section -->
-  <div class="customer-notice fade-in">
-    <div class="notice-card">
-      <h3>🆕 New Customers</h3>
-      <p>Get the CallOrbit portal + number to start managing your contact center efficiently.</p>
-      <a href="/pricing">Get Portal + Number</a>
+  <nav>
+    <div><a href="/"><strong>CallOrbit</strong></a></div>
+    <div>
+      <a href="/" >Home</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/coverage">Coverage</a>
+      <a href="/platform">Platform</a>
     </div>
-    <div class="notice-card">
-      <h3>🔁 Existing Customers</h3>
-      <p>Add numbers only to your existing portal account easily and quickly.</p>
-      <button>Add Numbers Only</button>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner fade-in">
+    🚀 Special Offer: Get your portal and numbers today with easy setup!
+  </div>
+
+  <header class="hero fade-in">
+    <h1>Choose Your Plan & Number</h1>
+    <p>Pick your country, plan, and forwarding number to get started.</p>
+  </header>
+
+  <main>
+    <div class="forwarding">
+      <label for="country">Select Country</label>
+      <select id="country">
+        <option value="US">United States</option>
+        <option value="ZA">South Africa</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+        <option value="AU">Australia</option>
+      </select>
+      <label for="forward">Forwarding Number / Device</label>
+      <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
+    </div>
+
+    <div class="plans-grid" id="plans-container"></div>
+
+    <!-- Customer Notice -->
+    <div class="customer-notice fade-in">
+      <h2>⚠️ Important</h2>
+      <p>You cannot purchase numbers alone. All numbers must be used with the CallOrbit portal.</p>
+      <div>
+        <a href="/pricing" class="buy-now">🆕 New Customers — Get Portal + Number</a>
+      </div>
+      <div>
+        <button class="existing-btn">🔁 Existing Customers — Add Numbers Only</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Cart -->
+  <div class="cart-wrapper" id="cart-wrapper">
+    <div class="cart">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
+        <span>Total:</span><span id="cart-total">$0.00</span>
+      </div>
+      <div id="paypal-button-container" style="margin-top:15px;"></div>
     </div>
   </div>
-</main>
 
-<!-- Cart -->
-<div class="cart-wrapper" id="cart-wrapper">
-  <div class="cart">
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-      <span>Total:</span><span id="cart-total">$0.00</span>
-    </div>
-    <div id="paypal-button-container" style="margin-top:15px;"></div>
-  </div>
-</div>
-<button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
+  <!-- Cart Summary Button -->
+  <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-</footer>
+  <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  </footer>
 
-<script>
-// Year
-document.getElementById('year').textContent = new Date().getFullYear();
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-// Country Plans Data
-const countryData = {
-  US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
-  ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
-  GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
-  IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
-  AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
-};
+    const countryData = {
+      US:{Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304}},
+      ZA:{Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30}},
+      GB:{Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298}},
+      IN:{Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.285},Pro:{price:40.99,minutes:250,overage:0.28},Max:{price:65.99,minutes:400,overage:0.27}},
+      AU:{Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:26.99,minutes:155,overage:0.31},Pro:{price:44.99,minutes:215,overage:0.305},Max:{price:72.99,minutes:345,overage:0.30}}
+    };
 
-// DOM Elements
-const countrySelect = document.getElementById('country');
-const forwardInput = document.getElementById('forward');
-const plansContainer = document.getElementById('plans-container');
-const cartWrapper = document.getElementById('cart-wrapper');
-const cartItems = document.getElementById('cart-items');
-const cartTotalEl = document.getElementById('cart-total');
-const cartButton = document.getElementById('cart-button');
-const paypalContainer = document.getElementById('paypal-button-container');
+    const countrySelect = document.getElementById('country');
+    const forwardInput = document.getElementById('forward');
+    const plansContainer = document.getElementById('plans-container');
+    const cartWrapper = document.getElementById('cart-wrapper');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    const cartButton = document.getElementById('cart-button');
+    const paypalContainer = document.getElementById('paypal-button-container');
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Render Plans
-function renderPlans(){
-  plansContainer.innerHTML='';
-  const c = countrySelect.value;
-  const plans = countryData[c];
-  for(const plan in plans){
-    const data = plans[plan];
-    const div = document.createElement('div');
-    div.className='plan';
-    div.innerHTML=`
-      <h3>${plan}</h3>
-      <div class="price">$${data.price} /mo</div>
-      <div class="minutes">${data.minutes} included minutes</div>
-      <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
-      <button class="buy-now">Add to Cart</button>
-    `;
-    div.querySelector('button').addEventListener('click',()=>{ addToCart(c,plan,data); });
-    plansContainer.appendChild(div);
-  }
-}
+    function renderPlans(){
+      plansContainer.innerHTML='';
+      const c = countrySelect.value;
+      const plans = countryData[c];
+      for(const plan in plans){
+        const data = plans[plan];
+        const div = document.createElement('div');
+        div.className='plan';
+        div.innerHTML=`
+          <h3>${plan}</h3>
+          <div class="price">$${data.price} /mo</div>
+          <div class="minutes">${data.minutes} included minutes</div>
+          <div class="overage">$${data.overage.toFixed(3)} per extra minute</div>
+          <button class="buy-now">Add to Cart</button>
+        `;
+        div.querySelector('button').addEventListener('click',()=>addToCart(c,plan,data));
+        plansContainer.appendChild(div);
+      }
+    }
 
-// Add to Cart
-function addToCart(country,plan,data){
-  const forward = forwardInput.value || '—';
-  cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-  updateCartButton();
-  cartWrapper.classList.add('active');
-}
-
-// Remove from Cart
-function removeFromCart(index){
-  cart.splice(index,1);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-  updateCartButton();
-}
-
-// Render Cart
-function renderCart(){
-  cartItems.innerHTML='';
-  let total = 0;
-  cart.forEach((item,index)=>{
-    total+=item.price;
-    const div = document.createElement('div');
-    div.className='cart-item';
-    div.innerHTML=`
-      <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
-      <span>$${item.price.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">X</button></span>
-    `;
-    cartItems.appendChild(div);
-  });
-  cartTotalEl.textContent=`$${total.toFixed(2)}`;
-  renderPayPal();
-}
-
-// Update Cart Button
-function updateCartButton(){
-  const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
-}
-
-// Cart Button Toggle
-cartButton.addEventListener('click',()=>{ cartWrapper.classList.toggle('active'); });
-
-// PayPal Buttons
-function renderPayPal(){
-  paypalContainer.innerHTML='';
-  if(cart.length===0) return;
-  const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  paypal.Buttons({
-    createOrder:function(data,actions){ return actions.order.create({purchase_units:[{amount:{value:total}}]}); },
-    onApprove:function(data,actions){ return actions.order.capture().then(function(details){
-      alert('Payment completed by '+details.payer.name.given_name);
-      cart=[];
+    function addToCart(country,plan,data){
+      const forward = forwardInput.value || '—';
+      cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
       localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
       updateCartButton();
-      cartWrapper.classList.remove('active');
-    }); }
-  }).render('#paypal-button-container');
-}
+      cartWrapper.classList.add('active');
+    }
 
-countrySelect.addEventListener('change',renderPlans);
-forwardInput.addEventListener('input',renderPlans);
+    function removeFromCart(index){
+      cart.splice(index,1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+      updateCartButton();
+    }
 
-renderPlans();
-updateCartButton();
-</script>
+    function renderCart(){
+      cartItems.innerHTML='';
+      let total = 0;
+      cart.forEach((item,index)=>{
+        total+=item.price;
+        const div = document.createElement('div');
+        div.className='cart-item';
+        div.innerHTML=`
+          <span>${item.country} - ${item.plan} (${item.minutes} min)</span>
+          <span>$${item.price.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">X</button></span>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      renderPayPal();
+    }
+
+    function updateCartButton(){
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+    }
+
+    cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
+
+    function renderPayPal(){
+      paypalContainer.innerHTML='';
+      if(cart.length===0) return;
+      const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+      paypal.Buttons({
+        createOrder: (data, actions) => actions.order.create({purchase_units:[{amount:{value:total}}]}),
+        onApprove: (data, actions) => actions.order.capture().then(details=>{
+          alert(`Transaction completed by ${details.payer.name.given_name}`);
+          cart = [];
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+          updateCartButton();
+          cartWrapper.classList.remove('active');
+        })
+      }).render('#paypal-button-container');
+    }
+
+    countrySelect.addEventListener('change', renderPlans);
+    renderPlans();
+    renderCart();
+    updateCartButton();
+  </script>
 </body>
 </html>

@@ -74,6 +74,20 @@ nav div:last-child a.active-page {
   font-size: 1.25rem;
 }
 
+/* --- Banner --- */
+.banner {
+  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  margin: 2rem auto;
+  max-width: 1120px;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
 /* --- Features Section --- */
 .features {
   padding: 4rem 2rem;
@@ -106,12 +120,12 @@ nav div:last-child a.active-page {
   color: #374151;
 }
 
-/* --- Pricing / Plans --- */
+/* --- Plans / Pricing --- */
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  padding: 4rem 2rem;
+  padding: 2rem;
 }
 
 .plan {
@@ -120,6 +134,12 @@ nav div:last-child a.active-page {
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
 }
 
 .plan h3 {
@@ -127,9 +147,141 @@ nav div:last-child a.active-page {
   color: #1e3a8a;
 }
 
-.plan p {
+.plan .price,
+.plan .minutes,
+.plan .overage {
   margin-bottom: 0.5rem;
   font-size: 1rem;
+}
+
+.buy-now, .existing-btn {
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: filter 0.2s;
+  border: none;
+  margin-top: 10px;
+}
+
+.buy-now {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.buy-now:hover {
+  filter: brightness(0.95);
+}
+
+.existing-btn {
+  background: #10b981;
+  color: #fff;
+}
+
+.existing-btn:hover {
+  filter: brightness(0.95);
+}
+
+/* --- Forwarding Input --- */
+.forwarding {
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  max-width: 600px;
+}
+
+.forwarding label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.forwarding select,
+.forwarding input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+/* --- Customer Notice --- */
+.customer-notice {
+  max-width: 1120px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.customer-notice h2 {
+  margin-bottom: 1rem;
+}
+
+.customer-notice p {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* --- Cart --- */
+.cart-wrapper {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100%;
+  background: #f9fafb;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: right 0.3s;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.cart-wrapper.active {
+  right: 0;
+}
+
+.cart h2 {
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#cart-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #3b82f6;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* --- Contact Form --- */
@@ -178,16 +330,6 @@ nav div:last-child a.active-page {
   background: #2563eb;
 }
 
-.thank-you {
-  display: none;
-  text-align: center;
-  padding: 3rem 1rem;
-}
-
-.thank-you.visible {
-  display: block;
-}
-
 /* --- Footer --- */
 footer {
   text-align: center;
@@ -215,5 +357,17 @@ footer {
   }
   .hero p {
     font-size: 1rem;
+  }
+  .plans-grid {
+    gap: 1rem;
+    padding: 2rem 1rem;
+  }
+  .forwarding {
+    padding: 1rem;
+  }
+  .banner {
+    font-size: 1rem;
+    padding: 15px;
+    margin: 1rem;
   }
 }
