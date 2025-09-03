@@ -8,29 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <style>
-/* Styles kept same as before */
-main{max-width:1120px;margin:20px auto;padding:0}
-header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
-header.hero h1{margin-bottom:1rem}
-header.hero p{margin-bottom:1rem}
-.customer-notice{margin:15px auto;text-align:center;font-size:1.1rem;color:#1e3a8a}
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
-.plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
-.plan:hover{transform:translateY(-5px)}
-.plan h3{color:#1e3a8a;margin-bottom:1rem}
-.plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
-.forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
-.forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
-.forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
-.buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
-.buy-now:hover{filter:brightness(0.95)}
-.cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
-.cart-wrapper.active{right:0;}
-.cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center;}
-.cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-.remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
-#cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
-#close-cart{background:none;border:none;color:#1e3a8a;font-size:1.2rem;cursor:pointer;}
+/* --- Keep your existing styles --- */
 </style>
 </head>
 <body>
@@ -131,10 +109,6 @@ header.hero p{margin-bottom:1rem}
     </div>
   </div>
 
-  <div style="text-align:center;margin:20px;">
-    <button id="buy-numbers" class="buy-now">Buy Numbers</button>
-  </div>
-
   <div class="plans-grid" id="plans-container"></div>
 </main>
 
@@ -157,10 +131,7 @@ header.hero p{margin-bottom:1rem}
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Packages and profit margin
 const profitMargin = 1.25;
-const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
 
 // Local areas
 const localAreas = {
@@ -177,20 +148,265 @@ const localAreas = {
   MX:["Mexico City","Guadalajara","Monterrey"]
 };
 
-// Cart
+// Hardcoded country data
+const countryData = {
+  "US": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":500,"price":12},"Plus":{"minutes":1000,"price":30},"Pro":{"minutes":2000,"price":60},"Max":{"minutes":4000,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":450,"price":10.8},"Plus":{"minutes":900,"price":26.4},"Pro":{"minutes":1800,"price":54},"Max":{"minutes":3600,"price":102}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":500,"price":14.4},"Plus":{"minutes":1000,"price":33.6},"Pro":{"minutes":2000,"price":66},"Max":{"minutes":4000,"price":120}}}
+  },
+  "ZA": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":300,"price":9.6},"Plus":{"minutes":600,"price":21.6},"Pro":{"minutes":1200,"price":42},"Max":{"minutes":2400,"price":78}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":250,"price":8.4},"Plus":{"minutes":500,"price":19.2},"Pro":{"minutes":1000,"price":38.4},"Max":{"minutes":2000,"price":72}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":300,"price":10.8},"Plus":{"minutes":600,"price":24},"Pro":{"minutes":1200,"price":45.6},"Max":{"minutes":2400,"price":84}}}
+  },
+  "GB": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "IN": {
+    "tollFree": {"rate":0.036,"packages":{"Basic":{"minutes":500,"price":9.6},"Plus":{"minutes":1000,"price":21.6},"Pro":{"minutes":2000,"price":42},"Max":{"minutes":4000,"price":78}}},
+    "local": {"rate":0.03,"packages":{"Basic":{"minutes":450,"price":8.4},"Plus":{"minutes":900,"price":19.2},"Pro":{"minutes":1800,"price":38.4},"Max":{"minutes":3600,"price":72}}},
+    "national": {"rate":0.034,"packages":{"Basic":{"minutes":500,"price":10.8},"Plus":{"minutes":1000,"price":24},"Pro":{"minutes":2000,"price":45.6},"Max":{"minutes":4000,"price":84}}}
+  },
+  "AU": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "CA": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":500,"price":12},"Plus":{"minutes":1000,"price":30},"Pro":{"minutes":2000,"price":60},"Max":{"minutes":4000,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":450,"price":10.8},"Plus":{"minutes":900,"price":26.4},"Pro":{"minutes":1800,"price":54},"Max":{"minutes":3600,"price":102}}},
+    "national": {"rate":0.046,"packages":{"Basic":{"minutes":500,"price":14.4},"Plus":{"minutes":1000,"price":33.6},"Pro":{"minutes":2000,"price":66},"Max":{"minutes":4000,"price":120}}}
+  },
+  "DE": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "FR": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "JP": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "BR": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "MX": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "IT": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "ES": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "KR": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "SG": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "NL": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "CH": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "SE": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "BE": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "GR": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "PT": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "IE": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "IL": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "PL": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "RO": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "HU": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "SK": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "CZ": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "EE": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "LV": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "LT": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "LU": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "MO": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "MY": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "MT": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "MC": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "AN": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "NZ": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "NO": {
+    "tollFree": {"rate":0.06,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}},
+    "local": {"rate":0.048,"packages":{"Basic":{"minutes":350,"price":12},"Plus":{"minutes":700,"price":30},"Pro":{"minutes":1400,"price":60},"Max":{"minutes":2800,"price":108}}},
+    "national": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":14.4},"Plus":{"minutes":800,"price":33.6},"Pro":{"minutes":1600,"price":66},"Max":{"minutes":3200,"price":120}}}
+  },
+  "PA": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "PE": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "PH": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "TW": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "TH": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "TT": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "TR": {
+    "tollFree": {"rate":0.054,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.042,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "UY": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "VE": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  },
+  "VN": {
+    "tollFree": {"rate":0.048,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}},
+    "local": {"rate":0.036,"packages":{"Basic":{"minutes":350,"price":10.8},"Plus":{"minutes":700,"price":26.4},"Pro":{"minutes":1400,"price":52.8},"Max":{"minutes":2800,"price":100.8}}},
+    "national": {"rate":0.042,"packages":{"Basic":{"minutes":400,"price":12},"Plus":{"minutes":800,"price":30},"Pro":{"minutes":1600,"price":60},"Max":{"minutes":3200,"price":108}}}
+  }
+}
+
+
+
+};
+
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const plansContainer = document.getElementById('plans-container');
 const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total');
 const cartWrapper = document.getElementById('cart-wrapper');
 const cartButton = document.getElementById('cart-button');
-
-// Load rates.json
-let countryData = {};
-fetch('/rates.json')
-  .then(res=>res.json())
-  .then(data=>{countryData=data;})
-  .catch(err=>console.error("Error loading rates.json:",err));
 
 function generatePlans(){
   const country = document.getElementById('country').value;
@@ -202,32 +418,38 @@ function generatePlans(){
     areaContainer.style.display='block';
     areaSelect.innerHTML='';
     (localAreas[country]||[]).forEach(a=>{
-      const opt=document.createElement('option'); opt.value=a; opt.textContent=a;
+      const opt=document.createElement('option'); 
+      opt.value=a; 
+      opt.textContent=a;
       areaSelect.appendChild(opt);
     });
-  } else { areaContainer.style.display='none'; }
+  } else areaContainer.style.display='none';
 
   plansContainer.innerHTML='';
+  const packages = countryData[country]?.[numberType]?.packages || {};
+  const rate = +(countryData[country]?.[numberType]?.rate * profitMargin).toFixed(3);
+
   Object.keys(packages).forEach(pkg=>{
-    const mins = packages[pkg];
-    const rate = countryData[country]?.[numberType]||0;
-    const price = +(rate*mins*profitMargin).toFixed(2);
-    const overage = +(rate*profitMargin).toFixed(3);
+    const mins = packages[pkg].minutes;
+    const price = +(packages[pkg].price * profitMargin).toFixed(2);
 
     const div = document.createElement('div');
     div.className='plan';
-    div.innerHTML=`<h3>${pkg}</h3>
-                   <div class="price">$${price}</div>
-                   <div class="minutes">${mins} Minutes</div>
-                   <div class="overage">Overage: $${overage}/min</div>
-                   <button class="buy-now">Add to Cart</button>`;
-    div.querySelector('button').addEventListener('click',()=>{
+    div.innerHTML=`
+      <h3>${pkg}</h3>
+      <div class="price">$${price}</div>
+      <div class="minutes">${mins} Minutes</div>
+      <div class="overage">Overage: $${rate}/min</div>
+      <button class="buy-now">Add to Cart</button>`;
+      
+    div.querySelector('button').addEventListener('click', ()=>{
       const forward = document.getElementById('forward').value || '';
       const area = numberType==='local'?areaSelect.value:'';
       cart.push({plan:pkg,country,numberType,area,price,forward});
       updateCart();
       localStorage.setItem('cart',JSON.stringify(cart));
     });
+
     plansContainer.appendChild(div);
   });
 }
@@ -254,17 +476,14 @@ function updateCart(){
 
 cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
 document.getElementById('close-cart').addEventListener('click',()=>cartWrapper.classList.remove('active'));
-
-// Trigger packages on Buy Numbers
-document.getElementById('buy-numbers').addEventListener('click',generatePlans);
-
-// Initialize cart
+document.getElementById('country').addEventListener('change',generatePlans);
+document.getElementById('number-type').addEventListener('change',generatePlans);
 updateCart();
 
 // PayPal
 paypal.Buttons({
   createOrder:(data,actions)=>{
-    const total = cart.reduce((sum,p)=>sum+p.price,0);
+    const total=cart.reduce((sum,p)=>sum+p.price,0);
     return actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]});
   },
   onApprove:(data,actions)=>{
@@ -274,6 +493,8 @@ paypal.Buttons({
     });
   }
 }).render('#paypal-button-container');
+
+generatePlans();
 </script>
 </body>
 </html>
