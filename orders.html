@@ -123,7 +123,8 @@
     const cartButton = document.getElementById('cart-button');
     const paypalContainer = document.getElementById('paypal-button-container');
 
-    let cart = [];
+    // LOAD cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function renderPlans(){
       plansContainer.innerHTML='';
@@ -150,6 +151,7 @@
     function addToCart(country,plan,data){
       const forward = forwardInput.value || '—';
       cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
+      localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
       updateCartButton();
       cartWrapper.classList.add('active'); // open cart on add
@@ -157,6 +159,7 @@
 
     function removeFromCart(index){
       cart.splice(index,1);
+      localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
       updateCartButton();
     }
@@ -201,6 +204,7 @@
           return actions.order.capture().then(function(details){
             alert('Payment completed by '+details.payer.name.given_name);
             cart=[];
+            localStorage.setItem('cart', JSON.stringify(cart));
             renderCart();
             updateCartButton();
             cartWrapper.classList.remove('active'); // close cart after payment
