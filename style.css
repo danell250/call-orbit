@@ -217,3 +217,16 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* --- Orders Page Adjustments --- */
+header.orders-hero {
+  padding: 30px 20px 10px; /* smaller top padding */
+  text-align: center;
+  margin: 1rem auto; /* less gap than hero */
+  background: none; /* no gradient */
+  color: #1f2937;
+}
+
+.orders-section {
+  margin-top: 20px;
+}
