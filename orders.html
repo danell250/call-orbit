@@ -58,6 +58,51 @@
           <option value="ZA">South Africa</option>
           <option value="GB">United Kingdom</option>
           <option value="IN">India</option>
+          <option value="AU">Australia</option>
+          <option value="CA">Canada</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="JP">Japan</option>
+          <option value="BR">Brazil</option>
+          <option value="MX">Mexico</option>
+          <option value="IT">Italy</option>
+          <option value="ES">Spain</option>
+          <option value="KR">South Korea</option>
+          <option value="SG">Singapore</option>
+          <option value="NL">Netherlands</option>
+          <option value="CH">Switzerland</option>
+          <option value="SE">Sweden</option>
+          <option value="BE">Belgium</option>
+          <option value="GR">Greece</option>
+          <option value="PT">Portugal</option>
+          <option value="IE">Ireland</option>
+          <option value="IL">Israel</option>
+          <option value="PL">Poland</option>
+          <option value="RO">Romania</option>
+          <option value="HU">Hungary</option>
+          <option value="SK">Slovakia</option>
+          <option value="CZ">Czech Republic</option>
+          <option value="EE">Estonia</option>
+          <option value="LV">Latvia</option>
+          <option value="LT">Lithuania</option>
+          <option value="LU">Luxembourg</option>
+          <option value="MO">Macau</option>
+          <option value="MY">Malaysia</option>
+          <option value="MT">Malta</option>
+          <option value="MC">Monaco</option>
+          <option value="AN">Netherlands Antilles</option>
+          <option value="NZ">New Zealand</option>
+          <option value="NO">Norway</option>
+          <option value="PA">Panama</option>
+          <option value="PE">Peru</option>
+          <option value="PH">Philippines</option>
+          <option value="TW">Taiwan</option>
+          <option value="TH">Thailand</option>
+          <option value="TT">Trinidad & Tobago</option>
+          <option value="TR">Turkey</option>
+          <option value="UY">Uruguay</option>
+          <option value="VE">Venezuela</option>
+          <option value="VN">Vietnam</option>
         </select>
       </div>
       <div>
@@ -108,44 +153,54 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Country + Number Type Data
-    const countryData = {
-      US: {
-        tollFree: { Basic:{price:18.99,minutes:120,overage:0.33},Plus:{price:28.99,minutes:180,overage:0.31},Pro:{price:48.99,minutes:240,overage:0.30},Max:{price:75.99,minutes:360,overage:0.29} },
-        national: { Basic:{price:16.99,minutes:100,overage:0.32},Plus:{price:25.99,minutes:156,overage:0.316},Pro:{price:43.99,minutes:215,overage:0.307},Max:{price:70.99,minutes:346,overage:0.304} },
-        did: { Basic:{price:15.99,minutes:90,overage:0.34},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30} }
-      },
-      ZA: {
-        tollFree: { Basic:{price:17.99,minutes:110,overage:0.34},Plus:{price:27.99,minutes:170,overage:0.32},Pro:{price:45.99,minutes:230,overage:0.31},Max:{price:73.99,minutes:350,overage:0.30} },
-        national: { Basic:{price:15.99,minutes:90,overage:0.35},Plus:{price:24.99,minutes:140,overage:0.33},Pro:{price:42.99,minutes:200,overage:0.31},Max:{price:69.99,minutes:330,overage:0.30} },
-        did: { Basic:{price:14.99,minutes:80,overage:0.36},Plus:{price:23.99,minutes:130,overage:0.34},Pro:{price:40.99,minutes:190,overage:0.32},Max:{price:65.99,minutes:310,overage:0.30} }
-      },
-      GB: {
-        tollFree: { Basic:{price:19.99,minutes:130,overage:0.32},Plus:{price:29.99,minutes:190,overage:0.30},Pro:{price:47.99,minutes:250,overage:0.29},Max:{price:76.99,minutes:370,overage:0.28} },
-        national: { Basic:{price:18.99,minutes:110,overage:0.31},Plus:{price:28.99,minutes:160,overage:0.305},Pro:{price:46.99,minutes:220,overage:0.30},Max:{price:74.99,minutes:350,overage:0.298} },
-        did: { Basic:{price:17.99,minutes:100,overage:0.32},Plus:{price:27.99,minutes:150,overage:0.31},Pro:{price:44.99,minutes:210,overage:0.305},Max:{price:72.99,minutes:340,overage:0.30} }
-      },
-      IN: {
-        tollFree: { Basic:{price:15.99,minutes:140,overage:0.30},Plus:{price:24.99,minutes:200,overage:0.28},Pro:{price:42.99,minutes:270,overage:0.27},Max:{price:70.99,minutes:420,overage:0.26} },
-        national: { Basic:{price:14.99,minutes:120,overage:0.29},Plus:{price:23.99,minutes:180,overage:0.28},Pro:{price:39.99,minutes:250,overage:0.27},Max:{price:65.99,minutes:400,overage:0.265} },
-        did: { Basic:{price:13.99,minutes:100,overage:0.31},Plus:{price:22.99,minutes:160,overage:0.30},Pro:{price:38.99,minutes:230,overage:0.28},Max:{price:63.99,minutes:380,overage:0.265} }
-      }
+    const tollFreeRates = {
+      US: 0.0706, ZA: 0.4843, GB: 0.1167, IN: 0.3078,
+      AU: 0.0706, CA: 0.0706, DE: 0.1032, FR: 0.1427,
+      JP: 0.1255, BR: 0.2098, MX: 0.2503, IT: 0.0680,
+      ES: 0.2167, KR: 0.3275, SG: 0.0533, NL: 0.1100,
+      CH: 0.0667, SE: 0.2085, BE: 0.1475, GR: 0.1170,
+      PT: 0.1552, IE: 0.0708, IL: 0.1058, PL: 0.0673,
+      RO: 0.2037, HU: 0.1032, SK: 0.1433, CZ: 0.2567,
+      EE: 0.0617, LV: 0.2847, LT: 1.0108, LU: 0.0708,
+      MO: 0.1804, MY: 0.1250, MT: 0.0917, MC: 0.0961,
+      AN: 0.3960, NZ: 0.0533, NO: 0.1902, PA: 0.1216,
+      PE: 0.4059, PH: 0.3992, TW: 0.2294, TH: 0.2294,
+      TT: 0.1333, TR: 0.2286, UY: 0.1042, VE: 0.3275, VN: 0.4647
     };
+
+    const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
+    const profitMargin = 1.2;
+
+    const countryData = {};
+    Object.keys(tollFreeRates).forEach(code => {
+      const base = tollFreeRates[code];
+      countryData[code] = {
+        tollFree: {},
+        national: { Basic:{price:18,minutes:100,overage:0.35}, Plus:{price:28,minutes:200,overage:0.33}, Pro:{price:45,minutes:300,overage:0.31}, Max:{price:75,minutes:500,overage:0.29} },
+        did: { Basic:{price:15,minutes:90,overage:0.36}, Plus:{price:25,minutes:150,overage:0.34}, Pro:{price:40,minutes:250,overage:0.32}, Max:{price:70,minutes:400,overage:0.30} }
+      };
+      Object.keys(packages).forEach(pkg => {
+        const mins = packages[pkg];
+        countryData[code].tollFree[pkg] = {
+          minutes: mins,
+          price: +(base*mins*profitMargin).toFixed(2),
+          overage: +(base*profitMargin).toFixed(3)
+        };
+      });
+    });
 
     const plansContainer = document.getElementById('plans-container');
     const cartButton = document.getElementById('cart-button');
     const cartWrapper = document.getElementById('cart-wrapper');
     const cartItemsEl = document.getElementById('cart-items');
     const cartTotalEl = document.getElementById('cart-total');
-
     let cart = [];
 
     function renderPlans() {
       plansContainer.innerHTML = '';
       const country = document.getElementById('country').value || 'US';
-      const numberType = document.getElementById('number-type').value || 'national';
+      const numberType = document.getElementById('number-type').value || 'tollFree';
       const plans = countryData[country][numberType];
-
       Object.keys(plans).forEach(name => {
         const plan = plans[name];
         const div = document.createElement('div');
@@ -193,7 +248,6 @@
 
     renderPlans();
 
-    // PayPal
     paypal.Buttons({
       createOrder: (data, actions) => {
         const total = cart.reduce((sum, p) => sum + p.price, 0);
