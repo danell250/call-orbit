@@ -10,6 +10,40 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
+<style>
+/* --- Reset / Base Styles --- */
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body {background-color:#f9fafb;color:#1f2937}
+
+/* Hero */
+header.hero {margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
+header.hero h1 {margin-bottom:1rem}
+header.hero p {margin-bottom:2rem}
+
+/* Plans Grid */
+.plans-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
+.plan {background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
+.plan:hover {transform:translateY(-5px)}
+.plan h3 {color:#1e3a8a;margin-bottom:1rem}
+.plan .price {margin-bottom:0.5rem}
+
+/* Forwarding Section */
+.forwarding {margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05)}
+.forwarding label {display:block;margin-bottom:0.5rem;font-weight:600}
+.forwarding select,.forwarding input {width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
+
+/* Add-to-Cart Button */
+.buy-now {background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
+.buy-now:hover {filter:brightness(0.95)}
+
+/* Cart sliding in */
+.cart-wrapper {position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
+.cart-wrapper.active {right:0;}
+.cart h2 {margin-bottom:1rem;color:#1e3a8a}
+.cart-item {display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.remove-btn {background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-left:10px}
+#cart-button {position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+</style>
 </head>
 <body>
 <nav>
@@ -27,12 +61,25 @@
 
 <header class="hero fade-in">
   <h1>Pricing</h1>
-  <p>Flexible plans + simple usage pricing to fit every business.</p>
+  <p>Flexible plans to fit every business.</p>
 </header>
 
-<section class="plans-grid fade-in" id="plans-container">
-  <!-- Plans will be dynamically rendered here with Add to Cart buttons -->
-</section>
+<main>
+  <div class="forwarding">
+    <label for="country">Select Country</label>
+    <select id="country">
+      <option value="US">United States</option>
+      <option value="ZA">South Africa</option>
+      <option value="GB">United Kingdom</option>
+      <option value="IN">India</option>
+      <option value="AU">Australia</option>
+    </select>
+    <label for="forward">Forwarding Number / Device</label>
+    <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
+  </div>
+
+  <div class="plans-grid" id="plans-container"></div>
+</main>
 
 <!-- Cart -->
 <div class="cart-wrapper" id="cart-wrapper">
@@ -48,34 +95,24 @@
 
 <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
-<footer>
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
+<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Fade-in animations (unchanged)
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
-
-// Pricing plans data (same as orders.html)
 const countryData = {
-  US:{Starter:{price:19,minutes:100,overage:0.32},Team:{price:29,minutes:150,overage:0.31},Business:{price:49,minutes:200,overage:0.30},Enterprise:{price:0,minutes:0,overage:0}},
-  ZA:{Starter:{price:19,minutes:100,overage:0.32},Team:{price:29,minutes:150,overage:0.31},Business:{price:49,minutes:200,overage:0.30},Enterprise:{price:0,minutes:0,overage:0}},
-  GB:{Starter:{price:19,minutes:100,overage:0.32},Team:{price:29,minutes:150,overage:0.31},Business:{price:49,minutes:200,overage:0.30},Enterprise:{price:0,minutes:0,overage:0}},
-  IN:{Starter:{price:19,minutes:100,overage:0.32},Team:{price:29,minutes:150,overage:0.31},Business:{price:49,minutes:200,overage:0.30},Enterprise:{price:0,minutes:0,overage:0}},
-  AU:{Starter:{price:19,minutes:100,overage:0.32},Team:{price:29,minutes:150,overage:0.31},Business:{price:49,minutes:200,overage:0.30},Enterprise:{price:0,minutes:0,overage:0}}
+  US:{Starter:{price:19},Team:{price:29},Business:{price:49},Enterprise:{price:99}},
+  ZA:{Starter:{price:19},Team:{price:29},Business:{price:49},Enterprise:{price:99}},
+  GB:{Starter:{price:19},Team:{price:29},Business:{price:49},Enterprise:{price:99}},
+  IN:{Starter:{price:19},Team:{price:29},Business:{price:49},Enterprise:{price:99}},
+  AU:{Starter:{price:19},Team:{price:29},Business:{price:49},Enterprise:{price:99}}
 };
 
+const countrySelect = document.getElementById('country');
+const forwardInput = document.getElementById('forward');
 const plansContainer = document.getElementById('plans-container');
 const cartWrapper = document.getElementById('cart-wrapper');
 const cartItems = document.getElementById('cart-items');
@@ -87,27 +124,27 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function renderPlans(){
   plansContainer.innerHTML='';
-  const country = 'US'; // default country for pricing page
-  const plans = countryData[country];
+  const c = countrySelect.value;
+  const plans = countryData[c];
   for(const plan in plans){
     const data = plans[plan];
     const div = document.createElement('div');
     div.className='plan';
     div.innerHTML=`
       <h3>${plan}</h3>
-      <p><strong>$${data.price}${data.price===0?'':'/mo'}</strong></p>
-      ${data.minutes>0?`<p>${data.minutes} included minutes</p>`:''}
-      ${data.overage>0?`<p>$${data.overage.toFixed(3)} per extra minute</p>`:''}
+      <div class="price">$${data.price} /mo</div>
       <button class="buy-now">Add to Cart</button>
     `;
-    div.querySelector('button').addEventListener('click',()=>{ addToCart(country,plan,data); });
+    div.querySelector('button').addEventListener('click',()=>{
+      addToCart(c,plan,data);
+    });
     plansContainer.appendChild(div);
   }
 }
 
 function addToCart(country,plan,data){
-  const forward='—';
-  cart.push({country,plan,price:data.price,minutes:data.minutes,forward});
+  const forward = forwardInput.value || '—';
+  cart.push({country,plan,price:data.price,forward});
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
   updateCartButton();
@@ -123,15 +160,17 @@ function removeFromCart(index){
 
 function renderCart(){
   cartItems.innerHTML='';
-  let total=0;
+  let total = 0;
   cart.forEach((item,index)=>{
     total+=item.price;
-    const div=document.createElement('div');
+    const div = document.createElement('div');
     div.className='cart-item';
-    div.innerHTML=`<span>${item.country} - ${item.plan} (${item.minutes} min)</span>
+    div.innerHTML=`
+      <span>${item.country} - ${item.plan}</span>
       <span>$${item.price.toFixed(2)}
         <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
-      </span>`;
+      </span>
+    `;
     cartItems.appendChild(div);
   });
   cartTotalEl.textContent=`$${total.toFixed(2)}`;
@@ -139,30 +178,38 @@ function renderCart(){
 }
 
 function updateCartButton(){
-  const total=cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
-  cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total})`;
+  const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-cartButton.addEventListener('click',()=>{ cartWrapper.classList.toggle('active'); });
+cartButton.addEventListener('click', () => {
+  cartWrapper.classList.toggle('active');
+});
 
 function renderPayPal(){
   paypalContainer.innerHTML='';
   if(cart.length===0) return;
-  const total=cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
+  const total = cart.reduce((sum,item)=>sum+item.price,0).toFixed(2);
   paypal.Buttons({
-    createOrder:function(data,actions){ return actions.order.create({purchase_units:[{amount:{value:total}}]}); },
-    onApprove:function(data,actions){ return actions.order.capture().then(function(details){
-      alert('Payment completed by '+details.payer.name.given_name);
-      cart=[];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-      updateCartButton();
-      cartWrapper.classList.remove('active'); 
-    }); }
+    createOrder: function(data, actions){
+      return actions.order.create({purchase_units:[{amount:{value:total}}]});
+    },
+    onApprove: function(data, actions){
+      return actions.order.capture().then(function(details){
+        alert('Payment completed by '+details.payer.name.given_name);
+        cart=[];
+        localStorage.removeItem('cart');
+        renderCart();
+        updateCartButton();
+        cartWrapper.classList.remove('active');
+      });
+    }
   }).render('#paypal-button-container');
 }
 
-// Initialize page
+countrySelect.addEventListener('change',renderPlans);
+forwardInput.addEventListener('input',renderPlans);
+
 renderPlans();
 updateCartButton();
 </script>
