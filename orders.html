@@ -222,6 +222,15 @@ const cartWrapper = document.getElementById('cart-wrapper');
 const cartButton = document.getElementById('cart-button');
 let cart = [];
 
+// Load shared cart from localStorage
+window.addEventListener('DOMContentLoaded', () => {
+  const savedCart = localStorage.getItem('callOrbitCart');
+  if(savedCart){
+    cart = JSON.parse(savedCart);
+    updateCart();
+  }
+});
+
 function generatePlans() {
   const country = document.getElementById('country').value;
   const numberType = document.getElementById('number-type').value;
@@ -283,6 +292,9 @@ function updateCart(){
   });
   cartTotalEl.textContent = `$${total.toFixed(2)}`;
   cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
+
+  // Save shared cart
+  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
 }
 
 cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
