@@ -9,42 +9,71 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
+
 <style>
+/* Navbar Buy Numbers button */
+.navbar-buy {
+  background: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.navbar-buy:hover {
+  background: #3b82f6;
+  color: #fff;
+  transform: scale(1.05);
+}
+
 /* Hero */
 header.hero {
   margin: 20px auto;
   padding: 60px 20px;
   text-align: center;
-  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
   color: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.2rem; }
+header.hero h1 { margin-bottom: 1rem; font-size: 3rem; }
+header.hero p { margin-bottom: 2rem; font-size: 1.2rem; }
 
-/* Privacy Content */
+/* Privacy Policy Content */
 .privacy-content {
   max-width: 900px;
-  margin: 30px auto;
-  padding: 25px 20px;
-  background:#fff;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  line-height:1.6;
-  color:#1f2937;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #1f2937;
 }
-.privacy-content h2 { color:#1e3a8a; margin-top:1.5rem; }
-.privacy-content p { margin-bottom:1rem; }
+.privacy-content h2 { margin-top: 1.5rem; color: #1e3a8a; }
+.privacy-content p { margin-bottom: 1rem; }
+.privacy-content a { color: #3b82f6; text-decoration: underline; }
 
-/* Fade-in animation */
-.fade-in { opacity:0; transform:translateY(30px); transition:opacity 0.8s ease-out, transform 0.8s ease-out; }
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #f3f4f6;
+  margin-top: 40px;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+/* Fade-in */
+.fade-in { opacity:0; transform:translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .fade-in.visible { opacity:1; transform:translateY(0); }
 </style>
 </head>
-<body>
 
-<!-- Navbar -->
+<body>
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
@@ -59,50 +88,43 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   </div>
 </nav>
 
-<!-- Hero Section -->
 <header class="hero fade-in">
   <h1>Privacy Policy</h1>
-  <p>Your privacy and trust are important to us.</p>
+  <p>Your privacy is important to us. This page explains what data we collect, how we use it, and your rights regarding your information.</p>
 </header>
 
-<!-- Privacy Content -->
 <section class="privacy-content fade-in">
   <h2>Information We Collect</h2>
-  <p>We may collect personal information such as your name, email address, and other details when you interact with our platform or submit a form via our <a href="/contact">Contact Page</a>.</p>
+  <p>We may collect information that you provide directly to us when using our services, such as your name, email address, and contact preferences. Additionally, we may collect technical data automatically through your use of our website, such as IP address, browser type, and usage patterns.</p>
 
   <h2>How We Use Your Information</h2>
-  <p>We use your information to provide, maintain, and improve our services, respond to inquiries, and communicate updates related to CallOrbit.</p>
+  <p>Your data is used to improve our services, communicate with you about your account or inquiries, provide support, and personalize your experience on our platform. We also use aggregated data to analyze trends and optimize our services.</p>
 
-  <h2>Data Security</h2>
-  <p>We implement reasonable technical and organizational measures to protect your personal information from unauthorized access, use, or disclosure.</p>
-
-  <h2>Sharing and Disclosure</h2>
-  <p>We do not sell or rent your personal information. We may share information with trusted partners to deliver services, comply with legal obligations, or protect our rights and safety.</p>
+  <h2>Sharing Your Information</h2>
+  <p>We do not sell your personal information. We may share data with trusted service providers who help us operate the platform, such as hosting providers and analytics services, under strict confidentiality agreements.</p>
 
   <h2>Cookies and Tracking</h2>
-  <p>We use cookies and similar technologies to enhance user experience, analyze traffic, and optimize our platform performance.</p>
+  <p>We use cookies and similar technologies to enhance user experience, remember your preferences, and collect analytical data to improve our platform. You can manage your cookie preferences through your browser settings.</p>
 
-  <h2>Your Choices</h2>
-  <p>You can access, update, or request deletion of your personal data by contacting us via our <a href="/contact">Contact Page</a>. You may also manage cookie preferences through your browser settings.</p>
+  <h2>Your Rights</h2>
+  <p>You have the right to access, update, or delete your personal information. You may also opt-out of marketing communications. To exercise any of these rights, please <a href="/contact">contact us</a>.</p>
+
+  <h2>Data Security</h2>
+  <p>We implement reasonable security measures to protect your information from unauthorized access, alteration, or disclosure. However, no online platform can guarantee 100% security.</p>
 
   <h2>Changes to This Policy</h2>
-  <p>We may update this Privacy Policy periodically. Updates will be posted on this page, and the "Last Updated" date will indicate the latest revision.</p>
+  <p>We may update this Privacy Policy from time to time. Changes will be reflected on this page with the effective date. We encourage you to review this page periodically.</p>
 
   <h2>Contact Us</h2>
-  <p>If you have questions or concerns about this Privacy Policy, please reach out via our <a href="/contact">Contact Page</a>.</p>
-
-  <p><strong>Last Updated:</strong> September 4, 2025</p>
+  <p>If you have questions or concerns regarding this policy, please <a href="/contact">contact our team</a> via the Contact page.</p>
 </section>
 
-<!-- Footer -->
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:40px;">
+<footer>
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Fade-in animation
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
@@ -114,5 +136,6 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
+
 </body>
 </html>
