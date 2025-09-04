@@ -65,19 +65,34 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
 .cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
 .cta a {
   display:inline-block;
-  background:#3b82f6;
-  color:#fff;
   padding:12px 24px;
   border-radius:999px;
   font-weight:700;
   text-decoration:none;
-  transition:filter 0.2s;
+  transition: filter 0.2s;
+  border: 2px solid #3b82f6; /* matches index */
+  color: #3b82f6;             /* matches index */
+  background: transparent;    /* matches index */
 }
-.cta a:hover { filter:brightness(0.95); }
+.cta a:hover { filter:brightness(0.95); background:#3b82f6; color:#fff; }
+
+/* Navbar Buy Numbers Button (matches index) */
+.navbar-buy {
+  padding: 8px 16px;
+  border: 2px solid #3b82f6;
+  border-radius: 999px;
+  color: #3b82f6;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.navbar-buy:hover {
+  background: #3b82f6;
+  color: #fff;
+}
 </style>
 </head>
 <body>
-<!-- ✅ Navbar matching index/features/pricing -->
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
@@ -86,7 +101,7 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
     <a href="/pricing">Pricing</a>
     <a href="/coverage" class="active-page">Coverage</a>
     <a href="/platform">Platform</a>
-    <a href="/orders" class="navbar-buy">🛒 Buy Numbers</a>
+    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
     <a href="/contact">Contact</a>
     <a href="/about">About</a>
   </div>
