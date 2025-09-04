@@ -10,6 +10,7 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
+/* Hero */
 header.hero {
   margin: 20px auto;
   padding: 60px 20px;
@@ -23,8 +24,8 @@ header.hero h1 { margin-bottom: 1rem; font-size: 3rem; }
 header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .fade-in { animation: fadeIn 1.2s ease forwards; }
 @keyframes fadeIn { 0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
-.navbar-buy { background:#10b981; color:#fff; padding:6px 14px; border-radius:999px; font-weight:700; margin-left:10px; text-decoration:none; transition:filter .2s; }
-.navbar-buy:hover { filter:brightness(0.9); }
+
+/* Plans */
 .plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px 0; padding:0 10px; }
 .plan { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; cursor:pointer; }
 .plan:hover { transform:translateY(-5px) }
@@ -32,12 +33,22 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .plan .price, .plan .setup { margin-bottom:0.5rem; }
 .buy-now { background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px; }
 .buy-now:hover { filter:brightness(0.95); }
+
+/* Cart */
 .cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
 .cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a }
-.cart-item { display:flex; justify-content:space-between; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
+.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
+.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
 .remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
 #cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+/* CTA Section */
+.cta { background:#fff; padding:40px 20px; text-align:center; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); margin:40px 10px; }
+.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
+.cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
+.cta a:hover { filter:brightness(0.95); }
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
@@ -45,9 +56,9 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
-    <a href="/" class="active-page">Home</a>
+    <a href="/">Home</a>
     <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
+    <a href="/pricing" class="active-page">Pricing</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
@@ -62,7 +73,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 </header>
 
 <main>
-  <section class="plans-grid">
+  <section class="plans-grid fade-in">
     <div class="plan">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included.</p>
@@ -92,11 +103,19 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
       <button class="buy-now">Add to Cart</button>
     </div>
   </section>
+
+  <!-- CTA Section -->
+  <section class="cta fade-in">
+    <h2>Get Your Numbers Anywhere</h2>
+    <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
+    <a href="/orders.html">Get Started Today</a>
+  </section>
 </main>
 
+<!-- Cart -->
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
-    <h2>Your Cart</h2>
+    <h2>Your Cart <button class="cart-close" id="cart-close">✕</button></h2>
     <div id="cart-items"></div>
     <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
       <span>Total:</span><span id="cart-total">$0.00</span>
@@ -113,7 +132,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Shared persistent cart across pages
+// Shared cart across all pages
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
 
 function renderCart(){
@@ -125,7 +144,7 @@ function renderCart(){
     total += item.price || 0;
     const div = document.createElement('div');
     div.className = 'cart-item';
-    div.innerHTML = `<span>${item.plan} Plan</span>
+    div.innerHTML = `<span>${item.plan}</span>
                      <span>$${(item.price||0).toFixed(2)}
                      <button class="remove-btn" data-index="${index}">x</button></span>`;
     cartItems.appendChild(div);
@@ -147,15 +166,16 @@ function updateCartButton(){
   document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-document.getElementById('cart-button').addEventListener('click',()=>{
-  document.getElementById('cart-wrapper').classList.toggle('active');
-});
+// Cart open/close
+document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.add('active'));
+document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
 
+// Add to cart buttons
 document.querySelectorAll('.buy-now').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const planDiv = btn.closest('.plan');
     const planName = planDiv.querySelector('h3').textContent;
-    const price = parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,''));
+    const price = parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,'')) || 0;
     cart.push({plan:planName,price});
     renderCart();
   });
@@ -176,14 +196,16 @@ function renderPayPal(){
   }).render('#paypal-button-container');
 }
 
+// Keep cart synced across tabs/pages
+window.addEventListener("storage", function(e){
+  if(e.key === "callOrbitCart"){
+    cart = JSON.parse(e.newValue) || [];
+    renderCart();
+  }
+});
+
 // Initial render
 renderCart();
-
-// Listen to localStorage changes to sync cart across pages
-window.addEventListener('storage',()=>{
-  cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
-  renderCart();
-});
 </script>
 </body>
 </html>

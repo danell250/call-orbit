@@ -9,9 +9,20 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <style>
 main{max-width:1120px;margin:20px auto;padding:0}
-header.hero{margin:0 auto;padding:40px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px}
-header.hero h1{margin-bottom:1rem}
-header.hero p{margin-bottom:2rem}
+
+/* Hero banner */
+header.hero{
+  margin:20px auto;
+  padding:60px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1{margin-bottom:1rem;font-size:2.5rem}
+header.hero p{margin-bottom:2rem;font-size:1.25rem}
+
 .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
 .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
 .plan:hover{transform:translateY(-5px)}
@@ -133,8 +144,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const profitMargin = 1.25; // 25% profit
 const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
-
-// Hardcoded Local Areas
 const localAreas = {
   US:["New York","Los Angeles","Chicago","Houston","Miami"],
   GB:["London","Manchester","Birmingham"],
@@ -168,84 +177,59 @@ const localAreas = {
   HU:["Budapest","Debrecen"]
 };
 
-// Inline country rates (USD per minute)
 const countryData = {
-  US:{tollFree:0.05,local:0.03,national:0.04},
-  GB:{tollFree:0.06,local:0.04,national:0.05},
-  CA:{tollFree:0.05,local:0.03,national:0.04},
-  AU:{tollFree:0.06,local:0.04,national:0.05},
-  DE:{tollFree:0.07,local:0.05,national:0.06},
-  FR:{tollFree:0.07,local:0.05,national:0.06},
-  IN:{tollFree:0.04,local:0.02,national:0.03},
-  ZA:{tollFree:0.05,local:0.03,national:0.04},
-  BR:{tollFree:0.06,local:0.04,national:0.05},
-  MX:{tollFree:0.05,local:0.03,national:0.04},
-  JP:{tollFree:0.08,local:0.06,national:0.07},
-  IT:{tollFree:0.07,local:0.05,national:0.06},
-  ES:{tollFree:0.07,local:0.05,national:0.06},
-  NL:{tollFree:0.06,local:0.04,national:0.05},
-  CH:{tollFree:0.08,local:0.06,national:0.07},
-  SE:{tollFree:0.06,local:0.04,national:0.05},
-  SG:{tollFree:0.07,local:0.05,national:0.06},
-  IE:{tollFree:0.06,local:0.04,national:0.05},
-  NZ:{tollFree:0.06,local:0.04,national:0.05},
-  NO:{tollFree:0.07,local:0.05,national:0.06},
-  PT:{tollFree:0.07,local:0.05,national:0.06},
-  BE:{tollFree:0.07,local:0.05,national:0.06},
-  KR:{tollFree:0.08,local:0.06,national:0.07},
-  TR:{tollFree:0.06,local:0.04,national:0.05},
-  TH:{tollFree:0.05,local:0.03,national:0.04},
-  PH:{tollFree:0.04,local:0.02,national:0.03},
-  TW:{tollFree:0.07,local:0.05,national:0.06},
-  PL:{tollFree:0.06,local:0.04,national:0.05},
-  RO:{tollFree:0.06,local:0.04,national:0.05},
-  HU:{tollFree:0.06,local:0.04,national:0.05}
+  US:{tollFree:0.05,local:0.03,national:0.04}, GB:{tollFree:0.06,local:0.04,national:0.05},
+  CA:{tollFree:0.05,local:0.03,national:0.04}, AU:{tollFree:0.06,local:0.04,national:0.05},
+  DE:{tollFree:0.07,local:0.05,national:0.06}, FR:{tollFree:0.07,local:0.05,national:0.06},
+  IN:{tollFree:0.04,local:0.02,national:0.03}, ZA:{tollFree:0.05,local:0.03,national:0.04},
+  BR:{tollFree:0.06,local:0.04,national:0.05}, MX:{tollFree:0.05,local:0.03,national:0.04},
+  JP:{tollFree:0.08,local:0.06,national:0.07}, IT:{tollFree:0.07,local:0.05,national:0.06},
+  ES:{tollFree:0.07,local:0.05,national:0.06}, NL:{tollFree:0.06,local:0.04,national:0.05},
+  CH:{tollFree:0.08,local:0.06,national:0.07}, SE:{tollFree:0.06,local:0.04,national:0.05},
+  SG:{tollFree:0.07,local:0.05,national:0.06}, IE:{tollFree:0.06,local:0.04,national:0.05},
+  NZ:{tollFree:0.06,local:0.04,national:0.05}, NO:{tollFree:0.07,local:0.05,national:0.06},
+  PT:{tollFree:0.07,local:0.05,national:0.06}, BE:{tollFree:0.07,local:0.05,national:0.06},
+  KR:{tollFree:0.08,local:0.06,national:0.07}, TR:{tollFree:0.06,local:0.04,national:0.05},
+  TH:{tollFree:0.05,local:0.03,national:0.04}, PH:{tollFree:0.04,local:0.02,national:0.03},
+  TW:{tollFree:0.07,local:0.05,national:0.06}, PL:{tollFree:0.06,local:0.04,national:0.05},
+  RO:{tollFree:0.06,local:0.04,national:0.05}, HU:{tollFree:0.06,local:0.04,national:0.05}
 };
 
-const plansContainer = document.getElementById('plans-container');
-const cartItemsEl = document.getElementById('cart-items');
-const cartTotalEl = document.getElementById('cart-total');
-const cartWrapper = document.getElementById('cart-wrapper');
-const cartButton = document.getElementById('cart-button');
-const cartClose = document.getElementById('cart-close');
+const plansContainer=document.getElementById('plans-container');
+const cartItemsEl=document.getElementById('cart-items');
+const cartTotalEl=document.getElementById('cart-total');
+const cartWrapper=document.getElementById('cart-wrapper');
+const cartButton=document.getElementById('cart-button');
+const cartClose=document.getElementById('cart-close');
 
-// Load persistent shared cart
-let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+let cart=JSON.parse(localStorage.getItem('callOrbitCart'))||[];
 
-function generatePlans() {
-  const country = document.getElementById('country').value;
-  const numberType = document.getElementById('number-type').value;
-
-  const areaContainer = document.getElementById('area-container');
-  const areaSelect = document.getElementById('area');
+function generatePlans(){
+  const country=document.getElementById('country').value;
+  const numberType=document.getElementById('number-type').value;
+  const areaContainer=document.getElementById('area-container');
+  const areaSelect=document.getElementById('area');
   if(numberType==='local'){
     areaContainer.style.display='block';
     areaSelect.innerHTML='';
     localAreas[country].forEach(a=>{
-      const opt = document.createElement('option');
-      opt.value = a; opt.textContent = a;
-      areaSelect.appendChild(opt);
+      const opt=document.createElement('option');
+      opt.value=a; opt.textContent=a; areaSelect.appendChild(opt);
     });
-  } else {
-    areaContainer.style.display='none';
-  }
+  } else { areaContainer.style.display='none'; }
 
   plansContainer.innerHTML='';
   Object.keys(packages).forEach(pkg=>{
-    const mins = packages[pkg];
-    const rate = countryData[country][numberType];
-    const price = +(rate*mins*profitMargin).toFixed(2);
-    const overage = +(rate*profitMargin).toFixed(3);
-    const div = document.createElement('div');
+    const mins=packages[pkg];
+    const rate=countryData[country][numberType];
+    const price=+(rate*mins*profitMargin).toFixed(2);
+    const overage=+(rate*profitMargin).toFixed(3);
+    const div=document.createElement('div');
     div.className='plan';
-    div.innerHTML = `<h3>${pkg}</h3>
-                     <div class="price">$${price}</div>
-                     <div class="minutes">${mins} Minutes</div>
-                     <div class="overage">Overage: $${overage}/min</div>
-                     <button class="buy-now">Add to Cart</button>`;
+    div.innerHTML=`<h3>${pkg}</h3><div class="price">$${price}</div><div class="minutes">${mins} Minutes</div><div class="overage">Overage: $${overage}/min</div><button class="buy-now">Add to Cart</button>`;
     div.querySelector('button').addEventListener('click',()=>{
-      const forward = document.getElementById('forward').value || '';
-      const area = numberType==='local'?areaSelect.value:'';
+      const forward=document.getElementById('forward').value||'';
+      const area=numberType==='local'?areaSelect.value:'';
       cart.push({plan:pkg,country,numberType,area,price,forward});
       updateCart();
     });
@@ -258,10 +242,9 @@ function updateCart(){
   let total=0;
   cart.forEach((item,i)=>{
     total+=item.price;
-    const div = document.createElement('div');
+    const div=document.createElement('div');
     div.className='cart-item';
-    div.innerHTML = `<span>${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})</span>
-                     <span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+    div.innerHTML=`<span>${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})</span><span>$${item.price.toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
     cartItemsEl.appendChild(div);
   });
   document.querySelectorAll('.remove-btn').forEach(btn=>{
@@ -270,8 +253,8 @@ function updateCart(){
       updateCart();
     });
   });
-  cartTotalEl.textContent = `$${total.toFixed(2)}`;
-  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
+  cartTotalEl.textContent=`$${total.toFixed(2)}`;
+  cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
   localStorage.setItem('callOrbitCart',JSON.stringify(cart));
   renderPayPal();
 }
@@ -296,7 +279,6 @@ function renderPayPal(){
   }).render('#paypal-button-container');
 }
 
-// Initial load
 generatePlans();
 updateCart();
 </script>
