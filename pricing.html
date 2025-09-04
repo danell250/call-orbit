@@ -26,13 +26,43 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 @keyframes fadeIn { 0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
 
 /* Plans */
-.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px 0; padding:0 10px; }
-.plan { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; cursor:pointer; }
-.plan:hover { transform:translateY(-5px); }
-.plan h3 { color:#1e3a8a;margin-bottom:1rem; }
-.plan .price, .plan .setup { margin-bottom:0.5rem; }
-.buy-now { background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px; }
-.buy-now:hover { filter:brightness(0.95); }
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 20px 0;
+  padding: 0 10px;
+}
+.plan {
+  background:#fff;
+  padding:25px 20px;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan:hover { transform: translateY(-5px); box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+.plan h3 { color:#1e3a8a; margin-bottom:1rem; font-size:1.75rem; }
+.plan p { margin-bottom:0.75rem; font-size:1rem; color:#374151; }
+.plan .price, .plan .setup { margin-bottom:1rem; font-weight:700; font-size:1.1rem; }
+
+/* Add to Cart Button */
+.buy-now {
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 24px;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  transition: filter 0.2s, transform 0.2s;
+  margin-top:auto;
+}
+.buy-now:hover { filter:brightness(0.95); transform:translateY(-2px); }
 
 /* Cart */
 .cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
@@ -49,22 +79,6 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
 .cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
 .cta a:hover { filter:brightness(0.95); }
-
-/* Navbar Buy Numbers button like index/features */
-.navbar-buy {
-  background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-}
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
@@ -120,7 +134,6 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
     </div>
   </section>
 
-  <!-- CTA Section -->
   <section class="cta fade-in">
     <h2>Get Your Numbers Anywhere</h2>
     <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
@@ -128,7 +141,6 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
   </section>
 </main>
 
-<!-- Cart -->
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
     <h2>Your Cart <button class="cart-close" id="cart-close">✕</button></h2>
@@ -148,7 +160,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Shared cart across all pages
+// Shared cart
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
 
 function renderCart(){
@@ -182,11 +194,10 @@ function updateCartButton(){
   document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-// Cart open/close
 document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.add('active'));
 document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
 
-// Add to cart buttons
+// Add to Cart
 document.querySelectorAll('.buy-now').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const planDiv = btn.closest('.plan');
@@ -212,7 +223,6 @@ function renderPayPal(){
   }).render('#paypal-button-container');
 }
 
-// Keep cart synced across tabs/pages
 window.addEventListener("storage", function(e){
   if(e.key === "callOrbitCart"){
     cart = JSON.parse(e.newValue) || [];
@@ -220,7 +230,6 @@ window.addEventListener("storage", function(e){
   }
 });
 
-// Initial render
 renderCart();
 </script>
 </body>
