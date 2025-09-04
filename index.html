@@ -140,7 +140,14 @@
   </section>
 
   <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  <br>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
   </footer>
 
   <script>
