@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Refund Policy</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
+
+<style>
+/* Navbar Buy Numbers Button */
+.navbar-buy {
+  background: none;
+  color: #3b82f6;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid #3b82f6;
+}
+.navbar-buy:hover { 
+  background:#3b82f6; 
+  color: #fff; 
+  transform:scale(1.05); 
+}
+
+/* Content */
+.refund-content {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.refund-content h1 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+.refund-content h2 {
+  color: #1e3a8a;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.refund-content p, .refund-content li {
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.refund-content ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.refund-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/" class="active-page">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+    <a href="/orders" class="navbar-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+
+<!-- Hero / Content -->
+<section class="refund-content fade-in">
+  <h1>Refund Policy</h1>
+
+  <p>At CallOrbit, we offer digital services including platform access and contact center numbers. Please review our refund policy carefully.</p>
+
+  <h2>1. General Policy</h2>
+  <p>All sales are generally <strong>non-refundable</strong> once services have been activated or numbers assigned.</p>
+
+  <h2>2. Refund Eligibility</h2>
+  <ul>
+    <li>Duplicate purchase.</li>
+    <li>Incorrect charges due to technical error.</li>
+    <li>Cancellation before number activation (contact support immediately via <a href="/contact">Contact Page</a>).</li>
+  </ul>
+
+  <h2>3. Refund Process</h2>
+  <p>Submit a refund request via our <a href="/contact">Contact Page</a> within 14 days of purchase. Our support team will review and notify you of the decision. Approved refunds are processed to the original payment method within 5–10 business days.</p>
+
+  <h2>4. Non-Refundable Cases</h2>
+  <ul>
+    <li>Activated numbers or services already used.</li>
+    <li>Any third-party fees incurred during purchase.</li>
+    <li>Change of mind after service activation.</li>
+  </ul>
+
+  <h2>5. Contact</h2>
+  <p>For refund requests or inquiries, please contact our support via <a href="/contact">Contact Page</a>.</p>
+
+</section>
+
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:40px;">
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
+
+</body>
+</html>

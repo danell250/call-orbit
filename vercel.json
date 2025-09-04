@@ -8,9 +8,13 @@
     { "source": "/coverage", "destination": "/coverage.html" },
     { "source": "/platform", "destination": "/platform.html" },
     { "source": "/orders", "destination": "/orders.html" },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" }
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/refund-policy", "destination": "/refund-policy.html" }
   ],
   "redirects": [
-    { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true }
+    { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/terms.html", "destination": "/terms", "permanent": true },
+    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true }
   ]
 }
