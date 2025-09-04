@@ -10,40 +10,110 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <style>
-/* CTA button */
-.cta .buy-now {
-  background:#3b82f6;
-  color:#fff;
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:1rem;
-  text-decoration:none;
-  display:inline-block;
-  transition:filter 0.2s;
+/* Unified button styles */
+.btn {
+  padding: 12px 30px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
 }
-.cta .buy-now:hover { filter: brightness(0.95); }
+
+/* Buy Numbers button */
+.btn-buy {
+  background: none;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  margin-left: 10px;
+}
+.btn-buy:hover {
+  background: #3b82f6;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Hero CTA button */
+.btn-primary {
+  background: #10b981;
+  color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+/* Center alignment helper */
+.center { text-align:center; }
+
+/* Hero */
+header.hero {
+  margin:0 auto;
+  padding:60px 20px;
+  text-align:center;
+  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1 { margin-bottom:1rem; font-size:2.8rem; }
+header.hero p { margin-bottom:2rem; font-size:1.3rem; }
+
+/* Features Grid */
+.features-grid { 
+  display:grid; 
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); 
+  gap:1.5rem; 
+  margin:20px 10px; 
+}
+.feature { 
+  background:#fff; 
+  padding:20px; 
+  border-radius:1rem; 
+  box-shadow:0 5px 20px rgba(0,0,0,0.05); 
+  transition:transform 0.2s; 
+  text-align:center; 
+}
+.feature:hover { transform:translateY(-5px); }
+.feature h3 { color:#1e3a8a; margin-bottom:0.5rem; }
+.feature p { font-size:0.95rem; margin-bottom:10px; }
+
+/* CTA Section */
+.cta { text-align:center; margin:50px 0; }
+.cta h2 { font-size:2rem; margin-bottom:0.5rem; }
+.cta p { font-size:1rem; margin-bottom:1rem; }
+
+/* Footer */
+footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
+
 </style>
 </head>
 <body>
+
+<!-- Navbar -->
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
     <a href="/">Home</a>
     <a href="/features" class="active-page">Features</a>
     <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
+    <a href="/orders" class="btn btn-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
   </div>
 </nav>
 
+<!-- Hero -->
 <header class="hero fade-in">
   <h1>Features</h1>
   <p>Everything you need to manage your contact centers efficiently.</p>
+  <a href="/pricing" class="btn btn-primary">See Platform Pricing 🛒</a>
 </header>
 
+<!-- Features Grid -->
 <section class="features features-grid fade-in">
   <div class="feature">
     <h3>Live Dashboards</h3>
@@ -63,12 +133,14 @@
   </div>
 </section>
 
-<section class="cta fade-in" style="text-align:center;margin:50px 0;">
+<!-- CTA Section -->
+<section class="cta fade-in">
   <h2>Take Your Contact Center to the Next Level</h2>
   <p>Everything you need to centralize, streamline, and supercharge your operations.</p>
-  <a href="/pricing" class="buy-now">See Platform Pricing 🛒</a>
+  <a href="/orders" class="btn btn-buy">Buy Numbers Now</a>
 </section>
 
+<!-- Footer -->
 <footer>
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
@@ -86,5 +158,6 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
+
 </body>
 </html>
