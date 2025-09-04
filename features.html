@@ -9,10 +9,31 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
+
+<!-- Inline CSS to ensure navbar Buy Numbers matches index.html -->
+<style>
+.navbar-buy {
+  background: none;
+  color: #3b82f6;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid #3b82f6;
+}
+.navbar-buy:hover { 
+  background:#3b82f6; 
+  color: #fff; 
+  transform:scale(1.05); 
+}
+</style>
+
 </head>
 <body>
 
-<!-- Navbar (matches index.html) -->
+<!-- Navbar -->
 <nav>
   <div>
     <a href="/"><strong>CallOrbit</strong></a>
@@ -33,7 +54,6 @@
 <header class="hero fade-in">
   <h1>Features</h1>
   <p>Everything you need to manage your contact centers efficiently.</p>
-  <!-- Top hero CTA -->
   <a href="/orders" class="hero-cta">Buy Numbers 🛒</a>
 </header>
 
