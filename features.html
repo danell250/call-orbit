@@ -112,13 +112,14 @@
   <a href="/orders">Buy Numbers Now</a>
 </section>
 
-<!-- Footer -->
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  <br>
+  <a href="/privacy-policy.html">Privacy Policy</a>
 </footer>
-
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
