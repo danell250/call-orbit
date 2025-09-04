@@ -9,90 +9,6 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
-<style>
-/* Unified button styles */
-.btn {
-  padding: 12px 30px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-/* Buy Numbers button - match index.html exactly */
-.btn-buy {
-  background: none;
-  color: #3b82f6;
-  padding: 10px 20px;   /* same as index.html */
-  border-radius: 999px;
-  font-weight: 700;
-  margin-left: 10px;
-  text-decoration: none;
-  transition: all 0.2s;
-  border: 2px solid #3b82f6;
-}
-.btn-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-  transform: scale(1.05);
-}
-
-/* Hero CTA button */
-.btn-primary {
-  background: #10b981;
-  color: #fff;
-}
-.btn-primary:hover {
-  filter: brightness(0.9);
-}
-
-/* Center alignment helper */
-.center { text-align:center; }
-
-/* Hero */
-header.hero {
-  margin:0 auto;
-  padding:60px 20px;
-  text-align:center;
-  background: linear-gradient(135deg,#3b82f6,#60a5fa);
-  color:#fff;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-header.hero h1 { margin-bottom:1rem; font-size:2.8rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; }
-
-/* Features Grid */
-.features-grid { 
-  display:grid; 
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); 
-  gap:1.5rem; 
-  margin:20px 10px; 
-}
-.feature { 
-  background:#fff; 
-  padding:20px; 
-  border-radius:1rem; 
-  box-shadow:0 5px 20px rgba(0,0,0,0.05); 
-  transition:transform 0.2s; 
-  text-align:center; 
-}
-.feature:hover { transform:translateY(-5px); }
-.feature h3 { color:#1e3a8a; margin-bottom:0.5rem; }
-.feature p { font-size:0.95rem; margin-bottom:10px; }
-
-/* CTA Section */
-.cta { text-align:center; margin:50px 0; }
-.cta h2 { font-size:2rem; margin-bottom:0.5rem; }
-.cta p { font-size:1rem; margin-bottom:1rem; }
-
-/* Footer */
-footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
-
-</style>
 </head>
 <body>
 
@@ -100,7 +16,7 @@ footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
-    <a href="/">Home</a>
+    <a href="/" >Home</a>
     <a href="/features" class="active-page">Features</a>
     <a href="/pricing">Pricing</a>
     <a href="/coverage">Coverage</a>
@@ -139,7 +55,7 @@ footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
 </section>
 
 <!-- CTA Section -->
-<section class="cta fade-in">
+<section class="cta fade-in" style="text-align:center;margin:50px 0;">
   <h2>Take Your Contact Center to the Next Level</h2>
   <p>Everything you need to centralize, streamline, and supercharge your operations.</p>
   <a href="/orders" class="btn btn-buy">Buy Numbers Now</a>
