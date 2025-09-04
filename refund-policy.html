@@ -9,59 +9,46 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
-
 <style>
-/* Navbar Buy Numbers Button */
-.navbar-buy {
-  background: none;
-  color: #3b82f6;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-weight: 700;
-  margin-left: 10px;
-  text-decoration: none;
-  transition: all 0.2s;
-  border: 2px solid #3b82f6;
+/* Hero */
+header.hero {
+  margin:20px auto;
+  padding:60px 20px;
+  text-align:center;
+  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
-.navbar-buy:hover { 
-  background:#3b82f6; 
-  color: #fff; 
-  transform:scale(1.05); 
+header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
+header.hero p { margin-bottom:2rem; font-size:1.2rem; }
+
+/* Policy Content */
+.policy-container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  line-height:1.7;
+  color:#1f2937;
+}
+.policy-container h2 { margin-top:2rem; color:#1e3a8a; }
+.policy-container ul { margin-left:20px; margin-bottom:1rem; }
+
+/* Footer */
+footer {
+  text-align:center;
+  padding:2rem;
+  background:#f3f4f6;
+  margin-top:20px;
+  color:#1f2937;
+  font-size:0.95rem;
 }
 
-/* Content */
-.refund-content {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 2rem 1rem;
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-.refund-content h1 {
-  text-align: center;
-  color: #1e3a8a;
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
-}
-.refund-content h2 {
-  color: #1e3a8a;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-.refund-content p, .refund-content li {
-  color: #374151;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-.refund-content ul {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-.refund-content a {
-  color: #3b82f6;
-  text-decoration: underline;
-}
+a { color:#3b82f6; text-decoration:none; }
+a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -70,7 +57,7 @@
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
-    <a href="/" class="active-page">Home</a>
+    <a href="/" >Home</a>
     <a href="/features">Features</a>
     <a href="/pricing">Pricing</a>
     <a href="/coverage">Coverage</a>
@@ -81,43 +68,57 @@
   </div>
 </nav>
 
-<!-- Hero / Content -->
-<section class="refund-content fade-in">
+<header class="hero fade-in">
   <h1>Refund Policy</h1>
+  <p>Our approach to refunds is simple, transparent, and customer-friendly.</p>
+</header>
 
-  <p>At CallOrbit, we offer digital services including platform access and contact center numbers. Please review our refund policy carefully.</p>
+<main>
+  <section class="policy-container fade-in">
+    <p>At CallOrbit, we strive to ensure your satisfaction with our services. If you encounter any issues with our platform, please review the following refund terms:</p>
+    
+    <h2>1. Eligibility for Refunds</h2>
+    <ul>
+      <li>Refunds are available only for subscriptions or purchases made directly through CallOrbit.</li>
+      <li>Refunds must be requested within 14 days of the original purchase.</li>
+      <li>Partial usage of a service does not automatically qualify for a refund.</li>
+    </ul>
 
-  <h2>1. General Policy</h2>
-  <p>All sales are generally <strong>non-refundable</strong> once services have been activated or numbers assigned.</p>
+    <h2>2. Non-Refundable Items</h2>
+    <ul>
+      <li>Custom setup fees.</li>
+      <li>Third-party services or integrations billed through CallOrbit.</li>
+      <li>Any promotional credits or discounts applied to a purchase.</li>
+    </ul>
 
-  <h2>2. Refund Eligibility</h2>
-  <ul>
-    <li>Duplicate purchase.</li>
-    <li>Incorrect charges due to technical error.</li>
-    <li>Cancellation before number activation (contact support immediately via <a href="/contact">Contact Page</a>).</li>
-  </ul>
+    <h2>3. How to Request a Refund</h2>
+    <ul>
+      <li>Contact our support team via the <a href="/contact">Contact Page</a>.</li>
+      <li>Include your account details, purchase date, and reason for the refund.</li>
+      <li>Our team will review your request and respond within 3–5 business days.</li>
+    </ul>
 
-  <h2>3. Refund Process</h2>
-  <p>Submit a refund request via our <a href="/contact">Contact Page</a> within 14 days of purchase. Our support team will review and notify you of the decision. Approved refunds are processed to the original payment method within 5–10 business days.</p>
+    <h2>4. Refund Process</h2>
+    <ul>
+      <li>Approved refunds will be issued via the original payment method.</li>
+      <li>It may take 5–10 business days for the refund to appear in your account.</li>
+    </ul>
 
-  <h2>4. Non-Refundable Cases</h2>
-  <ul>
-    <li>Activated numbers or services already used.</li>
-    <li>Any third-party fees incurred during purchase.</li>
-    <li>Change of mind after service activation.</li>
-  </ul>
+    <h2>5. Changes to this Policy</h2>
+    <p>CallOrbit reserves the right to modify this Refund Policy at any time. Updates will be posted on this page.</p>
+  </section>
+</main>
 
-  <h2>5. Contact</h2>
-  <p>For refund requests or inquiries, please contact our support via <a href="/contact">Contact Page</a>.</p>
-
-</section>
-
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:40px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved. | 
+  <a href="/privacy-policy">Privacy Policy</a> | 
+  <a href="/terms-conditions">Terms & Conditions</a>
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Fade-in effect
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries, observer){
   entries.forEach(entry => {
