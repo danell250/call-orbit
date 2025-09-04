@@ -9,12 +9,12 @@
     { "source": "/platform", "destination": "/platform.html" },
     { "source": "/orders", "destination": "/orders.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
     { "source": "/refund-policy", "destination": "/refund-policy.html" }
   ],
   "redirects": [
     { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
-    { "source": "/terms.html", "destination": "/terms", "permanent": true },
+    { "source": "/terms-conditions.html", "destination": "/terms-conditions", "permanent": true },
     { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true }
   ]
 }
