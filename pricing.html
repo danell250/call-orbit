@@ -50,19 +50,20 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
 .cta a:hover { filter:brightness(0.95); }
 
-/* Navbar Buy Numbers button same as index */
+/* Navbar Buy Numbers button like index */
 .navbar-buy {
-  background: #3b82f6;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
+  background: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  padding: 6px 16px;
   border-radius: 999px;
   font-weight: 700;
   text-decoration: none;
-  transition: filter 0.2s;
+  transition: all 0.2s;
 }
 .navbar-buy:hover {
-  filter: brightness(0.95);
+  background: #3b82f6;
+  color: #fff;
 }
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
@@ -147,7 +148,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Shared cart
+// Shared cart across all pages
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
 
 function renderCart(){
