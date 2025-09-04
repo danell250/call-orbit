@@ -10,7 +10,7 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
-<!-- Inline CSS to ensure navbar Buy Numbers matches index.html -->
+<!-- Navbar Buy Numbers Button CSS -->
 <style>
 .navbar-buy {
   background: none;
@@ -28,6 +28,34 @@
   color: #fff; 
   transform:scale(1.05); 
 }
+
+/* CTA Section style matching Coverage page */
+.cta {
+  background:#fff;
+  padding:40px 20px;
+  text-align:center;
+  border-radius:1rem;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  margin:40px 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cta:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
+.cta a {
+  display:inline-block;
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  transition:filter 0.2s;
+}
+.cta a:hover { filter:brightness(0.95); }
 </style>
 
 </head>
@@ -78,14 +106,14 @@
 </section>
 
 <!-- Bottom CTA Section -->
-<section class="cta fade-in" style="text-align:center;margin:50px 0;">
+<section class="cta fade-in">
   <h2>Take Your Contact Center to the Next Level</h2>
   <p>Everything you need to centralize, streamline, and supercharge your operations.</p>
-  <a href="/orders" class="btn btn-buy">Buy Numbers Now</a>
+  <a href="/orders">Buy Numbers Now</a>
 </section>
 
 <!-- Footer -->
-<footer>
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved.
 </footer>
 
