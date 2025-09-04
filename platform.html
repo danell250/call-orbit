@@ -57,18 +57,22 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   display:block;
 }
 
-/* CTA Section */
+/* CTA Section (match coverage style) */
 .cta {
   background:#fff;
-  color:#1e3a8a;
   padding:40px 20px;
   text-align:center;
   border-radius:1rem;
-  margin:40px 10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  margin:40px 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.cta h2 { margin-bottom:1rem; font-size:2rem; }
-.cta p { margin-bottom:1.5rem; font-size:1.2rem; }
+.cta:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
 .cta a {
   display:inline-block;
   background:#3b82f6;
@@ -80,21 +84,38 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   transition:filter 0.2s;
 }
 .cta a:hover { filter:brightness(0.95); }
+
+/* Navbar Buy Numbers */
+.navbar-buy {
+  display: inline-block;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.navbar-buy:hover {
+  background: #3b82f6;
+  color: #fff;
+}
 </style>
-<!-- Using FontAwesome CDN for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
     <a href="/">Home</a>
     <a href="/features">Features</a>
     <a href="/pricing">Pricing</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform" class="active-page">Platform</a>
+    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
   </div>
 </nav>
 
@@ -159,5 +180,6 @@ const appearOnScroll = new IntersectionObserver(function(entries, observer){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
+
 </body>
 </html>
