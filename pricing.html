@@ -34,23 +34,14 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .buy-now { background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px; }
 .buy-now:hover { filter:brightness(0.95); }
 
-/* Cart */
-.cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
-.cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
-.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
-.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-.remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
-#cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-
-/* CTA Section */
+/* CTA / Info Sections */
 .cta { background:#fff; padding:40px 20px; text-align:center; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); margin:40px 10px; }
 .cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
 .cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
 .cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
 .cta a:hover { filter:brightness(0.95); }
 
-/* Navbar Buy Numbers button like index */
+/* Navbar Buy Numbers button */
 .navbar-buy {
   background: transparent;
   color: #3b82f6;
@@ -61,14 +52,21 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
   text-decoration: none;
   transition: all 0.2s;
 }
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-}
+.navbar-buy:hover { background: #3b82f6; color: #fff; }
+
+/* Cart */
+.cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
+.cart-wrapper.active { right:0; }
+.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
+.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
+.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
+#cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
 <body>
+
 <nav>
   <div><a href="/"><strong>CallOrbit</strong></a></div>
   <div>
@@ -89,38 +87,47 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 </header>
 
 <main>
+  <!-- Plans Grid -->
   <section class="plans-grid fade-in">
     <div class="plan">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included.</p>
       <p class="price"><strong>$19</strong>/mo</p>
-      <p class="setup">Setup: $99</p>
+      <p class="setup">Setup / Onboarding: $99</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan">
       <h3>Team</h3>
       <p>Unlimited dashboards, up to 20 agents.</p>
       <p class="price"><strong>$29</strong>/user·mo</p>
-      <p class="setup">Setup: $149</p>
+      <p class="setup">Setup / Onboarding: $149</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents.</p>
       <p class="price"><strong>$49</strong>/user·mo</p>
-      <p class="setup">Setup: $199</p>
+      <p class="setup">Setup / Onboarding: $199</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan">
       <h3>Enterprise</h3>
       <p>Global scale, unlimited agents, dedicated manager.</p>
       <p class="price"><strong>$99</strong>/user·mo</p>
-      <p class="setup">Setup: Custom onboarding</p>
+      <p class="setup">Custom onboarding included</p>
       <button class="buy-now">Add to Cart</button>
     </div>
   </section>
 
-  <!-- CTA Section -->
+  <!-- Onboarding & Training Info -->
+  <section class="cta fade-in">
+    <h2>Onboarding & Training</h2>
+    <p>All plans include a one-time <strong>onboarding fee</strong> to set up your portal, configure dashboards, agents, and email domains.</p>
+    <p>Optional <strong>training sessions</strong> are available to get your team comfortable with CallOrbit. Each session lasts 1 hour and costs $50.</p>
+    <p>Our goal is to get you fully operational from day one with minimal effort.</p>
+  </section>
+
+  <!-- CTA to Buy Numbers -->
   <section class="cta fade-in">
     <h2>Get Your Numbers Anywhere</h2>
     <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
@@ -141,94 +148,72 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 </div>
 <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
-<!-- Footer -->
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
   <br>
   <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+  <a href="/terms" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms</a>
 </footer>
 
-
-
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+// Update footer year
+document.getElementById("year").textContent = new Date().getFullYear();
 
-// Shared cart across all pages
-let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+// Cart logic
+let cart = [];
+const cartWrapper = document.getElementById('cart-wrapper');
+const cartButton = document.getElementById('cart-button');
+const cartClose = document.getElementById('cart-close');
+const cartItems = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
 
-function renderCart(){
-  const cartItems = document.getElementById('cart-items');
-  const cartTotalEl = document.getElementById('cart-total');
+function updateCartUI() {
   cartItems.innerHTML = '';
   let total = 0;
-  cart.forEach((item,index)=>{
-    total += item.price || 0;
+  cart.forEach((item, idx) => {
+    total += item.price;
     const div = document.createElement('div');
     div.className = 'cart-item';
-    div.innerHTML = `<span>${item.plan}</span>
-                     <span>$${(item.price||0).toFixed(2)}</span>
-                     <button class="remove-btn" data-index="${index}">x</button>`;
+    div.innerHTML = `${item.name} - $${item.price} <button class="remove-btn" onclick="removeItem(${idx})">✕</button>`;
     cartItems.appendChild(div);
   });
-  document.querySelectorAll('.remove-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      cart.splice(e.target.dataset.index,1);
-      renderCart();
-    });
-  });
-  cartTotalEl.textContent = `$${total.toFixed(2)}`;
-  updateCartButton();
-  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
-  renderPayPal();
+  cartTotal.textContent = `$${total.toFixed(2)}`;
+  cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
 }
 
-function updateCartButton(){
-  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
-  document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
-}
+function removeItem(idx) { cart.splice(idx,1); updateCartUI(); }
 
-// Cart open/close
-document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.add('active'));
-document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
+cartButton.onclick = () => cartWrapper.classList.toggle('active');
+cartClose.onclick = () => cartWrapper.classList.remove('active');
 
-// Add to cart buttons
-document.querySelectorAll('.buy-now').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+document.querySelectorAll('.buy-now').forEach((btn, idx) => {
+  btn.onclick = () => {
     const planDiv = btn.closest('.plan');
-    const planName = planDiv.querySelector('h3').textContent;
-    const price = parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,'')) || 0;
-    cart.push({plan:planName,price});
-    renderCart();
-  });
+    const name = planDiv.querySelector('h3').innerText;
+    const priceText = planDiv.querySelector('.price').innerText.replace(/[^0-9\.]/g,'');
+    const price = parseFloat(priceText);
+    cart.push({name, price});
+    updateCartUI();
+    cartWrapper.classList.add('active');
+  };
 });
 
-function renderPayPal(){
-  const paypalContainer = document.getElementById('paypal-button-container');
-  paypalContainer.innerHTML = '';
-  if(cart.length === 0) return;
-  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
-  paypal.Buttons({
-    createOrder: (data,actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
-    onApprove: (data,actions)=>actions.order.capture().then(details=>{
-      alert('Payment completed by '+details.payer.name.given_name);
+// PayPal buttons
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    return actions.order.create({ purchase_units: [{ amount: { value: total.toFixed(2) } }] });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details) {
+      alert('Transaction completed by ' + details.payer.name.given_name);
       cart = [];
-      renderCart();
-    })
-  }).render('#paypal-button-container');
-}
-
-// Keep cart synced across tabs/pages
-window.addEventListener("storage", function(e){
-  if(e.key === "callOrbitCart"){
-    cart = JSON.parse(e.newValue) || [];
-    renderCart();
+      updateCartUI();
+      cartWrapper.classList.remove('active');
+    });
   }
-});
+}).render('#paypal-button-container');
 
-// Initial render
-renderCart();
 </script>
 </body>
 </html>
