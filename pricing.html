@@ -1,245 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricing - CallOrbit</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #3b82f6;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-    h2 {
-      margin-top: 2rem;
-      color: #1f2937;
-    }
-    .card {
-      border: 1px solid #e5e7eb;
-      background: white;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .card h3 {
-      margin: 0 0 0.5rem 0;
-    }
-    .price {
-      font-weight: bold;
-      margin: 0.5rem 0;
-    }
-    button {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #2563eb;
-    }
-    /* Cart modal */
-    #cartModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    #cartContent {
-      background: white;
-      border-radius: 8px;
-      padding: 1rem;
-      width: 400px;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-    }
-    #cartItems div {
-      border-bottom: 1px solid #e5e7eb;
-      padding: 0.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .close {
-      float: right;
-      cursor: pointer;
-      font-weight: bold;
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      font-size: 1.2rem;
-    }
-    .remove-btn {
-      background: none;
-      border: none;
-      color: red;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CallOrbit — Pricing</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
+<style>
+/* Hero */
+header.hero {
+  margin: 20px auto;
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+header.hero h1 { margin-bottom: 1rem; font-size: 3rem; }
+header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
+.fade-in { animation: fadeIn 1.2s ease forwards; }
+@keyframes fadeIn { 0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
+
+/* Plans */
+.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px 0; padding:0 10px; }
+.plan { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; cursor:pointer; }
+.plan:hover { transform:translateY(-5px); }
+.plan h3 { color:#1e3a8a;margin-bottom:1rem; }
+.plan .price, .plan .setup { margin-bottom:0.5rem; }
+.buy-now { background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px; }
+.buy-now:hover { filter:brightness(0.95); }
+
+/* Cart */
+.cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
+.cart-wrapper.active { right:0; }
+.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
+.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
+.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
+#cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+/* CTA Section */
+.cta { background:#fff; padding:40px 20px; text-align:center; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); margin:40px 10px; }
+.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
+.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
+.cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
+.cta a:hover { filter:brightness(0.95); }
+
+/* Navbar Buy Numbers button like index */
+.navbar-buy {
+  background: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.navbar-buy:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+</style>
+<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
 <body>
-  <header>
-    <h1>Pricing Plans</h1>
-    <button onclick="openCart()">View Cart</button>
-  </header>
-
-  <div class="container">
-    <h2>Portals</h2>
-    <div class="card">
-      <h3>Team Portal</h3>
-      <p class="price">Setup & Onboarding: $150</p>
-      <p class="price">Initial Training: $50</p>
-      <p class="price">Monthly Subscription: $35/user</p>
-      <button onclick="addPortalToCart('Team Portal',150,50,35)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <h3>Business Portal</h3>
-      <p class="price">Setup & Onboarding: $200</p>
-      <p class="price">Initial Training: $50</p>
-      <p class="price">Monthly Subscription: $50/user</p>
-      <button onclick="addPortalToCart('Business Portal',200,50,50)">Add to Cart</button>
-    </div>
-
-    <h2>Numbers Packages</h2>
-    <div class="card">
-      <h3>Plus (US - tollFree)</h3>
-      <p class="price">500 Minutes, $31.25/month</p>
-      <button onclick="addNumberToCart('Plus (US - tollFree)','500 Minutes',31.25,true)">Add to Cart</button>
-    </div>
-
-    <div class="card">
-      <h3>Pro (US - tollFree)</h3>
-      <p class="price">1000 Minutes, $62.50/month</p>
-      <button onclick="addNumberToCart('Pro (US - tollFree)','1000 Minutes',62.5,true)">Add to Cart</button>
-    </div>
+<nav>
+  <div><a href="/"><strong>CallOrbit</strong></a></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing" class="active-page">Pricing</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
   </div>
+</nav>
 
-  <!-- Cart Modal -->
-  <div id="cartModal">
-    <div id="cartContent">
-      <span class="close" onclick="closeCart()">&times;</span>
-      <h2>Your Cart</h2>
-      <div id="cartItems"></div>
-      <p><strong>Total: $<span id="cartTotal">0.00</span></strong></p>
-      <a href="orders.html"><button>Checkout</button></a>
+<header class="hero fade-in">
+  <h1>Pricing</h1>
+  <p>Flexible plans + simple usage pricing to fit every business.</p>
+</header>
+
+<main>
+  <section class="plans-grid fade-in">
+    <div class="plan">
+      <h3>Starter</h3>
+      <p>Dashboards + 3 agents included.</p>
+      <p class="price"><strong>$19</strong>/mo</p>
+      <p class="setup">Setup: $99</p>
+      <button class="buy-now">Add to Cart</button>
     </div>
+    <div class="plan">
+      <h3>Team</h3>
+      <p>Unlimited dashboards, up to 20 agents.</p>
+      <p class="price"><strong>$29</strong>/user·mo</p>
+      <p class="setup">Setup: $149</p>
+      <button class="buy-now">Add to Cart</button>
+    </div>
+    <div class="plan">
+      <h3>Business</h3>
+      <p>Advanced analytics, AI insights, 50 agents.</p>
+      <p class="price"><strong>$49</strong>/user·mo</p>
+      <p class="setup">Setup: $199</p>
+      <button class="buy-now">Add to Cart</button>
+    </div>
+    <div class="plan">
+      <h3>Enterprise</h3>
+      <p>Global scale, unlimited agents, dedicated manager.</p>
+      <p class="price"><strong>$99</strong>/user·mo</p>
+      <p class="setup">Setup: Custom onboarding</p>
+      <button class="buy-now">Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta fade-in">
+    <h2>Get Your Numbers Anywhere</h2>
+    <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
+    <a href="/orders.html">Get Started Today</a>
+  </section>
+</main>
+
+<!-- Cart -->
+<div class="cart-wrapper" id="cart-wrapper">
+  <div class="cart">
+    <h2>Your Cart <button class="cart-close" id="cart-close">✕</button></h2>
+    <div id="cart-items"></div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
+      <span>Total:</span><span id="cart-total">$0.00</span>
+    </div>
+    <div id="paypal-button-container" style="margin-top:15px;"></div>
   </div>
+</div>
+<button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
-  <script>
-    function loadCart() {
-      return JSON.parse(localStorage.getItem("cart") || "[]");
-    }
+<!-- Footer -->
+<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
+  &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+  <br>
+  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
+  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
+  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+</footer>
 
-    function saveCart(cart) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 
-    function addPortalToCart(name, setup, training, monthly) {
-      let cart = loadCart();
-      cart.push({ 
-        name: name, 
-        description: "Setup & Onboarding", 
-        price: setup, 
-        recurring: false, 
-        quantity: 1 
-      });
-      cart.push({ 
-        name: name, 
-        description: "Initial Training", 
-        price: training, 
-        recurring: false, 
-        quantity: 1 
-      });
-      cart.push({ 
-        name: name, 
-        description: "Monthly Subscription", 
-        price: monthly, 
-        recurring: true, 
-        quantity: 1 
-      });
-      saveCart(cart);
+// Shared cart across all pages
+let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+
+function renderCart(){
+  const cartItems = document.getElementById('cart-items');
+  const cartTotalEl = document.getElementById('cart-total');
+  cartItems.innerHTML = '';
+  let total = 0;
+  cart.forEach((item,index)=>{
+    total += item.price || 0;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `<span>${item.plan}</span>
+                     <span>$${(item.price||0).toFixed(2)}</span>
+                     <button class="remove-btn" data-index="${index}">x</button>`;
+    cartItems.appendChild(div);
+  });
+  document.querySelectorAll('.remove-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      cart.splice(e.target.dataset.index,1); // allow removing any item
       renderCart();
-      alert(name + " added to cart!");
-    }
+    });
+  });
+  cartTotalEl.textContent = `$${total.toFixed(2)}`;
+  updateCartButton();
+  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
+  renderPayPal();
+}
 
-    function addNumberToCart(name, minutes, price, recurring) {
-      let cart = loadCart();
-      cart.push({ 
-        name: name, 
-        description: minutes, 
-        price: price, 
-        recurring: recurring, 
-        quantity: 1 
-      });
-      saveCart(cart);
-      renderCart();
-      alert(name + " added to cart!");
-    }
+function updateCartButton(){
+  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
+  document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+}
 
-    function openCart() {
-      renderCart();
-      document.getElementById("cartModal").style.display = "flex";
-    }
+// Cart open/close
+document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.add('active'));
+document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
 
-    function closeCart() {
-      document.getElementById("cartModal").style.display = "none";
-    }
-
-    function renderCart() {
-      let cart = loadCart();
-      let cartItems = document.getElementById("cartItems");
-      let total = 0;
-      cartItems.innerHTML = "";
-
-      cart.forEach((item, index) => {
-        let subtotal = item.price * item.quantity;
-        total += subtotal;
-
-        const itemDiv = document.createElement("div");
-        itemDiv.innerHTML = `
-          <div>
-            <strong>${item.description} - ${item.name}</strong><br>
-            ${item.recurring ? "Monthly Subscription" : "One-time"}<br>
-            $${item.price.toFixed(2)} x ${item.quantity}
-            <button class="remove-btn" onclick="removeFromCart(${index})">x</button>
-          </div>
-        `;
-        cartItems.appendChild(itemDiv);
-      });
-
-      document.getElementById("cartTotal").innerText = total.toFixed(2);
-    }
-
-    function removeFromCart(index) {
-      let cart = loadCart();
-      cart.splice(index, 1);
-      saveCart(cart);
-      renderCart();
-    }
-
-    // Initialize cart on page load
+// Add to cart buttons
+document.querySelectorAll('.buy-now').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const planDiv = btn.closest('.plan');
+    const planName = planDiv.querySelector('h3').textContent;
+    const price = parseFloat(planDiv.querySelector('.price').textContent.replace(/[^0-9\.]/g,'')) || 0;
+    cart.push({plan:planName,price});
     renderCart();
-  </script>
+  });
+});
+
+function renderPayPal(){
+  const paypalContainer = document.getElementById('paypal-button-container');
+  paypalContainer.innerHTML = '';
+  if(cart.length === 0) return;
+  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
+  paypal.Buttons({
+    createOrder: (data,actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
+    onApprove: (data,actions)=>actions.order.capture().then(details=>{
+      alert('Payment completed by '+details.payer.name.given_name);
+      cart = [];
+      renderCart();
+    })
+  }).render('#paypal-button-container');
+}
+
+// Keep cart synced across tabs/pages
+window.addEventListener("storage", function(e){
+  if(e.key === "callOrbitCart"){
+    cart = JSON.parse(e.newValue) || [];
+    renderCart();
+  }
+});
+
+// Initial render
+renderCart();
+</script>
 </body>
 </html>
