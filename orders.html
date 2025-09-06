@@ -8,13 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <style>
-body {
-  font-family: 'Inter', sans-serif;
-  background:#f9fafb;
-  color:#1f2937;
-  margin:0;
-  padding:0;
-}
+body { font-family: 'Inter', sans-serif; background:#f9fafb; color:#1f2937; margin:0; padding:0; }
 nav {display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
 nav a {margin-left:15px;text-decoration:none;color:#1f2937;font-weight:500;}
 main{max-width:1120px;margin:20px auto;padding:0}
@@ -56,9 +50,7 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 
 <header class="hero">
   <h1>Get Started with CallOrbit</h1>
-  <p>
-    Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.
-  </p>
+  <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.</p>
 </header>
 
 <main>
@@ -172,12 +164,11 @@ const countryData = {
   RO:{tollFree:0.06,local:0.04,national:0.05}, HU:{tollFree:0.06,local:0.04,national:0.05}
 };
 
-// Populate country dropdown
 const countrySelect = document.getElementById('country');
 countries.forEach(c=>{
-  const opt = document.createElement('option');
-  opt.value = c;
-  opt.textContent = countryNames[c];
+  const opt=document.createElement('option');
+  opt.value=c;
+  opt.textContent=countryNames[c];
   countrySelect.appendChild(opt);
 });
 
@@ -190,7 +181,6 @@ const cartClose=document.getElementById('cart-close');
 
 let cart=JSON.parse(localStorage.getItem('callOrbitCart'))||[];
 
-// Portal Items (cannot remove)
 const portalItems = [
   { plan: "Setup & Onboarding - Business Portal", price: 200 },
   { plan: "Initial Training - Business Portal", price: 50 },
@@ -255,15 +245,14 @@ function updateCart(){
     const div=document.createElement('div');
     div.className='cart-item';
 
-    // Only user-added items have remove button
-    const removeBtn = i >= portalItems.length ? `<button class="remove-btn" data-index="${i}">x</button>` : '';
+    const removeBtn = i >= portalItems.length ? `<button class="remove-btn" data-index="${i - portalItems.length}">x</button>` : '';
     div.innerHTML=`<span>${desc}${qty>1?' x '+qty:''}</span><span>$${(price*qty).toFixed(2)} ${removeBtn}</span>`;
     cartItemsEl.appendChild(div);
   });
 
   document.querySelectorAll('.remove-btn').forEach(btn=>{
     btn.addEventListener('click',e=>{
-      const idx=parseInt(e.target.dataset.index) - portalItems.length;
+      const idx=parseInt(e.target.dataset.index);
       if(idx>=0){ cart.splice(idx,1); updateCart(); }
     });
   });
