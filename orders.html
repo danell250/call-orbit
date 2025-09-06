@@ -8,31 +8,24 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 <style>
-body {
-  font-family: 'Inter', sans-serif;
-  background:#f9fafb;
-  color:#1f2937;
-  margin:0;
-  padding:0;
-}
-nav {display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
-nav a {margin-left:15px;text-decoration:none;color:#1f2937;font-weight:500;}
+body{font-family:'Inter',sans-serif;background:#f9fafb;color:#1f2937;margin:0;padding:0}
+nav{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+nav a{margin-left:15px;text-decoration:none;color:#1f2937;font-weight:500}
 main{max-width:1120px;margin:20px auto;padding:0}
-header.hero{margin:20px auto;padding:60px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);display:block;}
+header.hero{margin:20px auto;padding:60px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
 header.hero h1{margin-bottom:1rem;font-size:2.5rem}
 header.hero p{margin-bottom:2rem;font-size:1.25rem}
 .plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 0;padding:0 10px}
 .plan{background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);text-align:center;transition:transform .2s;cursor:pointer}
 .plan:hover{transform:translateY(-5px)}
 .plan h3{color:#1e3a8a;margin-bottom:1rem}
-.plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
 .forwarding{margin:20px 10px;background:#fff;padding:20px;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:end}
 .forwarding label{display:block;margin-bottom:0.5rem;font-weight:600}
 .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
 .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
 .buy-now:hover{filter:brightness(0.95)}
-.cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000;}
-.cart-wrapper.active{right:0;}
+.cart-wrapper{position:fixed;top:0;right:-400px;width:350px;height:100%;background:#f9fafb;box-shadow:-2px 0 10px rgba(0,0,0,0.2);padding:20px;transition:right 0.3s;overflow-y:auto;z-index:1000}
+.cart-wrapper.active{right:0}
 .cart h2{margin-bottom:1rem;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center}
 .cart-close{cursor:pointer;color:red;font-weight:bold;font-size:1.2rem}
 .cart-item{display:flex;justify-content:space-between;margin-bottom:10px;padding:10px;background:#fff;border-radius:0.5rem;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
@@ -56,9 +49,7 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 
 <header class="hero">
   <h1>Get Started with CallOrbit</h1>
-  <p>
-    Select your plan, country, number type, area (for local numbers), and forwarding number to start using your CallOrbit portal.
-  </p>
+  <p>Select your plan, country, number type, area, and forwarding number to start using your CallOrbit portal.</p>
 </header>
 
 <main>
@@ -103,131 +94,58 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved. 
-  <br>
-  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
 </footer>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent=new Date().getFullYear();
 
-// Data
-const profitMargin = 1.25;
-const packages = { Basic:100, Plus:500, Pro:1000, Max:2500 };
-const countries = ["US","GB","CA","AU","DE","FR","IN","ZA","BR","MX","JP","IT","ES","NL","CH","SE","SG","IE","NZ","NO","PT","BE","KR","TR","TH","PH","TW","PL","RO","HU"];
-const countryNames = {
-  US:"United States", GB:"United Kingdom", CA:"Canada", AU:"Australia", DE:"Germany",
-  FR:"France", IN:"India", ZA:"South Africa", BR:"Brazil", MX:"Mexico", JP:"Japan",
-  IT:"Italy", ES:"Spain", NL:"Netherlands", CH:"Switzerland", SE:"Sweden", SG:"Singapore",
-  IE:"Ireland", NZ:"New Zealand", NO:"Norway", PT:"Portugal", BE:"Belgium", KR:"South Korea",
-  TR:"Turkey", TH:"Thailand", PH:"Philippines", TW:"Taiwan", PL:"Poland", RO:"Romania", HU:"Hungary"
-};
-const localAreas = {
-  US:["New York","Los Angeles","Chicago","Houston","Miami"],
-  GB:["London","Manchester","Birmingham"],
-  CA:["Toronto","Vancouver","Montreal"],
-  AU:["Sydney","Melbourne","Brisbane"],
-  DE:["Berlin","Munich","Hamburg"],
-  FR:["Paris","Lyon","Marseille"],
-  IN:["Mumbai","Delhi","Bangalore"],
-  ZA:["Johannesburg","Cape Town","Durban"],
-  BR:["Sao Paulo","Rio de Janeiro","Brasilia"],
-  MX:["Mexico City","Guadalajara","Monterrey"],
-  JP:["Tokyo","Osaka","Nagoya"],
-  IT:["Rome","Milan","Naples"],
-  ES:["Madrid","Barcelona","Valencia"],
-  NL:["Amsterdam","Rotterdam","The Hague"],
-  CH:["Zurich","Geneva"],
-  SE:["Stockholm","Gothenburg"],
-  SG:["Singapore"],
-  IE:["Dublin","Cork"],
-  NZ:["Auckland","Wellington"],
-  NO:["Oslo","Bergen"],
-  PT:["Lisbon","Porto"],
-  BE:["Brussels","Antwerp"],
-  KR:["Seoul","Busan"],
-  TR:["Istanbul","Ankara"],
-  TH:["Bangkok","Chiang Mai"],
-  PH:["Manila","Cebu"],
-  TW:["Taipei","Kaohsiung"],
-  PL:["Warsaw","Krakow"],
-  RO:["Bucharest","Cluj"],
-  HU:["Budapest","Debrecen"]
-};
-const countryData = {
-  US:{tollFree:0.05,local:0.03,national:0.04}, GB:{tollFree:0.06,local:0.04,national:0.05},
-  CA:{tollFree:0.05,local:0.03,national:0.04}, AU:{tollFree:0.06,local:0.04,national:0.05},
-  DE:{tollFree:0.07,local:0.05,national:0.06}, FR:{tollFree:0.07,local:0.05,national:0.06},
-  IN:{tollFree:0.04,local:0.02,national:0.03}, ZA:{tollFree:0.05,local:0.03,national:0.04},
-  BR:{tollFree:0.06,local:0.04,national:0.05}, MX:{tollFree:0.05,local:0.03,national:0.04},
-  JP:{tollFree:0.08,local:0.06,national:0.07}, IT:{tollFree:0.07,local:0.05,national:0.06},
-  ES:{tollFree:0.07,local:0.05,national:0.06}, NL:{tollFree:0.06,local:0.04,national:0.05},
-  CH:{tollFree:0.08,local:0.06,national:0.07}, SE:{tollFree:0.06,local:0.04,national:0.05},
-  SG:{tollFree:0.07,local:0.05,national:0.06}, IE:{tollFree:0.06,local:0.04,national:0.05},
-  NZ:{tollFree:0.06,local:0.04,national:0.05}, NO:{tollFree:0.07,local:0.05,national:0.06},
-  PT:{tollFree:0.07,local:0.05,national:0.06}, BE:{tollFree:0.07,local:0.05,national:0.06},
-  KR:{tollFree:0.08,local:0.06,national:0.07}, TR:{tollFree:0.06,local:0.04,national:0.05},
-  TH:{tollFree:0.05,local:0.03,national:0.04}, PH:{tollFree:0.04,local:0.02,national:0.03},
-  TW:{tollFree:0.07,local:0.05,national:0.06}, PL:{tollFree:0.06,local:0.04,national:0.05},
-  RO:{tollFree:0.06,local:0.04,national:0.05}, HU:{tollFree:0.06,local:0.04,national:0.05}
-};
+// Config
+const profitMargin=1.25;
+const packages={Basic:100,Plus:500,Pro:1000,Max:2500};
+const countries=["US","GB","CA","AU","DE","FR","IN","ZA"];
+const countryNames={US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",IN:"India",ZA:"South Africa"};
+const localAreas={US:["New York","Los Angeles"],GB:["London","Manchester"],CA:["Toronto"],AU:["Sydney"],DE:["Berlin"],FR:["Paris"],IN:["Mumbai"],ZA:["Johannesburg"]};
+const countryData={US:{tollFree:0.05,local:0.03,national:0.04},GB:{tollFree:0.06,local:0.04,national:0.05},CA:{tollFree:0.05,local:0.03,national:0.04},AU:{tollFree:0.06,local:0.04,national:0.05},DE:{tollFree:0.07,local:0.05,national:0.06},FR:{tollFree:0.07,local:0.05,national:0.06},IN:{tollFree:0.04,local:0.02,national:0.03},ZA:{tollFree:0.05,local:0.03,national:0.04}};
 
-// Populate country dropdown
-const countrySelect = document.getElementById('country');
-countries.forEach(c=>{
-  const opt = document.createElement('option');
-  opt.value = c;
-  opt.textContent = countryNames[c];
-  countrySelect.appendChild(opt);
-});
-
-const plansContainer=document.getElementById('plans-container');
-const cartItemsEl=document.getElementById('cart-items');
-const cartTotalEl=document.getElementById('cart-total');
-const cartWrapper=document.getElementById('cart-wrapper');
-const cartButton=document.getElementById('cart-button');
-const cartClose=document.getElementById('cart-close');
-
-let cart=JSON.parse(localStorage.getItem('callOrbitCart'))||[];
-
-// Sample Portal / Pricing Items
-const portalItems = [
-  { plan: "Setup & Onboarding - Business Portal", price: 200 },
-  { plan: "Initial Training - Business Portal", price: 50 },
-  { plan: "Monthly Subscription - Business Portal", price: 50, recurring: true }
+// Portal items
+const portalItems=[
+  {plan:"Setup & Onboarding - Team Portal",price:150},
+  {plan:"Initial Training - Team Portal",price:50},
+  {plan:"Monthly Subscription - Team Portal",price:35,recurring:true}
 ];
+
+// State
+const countrySelect=document.getElementById("country");
+countries.forEach(c=>{let opt=document.createElement("option");opt.value=c;opt.textContent=countryNames[c];countrySelect.appendChild(opt)});
+const plansContainer=document.getElementById("plans-container");
+const cartItemsEl=document.getElementById("cart-items");
+const cartTotalEl=document.getElementById("cart-total");
+const cartWrapper=document.getElementById("cart-wrapper");
+const cartButton=document.getElementById("cart-button");
+const cartClose=document.getElementById("cart-close");
+let cart=JSON.parse(localStorage.getItem("callOrbitCart"))||[];
 
 function generatePlans(){
   const country=countrySelect.value;
-  const numberType=document.getElementById('number-type').value;
-  const areaContainer=document.getElementById('area-container');
-  const areaSelect=document.getElementById('area');
+  const type=document.getElementById("number-type").value;
+  const areaSel=document.getElementById("area");
+  const areaWrap=document.getElementById("area-container");
 
-  if(numberType==='local'){
-    areaContainer.style.display='block';
-    areaSelect.innerHTML='';
-    localAreas[country].forEach(a=>{
-      const opt=document.createElement('option');
-      opt.value=a; opt.textContent=a;
-      areaSelect.appendChild(opt);
-    });
-  } else { areaContainer.style.display='none'; }
+  if(type==="local"){areaWrap.style.display="block";areaSel.innerHTML="";localAreas[country].forEach(a=>{let o=document.createElement("option");o.value=a;o.textContent=a;areaSel.appendChild(o)})}
+  else{areaWrap.style.display="none"}
 
-  plansContainer.innerHTML='';
-
-  // Number Packages
+  plansContainer.innerHTML="";
   Object.keys(packages).forEach(pkg=>{
     const mins=packages[pkg];
-    const rate=countryData[country][numberType];
+    const rate=countryData[country][type];
     const price=+(rate*mins*profitMargin).toFixed(2);
-    const div=document.createElement('div');
-    div.className='plan';
-    div.innerHTML=`<h3>${pkg}</h3><div class="price">$${price}</div><div class="minutes">${mins} Minutes, Monthly Subscription</div><div class="overage">Overage: $${(rate*profitMargin).toFixed(3)}/min</div><button class="buy-now">Add to Cart</button>`;
-    div.querySelector('button').addEventListener('click',()=>{
-      const forward=document.getElementById('forward').value||'';
-      const area=numberType==='local'?areaSelect.value:'';
-      cart.push({plan:pkg,country,numberType,area,price,forward,quantity:1,recurring:true});
+    const div=document.createElement("div");
+    div.className="plan";
+    div.innerHTML=`<h3>${pkg}</h3><div class="price">$${price}</div><div class="minutes">${mins} Minutes, Monthly</div><button class="buy-now">Add to Cart</button>`;
+    div.querySelector("button").addEventListener("click",()=>{
+      const forward=document.getElementById("forward").value||"";
+      const area=type==="local"?areaSel.value:"";
+      cart.push({plan:pkg,country,type,area,price,forward,quantity:1,recurring:true});
       updateCart();
     });
     plansContainer.appendChild(div);
@@ -235,66 +153,60 @@ function generatePlans(){
 }
 
 function updateCart(){
-  cartItemsEl.innerHTML='';
+  cartItemsEl.innerHTML="";
   let total=0;
-
-  // Merge portal items for demonstration
-  const fullCart = [...portalItems, ...cart];
+  const fullCart=[...portalItems,...cart];
 
   fullCart.forEach((item,i)=>{
-    let desc='';
-    if(item.country && item.numberType){ 
-      desc = `${item.plan} (${item.country} - ${item.numberType}${item.area?' - '+item.area:''})`;
-    } else if(item.recurring){
-      desc = `${item.plan} (Monthly Subscription)`;
-    } else {
-      desc = item.plan;
+    const qty=item.quantity||1;
+    const price=item.price||0;
+    let desc="";
+    if(item.country&&item.type){
+      desc=`${item.plan} (${item.country} - ${item.type}${item.area?" - "+item.area:""})`;
+    }else if(item.recurring){
+      desc=`${item.plan} (Monthly Subscription)`;
+    }else{
+      desc=item.plan;
     }
-
-    const price = item.price || 0;
-    const qty = item.quantity || 1;
-    total += price * qty;
-
-    const div=document.createElement('div');
-    div.className='cart-item';
-    div.innerHTML=`<span>${desc}${qty>1?' x '+qty:''}</span><span>$${(price*qty).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
+    total+=price*qty;
+    const div=document.createElement("div");
+    div.className="cart-item";
+    div.innerHTML=`<span>${desc}${qty>1?" x "+qty:""}</span><span>$${(price*qty).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
     cartItemsEl.appendChild(div);
   });
 
-  document.querySelectorAll('.remove-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      fullCart.splice(e.target.dataset.index,1);
-      cart=fullCart.filter(item=>!portalItems.includes(item)); // Keep portal items separate
+  document.querySelectorAll(".remove-btn").forEach(btn=>{
+    btn.addEventListener("click",e=>{
+      const idx=parseInt(e.target.dataset.index);
+      if(idx<portalItems.length)return; // prevent removing portal items
+      cart.splice(idx-portalItems.length,1);
       updateCart();
     });
   });
 
   cartTotalEl.textContent=`$${total.toFixed(2)}`;
   cartButton.textContent=`Cart 🛒 (${fullCart.length} items - $${total.toFixed(2)})`;
-  localStorage.setItem('callOrbitCart',JSON.stringify(cart));
+  localStorage.setItem("callOrbitCart",JSON.stringify(cart));
 
-  // Render PayPal for dynamic cart
-  const container=document.getElementById('paypal-button-container');
-  container.innerHTML='';
-  if(fullCart.length===0) return;
+  const container=document.getElementById("paypal-button-container");
+  container.innerHTML="";
+  if(fullCart.length===0)return;
   paypal.Buttons({
     createOrder:(data,actions)=>actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]}),
     onApprove:(data,actions)=>actions.order.capture().then(details=>{
-      alert('Transaction completed by '+details.payer.name.given_name);
-      cart=[];
-      updateCart();
+      alert("Transaction completed by "+details.payer.name.given_name);
+      cart=[];updateCart();
     })
-  }).render('#paypal-button-container');
+  }).render("#paypal-button-container");
 }
 
-cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
-cartClose.addEventListener('click',()=>cartWrapper.classList.remove('active'));
-countrySelect.addEventListener('change',generatePlans);
-document.getElementById('number-type').addEventListener('change',generatePlans);
+cartButton.addEventListener("click",()=>cartWrapper.classList.toggle("active"));
+cartClose.addEventListener("click",()=>cartWrapper.classList.remove("active"));
+countrySelect.addEventListener("change",generatePlans);
+document.getElementById("number-type").addEventListener("change",generatePlans);
 
-// Initialize
-generatePlans();
-updateCart();
+// Init
+generatePlans();updateCart();
 </script>
 </body>
 </html>
