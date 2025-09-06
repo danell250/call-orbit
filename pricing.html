@@ -1,203 +1,245 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Pricing</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
-<script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
-<style>
-/* Hero */
-header.hero { margin:20px auto; padding:60px 20px; text-align:center; background:linear-gradient(135deg,#3b82f6,#60a5fa); color:#fff; border-radius:10px; box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.5rem; }
-
-/* Plans */
-.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px 0; padding:0 10px; }
-.plan { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; cursor:pointer; }
-.plan:hover { transform:translateY(-5px); }
-.plan h3 { color:#1e3a8a; margin-bottom:1rem; }
-.plan p { margin-bottom:0.5rem; }
-.buy-now { background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px; }
-.buy-now:hover { filter:brightness(0.95); }
-
-/* Cart */
-.cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
-.cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
-.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
-.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-.remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
-#cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-
-/* CTA Section */
-.cta { background:#fff; padding:40px 20px; text-align:center; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); margin:40px 10px; }
-.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
-.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
-.cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
-.cta a:hover { filter:brightness(0.95); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - CallOrbit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #3b82f6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      color: #1f2937;
+    }
+    .card {
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin: 0 0 0.5rem 0;
+    }
+    .price {
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    /* Cart modal */
+    #cartModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #cartContent {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    #cartItems div {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-weight: bold;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 1.2rem;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Pricing Plans</h1>
+    <button onclick="openCart()">View Cart</button>
+  </header>
 
-<nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing" class="active-page">Pricing</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
-    <a href="/contact">Contact</a>
-    <a href="/about">About</a>
-  </div>
-</nav>
-
-<header class="hero fade-in">
-  <h1>Pricing</h1>
-  <p>Flexible plans + portal with setup, training, and subscription.</p>
-</header>
-
-<main>
-  <section class="plans-grid fade-in" id="plans-container"></section>
-
-  <section class="cta fade-in">
-    <h2>Get Started Today</h2>
-    <p>Choose a portal plan or a number package to get your business connected globally.</p>
-    <a href="/orders.html">Buy Numbers</a>
-  </section>
-</main>
-
-<!-- Cart -->
-<div class="cart-wrapper" id="cart-wrapper">
-  <div class="cart">
-    <h2>Your Cart <button class="cart-close" id="cart-close">✕</button></h2>
-    <div id="cart-items"></div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-      <span>Total:</span><span id="cart-total">$0.00</span>
+  <div class="container">
+    <h2>Portals</h2>
+    <div class="card">
+      <h3>Team Portal</h3>
+      <p class="price">Setup & Onboarding: $150</p>
+      <p class="price">Initial Training: $50</p>
+      <p class="price">Monthly Subscription: $35/user</p>
+      <button onclick="addPortalToCart('Team Portal',150,50,35)">Add to Cart</button>
     </div>
-    <div id="paypal-button-container" style="margin-top:15px;"></div>
+
+    <div class="card">
+      <h3>Business Portal</h3>
+      <p class="price">Setup & Onboarding: $200</p>
+      <p class="price">Initial Training: $50</p>
+      <p class="price">Monthly Subscription: $50/user</p>
+      <button onclick="addPortalToCart('Business Portal',200,50,50)">Add to Cart</button>
+    </div>
+
+    <h2>Numbers Packages</h2>
+    <div class="card">
+      <h3>Plus (US - tollFree)</h3>
+      <p class="price">500 Minutes, $31.25/month</p>
+      <button onclick="addNumberToCart('Plus (US - tollFree)','500 Minutes',31.25,true)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Pro (US - tollFree)</h3>
+      <p class="price">1000 Minutes, $62.50/month</p>
+      <button onclick="addNumberToCart('Pro (US - tollFree)','1000 Minutes',62.5,true)">Add to Cart</button>
+    </div>
   </div>
-</div>
-<button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-</footer>
+  <!-- Cart Modal -->
+  <div id="cartModal">
+    <div id="cartContent">
+      <span class="close" onclick="closeCart()">&times;</span>
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <p><strong>Total: $<span id="cartTotal">0.00</span></strong></p>
+      <a href="orders.html"><button>Checkout</button></a>
+    </div>
+  </div>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  <script>
+    function loadCart() {
+      return JSON.parse(localStorage.getItem("cart") || "[]");
+    }
 
-// ----- CART -----
-let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+    function saveCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
 
-// ----- PORTAL PLANS -----
-const portalPlans = [
-  {name:"Starter Portal", setup:100, training:50, monthly:25, description:"Includes domain, hosting, numbers, configuration. 1 training session, up to 5 users."},
-  {name:"Team Portal", setup:150, training:50, monthly:35, description:"Unlimited dashboards, up to 20 users. 1 training session included."},
-  {name:"Business Portal", setup:200, training:50, monthly:50, description:"Advanced analytics, AI insights, 50 users. 1 training session included."}
-];
+    function addPortalToCart(name, setup, training, monthly) {
+      let cart = loadCart();
+      cart.push({ 
+        name: name, 
+        description: "Setup & Onboarding", 
+        price: setup, 
+        recurring: false, 
+        quantity: 1 
+      });
+      cart.push({ 
+        name: name, 
+        description: "Initial Training", 
+        price: training, 
+        recurring: false, 
+        quantity: 1 
+      });
+      cart.push({ 
+        name: name, 
+        description: "Monthly Subscription", 
+        price: monthly, 
+        recurring: true, 
+        quantity: 1 
+      });
+      saveCart(cart);
+      renderCart();
+      alert(name + " added to cart!");
+    }
 
-// ----- NUMBER PACKAGES -----
-const numberPackages = [
-  {name:"Basic", minutes:100, rate:0.05},
-  {name:"Plus", minutes:500, rate:0.05},
-  {name:"Pro", minutes:1000, rate:0.05}
-];
+    function addNumberToCart(name, minutes, price, recurring) {
+      let cart = loadCart();
+      cart.push({ 
+        name: name, 
+        description: minutes, 
+        price: price, 
+        recurring: recurring, 
+        quantity: 1 
+      });
+      saveCart(cart);
+      renderCart();
+      alert(name + " added to cart!");
+    }
 
-// ----- ELEMENTS -----
-const plansContainer = document.getElementById('plans-container');
-const cartItemsEl = document.getElementById('cart-items');
-const cartTotalEl = document.getElementById('cart-total');
-const cartWrapper = document.getElementById('cart-wrapper');
-const cartButton = document.getElementById('cart-button');
-const cartClose = document.getElementById('cart-close');
+    function openCart() {
+      renderCart();
+      document.getElementById("cartModal").style.display = "flex";
+    }
 
-// ----- RENDER PORTAL PLANS -----
-portalPlans.forEach(plan=>{
-  const div = document.createElement('div');
-  div.className='plan';
-  div.innerHTML = `<h3>${plan.name}</h3>
-                   <p>${plan.description}</p>
-                   <p>Setup & Onboarding: $${plan.setup}</p>
-                   <p>Training: $${plan.training}</p>
-                   <p>Monthly: $${plan.monthly}/user</p>
-                   <button class="buy-now">Add to Cart</button>`;
-  div.querySelector('button').addEventListener('click',()=>addPortalToCart(plan));
-  plansContainer.appendChild(div);
-});
+    function closeCart() {
+      document.getElementById("cartModal").style.display = "none";
+    }
 
-// ----- RENDER NUMBER PACKAGES -----
-numberPackages.forEach(pkg=>{
-  const price = +(pkg.minutes * pkg.rate * 1.25).toFixed(2);
-  const div = document.createElement('div');
-  div.className='plan';
-  div.innerHTML = `<h3>${pkg.name}</h3>
-                   <p>${pkg.minutes} Minutes, Monthly Subscription</p>
-                   <p>Overage: $${(pkg.rate*1.25).toFixed(3)}/min</p>
-                   <button class="buy-now">Add to Cart</button>`;
-  div.querySelector('button').addEventListener('click',()=>{
-    addNumberPackageToCart(pkg, price);
-  });
-  plansContainer.appendChild(div);
-});
+    function renderCart() {
+      let cart = loadCart();
+      let cartItems = document.getElementById("cartItems");
+      let total = 0;
+      cartItems.innerHTML = "";
 
-// ----- ADD FUNCTIONS -----
-function addPortalToCart(plan){
-  cart.push({type:"Setup & Onboarding", plan:plan.name, price:plan.setup, recurring:false, quantity:1});
-  cart.push({type:"Initial Training", plan:plan.name, price:plan.training, recurring:false, quantity:1});
-  cart.push({type:"Monthly Subscription", plan:plan.name, price:plan.monthly, recurring:true, quantity:1});
-  updateCart();
-}
+      cart.forEach((item, index) => {
+        let subtotal = item.price * item.quantity;
+        total += subtotal;
 
-function addNumberPackageToCart(pkg, price){
-  cart.push({type:"Number Package", plan:pkg.name, price:price, recurring:true, quantity:1});
-  updateCart();
-}
+        const itemDiv = document.createElement("div");
+        itemDiv.innerHTML = `
+          <div>
+            <strong>${item.description} - ${item.name}</strong><br>
+            ${item.recurring ? "Monthly Subscription" : "One-time"}<br>
+            $${item.price.toFixed(2)} x ${item.quantity}
+            <button class="remove-btn" onclick="removeFromCart(${index})">x</button>
+          </div>
+        `;
+        cartItems.appendChild(itemDiv);
+      });
 
-function updateCart(){
-  cartItemsEl.innerHTML='';
-  let total=0;
-  cart.forEach((item,i)=>{
-    total += item.price * (item.quantity || 1);
-    const div = document.createElement('div');
-    div.className='cart-item';
-    div.innerHTML = `<span>${item.type} - ${item.plan}${item.recurring?' (Monthly)':''}${item.quantity>1?' x'+item.quantity:''}</span>
-                     <span>$${(item.price * (item.quantity ||1)).toFixed(2)}</span>
-                     <button class="remove-btn" data-index="${i}">x</button>`;
-    div.querySelector('button').addEventListener('click',()=>{
-      cart.splice(i,1);
-      updateCart();
-    });
-    cartItemsEl.appendChild(div);
-  });
-  cartTotalEl.textContent=`$${total.toFixed(2)}`;
-  cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
-  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
-}
+      document.getElementById("cartTotal").innerText = total.toFixed(2);
+    }
 
-// ----- CART TOGGLE -----
-cartButton.addEventListener('click',()=>cartWrapper.classList.add('active'));
-cartClose.addEventListener('click',()=>cartWrapper.classList.remove('active'));
+    function removeFromCart(index) {
+      let cart = loadCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+      renderCart();
+    }
 
-// ----- PAYPAL (ONE-TIME ITEMS ONLY) -----
-paypal.Buttons({
-  createOrder:function(data,actions){
-    const oneTimeTotal = cart.filter(i=>!i.recurring).reduce((a,b)=>a+b.price,0);
-    return actions.order.create({purchase_units:[{amount:{value:oneTimeTotal.toFixed(2)}}]});
-  },
-  onApprove:function(data,actions){
-    return actions.order.capture().then(function(details){
-      alert('Transaction completed by '+details.payer.name.given_name);
-      cart = cart.filter(i=>i.recurring); // keep recurring items in cart
-      updateCart();
-    });
-  }
-}).render('#paypal-button-container');
-</script>
+    // Initialize cart on page load
+    renderCart();
+  </script>
 </body>
 </html>
