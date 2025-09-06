@@ -104,7 +104,6 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Country and plan data
 const countries=["US","GB","CA","AU","DE","FR","IN","ZA","BR","MX","JP","IT","ES","NL","CH","SE","SG","IE","NZ","NO","PT","BE","KR","TR","TH","PH","TW","PL","RO","HU"];
 const countryNames={US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",IN:"India",ZA:"South Africa",BR:"Brazil",MX:"Mexico",JP:"Japan",IT:"Italy",ES:"Spain",NL:"Netherlands",CH:"Switzerland",SE:"Sweden",SG:"Singapore",IE:"Ireland",NZ:"New Zealand",NO:"Norway",PT:"Portugal",BE:"Belgium",KR:"South Korea",TR:"Turkey",TH:"Thailand",PH:"Philippines",TW:"Taiwan",PL:"Poland",RO:"Romania",HU:"Hungary"};
 const localAreas={US:["New York","Los Angeles","Chicago","Houston","Miami"],GB:["London","Manchester","Birmingham"],CA:["Toronto","Vancouver","Montreal"],AU:["Sydney","Melbourne","Brisbane"],DE:["Berlin","Munich","Hamburg"],FR:["Paris","Lyon","Marseille"],IN:["Mumbai","Delhi","Bangalore"],ZA:["Johannesburg","Cape Town","Durban"],BR:["Sao Paulo","Rio de Janeiro","Brasilia"],MX:["Mexico City","Guadalajara","Monterrey"],JP:["Tokyo","Osaka","Nagoya"],IT:["Rome","Milan","Naples"],ES:["Madrid","Barcelona","Valencia"],NL:["Amsterdam","Rotterdam","The Hague"],CH:["Zurich","Geneva"],SE:["Stockholm","Gothenburg"],SG:["Singapore"],IE:["Dublin","Cork"],NZ:["Auckland","Wellington"],NO:["Oslo","Bergen"],PT:["Lisbon","Porto"],BE:["Brussels","Antwerp"],KR:["Seoul","Busan"],TR:["Istanbul","Ankara"],TH:["Bangkok","Chiang Mai"],PH:["Manila","Cebu"],TW:["Taipei","Kaohsiung"],PL:["Warsaw","Krakow"],RO:["Bucharest","Cluj"],HU:["Budapest","Debrecen"]};
@@ -180,7 +179,6 @@ function updateCart(){
   localStorage.setItem('callOrbitCart',JSON.stringify(cart));
 }
 
-// Event listeners
 countrySelectEl.addEventListener('change',generatePlans);
 document.getElementById('number-type').addEventListener('change',generatePlans);
 cartButton.addEventListener('click',()=>cartWrapper.classList.toggle('active'));
@@ -188,7 +186,6 @@ cartClose.addEventListener('click',()=>cartWrapper.classList.remove('active'));
 
 generatePlans();
 
-// PayPal integration
 paypal.Buttons({
     createOrder: function(data, actions) {
       const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0).toFixed(2);
