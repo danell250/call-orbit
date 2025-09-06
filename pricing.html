@@ -11,15 +11,7 @@
 </svg>">
 <style>
 /* Hero */
-header.hero {
-  margin: 20px auto;
-  padding: 60px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
+header.hero { margin: 20px auto; padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #3b82f6, #60a5fa); color: #fff; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
 header.hero h1 { margin-bottom: 1rem; font-size: 3rem; }
 header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .fade-in { animation: fadeIn 1.2s ease forwards; }
@@ -50,21 +42,9 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .cta a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:filter 0.2s; }
 .cta a:hover { filter:brightness(0.95); }
 
-/* Navbar Buy Numbers button like index */
-.navbar-buy {
-  background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-}
+/* Navbar Buy Numbers button */
+.navbar-buy { background: transparent; color: #3b82f6; border: 2px solid #3b82f6; padding: 6px 16px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+.navbar-buy:hover { background: #3b82f6; color: #fff; }
 </style>
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
@@ -134,7 +114,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <!-- Cart -->
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
-    <h2>Your Cart <button class="cart-close" id="cart-close">✕</button></h2>
+    <h2>Your Cart <span class="cart-close" id="cart-close">✕</span></h2>
     <div id="cart-items"></div>
     <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
       <span>Total:</span><span id="cart-total">$0.00</span>
@@ -155,47 +135,57 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Initialize / normalize cart
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+cart = cart.map(item => ({
+  plan: item.plan || 'Unknown Plan',
+  type: item.type || 'Monthly Subscription',
+  country: item.country || 'US',
+  numberType: item.numberType || '',
+  area: item.area || '',
+  forward: item.forward || '',
+  price: item.price ? parseFloat(item.price) : 0,
+  quantity: item.quantity || 1,
+  recurring: item.recurring !== undefined ? item.recurring : true
+}));
 
 function renderCart(){
-  const cartItems = document.getElementById('cart-items');
+  const cartItemsEl = document.getElementById('cart-items');
   const cartTotalEl = document.getElementById('cart-total');
-  cartItems.innerHTML = '';
+  cartItemsEl.innerHTML = '';
   let total = 0;
-  cart.forEach((item,index)=>{
-    total += item.price || 0;
+
+  cart.forEach((item,i)=>{
+    total += (item.price||0)*item.quantity;
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
-      <div>
-        <strong>${item.plan} - ${item.type}</strong><br>
-        $${item.price.toFixed(2)} ${item.type==="Monthly Subscription"?"/ month":""}
-      </div>
-      <button class="remove-btn" data-index="${index}">x</button>
+      <span>${item.plan} - ${item.type}${item.numberType?' ('+item.numberType+')':''}${item.area?' - '+item.area:''} x ${item.quantity}</span>
+      <span>$${((item.price||0)*item.quantity).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>
     `;
-    cartItems.appendChild(div);
+    cartItemsEl.appendChild(div);
   });
 
   document.querySelectorAll('.remove-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      cart.splice(e.target.dataset.index,1);
+    btn.addEventListener('click', e=>{
+      const idx = parseInt(e.target.dataset.index);
+      cart.splice(idx,1);
       renderCart();
     });
   });
 
-  cartTotalEl.textContent = `$${total.toFixed(2)}`;
+  cartTotalEl.textContent = '$'+total.toFixed(2);
   updateCartButton();
   localStorage.setItem('callOrbitCart', JSON.stringify(cart));
   renderPayPal();
 }
 
 function updateCartButton(){
-  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
+  const total = cart.reduce((sum,item)=>sum + ((item.price||0)*item.quantity),0).toFixed(2);
   document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-// Cart open/close
-document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.add('active'));
+document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.toggle('active'));
 document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
 
 // Add to cart buttons
@@ -207,39 +197,38 @@ document.querySelectorAll('.buy-now').forEach(btn=>{
     const training = parseFloat(planDiv.dataset.training);
     const monthly = parseFloat(planDiv.dataset.monthly);
 
-    // Add all 3 items to cart
-    cart.push({plan:planName,type:"Setup Fee",price:setup});
-    cart.push({plan:planName,type:"Training Fee",price:training});
-    cart.push({plan:planName,type:"Monthly Subscription",price:monthly});
+    // Push items with full structure
+    cart.push({plan:planName,type:"Setup Fee",price:setup,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:false});
+    cart.push({plan:planName,type:"Training Fee",price:training,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:false});
+    cart.push({plan:planName,type:"Monthly Subscription",price:monthly,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:true});
 
     renderCart();
   });
 });
 
 function renderPayPal(){
-  const paypalContainer = document.getElementById('paypal-button-container');
-  paypalContainer.innerHTML = '';
-  if(cart.length === 0) return;
-  const total = cart.reduce((sum,item)=>sum+(item.price||0),0).toFixed(2);
+  const container = document.getElementById('paypal-button-container');
+  container.innerHTML = '';
+  if(cart.length===0) return;
+  const total = cart.reduce((sum,item)=>sum + ((item.price||0)*item.quantity),0).toFixed(2);
   paypal.Buttons({
     createOrder: (data,actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
     onApprove: (data,actions)=>actions.order.capture().then(details=>{
       alert('Payment completed by '+details.payer.name.given_name);
-      cart = [];
+      cart=[];
       renderCart();
     })
   }).render('#paypal-button-container');
 }
 
-// Keep cart synced across tabs/pages
-window.addEventListener("storage", function(e){
-  if(e.key === "callOrbitCart"){
-    cart = JSON.parse(e.newValue) || [];
+// Sync cart across pages/tabs
+window.addEventListener("storage", e=>{
+  if(e.key==='callOrbitCart'){
+    cart = JSON.parse(e.newValue)||[];
     renderCart();
   }
 });
 
-// Initial render
 renderCart();
 </script>
 </body>
