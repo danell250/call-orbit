@@ -31,7 +31,9 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .cart-wrapper.active { right:0; }
 .cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
 .cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
-.cart-item { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.cart-item { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); flex-direction:column; }
+.cart-item span { display:flex; justify-content:space-between; width:100%; }
+.cart-details { font-size:0.85rem; color:#555; margin-top:4px; }
 .remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
 #cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
 
@@ -74,32 +76,24 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included</p>
       <p class="price">$19 / month</p>
-      <p class="setup">Setup Fee: $99</p>
-      <p class="training">Training Fee: $49</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan" data-setup="149" data-training="49" data-monthly="29">
       <h3>Team</h3>
       <p>Unlimited dashboards, up to 20 agents</p>
       <p class="price">$29 / month per user</p>
-      <p class="setup">Setup Fee: $149</p>
-      <p class="training">Training Fee: $49</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan" data-setup="199" data-training="49" data-monthly="49">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents</p>
       <p class="price">$49 / month per user</p>
-      <p class="setup">Setup Fee: $199</p>
-      <p class="training">Training Fee: $49</p>
       <button class="buy-now">Add to Cart</button>
     </div>
     <div class="plan" data-setup="299" data-training="49" data-monthly="99">
       <h3>Enterprise</h3>
       <p>Global scale, unlimited agents, dedicated manager</p>
       <p class="price">$99 / month per user</p>
-      <p class="setup">Setup Fee: $299</p>
-      <p class="training">Training Fee: $49</p>
       <button class="buy-now">Add to Cart</button>
     </div>
   </section>
@@ -135,19 +129,11 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Initialize / normalize cart
+// 15% VAT
+const VAT_RATE = 0.15;
+
+// Initialize cart
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
-cart = cart.map(item => ({
-  plan: item.plan || 'Unknown Plan',
-  type: item.type || 'Monthly Subscription',
-  country: item.country || 'US',
-  numberType: item.numberType || '',
-  area: item.area || '',
-  forward: item.forward || '',
-  price: item.price ? parseFloat(item.price) : 0,
-  quantity: item.quantity || 1,
-  recurring: item.recurring !== undefined ? item.recurring : true
-}));
 
 function renderCart(){
   const cartItemsEl = document.getElementById('cart-items');
@@ -160,7 +146,12 @@ function renderCart(){
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
-      <span>${item.plan} - ${item.type}${item.numberType?' ('+item.numberType+')':''}${item.area?' - '+item.area:''} x ${item.quantity}</span>
+      <span>
+        ${item.plan} - ${item.type} x ${item.quantity}
+        <div class="cart-details">
+          ${item.recurring?'Monthly Subscription Included':''}
+        </div>
+      </span>
       <span>$${((item.price||0)*item.quantity).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>
     `;
     cartItemsEl.appendChild(div);
@@ -197,10 +188,13 @@ document.querySelectorAll('.buy-now').forEach(btn=>{
     const training = parseFloat(planDiv.dataset.training);
     const monthly = parseFloat(planDiv.dataset.monthly);
 
-    // Push items with full structure
-    cart.push({plan:planName,type:"Setup Fee",price:setup,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:false});
-    cart.push({plan:planName,type:"Training Fee",price:training,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:false});
-    cart.push({plan:planName,type:"Monthly Subscription",price:monthly,country:'US',numberType:'',area:'',forward:'',quantity:1,recurring:true});
+    // Plan + Setup combined
+    const combinedPrice = +(monthly + setup) * (1 + VAT_RATE);
+    cart.push({plan:planName,type:"Package + Setup Fee",price:combinedPrice.toFixed(2),quantity:1,recurring:true});
+
+    // Training optional
+    const trainingPrice = training * (1 + VAT_RATE);
+    cart.push({plan:planName,type:"Training Fee",price:trainingPrice.toFixed(2),quantity:1,recurring:false});
 
     renderCart();
   });
@@ -221,7 +215,7 @@ function renderPayPal(){
   }).render('#paypal-button-container');
 }
 
-// Sync cart across pages/tabs
+// Sync cart across tabs
 window.addEventListener("storage", e=>{
   if(e.key==='callOrbitCart'){
     cart = JSON.parse(e.newValue)||[];
