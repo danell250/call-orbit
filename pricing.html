@@ -3,45 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Pricing</title>
+<title>CallOrbit — Pricing & Plans</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
-<style>
-/* Hero */
-header.hero { margin: 20px auto; padding: 60px 20px; text-align:center; background: linear-gradient(135deg, #3b82f6, #60a5fa); color:#fff; border-radius:10px; box-shadow:0 5px 20px rgba(0,0,0,0.1); }
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.5rem; }
-.fade-in { animation: fadeIn 1.2s ease forwards; }
-@keyframes fadeIn { 0% {opacity:0; transform:translateY(-20px);} 100% {opacity:1; transform:translateY(0);} }
-
-/* Plans */
-.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px 0; padding:0 10px; }
-.plan { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); text-align:center; transition:transform .2s; cursor:pointer; }
-.plan:hover { transform:translateY(-5px); }
-.plan h3 { color:#1e3a8a; margin-bottom:0.5rem; }
-.plan .price { margin-bottom:0.5rem; font-weight:700; font-size:1.2rem; }
-
-/* Optional Training Checkbox */
-.plan label { display:block; margin-top:10px; font-size:0.9rem; font-weight:500; }
-
-/* Buttons */
-.buy-now { background:#3b82f6; color:#fff; padding:12px 24px; border:none; border-radius:999px; font-weight:700; font-size:1rem; cursor:pointer; transition:filter .2s; margin-top:10px; }
-.buy-now:hover { filter:brightness(0.95); }
-
-/* Cart */
-.cart-wrapper { position:fixed; top:0; right:-400px; width:400px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
-.cart-wrapper.active { right:0; }
-.cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
-.cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
-.cart-item { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; padding:10px; background:#fff; border-radius:0.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); flex-direction:column; }
-.cart-item span { display:flex; justify-content:space-between; width:100%; }
-.cart-details { font-size:0.85rem; color:#555; margin-top:4px; }
-.remove-btn { background:none; border:none; color:red; font-weight:bold; cursor:pointer; margin-left:10px; }
-#cart-button { position:fixed; bottom:20px; right:20px; background:#3b82f6; color:#fff; padding:12px 20px; border:none; border-radius:999px; font-weight:700; cursor:pointer; z-index:1001; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 <script src="https://www.paypal.com/sdk/js?client-id=AZj-lkjSMiruqhm64d7ZET-1K7Kv4YLo8IuJn_0ikbzNU3oR91hnmQN2l8uQXNyYYgOb0gqlv5aLM94N&currency=USD"></script>
 </head>
 <body>
@@ -50,192 +14,78 @@ header.hero p { margin-bottom:2rem; font-size:1.5rem; }
   <div>
     <a href="/">Home</a>
     <a href="/features">Features</a>
-    <a href="/pricing" class="active-page">Pricing</a>
+    <a href="/pricing">Pricing</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
-    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
     <a href="/contact">Contact</a>
     <a href="/about">About</a>
   </div>
 </nav>
 
-<header class="hero fade-in">
-  <h1>Pricing</h1>
-  <p>Flexible plans + simple usage pricing to fit every business.</p>
+<header class="hero">
+  <h1>CallOrbit Pricing & Plans</h1>
+  <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using CallOrbit.</p>
 </header>
 
 <main>
-  <section class="plans-grid fade-in">
-    <div class="plan" data-monthly="19" data-setup="49">
-      <h3>Starter</h3>
-      <p>Dashboards + 3 agents included</p>
-      <p class="price">$19 / month</p>
-      <label><input type="checkbox" class="training-option" data-price="29"> Optional Training ($29)</label>
-      <button class="buy-now">Add to Cart</button>
+  <div class="forwarding">
+    <div>
+      <label for="country">Select Country</label>
+      <select id="country"></select>
     </div>
-    <div class="plan" data-monthly="29" data-setup="79">
-      <h3>Team</h3>
-      <p>Unlimited dashboards, up to 20 agents</p>
-      <p class="price">$29 / month per user</p>
-      <label><input type="checkbox" class="training-option" data-price="49"> Optional Training ($49)</label>
-      <button class="buy-now">Add to Cart</button>
+    <div>
+      <label for="number-type">Number Type</label>
+      <select id="number-type">
+        <option value="tollFree">Toll-Free</option>
+        <option value="local">Local</option>
+        <option value="national">National</option>
+      </select>
     </div>
-    <div class="plan" data-monthly="49" data-setup="99">
-      <h3>Business</h3>
-      <p>Advanced analytics, AI insights, 50 agents</p>
-      <p class="price">$49 / month per user</p>
-      <label><input type="checkbox" class="training-option" data-price="69"> Optional Training ($69)</label>
-      <button class="buy-now">Add to Cart</button>
+    <div id="area-container" style="display:none">
+      <label for="area">Select Area</label>
+      <select id="area"></select>
     </div>
-    <div class="plan" data-monthly="99" data-setup="199">
-      <h3>Enterprise</h3>
-      <p>Global scale, unlimited agents, dedicated manager</p>
-      <p class="price">$99 / month per user</p>
-      <label><input type="checkbox" class="training-option" data-price="129"> Optional Training ($129)</label>
-      <button class="buy-now">Add to Cart</button>
+    <div style="grid-column:1/-1">
+      <label for="forward">Forwarding Number / Device</label>
+      <input type="text" id="forward" placeholder="+27 10 500 1234 or SIP URI">
     </div>
-  </section>
+  </div>
+
+  <div class="plans-grid" id="plans-container"></div>
 </main>
 
-<!-- Cart -->
 <div class="cart-wrapper" id="cart-wrapper">
   <div class="cart">
     <h2>Your Cart <span class="cart-close" id="cart-close">✕</span></h2>
     <div id="cart-items"></div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;font-size:1rem;">
       <span>Subtotal:</span><span id="cart-subtotal">$0.00</span>
     </div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:5px;">
+    <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1rem;">
       <span>VAT (15%):</span><span id="cart-vat">$0.00</span>
     </div>
-    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:5px;">
-      <span>Total Today:</span><span id="cart-total">$0.00</span>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:15px;font-size:1.1rem;">
+      <span>Total:</span><span id="cart-total">$0.00</span>
     </div>
-    <div id="paypal-button-container" style="margin-top:15px;"></div>
+    <div id="paypal-button-container" style="margin-top:20px;"></div>
   </div>
 </div>
+
 <button id="cart-button">Cart 🛒 (0 items - $0.00)</button>
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+  <br>
+  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
+  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
+  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-const VAT_RATE = 0.15;
-let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
-
-function addToCart(item){
-  cart.push(item);
-  renderCart();
-}
-
-function renderCart(){
-  const cartItemsEl = document.getElementById('cart-items');
-  const subtotalEl = document.getElementById('cart-subtotal');
-  const vatEl = document.getElementById('cart-vat');
-  const cartTotalEl = document.getElementById('cart-total');
-  cartItemsEl.innerHTML = '';
-  let subtotal = 0;
-
-  cart.forEach((item,i)=>{
-    subtotal += (item.price||0)*item.quantity;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `
-      <span>
-        <strong>${item.plan}</strong> - ${item.type} x ${item.quantity}
-        <div class="cart-details">
-          ${item.description || ''}
-          ${item.recurring?'Recurring charge':''}
-        </div>
-      </span>
-      <span>$${((item.price||0)*item.quantity).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>
-    `;
-    cartItemsEl.appendChild(div);
-  });
-
-  document.querySelectorAll('.remove-btn').forEach(btn=>{
-    btn.addEventListener('click', e=>{
-      const idx = parseInt(e.target.dataset.index);
-      cart.splice(idx,1);
-      renderCart();
-    });
-  });
-
-  const vat = subtotal * VAT_RATE;
-  const total = subtotal + vat;
-  subtotalEl.textContent = '$'+subtotal.toFixed(2);
-  vatEl.textContent = '$'+vat.toFixed(2);
-  cartTotalEl.textContent = '$'+total.toFixed(2);
-  document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
-  localStorage.setItem('callOrbitCart', JSON.stringify(cart));
-  renderPayPal(total.toFixed(2));
-}
-
-document.querySelectorAll('.buy-now').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const planDiv = btn.closest('.plan');
-    const planName = planDiv.querySelector('h3').textContent;
-    const monthly = parseFloat(planDiv.dataset.monthly);
-    const setup = parseFloat(planDiv.dataset.setup);
-    const trainingCheckbox = planDiv.querySelector('.training-option');
-    const trainingPrice = trainingCheckbox.checked ? parseFloat(trainingCheckbox.dataset.price) : 0;
-
-    // Add Package (Recurring)
-    addToCart({
-      plan: planName,
-      type: "Package",
-      description: "Recurring monthly subscription",
-      price: monthly,
-      quantity:1,
-      recurring:true
-    });
-
-    // Add Setup Fee (One-time)
-    addToCart({
-      plan: planName,
-      type: "Setup Fee",
-      description: "One-time setup fee",
-      price: setup,
-      quantity:1,
-      recurring:false
-    });
-
-    // Optional Training (One-time)
-    if(trainingPrice>0){
-      addToCart({
-        plan: planName,
-        type:"Training",
-        description:"Optional training session",
-        price:trainingPrice,
-        quantity:1,
-        recurring:false
-      });
-    }
-
-    renderCart();
-  });
-});
-
-document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.toggle('active'));
-document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
-
-function renderPayPal(total){
-  const container = document.getElementById('paypal-button-container');
-  container.innerHTML = '';
-  if(cart.length===0) return;
-  paypal.Buttons({
-    createOrder: (data, actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
-    onApprove: (data, actions)=>actions.order.capture().then(details=>{
-      alert('Payment completed by '+details.payer.name.given_name);
-      cart=[];
-      renderCart();
-    })
-  }).render('#paypal-button-container');
-}
-
-renderCart();
 </script>
+
+<script src="cart.js"></script>
+
 </body>
 </html>
