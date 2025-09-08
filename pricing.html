@@ -72,25 +72,25 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 
 <main>
   <section class="plans-grid fade-in">
-    <div class="plan" data-setup="99" data-training="49" data-monthly="19" data-minutes="60" data-overage="0.374">
+    <div class="plan" data-monthly="19" data-minutes="60" data-overage="0.374">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included</p>
       <p class="price">$19 / month</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="149" data-training="49" data-monthly="29" data-minutes="177" data-overage="0.374">
+    <div class="plan" data-monthly="29" data-minutes="177" data-overage="0.374">
       <h3>Team</h3>
       <p>Unlimited dashboards, up to 20 agents</p>
       <p class="price">$29 / month per user</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="199" data-training="49" data-monthly="49" data-minutes="500" data-overage="0.374">
+    <div class="plan" data-monthly="49" data-minutes="500" data-overage="0.374">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents</p>
       <p class="price">$49 / month per user</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="299" data-training="49" data-monthly="99" data-minutes="1000" data-overage="0.374">
+    <div class="plan" data-monthly="99" data-minutes="1000" data-overage="0.374">
       <h3>Enterprise</h3>
       <p>Global scale, unlimited agents, dedicated manager</p>
       <p class="price">$99 / month per user</p>
@@ -136,6 +136,17 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 document.getElementById('year').textContent = new Date().getFullYear();
 const VAT_RATE = 0.15;
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
+
+function addToCart(item){
+  // Check for duplicates by plan + type
+  const existing = cart.find(c=>c.plan===item.plan && c.type===item.type);
+  if(existing){
+    existing.quantity += item.quantity;
+  } else {
+    cart.push(item);
+  }
+  renderCart();
+}
 
 function renderCart(){
   const cartItemsEl = document.getElementById('cart-items');
@@ -192,34 +203,19 @@ document.querySelectorAll('.buy-now').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const planDiv = btn.closest('.plan');
     const planName = planDiv.querySelector('h3').textContent;
-    const setup = parseFloat(planDiv.dataset.setup);
-    const training = parseFloat(planDiv.dataset.training);
     const monthly = parseFloat(planDiv.dataset.monthly);
     const minutes = planDiv.dataset.minutes;
     const overage = planDiv.dataset.overage;
 
-    // Package + Setup
-    const mainPrice = (monthly + setup)*(1+VAT_RATE);
-    cart.push({
-      plan:planName,
-      type:"Package + Setup Fee",
-      description:`${minutes} minutes included, $${overage}/min overage`,
-      price:mainPrice.toFixed(2),
-      quantity:1,
-      recurring:true,
-      optional:false
-    });
-
-    // Optional Training
-    const trainingPrice = training*(1+VAT_RATE);
-    cart.push({
-      plan:planName,
-      type:"Training Fee",
-      description:"Optional training session",
-      price:trainingPrice.toFixed(2),
-      quantity:1,
-      recurring:false,
-      optional:true
+    // Add main plan to cart
+    addToCart({
+      plan: planName,
+      type: "Package",
+      description: `${minutes} minutes included, $${overage}/min overage`,
+      price: monthly,
+      quantity: 1,
+      recurring: true,
+      optional: false
     });
 
     renderCart();
