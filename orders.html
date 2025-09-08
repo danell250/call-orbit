@@ -33,6 +33,7 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 .cart-item span{display:flex;flex-direction:column;}
 .remove-btn{background:none;border:none;color:red;font-weight:bold;cursor:pointer;margin-top:5px;font-size:0.9rem}
 .cart-details{display:flex;flex-direction:column;font-size:0.85rem;color:#555;margin-top:4px;}
+#cart-subtotal,#cart-vat,#cart-total{font-weight:700;}
 #cart-button{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:12px 20px;border:none;border-radius:999px;font-weight:700;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
 </style>
 </head>
@@ -86,6 +87,12 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
   <div class="cart">
     <h2>Your Cart <span class="cart-close" id="cart-close">✕</span></h2>
     <div id="cart-items"></div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;font-size:1rem;">
+      <span>Subtotal:</span><span id="cart-subtotal">$0.00</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1rem;">
+      <span>VAT (15%):</span><span id="cart-vat">$0.00</span>
+    </div>
     <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:15px;font-size:1.1rem;">
       <span>Total:</span><span id="cart-total">$0.00</span>
     </div>
@@ -105,7 +112,7 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-const VAT_RATE = 0.15;
+const VAT_RATE=0.15;
 
 const countries=["US","GB","CA","AU","DE","FR","IN","ZA","BR","MX","JP","IT","ES","NL","CH","SE","SG","IE","NZ","NO","PT","BE","KR","TR","TH","PH","TW","PL","RO","HU"];
 const countryNames={US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",IN:"India",ZA:"South Africa",BR:"Brazil",MX:"Mexico",JP:"Japan",IT:"Italy",ES:"Spain",NL:"Netherlands",CH:"Switzerland",SE:"Sweden",SG:"Singapore",IE:"Ireland",NZ:"New Zealand",NO:"Norway",PT:"Portugal",BE:"Belgium",KR:"South Korea",TR:"Turkey",TH:"Thailand",PH:"Philippines",TW:"Taiwan",PL:"Poland",RO:"Romania",HU:"Hungary"};
@@ -119,6 +126,8 @@ countries.forEach(c=>{const opt=document.createElement('option');opt.value=c;opt
 
 const plansContainerEl=document.getElementById('plans-container');
 const cartItemsEl=document.getElementById('cart-items');
+const cartSubtotalEl=document.getElementById('cart-subtotal');
+const cartVATEl=document.getElementById('cart-vat');
 const cartTotalEl=document.getElementById('cart-total');
 const cartWrapper=document.getElementById('cart-wrapper');
 const cartButton=document.getElementById('cart-button');
@@ -144,19 +153,21 @@ function generatePlans(){
   Object.keys(packages).forEach(pkg=>{
     const mins=packages[pkg];
     const rate=countryData[country][numberType];
-    const price=+(rate*mins*(1+VAT_RATE)).toFixed(2);
+    const basePrice=+(rate*mins).toFixed(2);
+    const vatPrice=basePrice*VAT_RATE;
+    const totalPrice=basePrice+vatPrice;
     const div=document.createElement('div');
     div.className='plan';
     div.innerHTML=`<h3>${pkg}</h3>
-      <div class="price">$${price}</div>
+      <div class="price">$${totalPrice.toFixed(2)}</div>
       <div class="minutes">${mins} Minutes, Monthly Subscription</div>
-      <div class="overage">Overage: $${(rate*(1+VAT_RATE)).toFixed(3)}/min</div>
+      <div class="overage">Overage: $${rate.toFixed(3)}/min</div>
       <button class="buy-now">Add to Cart</button>`;
     div.querySelector('button').addEventListener('click',()=>{
       const forward=document.getElementById('forward').value||'';
       const area=numberType==='local'?areaSelect.value:'';
       const normalizedPkg=normalizePlanName(pkg);
-      cart.push({plan:normalizedPkg,country,numberType,area,price,forward,quantity:1,recurring:true});
+      cart.push({plan:normalizedPkg,country,numberType,area,price:basePrice,forward,quantity:1});
       updateCart();
     });
     plansContainerEl.appendChild(div);
@@ -165,17 +176,15 @@ function generatePlans(){
 
 function updateCart(){
   cartItemsEl.innerHTML='';
-  let total=0;
+  let subtotal=0;
   cart.forEach((item,i)=>{
-    total+=item.price*item.quantity;
+    subtotal+=item.price*item.quantity;
     const div=document.createElement('div');
     div.className='cart-item';
     div.innerHTML=`<span>
         <strong>${item.plan}</strong> (${item.country} - ${item.numberType}${item.area?' - '+item.area:''}) x ${item.quantity}
         <div class="cart-details">
           ${item.forward?'Forwarding: '+item.forward:''}
-          ${item.recurring?'Monthly Subscription Included':''}
-          VAT Included
         </div>
       </span>
       <span>$${(item.price*item.quantity).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>`;
@@ -188,6 +197,10 @@ function updateCart(){
       updateCart();
     });
   });
+  const vat=subtotal*VAT_RATE;
+  const total=subtotal+vat;
+  cartSubtotalEl.textContent='$'+subtotal.toFixed(2);
+  cartVATEl.textContent='$'+vat.toFixed(2);
   cartTotalEl.textContent='$'+total.toFixed(2);
   cartButton.textContent=`Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
   localStorage.setItem('callOrbitCart',JSON.stringify(cart));
@@ -202,8 +215,8 @@ generatePlans();
 
 paypal.Buttons({
     createOrder: function(data, actions) {
-      const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0).toFixed(2);
-      return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
+      const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0)*(1+VAT_RATE);
+      return actions.order.create({ purchase_units: [{ amount: { value: total.toFixed(2) } }] });
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
