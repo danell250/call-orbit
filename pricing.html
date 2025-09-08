@@ -27,7 +27,7 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 .buy-now:hover { filter:brightness(0.95); }
 
 /* Cart */
-.cart-wrapper { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
+.cart-wrapper { position:fixed; top:0; right:-400px; width:400px; height:100%; background:#f9fafb; box-shadow:-2px 0 10px rgba(0,0,0,0.2); padding:20px; transition:right 0.3s; overflow-y:auto; z-index:1000; }
 .cart-wrapper.active { right:0; }
 .cart h2 { margin-bottom:1rem;color:#1e3a8a; display:flex; justify-content:space-between; align-items:center; }
 .cart-close { background:none; border:none; font-size:1.2rem; cursor:pointer; color:#ef4444; }
@@ -72,25 +72,25 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 
 <main>
   <section class="plans-grid fade-in">
-    <div class="plan" data-setup="99" data-training="49" data-monthly="19">
+    <div class="plan" data-setup="99" data-training="49" data-monthly="19" data-minutes="60" data-overage="0.374">
       <h3>Starter</h3>
       <p>Dashboards + 3 agents included</p>
       <p class="price">$19 / month</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="149" data-training="49" data-monthly="29">
+    <div class="plan" data-setup="149" data-training="49" data-monthly="29" data-minutes="177" data-overage="0.374">
       <h3>Team</h3>
       <p>Unlimited dashboards, up to 20 agents</p>
       <p class="price">$29 / month per user</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="199" data-training="49" data-monthly="49">
+    <div class="plan" data-setup="199" data-training="49" data-monthly="49" data-minutes="500" data-overage="0.374">
       <h3>Business</h3>
       <p>Advanced analytics, AI insights, 50 agents</p>
       <p class="price">$49 / month per user</p>
       <button class="buy-now">Add to Cart</button>
     </div>
-    <div class="plan" data-setup="299" data-training="49" data-monthly="99">
+    <div class="plan" data-setup="299" data-training="49" data-monthly="99" data-minutes="1000" data-overage="0.374">
       <h3>Enterprise</h3>
       <p>Global scale, unlimited agents, dedicated manager</p>
       <p class="price">$99 / month per user</p>
@@ -111,7 +111,13 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
     <h2>Your Cart <span class="cart-close" id="cart-close">✕</span></h2>
     <div id="cart-items"></div>
     <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:10px;">
-      <span>Total:</span><span id="cart-total">$0.00</span>
+      <span>Subtotal:</span><span id="cart-subtotal">$0.00</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:5px;">
+      <span>VAT (15%):</span><span id="cart-vat">$0.00</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:5px;">
+      <span>Total Today:</span><span id="cart-total">$0.00</span>
     </div>
     <div id="paypal-button-container" style="margin-top:15px;"></div>
   </div>
@@ -128,31 +134,30 @@ header.hero p { margin-bottom: 2rem; font-size: 1.5rem; }
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// 15% VAT
 const VAT_RATE = 0.15;
-
-// Initialize cart
 let cart = JSON.parse(localStorage.getItem('callOrbitCart')) || [];
 
 function renderCart(){
   const cartItemsEl = document.getElementById('cart-items');
+  const subtotalEl = document.getElementById('cart-subtotal');
+  const vatEl = document.getElementById('cart-vat');
   const cartTotalEl = document.getElementById('cart-total');
   cartItemsEl.innerHTML = '';
-  let total = 0;
+  let subtotal = 0;
 
   cart.forEach((item,i)=>{
-    total += (item.price||0)*item.quantity;
+    subtotal += (item.price||0)*item.quantity;
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
       <span>
         ${item.plan} - ${item.type} x ${item.quantity}
         <div class="cart-details">
-          ${item.recurring?'Monthly Subscription Included':''}
+          ${item.description || ''}
+          ${item.recurring?'Recurring charge':''}
         </div>
       </span>
-      <span>$${((item.price||0)*item.quantity).toFixed(2)} <button class="remove-btn" data-index="${i}">x</button></span>
+      <span>$${((item.price||0)*item.quantity).toFixed(2)} ${item.optional?'<button class="remove-btn" data-index="'+i+'">x</button>':''}</span>
     `;
     cartItemsEl.appendChild(div);
   });
@@ -165,21 +170,24 @@ function renderCart(){
     });
   });
 
+  const vat = subtotal * VAT_RATE;
+  const total = subtotal + vat;
+  subtotalEl.textContent = '$'+subtotal.toFixed(2);
+  vatEl.textContent = '$'+vat.toFixed(2);
   cartTotalEl.textContent = '$'+total.toFixed(2);
   updateCartButton();
   localStorage.setItem('callOrbitCart', JSON.stringify(cart));
-  renderPayPal();
+  renderPayPal(total.toFixed(2));
 }
 
 function updateCartButton(){
-  const total = cart.reduce((sum,item)=>sum + ((item.price||0)*item.quantity),0).toFixed(2);
-  document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+  const total = cart.reduce((sum,item)=>sum + ((item.price||0)*item.quantity),0)*(1+VAT_RATE);
+  document.getElementById('cart-button').textContent = `Cart 🛒 (${cart.length} items - $${total.toFixed(2)})`;
 }
 
 document.getElementById('cart-button').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.toggle('active'));
 document.getElementById('cart-close').addEventListener('click',()=>document.getElementById('cart-wrapper').classList.remove('active'));
 
-// Add to cart buttons
 document.querySelectorAll('.buy-now').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const planDiv = btn.closest('.plan');
@@ -187,24 +195,41 @@ document.querySelectorAll('.buy-now').forEach(btn=>{
     const setup = parseFloat(planDiv.dataset.setup);
     const training = parseFloat(planDiv.dataset.training);
     const monthly = parseFloat(planDiv.dataset.monthly);
+    const minutes = planDiv.dataset.minutes;
+    const overage = planDiv.dataset.overage;
 
-    // Plan + Setup combined
-    const combinedPrice = +(monthly + setup) * (1 + VAT_RATE);
-    cart.push({plan:planName,type:"Package + Setup Fee",price:combinedPrice.toFixed(2),quantity:1,recurring:true});
+    // Package + Setup
+    const mainPrice = (monthly + setup)*(1+VAT_RATE);
+    cart.push({
+      plan:planName,
+      type:"Package + Setup Fee",
+      description:`${minutes} minutes included, $${overage}/min overage`,
+      price:mainPrice.toFixed(2),
+      quantity:1,
+      recurring:true,
+      optional:false
+    });
 
-    // Training optional
-    const trainingPrice = training * (1 + VAT_RATE);
-    cart.push({plan:planName,type:"Training Fee",price:trainingPrice.toFixed(2),quantity:1,recurring:false});
+    // Optional Training
+    const trainingPrice = training*(1+VAT_RATE);
+    cart.push({
+      plan:planName,
+      type:"Training Fee",
+      description:"Optional training session",
+      price:trainingPrice.toFixed(2),
+      quantity:1,
+      recurring:false,
+      optional:true
+    });
 
     renderCart();
   });
 });
 
-function renderPayPal(){
+function renderPayPal(total){
   const container = document.getElementById('paypal-button-container');
   container.innerHTML = '';
   if(cart.length===0) return;
-  const total = cart.reduce((sum,item)=>sum + ((item.price||0)*item.quantity),0).toFixed(2);
   paypal.Buttons({
     createOrder: (data,actions)=>actions.order.create({purchase_units:[{amount:{value:total}}]}),
     onApprove: (data,actions)=>actions.order.capture().then(details=>{
@@ -215,7 +240,6 @@ function renderPayPal(){
   }).render('#paypal-button-container');
 }
 
-// Sync cart across tabs
 window.addEventListener("storage", e=>{
   if(e.key==='callOrbitCart'){
     cart = JSON.parse(e.newValue)||[];
