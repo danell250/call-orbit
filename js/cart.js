@@ -11,7 +11,6 @@ const cartItemsEl = document.getElementById("cart-items");
 const cartSubtotalEl = document.getElementById("cart-subtotal");
 const cartVATEl = document.getElementById("cart-vat");
 const cartTotalEl = document.getElementById("cart-total");
-const cartCloseEl = document.getElementById("cart-close");
 const paypalContainerEl = document.getElementById("paypal-button-container");
 
 // -----------------------------
@@ -83,9 +82,11 @@ function renderCart() {
     document.querySelectorAll(".remove-btn").forEach(btn => {
         btn.addEventListener("click", e => {
             const idx = parseInt(e.target.dataset.index);
-            cart.splice(idx, 1);
-            saveCart();
-            renderCart();
+            if (!isNaN(idx)) {
+                cart.splice(idx, 1);
+                saveCart();
+                renderCart();
+            }
         });
     });
 
@@ -98,7 +99,7 @@ function renderCart() {
 // -----------------------------
 function updateCartButton() {
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
-    if (cartButtonEl) cartButtonEl.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+    if (cartButtonEl) cartButtonEl.textContent = `Cart 🛒 (${cart.length} item${cart.length !== 1 ? "s" : ""} - $${total})`;
 }
 
 // -----------------------------
@@ -153,16 +154,14 @@ function renderPayPal() {
 if (cartButtonEl && cartDropdownEl) {
     cartButtonEl.addEventListener("click", () => cartDropdownEl.classList.toggle("active"));
 }
-if (cartCloseEl && cartDropdownEl) {
-    cartCloseEl.addEventListener("click", () => cartDropdownEl.classList.remove("active"));
-}
 
 // -----------------------------
-// Hook up Add to Cart buttons (works on dynamic elements)
+// Hook up Add to Cart buttons dynamically
 // -----------------------------
 document.addEventListener("click", e => {
     if (e.target.classList.contains("buy-now")) {
         const planDiv = e.target.closest(".plan");
+        if (!planDiv) return;
         const planName = planDiv.querySelector("h3").textContent;
         const monthly = parseFloat(planDiv.dataset.monthly) || 0;
         const setup = parseFloat(planDiv.dataset.setup) || 0;
@@ -189,6 +188,8 @@ window.addEventListener("storage", e => {
 });
 
 // -----------------------------
-// Initialize
+// Initialize after DOM content
 // -----------------------------
-renderCart();
+document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+});
