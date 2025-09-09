@@ -9,170 +9,233 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
-/* Hero */
+/* Navbar */
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  font-family:'Inter',sans-serif;
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
+nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
+nav .menu a.active-page { color:#3b82f6; font-weight:700; }
+
+/* Buy Numbers Button */
+.navbar-buy {
+  background: none;
+  color: #3b82f6;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration:none;
+  transition: all 0.2s;
+  border: 2px solid #3b82f6;
+}
+.navbar-buy:hover { 
+  background:#3b82f6; 
+  color: #fff; 
+  transform:scale(1.05); 
+}
+
+/* Cart Button */
+.cart-container { display:flex; align-items:center; gap:12px; position:relative; }
+.cart-btn { border:none; background:none; color:#000; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; position:relative; }
+.cart-badge { position:absolute; top:-6px; right:-10px; background:#f87171; color:#fff; font-size:0.75rem; font-weight:700; padding:2px 6px; border-radius:999px; }
+.cart-dropdown { display:none; position:absolute; top:36px; right:0; width:320px; background:#fff; border-radius:10px; box-shadow:0 8px 25px rgba(0,0,0,0.15); padding:15px; z-index:300; }
+.cart-dropdown h4 { margin-top:0; margin-bottom:10px; color:#1e3a8a; font-size:1rem; }
+.cart-item { display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.95rem; color:#374151; }
+.cart-total { border-top:1px solid #e5e7eb; margin-top:10px; padding-top:10px; font-weight:600; display:flex; justify-content:space-between; }
+
+/* Login Button */
+.login-btn { padding:10px 18px; border-radius:999px; font-weight:600; text-decoration:none; background:#3b82f6; color:#fff; transition:0.2s; }
+.login-btn:hover { background:#2563eb; }
+
+/* Hero / Banner */
 header.hero {
   margin:0 auto;
-  padding:50px 20px;
+  padding:80px 20px;
   text-align:center;
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);
   color:#fff;
   border-radius:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  position:relative;
+  overflow:hidden;
 }
-header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
-header.hero p { margin-bottom:2rem; font-size:1.2rem; }
+header.hero video {
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  z-index:0;
+  opacity:0.4;
+}
+header.hero .hero-content { position:relative; z-index:1; }
+header.hero h1 { margin-bottom:1rem; font-size:3rem; }
+header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
 
-/* Features / Coverage Cards */
-.features-grid {
+/* Coverage Cards */
+.features-cards-container {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:1.5rem;
-  margin:30px 0;
-  padding:0 10px;
-}
-.feature {
-  background:#fff;
-  padding:25px 20px;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-}
-.feature:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:#f0f9ff;
-}
-.feature h3 { color:#1e3a8a; margin-bottom:1rem; }
-.feature p { color:#374151; }
-
-/* CTA Section */
-.cta {
-  background:#fff;
   padding:40px 20px;
-  text-align:center;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-  margin:40px 10px;
+}
+.feature-card {
+  background:#fff;
+  border-radius:15px;
+  padding:30px 20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.cta:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
-.cta h2 { margin-bottom:1rem; font-size:2rem; color:#1e3a8a; }
-.cta p { margin-bottom:1.5rem; font-size:1.2rem; color:#374151; }
-.cta a {
-  display:inline-block;
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  transition: filter 0.2s;
-  border: 2px solid #3b82f6; /* matches index */
-  color: #3b82f6;             /* matches index */
-  background: transparent;    /* matches index */
-}
-.cta a:hover { filter:brightness(0.95); background:#3b82f6; color:#fff; }
+.feature-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
+.feature-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
+.feature-card:hover i { transform:rotate(15deg) scale(1.1); }
+.feature-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
+.feature-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
 
-/* Navbar Buy Numbers Button (matches index) */
-.navbar-buy {
-  padding: 8px 16px;
-  border: 2px solid #3b82f6;
-  border-radius: 999px;
-  color: #3b82f6;
-  font-weight: 700;
-  text-decoration: none;
-  transition: 0.2s;
+/* Floating Chat Button */
+.chat-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#3b82f6;
+  color:#fff;
+  border:none;
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  z-index:500;
+  transition:0.2s;
 }
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-}
+.chat-btn:hover { background:#2563eb; }
+
+/* Footer */
+footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
+footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+
+/* Fade-in animation */
+.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
+
+<!-- Navbar -->
 <nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/">Home</a>
+  <div class="logo"><a href="/">CallOrbit</a></div>
+  <div class="menu">
+    <a href="/" >Home</a>
     <a href="/features">Features</a>
     <a href="/pricing">Pricing</a>
     <a href="/coverage" class="active-page">Coverage</a>
     <a href="/platform">Platform</a>
-    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
+    <a href="/orders" class="navbar-buy">Buy Numbers</a>
     <a href="/contact">Contact</a>
     <a href="/about">About</a>
   </div>
+  <div class="actions" style="display:flex; align-items:center; gap:12px;">
+    <div class="cart-container">
+      <button class="cart-btn"><i class="fas fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></button>
+      <div class="cart-dropdown" id="cart-dropdown">
+        <h4>Your Cart</h4>
+        <div id="cart-items"></div>
+        <div class="cart-total"><span>Total:</span><span id="cart-total">$0.00</span></div>
+      </div>
+    </div>
+    <a href="/login" class="login-btn">Login</a>
+  </div>
 </nav>
 
+<!-- Hero Section with Video -->
 <header class="hero fade-in">
-  <h1>Global Coverage</h1>
-  <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
+  <video autoplay muted loop>
+    <source src="dashboards.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1>Global Coverage</h1>
+    <p>CallOrbit offers extensive contact center coverage across multiple regions worldwide.</p>
+  </div>
 </header>
 
-<section class="features features-grid fade-in">
-  <div class="feature">
+<!-- Coverage Cards -->
+<section class="features-cards-container fade-in">
+  <div class="feature-card">
     <h3>USA 🇺🇸🇨🇦</h3>
     <p>Reliable numbers and infrastructure across the U.S. and Canada, ensuring fast connectivity and high availability.</p>
   </div>
-  <div class="feature">
+  <div class="feature-card">
     <h3>Europe 🇬🇧🇩🇪🇫🇷</h3>
     <p>Coverage in major European cities with local numbers and full support for EU contact centers.</p>
   </div>
-  <div class="feature">
+  <div class="feature-card">
     <h3>Asia-Pacific 🇯🇵🇦🇺🇸🇬</h3>
     <p>Seamless connectivity in APAC regions, helping your team reach customers efficiently and reliably.</p>
   </div>
-  <div class="feature">
+  <div class="feature-card">
     <h3>Latin America 🇧🇷🇲🇽🇦🇷</h3>
     <p>Local numbers and support for growing your reach across LATAM countries.</p>
   </div>
-  <div class="feature">
+  <div class="feature-card">
     <h3>Africa 🇿🇦🇳🇬🇪🇬</h3>
     <p>Expanding coverage to major African hubs with robust local telephony solutions.</p>
   </div>
-  <div class="feature">
+  <div class="feature-card">
     <h3>Middle East 🇦🇪🇸🇦🇶🇦</h3>
     <p>Reliable numbers and connectivity across key Middle Eastern markets.</p>
   </div>
 </section>
 
-<section class="fade-in" style="text-align:center; margin-top:2rem;">
-  <p style="font-style:italic;">We’re continuously expanding our regions to serve you better.</p>
-</section>
-
-<!-- ✅ CTA Section -->
-<section class="cta fade-in">
-  <h2>Get Your Numbers Anywhere</h2>
-  <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
-  <a href="/orders.html">Get Started Today</a>
-</section>
+<!-- Floating Chat Button -->
+<button class="chat-btn" onclick="window.location='/contact'">Need help?</button>
 
 <!-- Footer -->
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
   <br>
-  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-conditions">Terms & Conditions</a>
+  <a href="/refund-policy">Refund Policy</a>
 </footer>
 
-
-
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+  // Cart toggle
+  const cartBtn = document.querySelector('.cart-btn');
+  const cartDropdown = document.getElementById('cart-dropdown');
+  cartBtn.addEventListener('click', () => {
+    cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
   });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOnScroll = new IntersectionObserver(function(entries){
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold:0.1});
+  faders.forEach(fader => appearOnScroll.observe(fader));
+
+  // Set footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
 </body>
 </html>
