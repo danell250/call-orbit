@@ -1,6 +1,6 @@
+// Persistent Cart with VAT
 let cart = JSON.parse(localStorage.getItem("callOrbitCart")) || [];
-
-const VAT_RATE = 0.15; // 15% VAT – adjust if needed
+const VAT_RATE = 0.15; // 15% VAT
 
 // Add a plan to cart
 function addPlanToCart(plan) {
@@ -27,8 +27,10 @@ function addPlanToCart(plan) {
 function renderCart() {
     const cartItemsEl = document.getElementById("cart-items");
     const cartTotalEl = document.getElementById("cart-total");
-    cartItemsEl.innerHTML = "";
 
+    if (!cartItemsEl || !cartTotalEl) return;
+
+    cartItemsEl.innerHTML = "";
     let grandTotal = 0;
 
     cart.forEach((item, i) => {
@@ -37,17 +39,17 @@ function renderCart() {
         const div = document.createElement("div");
         div.className = "cart-item";
         div.innerHTML = `
-      <div style="flex:1">
-        <strong>${item.name}</strong><br>
-        Monthly: $${item.monthly.toFixed(2)}<br>
-        Setup: $${item.setup.toFixed(2)}${item.training ? ` + Training: $${item.training.toFixed(2)}` : ""}<br>
-        VAT: $${item.vat.toFixed(2)}
-      </div>
-      <div style="text-align:right">
-        $${item.totalFirstMonth.toFixed(2)} 
-        <button class="remove-btn" data-index="${i}">x</button>
-      </div>
-    `;
+            <div style="flex:1">
+                <strong>${item.name}</strong><br>
+                Monthly: $${item.monthly.toFixed(2)}<br>
+                Setup: $${item.setup.toFixed(2)}${item.training ? ` + Training: $${item.training.toFixed(2)}` : ""}<br>
+                VAT: $${item.vat.toFixed(2)}
+            </div>
+            <div style="text-align:right">
+                $${item.totalFirstMonth.toFixed(2)} 
+                <button class="remove-btn" data-index="${i}">x</button>
+            </div>
+        `;
         cartItemsEl.appendChild(div);
     });
 
@@ -70,17 +72,20 @@ function renderCart() {
 // Update cart button text
 function updateCartButton() {
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
-    document.getElementById("cart-button").textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+    const cartButton = document.getElementById("cart-button");
+    if (cartButton) cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-// Save cart
+// Save cart to localStorage
 function saveCart() {
     localStorage.setItem("callOrbitCart", JSON.stringify(cart));
 }
 
-// PayPal integration
+// PayPal Integration
 function renderPayPal() {
     const container = document.getElementById("paypal-button-container");
+    if (!container) return;
+
     container.innerHTML = "";
     if (cart.length === 0) return;
 
@@ -88,9 +93,7 @@ function renderPayPal() {
 
     paypal.Buttons({
         createOrder: (data, actions) =>
-            actions.order.create({
-                purchase_units: [{ amount: { value: total } }]
-            }),
+            actions.order.create({ purchase_units: [{ amount: { value: total } }] }),
         onApprove: (data, actions) =>
             actions.order.capture().then(details => {
                 alert("Payment completed by " + details.payer.name.given_name);
@@ -101,13 +104,17 @@ function renderPayPal() {
     }).render("#paypal-button-container");
 }
 
-// Event listeners
-document.getElementById("cart-button").addEventListener("click", () =>
-    document.getElementById("cart-wrapper").classList.toggle("active")
-);
-document.getElementById("cart-close").addEventListener("click", () =>
-    document.getElementById("cart-wrapper").classList.remove("active")
-);
+// Toggle cart drawer
+const cartButtonEl = document.getElementById("cart-button");
+const cartWrapper = document.getElementById("cart-wrapper");
+const cartClose = document.getElementById("cart-close");
+
+if (cartButtonEl && cartWrapper) {
+    cartButtonEl.addEventListener("click", () => cartWrapper.classList.toggle("active"));
+}
+if (cartClose && cartWrapper) {
+    cartClose.addEventListener("click", () => cartWrapper.classList.remove("active"));
+}
 
 // Hook up plan buttons
 document.querySelectorAll(".buy-now").forEach(btn => {
@@ -123,7 +130,7 @@ document.querySelectorAll(".buy-now").forEach(btn => {
             monthly,
             setup,
             training,
-            includeTraining: true // always include, or make optional later
+            includeTraining: true
         });
     });
 });
@@ -136,4 +143,5 @@ window.addEventListener("storage", e => {
     }
 });
 
+// Initialize cart on page load
 renderCart();

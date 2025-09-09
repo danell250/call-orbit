@@ -1,166 +1,382 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Home</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-    <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-  </svg>">
-  <style>
-    /* Navbar Buy Numbers button same as platform page */
-    .navbar-buy {
-      background: none;
-      color: #3b82f6;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-left: 10px;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 2px solid #3b82f6;
-    }
-    .navbar-buy:hover { 
-      background:#3b82f6; 
-      color: #fff; 
-      transform:scale(1.05); 
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CallOrbit — Home</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
+</svg>">
 
-    .center { text-align:center; }
+<!-- Font Awesome 6 CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    /* Hero / Banner */
-    header.hero {
-      margin:0 auto;
-      padding:60px 20px;
-      text-align:center;
-      background: linear-gradient(135deg,#3b82f6,#60a5fa);
-      color:#fff;
-      border-radius:10px;
-      box-shadow:0 5px 20px rgba(0,0,0,0.1);
-    }
-    header.hero h1 { margin-bottom:1rem; font-size:2.8rem; }
-    header.hero p { margin-bottom:2rem; font-size:1.3rem; }
-    .hero-cta { display:inline-block; padding:12px 30px; background:#10b981; color:#fff; border-radius:999px; font-weight:700; text-decoration:none; transition: filter 0.2s; }
-    .hero-cta:hover { filter:brightness(0.9); }
+<style>
+/* Navbar */
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  font-family:'Inter',sans-serif;
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
+nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
+nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 
-    /* Quick Stats */
-    .stats { display:flex; justify-content:center; gap:2rem; margin:40px 0; flex-wrap:wrap; text-align:center; }
-    .stat { background:#fff; padding:20px 30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.05); min-width:150px; }
-    .stat h2 { font-size:2rem; color:#1e3a8a; margin-bottom:0.5rem; }
-    .stat p { margin:0; font-weight:600; }
+/* Buy Numbers Button */
+.navbar-buy {
+  background: none;
+  color: #3b82f6;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration:none;
+  transition: all 0.2s;
+  border: 2px solid #3b82f6;
+}
+.navbar-buy:hover { 
+  background:#3b82f6; 
+  color: #fff; 
+  transform:scale(1.05); 
+}
 
-    /* Feature Teasers */
-    .feature-teasers { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin:20px 10px; }
-    .feature-teasers .feature { background:#fff; padding:20px; border-radius:1rem; box-shadow:0 5px 20px rgba(0,0,0,0.05); transition:transform 0.2s; cursor:pointer; text-align:center; }
-    .feature-teasers .feature:hover { transform:translateY(-5px); }
-    .feature-teasers h3 { color:#1e3a8a; margin-bottom:0.5rem; }
-    .feature-teasers p { font-size:0.95rem; margin-bottom:10px; }
-    .feature-teasers a { text-decoration:none; color:#3b82f6; font-weight:700; }
+/* Cart Button */
+.cart-container { display:flex; align-items:center; gap:12px; position:relative; }
+.cart-btn {
+  border:none;
+  background:none;
+  color:#000; /* black icon */
+  font-size:1.5rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.cart-badge {
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:#f87171;
+  color:#fff;
+  font-size:0.75rem;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:999px;
+}
+.cart-dropdown {
+  display:none;
+  position:absolute;
+  top:36px;
+  right:0;
+  width:320px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  padding:15px;
+  z-index:300;
+}
+.cart-dropdown h4 { margin-top:0; margin-bottom:10px; color:#1e3a8a; font-size:1rem; }
+.cart-item { display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.95rem; color:#374151; }
+.cart-total { border-top:1px solid #e5e7eb; margin-top:10px; padding-top:10px; font-weight:600; display:flex; justify-content:space-between; }
 
-    /* Testimonials */
-    .testimonials { background:#f3f4f6; padding:50px 20px; text-align:center; border-radius:10px; margin:40px 10px; }
-    .testimonial { max-width:600px; margin:20px auto; font-style:italic; color:#1f2937; }
-    .testimonial-author { margin-top:8px; font-weight:700; color:#1e3a8a; }
+/* Login Button */
+.login-btn {
+  padding:10px 18px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  background:#3b82f6;
+  color:#fff;
+  transition:0.2s;
+}
+.login-btn:hover { background:#2563eb; }
 
-    /* Footer */
-    footer { text-align:center; padding:2rem; background:#f3f4f6; margin-top:20px; }
-  </style>
+/* Hero / Banner */
+header.hero {
+  margin:0 auto;
+  padding:80px 20px;
+  text-align:center;
+  color:#fff;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  position:relative;
+  overflow:hidden;
+}
+header.hero video {
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  z-index:0;
+  opacity:0.4;
+}
+header.hero .hero-content {
+  position:relative;
+  z-index:1;
+}
+header.hero h1 { margin-bottom:1rem; font-size:3rem; }
+header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
+.hero-cta { display:inline-block; padding:14px 32px; background:#10b981; color:#fff; border-radius:999px; font-weight:700; text-decoration:none; transition: filter 0.2s; }
+.hero-cta:hover { filter:brightness(0.9); }
+
+/* Premium Cards Section */
+.premium-cards-container {
+  overflow-x:auto;
+  display:flex;
+  gap:1.5rem;
+  padding:40px 20px;
+  scroll-behavior:smooth;
+}
+.premium-card {
+  min-width:280px;
+  background:#fff;
+  border-radius:15px;
+  padding:30px 20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  flex-shrink:0;
+}
+.premium-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
+.premium-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
+.premium-card:hover i { transform:rotate(15deg) scale(1.1); }
+.premium-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
+.premium-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
+
+/* Floating Chat Button */
+.chat-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#3b82f6;
+  color:#fff;
+  border:none;
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  z-index:500;
+  transition:0.2s;
+}
+.chat-btn:hover { background:#2563eb; }
+
+/* FAQ Accordion */
+.faq-section {
+  max-width:900px;
+  margin:60px auto;
+  padding:0 20px;
+}
+.faq-item { background:#f9fafb; margin-bottom:10px; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05);}
+.faq-question {
+  cursor:pointer;
+  padding:18px 20px;
+  font-weight:600;
+  color:#1e3a8a;
+  position:relative;
+}
+.faq-question::after {
+  content: '+';
+  position:absolute;
+  right:20px;
+  font-size:1.5rem;
+  transition: transform 0.3s;
+}
+.faq-question.active::after { transform:rotate(45deg); }
+.faq-answer {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.5s ease;
+  padding:0 20px;
+  background:#fff;
+  font-size:1rem;
+  color:#374151;
+}
+
+/* Bottom CTA Banner */
+.cta-banner {
+  background:#10b981;
+  color:#fff;
+  text-align:center;
+  padding:50px 20px;
+  margin-top:60px;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.cta-banner h2 { font-size:2rem; margin-bottom:20px; }
+.cta-banner a {
+  display:inline-block;
+  padding:16px 36px;
+  background:#fff;
+  color:#10b981;
+  font-weight:700;
+  border-radius:999px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.cta-banner a:hover { background:#f0f0f0; transform:scale(1.05); }
+
+/* Footer */
+footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
+footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+
+/* Fade-in animation */
+.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* Hide scrollbar for horizontal cards */
+.premium-cards-container::-webkit-scrollbar { display:none; }
+.premium-cards-container { -ms-overflow-style:none; scrollbar-width:none; }
+</style>
 </head>
 <body>
-  <nav>
-    <div>
-      <a href="/"><strong>CallOrbit</strong></a>
-    </div>
-    <div>
-      <a href="/" class="active-page">Home</a>
-      <a href="/features">Features</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/coverage">Coverage</a>
-      <a href="/platform">Platform</a>
-      <a href="/orders" class="navbar-buy">Buy Numbers</a>
-      <a href="/contact">Contact</a>
-      <a href="/about">About</a>
-    </div>
-  </nav>
 
-  <!-- Hero / Banner -->
-  <header class="hero fade-in center">
+<!-- Navbar -->
+<nav>
+  <div class="logo"><a href="/">CallOrbit</a></div>
+  <div class="menu">
+    <a href="/" class="active-page">Home</a>
+    <a href="/features">Features</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+    <a href="/orders" class="navbar-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
+  </div>
+  <div class="actions" style="display:flex; align-items:center; gap:12px;">
+    <div class="cart-container">
+      <button class="cart-btn"><i class="fas fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></button>
+      <div class="cart-dropdown" id="cart-dropdown">
+        <h4>Your Cart</h4>
+        <div id="cart-items"></div>
+        <div class="cart-total"><span>Total:</span><span id="cart-total">$0.00</span></div>
+      </div>
+    </div>
+    <a href="/login" class="login-btn">Login</a>
+  </div>
+</nav>
+
+<!-- Hero Section with Video -->
+<header class="hero fade-in">
+  <video autoplay muted loop>
+    <source src="dashboards.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
     <h1>Separate. Simplify. Scale Your Contact Center.</h1>
-    <p>Powerful dashboards, portals, number management, and analytics—all in one platform.</p>
+    <p>CallOrbit gives managers full control of contact centers: live dashboards, agent oversight, and analytics—all in one platform.</p>
     <a href="/features" class="hero-cta">Explore Features</a>
-  </header>
+  </div>
+</header>
 
-  <!-- Quick Stats -->
-  <section class="stats fade-in">
-    <div class="stat">
-      <h2>100+</h2>
-      <p>Contact Centers Managed</p>
-    </div>
-    <div class="stat">
-      <h2>5000+</h2>
-      <p>Agents Connected</p>
-    </div>
-    <div class="stat">
-      <h2>99.9%</h2>
-      <p>Uptime Guarantee</p>
-    </div>
-  </section>
+<!-- Premium Highlights Horizontal Scroll -->
+<section class="premium-cards-container fade-in">
+  <div class="premium-card">
+    <i class="fas fa-stopwatch"></i>
+    <h3>Reduce Response Time by 50%</h3>
+    <p>Streamline operations with efficient call routing and live monitoring for all agents.</p>
+  </div>
+  <div class="premium-card">
+    <i class="fas fa-users"></i>
+    <h3>Monitor Teams from Anywhere</h3>
+    <p>Check agent activity, call stats, and performance no matter where you are.</p>
+  </div>
+  <div class="premium-card">
+    <i class="fas fa-globe"></i>
+    <h3>Global Number Coverage</h3>
+    <p>Buy and manage numbers in multiple countries with full control.</p>
+  </div>
+</section>
 
-  <!-- Feature Teasers -->
-  <section class="feature-teasers fade-in">
-    <div class="feature">
-      <h3>Live Dashboards</h3>
-      <p>Get real-time insights instantly.</p>
-      <a href="/features">Learn More →</a>
-    </div>
-    <div class="feature">
-      <h3>Number Management</h3>
-      <p>Buy, port, and manage numbers globally.</p>
-      <a href="/features">Learn More →</a>
-    </div>
-    <div class="feature">
-      <h3>Analytics & Reporting</h3>
-      <p>Generate actionable reports for every team.</p>
-      <a href="/features">Learn More →</a>
-    </div>
-  </section>
+<!-- FAQ Accordion -->
+<section class="faq-section fade-in">
+  <div class="faq-item">
+    <div class="faq-question">What is CallOrbit?</div>
+    <div class="faq-answer"><p>CallOrbit is a complete contact center management platform that gives managers full control over numbers, teams, and analytics.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Can I manage multiple contact centers?</div>
+    <div class="faq-answer"><p>Yes, our platform allows you to create separate portals for multiple centers with role-based access.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">How does analytics work?</div>
+    <div class="faq-answer"><p>Live dashboards provide real-time metrics, and you can generate detailed reports to optimize performance.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Can I buy numbers globally?</div>
+    <div class="faq-answer"><p>Yes, CallOrbit provides global number coverage, including easy porting and management.</p></div>
+  </div>
+</section>
 
-  <!-- Testimonials -->
-  <section class="testimonials fade-in">
-    <div class="testimonial">
-      "CallOrbit saved us hours every week managing multiple contact centers."
-      <div class="testimonial-author">— Alex P., Operations Manager</div>
-    </div>
-    <div class="testimonial">
-      "The dashboards and analytics are game changers for our teams!"
-      <div class="testimonial-author">— Maria L., Contact Center Director</div>
-    </div>
-  </section>
+<!-- Floating Chat Button -->
+<button class="chat-btn" onclick="window.location='/contact'">Need help?</button>
 
-  <!-- Footer -->
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+<!-- Bottom CTA Banner -->
+<section class="cta-banner fade-in">
+  <h2>Take control of your contact center today – Contact Us</h2>
+  <a href="/contact">Contact Us</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
   <br>
-  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-conditions">Terms & Conditions</a>
+  <a href="/refund-policy">Refund Policy</a>
 </footer>
 
+<script>
+// Cart toggle
+const cartBtn = document.querySelector('.cart-btn');
+const cartDropdown = document.getElementById('cart-dropdown');
+cartBtn.addEventListener('click', () => {
+  cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
+});
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.1});
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
+// FAQ Accordion toggle
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(q => {
+  q.addEventListener('click', () => {
+    q.classList.toggle('active');
+    const answer = q.nextElementSibling;
+    if(q.classList.contains('active')) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    } else {
+      answer.style.maxHeight = null;
+    }
+  });
+});
+
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const appearOnScroll = new IntersectionObserver(function(entries){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold:0.1});
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+// Set footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>

@@ -1,126 +1,141 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CallOrbit — About</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
-/* Hero */
+/* Navbar */
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  font-family:'Inter',sans-serif;
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
+nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
+nav .menu a.active-page { color:#3b82f6; font-weight:700; }
+.navbar-buy { background:none; color:#3b82f6; padding:10px 20px; border-radius:999px; font-weight:700; margin-left:10px; text-decoration:none; transition:all 0.2s; border:2px solid #3b82f6; }
+.navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
+.cart-container { display:flex; align-items:center; gap:12px; position:relative; }
+.cart-btn { border:none; background:none; color:#000; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; position:relative; }
+.cart-badge { position:absolute; top:-6px; right:-10px; background:#f87171; color:#fff; font-size:0.75rem; font-weight:700; padding:2px 6px; border-radius:999px; }
+.cart-dropdown { display:none; position:absolute; top:36px; right:0; width:320px; background:#fff; border-radius:10px; box-shadow:0 8px 25px rgba(0,0,0,0.15); padding:15px; z-index:300; }
+.cart-dropdown h4 { margin-top:0; margin-bottom:10px; color:#1e3a8a; font-size:1rem; }
+.cart-item { display:flex; justify-content:space-between; margin-bottom:8px; font-size:0.95rem; color:#374151; }
+.cart-total { border-top:1px solid #e5e7eb; margin-top:10px; padding-top:10px; font-weight:600; display:flex; justify-content:space-between; }
+.login-btn { padding:10px 18px; border-radius:999px; font-weight:600; text-decoration:none; background:#3b82f6; color:#fff; transition:0.2s; }
+.login-btn:hover { background:#2563eb; }
+
+/* Hero Section */
 header.hero {
   margin:0 auto;
-  padding:50px 20px;
+  padding:80px 20px;
   text-align:center;
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);
   color:#fff;
   border-radius:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  position:relative;
+  overflow:hidden;
+  background: linear-gradient(135deg,#3b82f6,#60a5fa);
 }
-header.hero h1 { margin-bottom:1rem; font-size:2.5rem; }
-header.hero p { margin-bottom:2rem; font-size:1.2rem; }
+header.hero h1 { margin-bottom:1rem; font-size:3rem; }
+header.hero p { font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
 
-/* Features / Cards */
+/* Features Grid */
 .features-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:1.5rem;
-  margin:30px 0;
-  padding:0 10px;
+  margin:40px 20px;
 }
 .feature {
   background:#fff;
   padding:25px 20px;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
   text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  cursor:pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.feature:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:#f0f9ff;
-}
+.feature:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
 .feature h3 { color:#1e3a8a; margin-bottom:1rem; }
 .feature p { color:#374151; }
 
-/* CTA Section same style as features */
-.cta-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:1.5rem;
-  margin:40px 10px;
-}
+/* CTA Card */
+.cta-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:40px 20px; }
 .cta-card {
   background:#fff;
   padding:25px 20px;
-  border-radius:1rem;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
   text-align:center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.cta-card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 15px 25px rgba(0,0,0,0.1);
-  background:#f0f9ff;
-}
+.cta-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
 .cta-card h2 { color:#1e3a8a; margin-bottom:1rem; }
 .cta-card p { color:#374151; margin-bottom:1rem; }
-.cta-card a {
-  display:inline-block;
-  background:#3b82f6;
-  color:#fff;
-  padding:12px 24px;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  transition:filter 0.2s;
-}
-.cta-card a:hover { filter:brightness(0.95); }
+.cta-card a { display:inline-block; background:#3b82f6; color:#fff; padding:12px 24px; border-radius:999px; font-weight:700; text-decoration:none; transition:0.2s; }
+.cta-card a:hover { background:#2563eb; transform:scale(1.05); }
 
-/* Navbar Buy Numbers button like index */
-.navbar-buy {
-  background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-}
+/* Footer */
+footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
+footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+
+/* Fade-in */
+.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
+
+<!-- Navbar -->
 <nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/">Home</a>
+  <div class="logo"><a href="/">CallOrbit</a></div>
+  <div class="menu">
+    <a href="/" >Home</a>
     <a href="/features">Features</a>
     <a href="/pricing">Pricing</a>
     <a href="/coverage">Coverage</a>
     <a href="/platform">Platform</a>
-    <a href="/orders.html" class="navbar-buy">Buy Numbers</a>
+    <a href="/orders" class="navbar-buy">Buy Numbers</a>
     <a href="/contact">Contact</a>
     <a href="/about" class="active-page">About</a>
-    
+  </div>
+  <div class="actions" style="display:flex; align-items:center; gap:12px;">
+    <div class="cart-container">
+      <button class="cart-btn"><i class="fas fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></button>
+      <div class="cart-dropdown" id="cart-dropdown">
+        <h4>Your Cart</h4>
+        <div id="cart-items"></div>
+        <div class="cart-total"><span>Total:</span><span id="cart-total">$0.00</span></div>
+      </div>
+    </div>
+    <a href="/login" class="login-btn">Login</a>
   </div>
 </nav>
 
+<!-- Hero -->
 <header class="hero fade-in">
   <h1>Our Mission at CallOrbit</h1>
   <p>Empowering teams worldwide to manage contact centers effortlessly, intelligently, and beautifully.</p>
 </header>
 
-<section class="features features-grid fade-in">
+<!-- Features -->
+<section class="features-grid fade-in">
   <div class="feature">
     <h3>Our Story</h3>
     <p>Founded by industry experts, we built CallOrbit to simplify complex contact center operations and give teams clarity and control.</p>
@@ -139,6 +154,7 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
   </div>
 </section>
 
+<!-- CTA Card -->
 <section class="cta-grid fade-in">
   <div class="cta-card">
     <h2>Join the Future of Contact Center Management</h2>
@@ -148,28 +164,35 @@ header.hero p { margin-bottom:2rem; font-size:1.2rem; }
 </section>
 
 <!-- Footer -->
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. 
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
   <br>
-  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-conditions">Terms & Conditions</a>
+  <a href="/refund-policy">Refund Policy</a>
 </footer>
 
-
-
+<script src="cart.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+// Cart toggle
+const cartBtn = document.querySelector('.cart-btn');
+const cartDropdown = document.getElementById('cart-dropdown');
+cartBtn.addEventListener('click', () => {
+  cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+// Fade-in
 const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries, observer){
+const appearOnScroll = new IntersectionObserver(function(entries){
   entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
   });
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
+
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
 </body>
 </html>
