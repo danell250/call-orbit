@@ -1,10 +1,24 @@
+// cart.js - Fully integrated navbar dropdown cart with VAT
+
 // Persistent Cart with VAT
 let cart = JSON.parse(localStorage.getItem("callOrbitCart")) || [];
 const VAT_RATE = 0.15; // 15% VAT
 
+// Elements
+const cartButtonEl = document.getElementById("cart-button");
+const cartDropdownEl = document.getElementById("cart-dropdown");
+const cartItemsEl = document.getElementById("cart-items");
+const cartSubtotalEl = document.getElementById("cart-subtotal");
+const cartVATEl = document.getElementById("cart-vat");
+const cartTotalEl = document.getElementById("cart-total");
+const cartCloseEl = document.getElementById("cart-close");
+const paypalContainerEl = document.getElementById("paypal-button-container");
+
+// -----------------------------
 // Add a plan to cart
+// -----------------------------
 function addPlanToCart(plan) {
-    const trainingFee = plan.includeTraining ? plan.training : 0;
+    const trainingFee = plan.includeTraining ? plan.training || 0 : 0;
     const firstMonthSubtotal = plan.monthly + plan.setup + trainingFee;
     const vat = +(firstMonthSubtotal * VAT_RATE).toFixed(2);
     const totalFirstMonth = +(firstMonthSubtotal + vat).toFixed(2);
@@ -23,34 +37,18 @@ function addPlanToCart(plan) {
     renderCart();
 }
 
-// Get customer info from form
-function getCustomerInfo() {
-    return {
-        name: document.getElementById("customer-name")?.value || "",
-        email: document.getElementById("customer-email")?.value || "",
-        phone: document.getElementById("customer-phone")?.value || "",
-        company: document.getElementById("customer-company")?.value || ""
-    };
+// -----------------------------
+// Save cart to localStorage
+// -----------------------------
+function saveCart() {
+    localStorage.setItem("callOrbitCart", JSON.stringify(cart));
 }
 
-// Validate customer info
-function validateCustomerInfo() {
-    const { name, email } = getCustomerInfo();
-    if (!name || !email) {
-        alert("Please enter your name and email before checkout.");
-        return false;
-    }
-    return true;
-}
-
-// Render the cart
+// -----------------------------
+// Render cart in navbar dropdown
+// -----------------------------
 function renderCart() {
-    const cartItemsEl = document.getElementById("cart-items");
-    const cartSubtotalEl = document.getElementById("cart-subtotal");
-    const cartVATEl = document.getElementById("cart-vat");
-    const cartTotalEl = document.getElementById("cart-total");
-
-    if (!cartItemsEl || !cartTotalEl) return;
+    if (!cartItemsEl) return;
 
     cartItemsEl.innerHTML = "";
     let subtotal = 0;
@@ -70,7 +68,7 @@ function renderCart() {
                 VAT: $${item.vat.toFixed(2)}
             </div>
             <div style="text-align:right">
-                $${item.totalFirstMonth.toFixed(2)} 
+                $${item.totalFirstMonth.toFixed(2)}
                 <button class="remove-btn" data-index="${i}">x</button>
             </div>
         `;
@@ -95,23 +93,41 @@ function renderCart() {
     renderPayPal();
 }
 
+// -----------------------------
 // Update cart button in navbar
+// -----------------------------
 function updateCartButton() {
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
-    const cartButton = document.getElementById("cart-button");
-    if (cartButton) cartButton.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
+    if (cartButtonEl) cartButtonEl.textContent = `Cart 🛒 (${cart.length} items - $${total})`;
 }
 
-// Save cart to localStorage
-function saveCart() {
-    localStorage.setItem("callOrbitCart", JSON.stringify(cart));
+// -----------------------------
+// Validate customer info
+// -----------------------------
+function getCustomerInfo() {
+    return {
+        name: document.getElementById("customer-name")?.value || "",
+        email: document.getElementById("customer-email")?.value || "",
+        phone: document.getElementById("customer-phone")?.value || "",
+        company: document.getElementById("customer-company")?.value || ""
+    };
 }
 
+function validateCustomerInfo() {
+    const { name, email } = getCustomerInfo();
+    if (!name || !email) {
+        alert("Please enter your name and email before checkout.");
+        return false;
+    }
+    return true;
+}
+
+// -----------------------------
 // PayPal integration
+// -----------------------------
 function renderPayPal() {
-    const container = document.getElementById("paypal-button-container");
-    if (!container) return;
-    container.innerHTML = "";
+    if (!paypalContainerEl) return;
+    paypalContainerEl.innerHTML = "";
     if (cart.length === 0) return;
 
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
@@ -131,26 +147,26 @@ function renderPayPal() {
     }).render("#paypal-button-container");
 }
 
-// Toggle cart drawer
-const cartButtonEl = document.getElementById("cart-button");
-const cartWrapper = document.getElementById("cart-wrapper");
-const cartClose = document.getElementById("cart-close");
-
-if (cartButtonEl && cartWrapper) {
-    cartButtonEl.addEventListener("click", () => cartWrapper.classList.toggle("active"));
+// -----------------------------
+// Toggle dropdown
+// -----------------------------
+if (cartButtonEl && cartDropdownEl) {
+    cartButtonEl.addEventListener("click", () => cartDropdownEl.classList.toggle("active"));
 }
-if (cartClose && cartWrapper) {
-    cartClose.addEventListener("click", () => cartWrapper.classList.remove("active"));
+if (cartCloseEl && cartDropdownEl) {
+    cartCloseEl.addEventListener("click", () => cartDropdownEl.classList.remove("active"));
 }
 
-// Hook up all Add to Cart buttons
-document.querySelectorAll(".buy-now").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const planDiv = btn.closest(".plan");
+// -----------------------------
+// Hook up Add to Cart buttons
+// -----------------------------
+document.addEventListener("click", e => {
+    if (e.target.classList.contains("buy-now")) {
+        const planDiv = e.target.closest(".plan");
         const planName = planDiv.querySelector("h3").textContent;
-        const setup = parseFloat(planDiv.dataset.setup);
-        const training = parseFloat(planDiv.dataset.training);
-        const monthly = parseFloat(planDiv.dataset.monthly);
+        const monthly = parseFloat(planDiv.dataset.monthly) || 0;
+        const setup = parseFloat(planDiv.dataset.setup) || 0;
+        const training = parseFloat(planDiv.dataset.training) || 0;
 
         addPlanToCart({
             name: planName,
@@ -159,10 +175,12 @@ document.querySelectorAll(".buy-now").forEach(btn => {
             training,
             includeTraining: true
         });
-    });
+    }
 });
 
+// -----------------------------
 // Sync cart across tabs
+// -----------------------------
 window.addEventListener("storage", e => {
     if (e.key === "callOrbitCart") {
         cart = JSON.parse(e.newValue) || [];
@@ -170,5 +188,7 @@ window.addEventListener("storage", e => {
     }
 });
 
-// Initialize cart on page load
+// -----------------------------
+// Initialize
+// -----------------------------
 renderCart();
