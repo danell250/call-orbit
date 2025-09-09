@@ -1,10 +1,12 @@
+// cart.js
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Popup elements (Pricing page)
+// Popup elements
 const cartPopup = document.getElementById('cart-popup');
 const cartItemsPopup = document.getElementById('cart-items');
 const cartIcon = document.getElementById('cart-icon');
 const closeBtn = document.querySelector('.close-cart');
+const cartCountEl = document.getElementById('cart-count');
 
 // Orders page container
 const orderCartEl = document.getElementById('plans-container') || document.getElementById('order-cart');
@@ -14,9 +16,10 @@ const cartSubtotalEl = document.getElementById('cart-subtotal');
 const cartVatEl = document.getElementById('cart-vat');
 const cartTotalEl = document.getElementById('cart-total');
 
-// Save cart to localStorage
+// Save cart
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
+    if (cartCountEl) cartCountEl.textContent = cart.reduce((a, b) => a + (b.quantity || 1), 0);
 }
 
 // Calculate totals
@@ -38,16 +41,10 @@ function renderCartItems(container) {
     cart.forEach((item, i) => {
         const div = document.createElement('div');
         div.className = 'cart-item';
-
-        // Render conditionally based on what exists
         div.innerHTML = `
             <div>
                 <strong>${item.name}</strong><br>
-                ${item.monthly ? `Monthly: $${item.monthly}` : `Price: $${item.price || 0}`}
-                ${item.minutes ? ` | Minutes: ${item.minutes}` : ''}
-                ${item.overage ? ` | Overage: $${item.overage}/min` : ''}
-                ${item.setup ? ` | Setup: $${item.setup}` : ''}
-                ${item.training ? ` | Training: $${item.training}` : ''}
+                ${item.monthly ? `Monthly: $${item.monthly}` : `Price: $${item.price}`} | Setup: $${item.setup || 0} | Training: $${item.training || 0}
                 x <input type="number" class="quantity-input" data-index="${i}" value="${item.quantity || 1}" min="1">
             </div>
             <button class="remove-btn" data-index="${i}">Remove</button>
@@ -56,7 +53,7 @@ function renderCartItems(container) {
     });
 }
 
-// Update cart
+// Update cart UI
 function updateCart() {
     if (cartItemsPopup) renderCartItems(cartItemsPopup);
     if (orderCartEl) renderCartItems(orderCartEl);
@@ -72,7 +69,7 @@ function updateCart() {
     renderPaypal(totals.total);
 }
 
-// Render PayPal buttons
+// PayPal
 function renderPaypal(total) {
     const paypalContainer = document.getElementById('paypal-buttons-global') || document.getElementById('paypal-button-container');
     if (!paypalContainer || paypalContainer.dataset.rendered === 'true') return;
@@ -91,13 +88,12 @@ function renderPaypal(total) {
     }
 }
 
-// Add to cart
+// Add to cart (document-level delegation)
 document.addEventListener('click', e => {
     if (e.target.classList.contains('buy-now')) {
         const plan = e.target.closest('.plan');
         if (!plan) return;
         const name = plan.querySelector('h3')?.textContent || 'Plan';
-
         const existing = cart.find(item => item.name === name);
         if (existing) {
             existing.quantity = (existing.quantity || 1) + 1;
@@ -116,10 +112,8 @@ document.addEventListener('click', e => {
         updateCart();
         if (cartPopup) cartPopup.style.display = 'block';
     }
-});
 
-// Remove from cart
-document.addEventListener('click', e => {
+    // Remove button
     if (e.target.classList.contains('remove-btn')) {
         const index = parseInt(e.target.dataset.index);
         if (!isNaN(index)) {
@@ -129,7 +123,7 @@ document.addEventListener('click', e => {
     }
 });
 
-// Update quantity
+// Quantity change
 document.addEventListener('input', e => {
     if (e.target.classList.contains('quantity-input')) {
         const index = parseInt(e.target.dataset.index);
@@ -142,14 +136,8 @@ document.addEventListener('input', e => {
 });
 
 // Cart popup toggle
-if (closeBtn) closeBtn.addEventListener('click', () => {
-    if (cartPopup) cartPopup.style.display = 'none';
-});
-
-if (cartIcon) cartIcon.addEventListener('click', () => {
-    if (!cartPopup) return;
-    cartPopup.style.display = (cartPopup.style.display === 'block') ? 'none' : (cart.length > 0 ? 'block' : 'none');
-});
+if (closeBtn) closeBtn.addEventListener('click', () => { if (cartPopup) cartPopup.style.display = 'none'; });
+if (cartIcon) cartIcon.addEventListener('click', () => { if (cartPopup) cartPopup.style.display = (cartPopup.style.display === 'block' ? 'none' : 'block'); });
 
 // Initialize
 updateCart();
