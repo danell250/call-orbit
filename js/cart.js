@@ -1,195 +1,153 @@
-// cart.js - Fully integrated navbar dropdown cart with VAT
+// cart.js - Shared cart for Pricing and Orders pages
 
-// Persistent Cart with VAT
-let cart = JSON.parse(localStorage.getItem("callOrbitCart")) || [];
-const VAT_RATE = 0.15; // 15% VAT
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem("sharedCart")) || [];
 
-// Elements
-const cartButtonEl = document.getElementById("cart-button");
-const cartDropdownEl = document.getElementById("cart-dropdown");
-const cartItemsEl = document.getElementById("cart-items");
-const cartSubtotalEl = document.getElementById("cart-subtotal");
-const cartVATEl = document.getElementById("cart-vat");
-const cartTotalEl = document.getElementById("cart-total");
-const paypalContainerEl = document.getElementById("paypal-button-container");
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem("sharedCart", JSON.stringify(cart));
+}
 
-// -----------------------------
-// Add a plan to cart
-// -----------------------------
-function addPlanToCart(plan) {
-    const trainingFee = plan.includeTraining ? plan.training || 0 : 0;
-    const firstMonthSubtotal = plan.monthly + plan.setup + trainingFee;
-    const vat = +(firstMonthSubtotal * VAT_RATE).toFixed(2);
-    const totalFirstMonth = +(firstMonthSubtotal + vat).toFixed(2);
+// Update cart badge in navbar
+function updateCartBadge() {
+    const cartCount = document.getElementById("cart-count");
+    if (cartCount) {
+        const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+        cartCount.textContent = totalQuantity;
+    }
+}
 
-    const item = {
-        name: plan.name,
-        monthly: plan.monthly,
-        setup: plan.setup,
-        training: trainingFee,
-        vat,
-        totalFirstMonth
-    };
+// Render cart dropdown or page
+function renderCart() {
+    const cartItemsEl = document.getElementById("cart-items");
+    const cartTotalEl = document.getElementById("cart-total");
 
-    cart.push(item);
+    if (!cartItemsEl || !cartTotalEl) return;
+
+    cartItemsEl.innerHTML = "";
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        const totalItemPrice = (item.monthly + item.setup + (item.training || 0)) * item.quantity;
+        subtotal += totalItemPrice;
+
+        const li = document.createElement("li");
+        li.className = "cart-item";
+        li.innerHTML = `
+            <strong>${item.name}</strong>
+            <span>Monthly: $${item.monthly.toFixed(2)}</span>
+            <span>Setup: $${item.setup.toFixed(2)}</span>
+            ${item.training ? `<span>Training: $${item.training.toFixed(2)}</span>` : ""}
+            <span>Quantity: <input type="number" min="1" value="${item.quantity}" 
+                onchange="updateQuantity('${item.name}', this.value)" /></span>
+            <button onclick="removeFromCart('${item.name}')">Remove</button>
+        `;
+        cartItemsEl.appendChild(li);
+    });
+
+    const vat = subtotal * 0.15;
+    const total = subtotal + vat;
+
+    cartTotalEl.innerHTML = `
+        <p>Subtotal: $${subtotal.toFixed(2)}</p>
+        <p>VAT (15%): $${vat.toFixed(2)}</p>
+        <p><strong>Total: $${total.toFixed(2)}</strong></p>
+    `;
+
+    updateCartBadge();
+}
+
+// Add item to cart
+function addToCart(name, monthly, setup, training = 0) {
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ name, monthly, setup, training, quantity: 1 });
+    }
     saveCart();
     renderCart();
 }
 
-// -----------------------------
-// Save cart to localStorage
-// -----------------------------
-function saveCart() {
-    localStorage.setItem("callOrbitCart", JSON.stringify(cart));
+// Remove item from cart
+function removeFromCart(name) {
+    cart = cart.filter(item => item.name !== name);
+    saveCart();
+    renderCart();
 }
 
-// -----------------------------
-// Render cart in navbar dropdown
-// -----------------------------
-function renderCart() {
-    if (!cartItemsEl) return;
-
-    cartItemsEl.innerHTML = "";
-    let subtotal = 0;
-    let totalVAT = 0;
-
-    cart.forEach((item, i) => {
-        subtotal += item.monthly + item.setup + item.training;
-        totalVAT += item.vat;
-
-        const div = document.createElement("div");
-        div.className = "cart-item";
-        div.innerHTML = `
-            <div style="flex:1">
-                <strong>${item.name}</strong><br>
-                Monthly: $${item.monthly.toFixed(2)}<br>
-                Setup: $${item.setup.toFixed(2)}${item.training ? ` + Training: $${item.training.toFixed(2)}` : ""}<br>
-                VAT: $${item.vat.toFixed(2)}
-            </div>
-            <div style="text-align:right">
-                $${item.totalFirstMonth.toFixed(2)}
-                <button class="remove-btn" data-index="${i}">x</button>
-            </div>
-        `;
-        cartItemsEl.appendChild(div);
-    });
-
-    if (cartSubtotalEl) cartSubtotalEl.textContent = "$" + subtotal.toFixed(2);
-    if (cartVATEl) cartVATEl.textContent = "$" + totalVAT.toFixed(2);
-    if (cartTotalEl) cartTotalEl.textContent = "$" + (subtotal + totalVAT).toFixed(2);
-
-    // Remove buttons
-    document.querySelectorAll(".remove-btn").forEach(btn => {
-        btn.addEventListener("click", e => {
-            const idx = parseInt(e.target.dataset.index);
-            if (!isNaN(idx)) {
-                cart.splice(idx, 1);
-                saveCart();
-                renderCart();
-            }
-        });
-    });
-
-    updateCartButton();
-    renderPayPal();
-}
-
-// -----------------------------
-// Update cart button in navbar
-// -----------------------------
-function updateCartButton() {
-    const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
-    if (cartButtonEl) cartButtonEl.textContent = `Cart 🛒 (${cart.length} item${cart.length !== 1 ? "s" : ""} - $${total})`;
-}
-
-// -----------------------------
-// Validate customer info
-// -----------------------------
-function getCustomerInfo() {
-    return {
-        name: document.getElementById("customer-name")?.value || "",
-        email: document.getElementById("customer-email")?.value || "",
-        phone: document.getElementById("customer-phone")?.value || "",
-        company: document.getElementById("customer-company")?.value || ""
-    };
-}
-
-function validateCustomerInfo() {
-    const { name, email } = getCustomerInfo();
-    if (!name || !email) {
-        alert("Please enter your name and email before checkout.");
-        return false;
+// Update quantity of an item
+function updateQuantity(name, quantity) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity = Math.max(1, parseInt(quantity));
     }
-    return true;
+    saveCart();
+    renderCart();
 }
 
-// -----------------------------
-// PayPal integration
-// -----------------------------
-function renderPayPal() {
-    if (!paypalContainerEl) return;
-    paypalContainerEl.innerHTML = "";
-    if (cart.length === 0) return;
-
-    const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
+// Initialize PayPal checkout
+function initPayPal() {
+    const paypalContainer = document.getElementById("paypal-button-container");
+    if (!paypalContainer) return;
 
     paypal.Buttons({
-        createOrder: (data, actions) => {
-            if (!validateCustomerInfo()) return;
-            return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
+        createOrder: function (data, actions) {
+            let subtotal = cart.reduce((sum, item) =>
+                sum + (item.monthly + item.setup + (item.training || 0)) * item.quantity, 0
+            );
+            let vat = subtotal * 0.15;
+            let total = (subtotal + vat).toFixed(2);
+
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { value: total }
+                }]
+            });
         },
-        onApprove: (data, actions) =>
-            actions.order.capture().then(details => {
-                alert("Payment completed by " + details.payer.name.given_name);
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                alert("Transaction completed by " + details.payer.name.given_name);
                 cart = [];
                 saveCart();
                 renderCart();
-            })
+            });
+        }
     }).render("#paypal-button-container");
 }
 
-// -----------------------------
-// Toggle dropdown
-// -----------------------------
-if (cartButtonEl && cartDropdownEl) {
-    cartButtonEl.addEventListener("click", () => cartDropdownEl.classList.toggle("active"));
-}
+// Attach add-to-cart buttons on Pricing page
+document.addEventListener("DOMContentLoaded", () => {
+    // Buttons with class 'buy-now' on Pricing page
+    document.querySelectorAll('.buy-now').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const planEl = e.target.closest('.plan');
+            const name = planEl.querySelector('h3').textContent;
+            const monthly = parseFloat(planEl.dataset.monthly);
+            const setup = parseFloat(planEl.dataset.setup);
+            const training = parseFloat(planEl.dataset.training);
 
-// -----------------------------
-// Hook up Add to Cart buttons dynamically
-// -----------------------------
-document.addEventListener("click", e => {
-    if (e.target.classList.contains("buy-now")) {
-        const planDiv = e.target.closest(".plan");
-        if (!planDiv) return;
-        const planName = planDiv.querySelector("h3").textContent;
-        const monthly = parseFloat(planDiv.dataset.monthly) || 0;
-        const setup = parseFloat(planDiv.dataset.setup) || 0;
-        const training = parseFloat(planDiv.dataset.training) || 0;
+            // Optional: confirm training
+            const includeTraining = confirm(`Include training for ${name}?`);
+            addToCart(name, monthly, setup, includeTraining ? training : 0);
 
-        addPlanToCart({
-            name: planName,
-            monthly,
-            setup,
-            training,
-            includeTraining: true
+            // Open cart dropdown
+            const dropdown = document.getElementById('cart-dropdown');
+            if (dropdown) dropdown.style.display = 'block';
+        });
+    });
+
+    // Toggle cart dropdown
+    const cartBtn = document.querySelector('.cart-btn');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            const dropdown = document.getElementById('cart-dropdown');
+            if (dropdown) {
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            }
         });
     }
-});
 
-// -----------------------------
-// Sync cart across tabs
-// -----------------------------
-window.addEventListener("storage", e => {
-    if (e.key === "callOrbitCart") {
-        cart = JSON.parse(e.newValue) || [];
-        renderCart();
-    }
-});
-
-// -----------------------------
-// Initialize after DOM content
-// -----------------------------
-document.addEventListener("DOMContentLoaded", () => {
     renderCart();
+    initPayPal();
 });

@@ -11,22 +11,26 @@
 </svg>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
-/* Navbar + Cart */
+/* Navbar */
 nav{display:flex;justify-content:space-between;align-items:center;padding:12px 30px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);font-family:'Inter',sans-serif;position:sticky;top:0;z-index:200;}
 nav .logo a{font-weight:700;font-size:1.5rem;color:#1e3a8a;text-decoration:none;}
 nav .menu a{margin:0 12px;text-decoration:none;color:#1f2937;font-weight:500;}
 nav .menu a.active-page{color:#3b82f6;font-weight:700;}
 .navbar-buy{background:none;color:#3b82f6;padding:10px 20px;border-radius:999px;font-weight:700;margin-left:10px;text-decoration:none;transition:all 0.2s;border:2px solid #3b82f6;}
 .navbar-buy:hover{background:#3b82f6;color:#fff;transform:scale(1.05);}
+.login-btn{padding:10px 18px;border-radius:999px;font-weight:600;text-decoration:none;background:#3b82f6;color:#fff;transition:0.2s;}
+.login-btn:hover{background:#2563eb;}
+
+/* Cart (Orders style) */
 .cart-container{display:flex;align-items:center;gap:12px;position:relative;}
 .cart-btn{border:none;background:none;color:#000;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;}
 .cart-badge{position:absolute;top:-6px;right:-10px;background:#f87171;color:#fff;font-size:0.75rem;font-weight:700;padding:2px 6px;border-radius:999px;}
-.cart-dropdown{display:none;position:absolute;top:36px;right:0;width:320px;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,0.15);padding:15px;z-index:300;}
+.cart-dropdown{display:none;position:absolute;top:36px;right:0;width:320px;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,0.15);padding:15px;z-index:300;font-family:'Inter',sans-serif;}
 .cart-dropdown h4{margin-top:0;margin-bottom:10px;color:#1e3a8a;font-size:1rem;}
-.cart-item{display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.95rem;color:#374151;}
+.cart-item{display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.95rem;color:#374151;flex-direction:column;gap:4px;}
 .cart-total{border-top:1px solid #e5e7eb;margin-top:10px;padding-top:10px;font-weight:600;display:flex;justify-content:space-between;}
-.login-btn{padding:10px 18px;border-radius:999px;font-weight:600;text-decoration:none;background:#3b82f6;color:#fff;transition:0.2s;}
-.login-btn:hover{background:#2563eb;}
+
+/* Hero & Plans */
 header.hero{margin:0 auto 40px auto;padding:80px 20px;text-align:center;color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);position:relative;overflow:hidden;background: linear-gradient(135deg,#3b82f6,#60a5fa);}
 header.hero h1{margin-bottom:1rem;font-size:3rem;}
 header.hero p{font-size:1.3rem;max-width:600px;margin-left:auto;margin-right:auto;}
@@ -37,11 +41,15 @@ header.hero p{font-size:1.3rem;max-width:600px;margin-left:auto;margin-right:aut
 .plan .price{font-weight:700;font-size:1.2rem;margin-bottom:0.5rem;}
 .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.2s;margin-top:10px;}
 .buy-now:hover{background:#2563eb;transform:scale(1.05);}
+
+/* CTA */
 .cta{background:#fff;padding:40px 20px;text-align:center;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);margin:40px 20px;}
 .cta h2{margin-bottom:1rem;font-size:2rem;color:#1e3a8a;}
 .cta p{margin-bottom:1.5rem;font-size:1.2rem;color:#374151;}
 .cta a{display:inline-block;background:#3b82f6;color:#fff;padding:12px 24px;border-radius:999px;font-weight:700;text-decoration:none;transition:all 0.2s;}
 .cta a:hover{background:#2563eb;transform:scale(1.05);}
+
+/* Fade-in */
 .fade-in{opacity:0;transform:translateY(20px);transition: all 0.8s ease-out;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 </style>
@@ -62,14 +70,13 @@ header.hero p{font-size:1.3rem;max-width:600px;margin-left:auto;margin-right:aut
   </div>
   <div class="actions" style="display:flex;align-items:center;gap:12px;">
     <div class="cart-container">
-      <button class="cart-btn" id="cart-button"><i class="fas fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></button>
+      <button class="cart-btn"><i class="fas fa-cart-shopping"></i><span class="cart-badge" id="cart-count">0</span></button>
       <div class="cart-dropdown" id="cart-dropdown">
         <h4>Your Cart</h4>
         <div id="cart-items"></div>
         <div class="cart-total"><span>Subtotal:</span><span id="cart-subtotal">$0.00</span></div>
         <div class="cart-total"><span>VAT:</span><span id="cart-vat">$0.00</span></div>
         <div class="cart-total"><span>Total:</span><span id="cart-total">$0.00</span></div>
-        <div id="paypal-button-container" style="margin-top:10px;"></div>
       </div>
     </div>
     <a href="/login" class="login-btn">Login</a>
@@ -134,9 +141,7 @@ header.hero p{font-size:1.3rem;max-width:600px;margin-left:auto;margin-right:aut
 
 <script src="cart.js"></script>
 <script>
-// Cart toggle handled in cart.js
-
-// Fade-in animation
+// Initialize fade-in
 const faders = document.querySelectorAll('.fade-in');
 const appearOnScroll = new IntersectionObserver(function(entries){
   entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); } });
