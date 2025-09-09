@@ -158,7 +158,7 @@ if (cartCloseEl && cartDropdownEl) {
 }
 
 // -----------------------------
-// Hook up Add to Cart buttons
+// Hook up Add to Cart buttons (works on dynamic elements)
 // -----------------------------
 document.addEventListener("click", e => {
     if (e.target.classList.contains("buy-now")) {
