@@ -157,97 +157,10 @@ faders.forEach(fader => appearOnScroll.observe(fader));
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
-
-// Cart logic
-let cart = [];
-const cartPopup = document.getElementById('cart-popup');
-const cartItemsEl = document.getElementById('cart-items');
-const cartIcon = document.getElementById('cart-icon');
-
-function updateCart() {
-  cartItemsEl.innerHTML = '';
-  let subtotal = 0;
-
-  cart.forEach((item,i)=>{
-    subtotal += item.monthly + item.setup + item.training;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `
-      <div>
-        <strong>${item.name}</strong><br>
-        Monthly: $${item.monthly} | Setup: $${item.setup} | Training: $${item.training}
-      </div>
-      <button class="remove-btn" data-index="${i}">Remove</button>
-    `;
-    cartItemsEl.appendChild(div);
-  });
-
-  const vat = +(subtotal*0.15).toFixed(2);
-  const total = +(subtotal+vat).toFixed(2);
-  document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById('cart-vat').textContent = `$${vat.toFixed(2)}`;
-  document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
-
-  if(cart.length > 0) {
-    cartPopup.style.display = 'block';
-  } else {
-    cartPopup.style.display = 'none';
-  }
-
-  // Render global PayPal button
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{ amount: { value: total.toFixed(2) }, description: 'CallOrbit Plans' }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert('Transaction completed successfully!');
-        cart = [];
-        updateCart();
-      });
-    }
-  }).render('#paypal-buttons-global');
-}
-
-// Add to Cart
-document.querySelectorAll('.buy-now').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    const plan = e.target.closest('.plan');
-    cart.push({
-      name: plan.querySelector('h3').textContent,
-      monthly: parseFloat(plan.dataset.monthly),
-      setup: parseFloat(plan.dataset.setup),
-      training: parseFloat(plan.dataset.training)
-    });
-    updateCart();
-  });
-});
-
-// Remove from cart
-cartItemsEl.addEventListener('click', e=>{
-  if(e.target.classList.contains('remove-btn')){
-    const index = e.target.dataset.index;
-    cart.splice(index,1);
-    updateCart();
-  }
-});
-
-// Close cart popup
-document.querySelector('.close-cart').addEventListener('click', ()=>{
-  cartPopup.style.display = 'none';
-});
-
-// Toggle popup when clicking cart icon
-cartIcon.addEventListener('click', ()=>{
-  if(cartPopup.style.display === 'block') {
-    cartPopup.style.display = 'none';
-  } else if(cart.length > 0) {
-    cartPopup.style.display = 'block';
-  }
-});
 </script>
+
+<!-- Shared Cart Logic -->
+<script src="cart.js"></script>
 
 </body>
 </html>

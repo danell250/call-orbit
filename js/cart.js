@@ -1,153 +1,95 @@
-// cart.js - Shared cart for Pricing and Orders pages
+// cart.js
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Load cart from localStorage
-let cart = JSON.parse(localStorage.getItem("sharedCart")) || [];
+const cartPopup = document.getElementById('cart-popup');
+const cartItemsEl = document.getElementById('cart-items');
+const cartIcon = document.getElementById('cart-icon');
 
-// Save cart to localStorage
 function saveCart() {
-    localStorage.setItem("sharedCart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Update cart badge in navbar
-function updateCartBadge() {
-    const cartCount = document.getElementById("cart-count");
-    if (cartCount) {
-        const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
-        cartCount.textContent = totalQuantity;
-    }
-}
-
-// Render cart dropdown or page
-function renderCart() {
-    const cartItemsEl = document.getElementById("cart-items");
-    const cartTotalEl = document.getElementById("cart-total");
-
-    if (!cartItemsEl || !cartTotalEl) return;
-
-    cartItemsEl.innerHTML = "";
+function updateCart() {
+    cartItemsEl.innerHTML = '';
     let subtotal = 0;
 
-    cart.forEach(item => {
-        const totalItemPrice = (item.monthly + item.setup + (item.training || 0)) * item.quantity;
-        subtotal += totalItemPrice;
-
-        const li = document.createElement("li");
-        li.className = "cart-item";
-        li.innerHTML = `
-            <strong>${item.name}</strong>
-            <span>Monthly: $${item.monthly.toFixed(2)}</span>
-            <span>Setup: $${item.setup.toFixed(2)}</span>
-            ${item.training ? `<span>Training: $${item.training.toFixed(2)}</span>` : ""}
-            <span>Quantity: <input type="number" min="1" value="${item.quantity}" 
-                onchange="updateQuantity('${item.name}', this.value)" /></span>
-            <button onclick="removeFromCart('${item.name}')">Remove</button>
-        `;
-        cartItemsEl.appendChild(li);
-    });
-
-    const vat = subtotal * 0.15;
-    const total = subtotal + vat;
-
-    cartTotalEl.innerHTML = `
-        <p>Subtotal: $${subtotal.toFixed(2)}</p>
-        <p>VAT (15%): $${vat.toFixed(2)}</p>
-        <p><strong>Total: $${total.toFixed(2)}</strong></p>
+    cart.forEach((item, i) => {
+        subtotal += item.monthly + item.setup + item.training;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+      <div>
+        <strong>${item.name}</strong><br>
+        Monthly: $${item.monthly} | Setup: $${item.setup} | Training: $${item.training}
+      </div>
+      <button class="remove-btn" data-index="${i}">Remove</button>
     `;
-
-    updateCartBadge();
-}
-
-// Add item to cart
-function addToCart(name, monthly, setup, training = 0) {
-    let existing = cart.find(item => item.name === name);
-    if (existing) {
-        existing.quantity += 1;
-    } else {
-        cart.push({ name, monthly, setup, training, quantity: 1 });
-    }
-    saveCart();
-    renderCart();
-}
-
-// Remove item from cart
-function removeFromCart(name) {
-    cart = cart.filter(item => item.name !== name);
-    saveCart();
-    renderCart();
-}
-
-// Update quantity of an item
-function updateQuantity(name, quantity) {
-    const item = cart.find(item => item.name === name);
-    if (item) {
-        item.quantity = Math.max(1, parseInt(quantity));
-    }
-    saveCart();
-    renderCart();
-}
-
-// Initialize PayPal checkout
-function initPayPal() {
-    const paypalContainer = document.getElementById("paypal-button-container");
-    if (!paypalContainer) return;
-
-    paypal.Buttons({
-        createOrder: function (data, actions) {
-            let subtotal = cart.reduce((sum, item) =>
-                sum + (item.monthly + item.setup + (item.training || 0)) * item.quantity, 0
-            );
-            let vat = subtotal * 0.15;
-            let total = (subtotal + vat).toFixed(2);
-
-            return actions.order.create({
-                purchase_units: [{
-                    amount: { value: total }
-                }]
-            });
-        },
-        onApprove: function (data, actions) {
-            return actions.order.capture().then(function (details) {
-                alert("Transaction completed by " + details.payer.name.given_name);
-                cart = [];
-                saveCart();
-                renderCart();
-            });
-        }
-    }).render("#paypal-button-container");
-}
-
-// Attach add-to-cart buttons on Pricing page
-document.addEventListener("DOMContentLoaded", () => {
-    // Buttons with class 'buy-now' on Pricing page
-    document.querySelectorAll('.buy-now').forEach(btn => {
-        btn.addEventListener('click', e => {
-            const planEl = e.target.closest('.plan');
-            const name = planEl.querySelector('h3').textContent;
-            const monthly = parseFloat(planEl.dataset.monthly);
-            const setup = parseFloat(planEl.dataset.setup);
-            const training = parseFloat(planEl.dataset.training);
-
-            // Optional: confirm training
-            const includeTraining = confirm(`Include training for ${name}?`);
-            addToCart(name, monthly, setup, includeTraining ? training : 0);
-
-            // Open cart dropdown
-            const dropdown = document.getElementById('cart-dropdown');
-            if (dropdown) dropdown.style.display = 'block';
-        });
+        cartItemsEl.appendChild(div);
     });
 
-    // Toggle cart dropdown
-    const cartBtn = document.querySelector('.cart-btn');
-    if (cartBtn) {
-        cartBtn.addEventListener('click', () => {
-            const dropdown = document.getElementById('cart-dropdown');
-            if (dropdown) {
-                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            }
-        });
-    }
+    const vat = +(subtotal * 0.15).toFixed(2);
+    const total = +(subtotal + vat).toFixed(2);
 
-    renderCart();
-    initPayPal();
+    document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('cart-vat').textContent = `$${vat.toFixed(2)}`;
+    document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+
+    cartPopup.style.display = cart.length > 0 ? 'block' : 'none';
+
+    saveCart();
+
+    // Render PayPal button
+    if (document.getElementById('paypal-buttons-global')) {
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{ amount: { value: total.toFixed(2) }, description: 'CallOrbit Plans' }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(() => {
+                    alert('Transaction completed successfully!');
+                    cart = [];
+                    updateCart();
+                });
+            }
+        }).render('#paypal-buttons-global');
+    }
+}
+
+// Add to Cart buttons
+document.querySelectorAll('.buy-now').forEach(btn => {
+    btn.addEventListener('click', e => {
+        const plan = e.target.closest('.plan');
+        cart.push({
+            name: plan.querySelector('h3').textContent,
+            monthly: parseFloat(plan.dataset.monthly),
+            setup: parseFloat(plan.dataset.setup),
+            training: parseFloat(plan.dataset.training)
+        });
+        updateCart();
+    });
 });
+
+// Remove item
+cartItemsEl.addEventListener('click', e => {
+    if (e.target.classList.contains('remove-btn')) {
+        const index = e.target.dataset.index;
+        cart.splice(index, 1);
+        updateCart();
+    }
+});
+
+// Close cart popup
+const closeBtn = document.querySelector('.close-cart');
+if (closeBtn) closeBtn.addEventListener('click', () => {
+    cartPopup.style.display = 'none';
+});
+
+// Toggle popup when clicking cart icon
+if (cartIcon) cartIcon.addEventListener('click', () => {
+    cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : cart.length > 0 ? 'block' : 'none';
+});
+
+// Initialize cart on load
+updateCart();
