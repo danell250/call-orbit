@@ -1,4 +1,3 @@
-// Unified Cart.js
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Popup elements (Pricing page)
@@ -32,17 +31,23 @@ function calculateTotals() {
     return { subtotal, vat, total };
 }
 
-// Render cart items to a container
+// Render cart items
 function renderCartItems(container) {
     if (!container) return;
     container.innerHTML = '';
     cart.forEach((item, i) => {
         const div = document.createElement('div');
         div.className = 'cart-item';
+
+        // Render conditionally based on what exists
         div.innerHTML = `
             <div>
                 <strong>${item.name}</strong><br>
-                ${item.monthly ? `Monthly: $${item.monthly}` : `Price: $${item.price}`} | Setup: $${item.setup || 0} | Training: $${item.training || 0}
+                ${item.monthly ? `Monthly: $${item.monthly}` : `Price: $${item.price || 0}`}
+                ${item.minutes ? ` | Minutes: ${item.minutes}` : ''}
+                ${item.overage ? ` | Overage: $${item.overage}/min` : ''}
+                ${item.setup ? ` | Setup: $${item.setup}` : ''}
+                ${item.training ? ` | Training: $${item.training}` : ''}
                 x <input type="number" class="quantity-input" data-index="${i}" value="${item.quantity || 1}" min="1">
             </div>
             <button class="remove-btn" data-index="${i}">Remove</button>
@@ -51,7 +56,7 @@ function renderCartItems(container) {
     });
 }
 
-// Update cart UI and totals
+// Update cart
 function updateCart() {
     if (cartItemsPopup) renderCartItems(cartItemsPopup);
     if (orderCartEl) renderCartItems(orderCartEl);
@@ -92,16 +97,19 @@ document.addEventListener('click', e => {
         const plan = e.target.closest('.plan');
         if (!plan) return;
         const name = plan.querySelector('h3')?.textContent || 'Plan';
+
         const existing = cart.find(item => item.name === name);
         if (existing) {
             existing.quantity = (existing.quantity || 1) + 1;
         } else {
             cart.push({
                 name,
-                monthly: parseFloat(plan.dataset.monthly) || parseFloat(plan.dataset.price) || 0,
+                monthly: parseFloat(plan.dataset.monthly) || 0,
                 price: parseFloat(plan.dataset.price) || 0,
                 setup: parseFloat(plan.dataset.setup) || 0,
                 training: parseFloat(plan.dataset.training) || 0,
+                minutes: plan.dataset.minutes || null,
+                overage: plan.dataset.overage || null,
                 quantity: 1
             });
         }
@@ -133,7 +141,7 @@ document.addEventListener('input', e => {
     }
 });
 
-// Cart popup controls
+// Cart popup toggle
 if (closeBtn) closeBtn.addEventListener('click', () => {
     if (cartPopup) cartPopup.style.display = 'none';
 });
@@ -143,5 +151,5 @@ if (cartIcon) cartIcon.addEventListener('click', () => {
     cartPopup.style.display = (cartPopup.style.display === 'block') ? 'none' : (cart.length > 0 ? 'block' : 'none');
 });
 
-// Initialize cart from localStorage
+// Initialize
 updateCart();
