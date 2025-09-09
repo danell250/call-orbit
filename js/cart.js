@@ -13,7 +13,7 @@ function saveCart() {
 function calculateTotals() {
     let subtotal = 0;
     cart.forEach(item => {
-        subtotal += (item.monthly || 0) + (item.setup || 0) + (item.training || 0);
+        subtotal += ((item.monthly || 0) + (item.setup || 0) + (item.training || 0)) * (item.quantity || 1);
     });
     const vat = +(subtotal * 0.15).toFixed(2);
     const total = +(subtotal + vat).toFixed(2);
@@ -31,7 +31,8 @@ function updateCart() {
         div.innerHTML = `
             <div>
                 <strong>${item.name}</strong><br>
-                Monthly: $${item.monthly || 0} | Setup: $${item.setup || 0} | Training: $${item.training || 0}
+                Monthly: $${item.monthly || 0} | Setup: $${item.setup || 0} | Training: $${item.training || 0} 
+                x <input type="number" class="quantity-input" data-index="${i}" value="${item.quantity || 1}" min="1">
             </div>
             <button class="remove-btn" data-index="${i}">Remove</button>
         `;
@@ -43,66 +44,82 @@ function updateCart() {
     document.getElementById('cart-vat').textContent = `$${totals.vat.toFixed(2)}`;
     document.getElementById('cart-total').textContent = `$${totals.total.toFixed(2)}`;
 
-    if (cart.length > 0) {
-        if (cartPopup) cartPopup.style.display = 'block';
-    } else {
-        if (cartPopup) cartPopup.style.display = 'none';
+    if (cartPopup) {
+        cartPopup.style.display = cart.length > 0 ? 'block' : 'none';
     }
 
     saveCart();
     renderPaypal(totals.total);
 }
 
+// PayPal rendering
 function renderPaypal(total) {
     const paypalContainer = document.getElementById('paypal-buttons-global');
-    if (!paypalContainer || paypalContainer.dataset.rendered === 'true') return;
+    if (!paypalContainer) return;
 
-    if (window.paypal) {
+    // Remove previous buttons to allow re-render
+    paypalContainer.innerHTML = '';
+
+    if (window.paypal && cart.length > 0) {
         paypal.Buttons({
-            createOrder: function (data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: { value: total.toFixed(2) },
-                        description: 'CallOrbit Plans'
-                    }]
-                });
-            },
-            onApprove: function (data, actions) {
-                return actions.order.capture().then(function () {
-                    alert('Transaction completed successfully!');
-                    cart = [];
-                    updateCart();
-                });
-            }
+            createOrder: (data, actions) => actions.order.create({
+                purchase_units: [{
+                    amount: { value: total.toFixed(2) },
+                    description: 'CallOrbit Plans'
+                }]
+            }),
+            onApprove: (data, actions) => actions.order.capture().then(() => {
+                alert('Transaction completed successfully!');
+                cart = [];
+                updateCart();
+            })
         }).render('#paypal-buttons-global');
-
-        paypalContainer.dataset.rendered = 'true';
     }
 }
 
-// Add to Cart buttons
+// Add item to cart
 document.querySelectorAll('.buy-now').forEach(btn => {
     btn.addEventListener('click', e => {
         const plan = e.target.closest('.plan');
         if (!plan) return;
 
-        cart.push({
-            name: plan.querySelector('h3')?.textContent || 'Unknown Plan',
-            monthly: parseFloat(plan.dataset.monthly) || 0,
-            setup: parseFloat(plan.dataset.setup) || 0,
-            training: parseFloat(plan.dataset.training) || 0
-        });
+        const name = plan.querySelector('h3')?.textContent || 'Unknown Plan';
+        const existing = cart.find(item => item.name === name);
+        if (existing) {
+            existing.quantity = (existing.quantity || 1) + 1;
+        } else {
+            cart.push({
+                name,
+                monthly: parseFloat(plan.dataset.monthly) || 0,
+                setup: parseFloat(plan.dataset.setup) || 0,
+                training: parseFloat(plan.dataset.training) || 0,
+                quantity: 1
+            });
+        }
+
         updateCart();
     });
 });
 
-// Remove from cart
+// Remove item from cart
 if (cartItemsEl) {
     cartItemsEl.addEventListener('click', e => {
         if (e.target.classList.contains('remove-btn')) {
             const index = parseInt(e.target.dataset.index);
             if (!isNaN(index)) {
                 cart.splice(index, 1);
+                updateCart();
+            }
+        }
+    });
+
+    // Update quantity inputs
+    cartItemsEl.addEventListener('input', e => {
+        if (e.target.classList.contains('quantity-input')) {
+            const index = parseInt(e.target.dataset.index);
+            const val = parseInt(e.target.value);
+            if (!isNaN(index) && val > 0) {
+                cart[index].quantity = val;
                 updateCart();
             }
         }
