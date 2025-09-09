@@ -104,11 +104,18 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Countries and Areas
 const countries=["US","GB","CA","AU","DE","FR","IN","ZA","BR","MX","JP","IT","ES","NL","CH","SE","SG","IE","NZ","NO","PT","BE","KR","TR","TH","PH","TW","PL","RO","HU"];
 const countryNames={US:"United States",GB:"United Kingdom",CA:"Canada",AU:"Australia",DE:"Germany",FR:"France",IN:"India",ZA:"South Africa",BR:"Brazil",MX:"Mexico",JP:"Japan",IT:"Italy",ES:"Spain",NL:"Netherlands",CH:"Switzerland",SE:"Sweden",SG:"Singapore",IE:"Ireland",NZ:"New Zealand",NO:"Norway",PT:"Portugal",BE:"Belgium",KR:"South Korea",TR:"Turkey",TH:"Thailand",PH:"Philippines",TW:"Taiwan",PL:"Poland",RO:"Romania",HU:"Hungary"};
 const localAreas={US:["New York","Los Angeles","Chicago","Houston","Miami"],GB:["London","Manchester","Birmingham"],CA:["Toronto","Vancouver","Montreal"],AU:["Sydney","Melbourne","Brisbane"],DE:["Berlin","Munich","Hamburg"],FR:["Paris","Lyon","Marseille"],IN:["Mumbai","Delhi","Bangalore"],ZA:["Johannesburg","Cape Town","Durban"],BR:["Sao Paulo","Rio de Janeiro","Brasilia"],MX:["Mexico City","Guadalajara","Monterrey"],JP:["Tokyo","Osaka","Nagoya"],IT:["Rome","Milan","Naples"],ES:["Madrid","Barcelona","Valencia"],NL:["Amsterdam","Rotterdam","The Hague"],CH:["Zurich","Geneva"],SE:["Stockholm","Gothenburg"],SG:["Singapore"],IE:["Dublin","Cork"],NZ:["Auckland","Wellington"],NO:["Oslo","Bergen"],PT:["Lisbon","Porto"],BE:["Brussels","Antwerp"],KR:["Seoul","Busan"],TR:["Istanbul","Ankara"],TH:["Bangkok","Chiang Mai"],PH:["Manila","Cebu"],TW:["Taipei","Kaohsiung"],PL:["Warsaw","Krakow"],RO:["Bucharest","Cluj"],HU:["Budapest","Debrecen"]};
-const packages={Basic:100,Plus:500,Pro:1000,Max:2500};
-const countryData={US:{tollFree:0.05,local:0.03,national:0.04},GB:{tollFree:0.06,local:0.04,national:0.05},CA:{tollFree:0.05,local:0.03,national:0.04},AU:{tollFree:0.06,local:0.04,national:0.05},DE:{tollFree:0.07,local:0.05,national:0.06},FR:{tollFree:0.07,local:0.05,national:0.06},IN:{tollFree:0.04,local:0.02,national:0.03},ZA:{tollFree:0.05,local:0.03,national:0.04},BR:{tollFree:0.06,local:0.04,national:0.05},MX:{tollFree:0.05,local:0.03,national:0.04},JP:{tollFree:0.08,local:0.06,national:0.07},IT:{tollFree:0.07,local:0.05,national:0.06},ES:{tollFree:0.07,local:0.05,national:0.06},NL:{tollFree:0.06,local:0.04,national:0.05},CH:{tollFree:0.08,local:0.06,national:0.07},SE:{tollFree:0.06,local:0.04,national:0.05},SG:{tollFree:0.07,local:0.05,national:0.06},IE:{tollFree:0.06,local:0.04,national:0.05},NZ:{tollFree:0.06,local:0.04,national:0.05},NO:{tollFree:0.07,local:0.05,national:0.06},PT:{tollFree:0.07,local:0.05,national:0.06},BE:{tollFree:0.07,local:0.05,national:0.06},KR:{tollFree:0.08,local:0.06,national:0.07},TR:{tollFree:0.06,local:0.04,national:0.05},TH:{tollFree:0.05,local:0.03,national:0.04},PH:{tollFree:0.04,local:0.02,national:0.03},TW:{tollFree:0.07,local:0.05,national:0.06},PL:{tollFree:0.06,local:0.04,national:0.05},RO:{tollFree:0.06,local:0.04,national:0.05},HU:{tollFree:0.06,local:0.04,national:0.05}};
+
+// Plans and Pricing
+const packages=[
+  {name:"Starter",minutes:100,price:19,setup:99,training:49,agents:3},
+  {name:"Team",minutes:500,price:29,setup:149,training:49,agents:20},
+  {name:"Business",minutes:1000,price:49,setup:199,training:49,agents:50},
+  {name:"Enterprise",minutes:2500,price:99,setup:299,training:49,agents:"Unlimited"}
+];
 
 const countrySelectEl=document.getElementById('country');
 countries.forEach(c=>{
@@ -139,17 +146,20 @@ function generatePlans(){
   } else { areaContainer.style.display='none'; }
 
   plansContainerEl.innerHTML='';
-  Object.keys(packages).forEach(pkg=>{
-    const mins=packages[pkg];
-    const rate=countryData[country][numberType];
-    const price=+(rate*mins*1.25).toFixed(2);
+  packages.forEach(pkg=>{
     const div=document.createElement('div');
     div.className='plan';
-    div.innerHTML=`<h3>${pkg}</h3><div class="price">$${price}</div><div class="minutes">${mins} Minutes, Monthly Subscription</div><div class="overage">Overage: $${(rate*1.25).toFixed(3)}/min</div><button class="buy-now">Add to Cart</button>`;
+    div.innerHTML=`
+      <h3>${pkg.name}</h3>
+      <div class="price">$${pkg.price}/month</div>
+      <div class="minutes">${pkg.minutes} Minutes, ${pkg.agents} Agents included</div>
+      <div class="overage">Setup: $${pkg.setup}, Training: $${pkg.training}</div>
+      <button class="buy-now">Add to Cart</button>
+    `;
     div.querySelector('button').addEventListener('click',()=>{
       const forward=document.getElementById('forward').value||'';
       const area=numberType==='local'?areaSelect.value:'';
-      cart.push({plan:pkg,country,numberType,area,price,forward,quantity:1,recurring:true});
+      cart.push({plan:pkg.name,country,numberType,area,price:pkg.price,forward,quantity:1,recurring:true});
       updateCart();
     });
     plansContainerEl.appendChild(div);
@@ -186,6 +196,7 @@ cartClose.addEventListener('click',()=>cartWrapper.classList.remove('active'));
 
 generatePlans();
 
+// PayPal Integration
 paypal.Buttons({
     createOrder: function(data, actions) {
       const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0).toFixed(2);
@@ -202,5 +213,6 @@ paypal.Buttons({
     }
 }).render('#paypal-button-container');
 </script>
+<script src="js/cart.js"></script>
 </body>
 </html>
