@@ -11,20 +11,21 @@ body { font-family: 'Inter', sans-serif; background:#f9fafb; color:#1f2937; marg
 nav {display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
 nav a {margin-left:15px;text-decoration:none;color:#1f2937;font-weight:500;}
 .nav-right {display:flex;align-items:center;gap:15px;position:relative;}
-.nav-icon {cursor:pointer;font-weight:700; display:inline-flex;align-items:center; position:relative; font-size:1.5rem; background:#3b82f6; padding:5px 10px; border-radius:50px; transition:all 0.2s;}
-.nav-icon:hover {filter:brightness(1.1);}
-#cart-dropdown {display:none;position:fixed;bottom:70px;right:20px;width:450px;height:600px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:15px;z-index:1001;transition:all 0.3s;overflow-y:auto;}
+
+/* Cart dropdown */
+#cart-dropdown {display:none;position:fixed;bottom:70px;right:20px;width:400px;height:500px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:15px;z-index:1001;transition:all 0.3s;overflow-y:auto;}
 #cart-dropdown.active {display:block;}
-.cart-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.cart-header h3 {margin:0;}
-.cart-close {cursor:pointer;font-weight:bold;font-size:1.5rem;color:#ef4444;}
 .cart-item {display:flex;flex-direction:column;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #e5e7eb;}
 .cart-item div {margin:2px 0;}
 .remove-btn {background:#ef4444;color:#fff;border:none;padding:4px 8px;border-radius:5px;cursor:pointer;align-self:flex-end;margin-top:5px;}
 .quantity-input {width:60px;padding:4px;border:1px solid #d1d5db;border-radius:5px;background:#fff;}
 .cart-summary {margin-top:15px;text-align:right;font-weight:600;font-size:1rem;position:sticky;bottom:70px;background:#fff;padding-top:10px;}
 #paypal-button-container {margin-top:10px;position:sticky;bottom:0;background:#fff;padding-top:10px;}
-#cart-items {max-height:450px; overflow-y:auto;}
+
+/* Scrollbar for cart */
+#cart-items {max-height:350px; overflow-y:auto;}
+
+/* Plans */
 main{max-width:1120px;margin:20px auto;padding:0}
 header.hero{margin:20px auto;padding:60px 20px;text-align:center;background:linear-gradient(135deg,#3b82f6,#60a5fa);color:#fff;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
 header.hero h1{margin-bottom:1rem;font-size:2.5rem}
@@ -39,8 +40,6 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 .forwarding select,.forwarding input{width:100%;padding:0.75rem;margin-bottom:1rem;border:1px solid #d1d5db;border-radius:0.5rem;font-size:1rem}
 .buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .2s;margin-top:10px}
 .buy-now:hover{filter:brightness(0.95)}
-#bottom-cart {position:fixed;bottom:20px;right:20px;background:#3b82f6;color:#fff;padding:15px 20px;border-radius:50px;font-weight:700;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,0.2);z-index:1000; transition:all 0.2s;}
-#bottom-cart:hover {filter:brightness(1.1);}
 </style>
 </head>
 <body>
@@ -55,20 +54,6 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
     <a href="/platform">Platform</a>
     <a href="/contact">Contact</a>
     <a href="/about">About</a>
-    <div class="nav-icon" id="cart-button">Cart</div>
-    <div id="cart-dropdown">
-      <div class="cart-header">
-        <h3>Your Cart</h3>
-        <span class="cart-close" id="cart-close">&times;</span>
-      </div>
-      <div id="cart-items"></div>
-      <div class="cart-summary">
-        <div>Subtotal: $<span id="cart-subtotal">0.00</span></div>
-        <div>VAT: $<span id="cart-vat">0.00</span></div>
-        <div>Total: $<span id="cart-total">0.00</span></div>
-      </div>
-      <div id="paypal-button-container"></div>
-    </div>
     <a href="/login">Login</a>
   </div>
 </nav>
@@ -105,7 +90,16 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
   <div class="plans-grid" id="plans-container"></div>
 </main>
 
-<div id="bottom-cart">Cart (<span id="bottom-cart-count">0</span>)</div>
+<!-- Cart dropdown stays hidden by default, can be used by buttons -->
+<div id="cart-dropdown">
+  <div id="cart-items"></div>
+  <div class="cart-summary">
+    <div>Subtotal: $<span id="cart-subtotal">0.00</span></div>
+    <div>VAT: $<span id="cart-vat">0.00</span></div>
+    <div>Total: $<span id="cart-total">0.00</span></div>
+  </div>
+  <div id="paypal-button-container"></div>
+</div>
 
 <footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
   &copy; <span id="year"></span> CallOrbit. All rights reserved. 
@@ -116,6 +110,7 @@ header.hero p{margin-bottom:2rem;font-size:1.25rem}
 </footer>
 
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -127,12 +122,8 @@ const countryData={US:{tollFree:0.05,local:0.03,national:0.04},GB:{tollFree:0.06
 
 const countrySelectEl=document.getElementById('country');
 const plansContainerEl=document.getElementById('plans-container');
-
 countries.forEach(c=>{
-  const opt=document.createElement('option');
-  opt.value=c;
-  opt.textContent=countryNames[c];
-  countrySelectEl.appendChild(opt);
+  const opt=document.createElement('option'); opt.value=c; opt.textContent=countryNames[c]; countrySelectEl.appendChild(opt);
 });
 
 let cart = [];
@@ -141,28 +132,20 @@ const cartItemsEl = document.getElementById('cart-items');
 const cartSubtotalEl = document.getElementById('cart-subtotal');
 const cartVatEl = document.getElementById('cart-vat');
 const cartTotalEl = document.getElementById('cart-total');
-const bottomCartCountEl = document.getElementById('bottom-cart-count');
-const cartCloseBtn = document.getElementById('cart-close');
 
 function generatePlans(){
   const country=countrySelectEl.value;
   const numberType=document.getElementById('number-type').value;
   const areaContainer=document.getElementById('area-container');
   const areaSelect=document.getElementById('area');
-
   if(numberType==='local'){
     areaContainer.style.display='block';
     areaSelect.innerHTML='';
     localAreas[country].forEach(a=>{
-      const opt=document.createElement('option');
-      opt.value=a;
-      opt.textContent=a;
-      areaSelect.appendChild(opt);
+      const opt=document.createElement('option'); opt.value=a; opt.textContent=a; areaSelect.appendChild(opt);
     });
-  } else {
-    areaContainer.style.display='none';
-  }
-
+  } else { areaContainer.style.display='none'; }
+  
   plansContainerEl.innerHTML='';
   Object.keys(packages).forEach(pkg=>{
     const mins=packages[pkg];
@@ -173,33 +156,13 @@ function generatePlans(){
     div.dataset.monthly=price;
     div.dataset.minutes=mins;
     div.dataset.overage=(rate*1.25).toFixed(3);
-    div.innerHTML=`
-      <h3>${pkg}</h3>
+    div.innerHTML=`<h3>${pkg}</h3>
       <div class="price">$${price}</div>
       <div class="minutes">${mins} Minutes, Monthly Subscription</div>
       <div class="overage">Overage: $${(rate*1.25).toFixed(3)}/min</div>
-      <button class="buy-now">Add to Cart</button>
-    `;
+      <button class="buy-now">Add to Cart</button>`;
     plansContainerEl.appendChild(div);
   });
-}
-
-function renderPaypal(total){
-  // Always reset container so buttons re-render
-  document.getElementById('paypal-button-container').innerHTML='';
-  paypal.Buttons({
-    style:{layout:'vertical', color:'blue', shape:'pill', label:'pay'},
-    createOrder: function(data, actions){
-      return actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]});
-    },
-    onApprove: function(data, actions){
-      return actions.order.capture().then(function(details){
-        alert('Transaction completed by ' + details.payer.name.given_name);
-        cart=[];
-        updateCartDisplay();
-      });
-    }
-  }).render('#paypal-button-container');
 }
 
 function updateCartDisplay(){
@@ -211,21 +174,38 @@ function updateCartDisplay(){
     div.className='cart-item';
     div.innerHTML=`
       <strong>${item.name}</strong>
-      <div>$${item.price.toFixed(2)} x <input type="number" class="quantity-input" data-index="${i}" value="${item.quantity}" min="1"></div>
+      <div>$${item.price.toFixed(2)} x 
+        <input type="number" class="quantity-input" data-index="${i}" value="${item.quantity}" min="1">
+      </div>
       <div>${item.minutes} Minutes, Monthly Subscription</div>
       <div>Overage: $${item.overage}/min</div>
       <button class="remove-btn" data-index="${i}">Remove</button>
     `;
     cartItemsEl.appendChild(div);
   });
+
   const vat=+(subtotal*0.15).toFixed(2);
   const total=+(subtotal+vat).toFixed(2);
   cartSubtotalEl.textContent=subtotal.toFixed(2);
   cartVatEl.textContent=vat.toFixed(2);
   cartTotalEl.textContent=total.toFixed(2);
-  bottomCartCountEl.textContent = cart.reduce((acc,i)=>acc+i.quantity,0);
 
-  renderPaypal(total);
+  if (!window.paypalRendered) {
+    paypal.Buttons({
+      style:{layout:'vertical', color:'blue', shape:'pill', label:'pay'},
+      createOrder: function(data, actions){
+        return actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]});
+      },
+      onApprove: function(data, actions){
+        return actions.order.capture().then(function(details){
+          alert('Transaction completed by ' + details.payer.name.given_name);
+          cart = [];
+          updateCartDisplay();
+        });
+      }
+    }).render('#paypal-button-container');
+    window.paypalRendered = true;
+  }
 }
 
 countrySelectEl.addEventListener('change',generatePlans);
@@ -234,12 +214,12 @@ document.getElementById('number-type').addEventListener('change',generatePlans);
 plansContainerEl.addEventListener('click', e=>{
   if(e.target.classList.contains('buy-now')){
     const planDiv = e.target.closest('.plan');
-    cart.push({ 
-      name: planDiv.querySelector('h3').textContent, 
-      price: parseFloat(planDiv.dataset.monthly), 
-      minutes: planDiv.dataset.minutes, 
-      overage: planDiv.dataset.overage, 
-      quantity:1 
+    cart.push({
+      name: planDiv.querySelector('h3').textContent,
+      price: parseFloat(planDiv.dataset.monthly),
+      minutes: planDiv.dataset.minutes,
+      overage: planDiv.dataset.overage,
+      quantity:1
     });
     updateCartDisplay();
   }
@@ -259,18 +239,6 @@ cartItemsEl.addEventListener('input', e=>{
     cart[index].quantity = parseInt(e.target.value);
     updateCartDisplay();
   }
-});
-
-const cartButton = document.getElementById('cart-button');
-cartButton.addEventListener('click', e=>{
-  e.stopPropagation();
-  cartDropdown.classList.toggle('active');
-});
-
-cartCloseBtn.addEventListener('click', ()=>{ cartDropdown.classList.remove('active'); });
-document.getElementById('bottom-cart').addEventListener('click', e=>{
-  e.stopPropagation();
-  cartDropdown.classList.toggle('active');
 });
 
 generatePlans();
