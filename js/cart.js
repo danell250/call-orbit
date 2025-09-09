@@ -23,18 +23,42 @@ function addPlanToCart(plan) {
     renderCart();
 }
 
+// Get customer info from form
+function getCustomerInfo() {
+    return {
+        name: document.getElementById("customer-name")?.value || "",
+        email: document.getElementById("customer-email")?.value || "",
+        phone: document.getElementById("customer-phone")?.value || "",
+        company: document.getElementById("customer-company")?.value || ""
+    };
+}
+
+// Validate customer info
+function validateCustomerInfo() {
+    const { name, email } = getCustomerInfo();
+    if (!name || !email) {
+        alert("Please enter your name and email before checkout.");
+        return false;
+    }
+    return true;
+}
+
 // Render the cart
 function renderCart() {
     const cartItemsEl = document.getElementById("cart-items");
+    const cartSubtotalEl = document.getElementById("cart-subtotal");
+    const cartVATEl = document.getElementById("cart-vat");
     const cartTotalEl = document.getElementById("cart-total");
 
     if (!cartItemsEl || !cartTotalEl) return;
 
     cartItemsEl.innerHTML = "";
-    let grandTotal = 0;
+    let subtotal = 0;
+    let totalVAT = 0;
 
     cart.forEach((item, i) => {
-        grandTotal += item.totalFirstMonth;
+        subtotal += item.monthly + item.setup + item.training;
+        totalVAT += item.vat;
 
         const div = document.createElement("div");
         div.className = "cart-item";
@@ -53,9 +77,11 @@ function renderCart() {
         cartItemsEl.appendChild(div);
     });
 
-    cartTotalEl.textContent = "$" + grandTotal.toFixed(2);
+    if (cartSubtotalEl) cartSubtotalEl.textContent = "$" + subtotal.toFixed(2);
+    if (cartVATEl) cartVATEl.textContent = "$" + totalVAT.toFixed(2);
+    if (cartTotalEl) cartTotalEl.textContent = "$" + (subtotal + totalVAT).toFixed(2);
 
-    // Hook up remove buttons
+    // Remove buttons
     document.querySelectorAll(".remove-btn").forEach(btn => {
         btn.addEventListener("click", e => {
             const idx = parseInt(e.target.dataset.index);
@@ -69,7 +95,7 @@ function renderCart() {
     renderPayPal();
 }
 
-// Update cart button text
+// Update cart button in navbar
 function updateCartButton() {
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
     const cartButton = document.getElementById("cart-button");
@@ -81,19 +107,20 @@ function saveCart() {
     localStorage.setItem("callOrbitCart", JSON.stringify(cart));
 }
 
-// PayPal Integration
+// PayPal integration
 function renderPayPal() {
     const container = document.getElementById("paypal-button-container");
     if (!container) return;
-
     container.innerHTML = "";
     if (cart.length === 0) return;
 
     const total = cart.reduce((sum, item) => sum + item.totalFirstMonth, 0).toFixed(2);
 
     paypal.Buttons({
-        createOrder: (data, actions) =>
-            actions.order.create({ purchase_units: [{ amount: { value: total } }] }),
+        createOrder: (data, actions) => {
+            if (!validateCustomerInfo()) return;
+            return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
+        },
         onApprove: (data, actions) =>
             actions.order.capture().then(details => {
                 alert("Payment completed by " + details.payer.name.given_name);
@@ -116,7 +143,7 @@ if (cartClose && cartWrapper) {
     cartClose.addEventListener("click", () => cartWrapper.classList.remove("active"));
 }
 
-// Hook up plan buttons
+// Hook up all Add to Cart buttons
 document.querySelectorAll(".buy-now").forEach(btn => {
     btn.addEventListener("click", () => {
         const planDiv = btn.closest(".plan");
@@ -135,7 +162,7 @@ document.querySelectorAll(".buy-now").forEach(btn => {
     });
 });
 
-// Sync across tabs
+// Sync cart across tabs
 window.addEventListener("storage", e => {
     if (e.key === "callOrbitCart") {
         cart = JSON.parse(e.newValue) || [];
