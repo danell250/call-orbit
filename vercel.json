@@ -7,7 +7,7 @@
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/coverage", "destination": "/coverage.html" },
     { "source": "/platform", "destination": "/platform.html" },
-    { "source": "/orders", "destination": "/orders.html" },
+    { "source": "/buy", "destination": "/buy.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
     { "source": "/refund-policy", "destination": "/refund-policy.html" }
