@@ -15,8 +15,17 @@
     { "source": "/your-orbit", "destination": "/your-orbit.html" }
   ],
   "redirects": [
+    { "source": "/company.html", "destination": "/company", "permanent": true },
+    { "source": "/contact-success.html", "destination": "/contact-success", "permanent": true },
+    { "source": "/orders.html", "destination": "/orders", "permanent": true },
+    { "source": "/solutions.html", "destination": "/solutions", "permanent": true },
+    { "source": "/get-numbers.html", "destination": "/get-numbers", "permanent": true },
+    { "source": "/pricing.html", "destination": "/pricing", "permanent": true },
+    { "source": "/global-reach.html", "destination": "/global-reach", "permanent": true },
     { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
     { "source": "/terms-conditions.html", "destination": "/terms-conditions", "permanent": true },
-    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true }
+    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true },
+    { "source": "/reach-us.html", "destination": "/reach-us", "permanent": true },
+    { "source": "/your-orbit.html", "destination": "/your-orbit", "permanent": true }
   ]
 }
