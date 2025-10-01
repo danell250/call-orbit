@@ -1,15 +1,18 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/features", "destination": "/features.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/coverage", "destination": "/coverage.html" },
-    { "source": "/platform", "destination": "/platform.html" },
-    { "source": "/buy", "destination": "/buy.html" },
+    { "source": "/company", "destination": "/company.html" },
+    { "source": "/contact-success", "destination": "/contact-success.html" },
+    { "source": "/orders", "destination": "/orders.html" },
+    { "source": "/solutions", "destination": "/solutions.html" },
+    { "source": "/get-numbers", "destination": "/get-numbers.html" },
+    { "source": "/pricing", "destination": "/pricing.html" },
+    { "source": "/global-reach", "destination": "/global-reach.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
-    { "source": "/refund-policy", "destination": "/refund-policy.html" }
+    { "source": "/refund-policy", "destination": "/refund-policy.html" },
+    { "source": "/reach-us", "destination": "/reach-us.html" },
+    { "source": "/your-orbit", "destination": "/your-orbit.html" }
   ],
   "redirects": [
     { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
