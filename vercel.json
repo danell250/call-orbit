@@ -1,31 +1,20 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/company", "destination": "/company.html" },
-    { "source": "/contact-success", "destination": "/contact-success.html" },
-    { "source": "/orders", "destination": "/orders.html" },
     { "source": "/solutions", "destination": "/solutions.html" },
-    { "source": "/get-numbers", "destination": "/get-numbers.html" },
-    { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/global-reach", "destination": "/global-reach.html" },
+    { "source": "/your-orbit", "destination": "/your-orbit.html" },
+    { "source": "/get-numbers", "destination": "/get-numbers.html" },
+    { "source": "/reach-us", "destination": "/reach-us.html" },
+    { "source": "/company", "destination": "/company.html" },
+    { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
-    { "source": "/refund-policy", "destination": "/refund-policy.html" },
-    { "source": "/reach-us", "destination": "/reach-us.html" },
-    { "source": "/your-orbit", "destination": "/your-orbit.html" }
+    { "source": "/refund-policy", "destination": "/refund-policy.html" }
   ],
   "redirects": [
-    { "source": "/company.html", "destination": "/company", "permanent": true },
-    { "source": "/contact-success.html", "destination": "/contact-success", "permanent": true },
-    { "source": "/orders.html", "destination": "/orders", "permanent": true },
-    { "source": "/solutions.html", "destination": "/solutions", "permanent": true },
-    { "source": "/get-numbers.html", "destination": "/get-numbers", "permanent": true },
-    { "source": "/pricing.html", "destination": "/pricing", "permanent": true },
-    { "source": "/global-reach.html", "destination": "/global-reach", "permanent": true },
     { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
     { "source": "/terms-conditions.html", "destination": "/terms-conditions", "permanent": true },
-    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true },
-    { "source": "/reach-us.html", "destination": "/reach-us", "permanent": true },
-    { "source": "/your-orbit.html", "destination": "/your-orbit", "permanent": true }
+    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true }
   ]
 }
