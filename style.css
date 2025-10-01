@@ -371,3 +371,10 @@ footer {
     margin: 1rem;
   }
 }
+
+/* --- Hide Tawk.to Knowledge Base / Help Center --- */
+#Tawk_HelpCenter,
+.tawk-help-center,
+.tawk-search-container {
+    display: none !important;
+}

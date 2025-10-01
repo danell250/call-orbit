@@ -167,31 +167,32 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   color:#374151;
 }
 
- /* Bottom CTA Banner */
-    .cta-banner {
-      background:#3b82f6;
-      color:#fff;
-      text-align:center;
-      padding:50px 20px;
-      margin-top:60px;
-      border-radius:15px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
-    .cta-banner h2 { font-size:2rem; margin-bottom:20px; }
-    .cta-banner a {
-      display:inline-block;
-      padding:16px 36px;
-      background:#0000FF;
-      color:#fff;
-      font-weight:700;
-      border-radius:999px;
-      text-decoration:none;
-      transition:0.3s;
-    }
-    .cta-banner a:hover { background:#0f9c6e; transform:scale(1.05); }
+/* Bottom CTA Banner */
+.cta-banner {
+  background:#3b82f6;
+  color:#fff;
+  text-align:center;
+  padding:50px 20px;
+  margin-top:60px;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.cta-banner h2 { font-size:2rem; margin-bottom:20px; }
+.cta-banner a {
+  display:inline-block;
+  padding:16px 36px;
+  background:#0000FF;
+  color:#fff;
+  font-weight:700;
+  border-radius:999px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.cta-banner a:hover { background:#0f9c6e; transform:scale(1.05); }
+
 /* Footer */
 footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
 footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
@@ -213,13 +214,13 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
   <div class="menu">
-    <a href="/" class="active-page">Home</a>
-    <a href="/features">Features</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-    <a href="/buy" class="navbar-buy">Buy Numbers</a>
-    <a href="/contact">Contact</a>
-    <a href="/about">About</a>
+    <a href="/" class="active-page">Overview</a>
+    <a href="/features">Solutions</a>
+    <a href="/coverage">Global Reach</a>
+    <a href="/platform">Your Orbit</a>
+    <a href="/buy" class="navbar-buy">Get Numbers</a>
+    <a href="/contact">Reach Us</a>
+    <a href="/about">Company</a>
   </div>
   <div class="actions" style="display:flex; align-items:center; gap:12px;">
     <a href="/login" class="login-btn">Login</a>
@@ -273,9 +274,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
 </section>
 
-
-
-
 <section class="cta-banner fade-in">
   <h2>Take control of your contact center today – Contact Us</h2>
   <a href="/contact">Contact Us</a>
@@ -318,13 +316,15 @@ faders.forEach(fader => appearOnScroll.observe(fader));
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-// Set footer year
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+Tawk_API.onLoad = function(){
+    // Remove profile picture
+    Tawk_API.setAttributes({ avatar: '' });
+    // Disable Knowledge Base / Help Center
+    Tawk_API.toggleHelpCenter(false);
+};
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
