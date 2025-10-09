@@ -1,341 +1,406 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CallOrbit — Home</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
-</svg>">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CallOrbit — Simplify & Scale Your Contact Center</title>
 
-<!-- Font Awesome 6 CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-/* Keep all your existing CSS exactly as before */
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-/* Navbar */
-nav {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 30px;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  font-family:'Inter',sans-serif;
-  position:sticky;
-  top:0;
-  z-index:200;
-}
-nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
-nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
-nav .menu a.active-page { color:#3b82f6; font-weight:700; }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-/* Buy Numbers Button */
-.navbar-buy {
-  background: none;
-  color: #3b82f6;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-weight: 700;
-  margin-left: 10px;
-  text-decoration:none;
-  transition: all 0.2s;
-  border: 2px solid #3b82f6;
-}
-.navbar-buy:hover { 
-  background:#3b82f6; 
-  color: #fff; 
-  transform:scale(1.05); 
-}
+    <style>
+        /* Custom Font Family */
+        :root { font-family: 'Inter', sans-serif; }
 
-/* Login Button */
-.login-btn {
-  padding:10px 18px;
-  border-radius:999px;
-  font-weight:600;
-  text-decoration:none;
-  background:#0000FF;
-  color:#fff;
-  transition:0.2s;
-}
-.login-btn:hover { background:#2563eb; }
+        /* The Hero Video/Overlay Styling */
+        .hero-video-overlay {
+            background-image: linear-gradient(135deg, rgba(30,64,138,0.95) 0%, rgba(59,130,246,0.85) 100%);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+        
+        /* Utility to hide horizontal scrollbar for the logo section */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* FAQ Answer Transition (Manual JS will set max-height) */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
 
-/* Hero / Banner */
-header.hero {
-  margin:0 auto;
-  padding:80px 20px;
-  text-align:center;
-  color:#fff;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-  position:relative;
-  overflow:hidden;
-}
-header.hero video {
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  z-index:0;
-  opacity:0.4;
-}
-header.hero .hero-content {
-  position:relative;
-  z-index:1;
-}
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
-.hero-cta { display:inline-block; padding:14px 32px; background:#0000FF; color:#fff; border-radius:999px; font-weight:700; text-decoration:none; transition: filter 0.2s; }
-.hero-cta:hover { filter:brightness(0.9); }
+        /* --- Hero Banner Animations --- */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-/* Premium Cards Section */
-.premium-cards-container {
-  overflow-x:auto;
-  display:flex;
-  gap:1.5rem;
-  padding:40px 20px;
-  scroll-behavior:smooth;
-}
-.premium-card {
-  min-width:280px;
-  background:#fff;
-  border-radius:15px;
-  padding:30px 20px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  flex-shrink:0;
-}
-.premium-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
-.premium-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
-.premium-card:hover i { transform:rotate(15deg) scale(1.1); }
-.premium-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
-.premium-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-/* Floating Chat Button */
-.chat-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#3b82f6;
-  color:#fff;
-  border:none;
-  padding:12px 16px;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-  z-index:500;
-  transition:0.2s;
-}
-.chat-btn:hover { background:#2563eb; }
+        /* Apply animations only when the 'animate-hero' class is present */
+        .animate-hero .hero-pre-headline {
+            animation: slideInUp 0.7s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+        .animate-hero .hero-headline {
+            animation: slideInUp 0.7s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+        .animate-hero .hero-sub-headline {
+            animation: slideInUp 0.7s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+        .animate-hero .hero-cta {
+            animation: fadeInScale 0.6s ease-out forwards;
+            animation-delay: 0.8s;
+        }
 
-/* FAQ Accordion */
-.faq-section {
-  max-width:900px;
-  margin:60px auto;
-  padding:0 20px;
-}
-.faq-item { background:#f9fafb; margin-bottom:10px; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05);}
-.faq-question {
-  cursor:pointer;
-  padding:18px 20px;
-  font-weight:600;
-  color:#1e3a8a;
-  position:relative;
-}
-.faq-question::after {
-  content: '+';
-  position:absolute;
-  right:20px;
-  font-size:1.5rem;
-  transition: transform 0.3s;
-}
-.faq-question.active::after { transform:rotate(45deg); }
-.faq-answer {
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.5s ease;
-  padding:0 20px;
-  background:#fff;
-  font-size:1rem;
-  color:#374151;
-}
+        /* Ensure elements are initially hidden before animation */
+        .hero-pre-headline, .hero-headline, .hero-sub-headline, .hero-cta {
+            opacity: 0;
+        }
 
-/* Bottom CTA Banner */
-.cta-banner {
-  background:#3b82f6;
-  color:#fff;
-  text-align:center;
-  padding:50px 20px;
-  margin-top:60px;
-  border-radius:15px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-.cta-banner h2 { font-size:2rem; margin-bottom:20px; }
-.cta-banner a {
-  display:inline-block;
-  padding:16px 36px;
-  background:#0000FF;
-  color:#fff;
-  font-weight:700;
-  border-radius:999px;
-  text-decoration:none;
-  transition:0.3s;
-}
-.cta-banner a:hover { background:#0f9c6e; transform:scale(1.05); }
+        /* Styles for the new SVG Logos */
+        .logo-container {
+            height: 40px; /* Consistent height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+            opacity: 0.6; /* Starts grayed out */
+        }
+        .logo-container:hover {
+            opacity: 1; /* Brightens on hover */
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+        .svg-icon {
+            fill: currentColor;
+            width: 20px;
+            height: 20px;
+            margin-right: 4px;
+        }
 
-/* Footer */
-footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
-footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
-
-/* Fade-in animation */
-.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-
-/* Hide scrollbar for horizontal cards */
-.premium-cards-container::-webkit-scrollbar { display:none; }
-.premium-cards-container { -ms-overflow-style:none; scrollbar-width:none; }
-</style>
+    </style>
 </head>
-<body>
+<body class="text-gray-800 antialiased">
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">
-    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
-  </div>
- <div class="menu">
-  <a href="/" class="active-page">Overview</a>
-  <a href="/solutions.html">Solutions</a>
-  <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html">Reach Us</a>
-  <a href="/company.html">Company</a>
-</div>
-</div>
-  <div class="actions" style="display:flex; align-items:center; gap:12px;">
-    <a href="/login" class="login-btn">Login</a>
-  </div>
+<nav class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        <div class="flex items-center">
+            <a href="/" class="text-2xl font-extrabold text-blue-800 tracking-tight">CallOrbit<span class="text-xs align-super">®</span></a>
+        </div>
+        
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="/" class="text-gray-600 hover:text-blue-600 font-semibold transition duration-150 border-b-2 border-blue-600 pb-1">Overview</a>
+            <a href="https://callorbit.vercel.app/solutions" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150">Solutions</a>
+            <a href="https://callorbit.vercel.app/global-reach" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150">Global Reach</a>
+            <a href="https://callorbit.vercel.app/your-orbit" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150">Your Orbit</a>
+            <a href="https://callorbit.vercel.app/reach-us" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150">Reach Us</a>
+            <a href="https://callorbit.vercel.app/company" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150">Company</a>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <a href="https://callorbit.vercel.app/get-numbers" id="navbar-buy-link" class="hidden sm:inline-block px-4 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-full hover:bg-blue-50 transition duration-300 shadow-sm">
+                Get Numbers
+            </a>
+            <a href="/login" id="login-link" class="px-5 py-2 bg-blue-800 text-white font-semibold rounded-full hover:bg-blue-700 transition duration-300 shadow-lg">
+                Login
+            </a>
+            <button class="md:hidden text-gray-500 hover:text-gray-700 p-2 rounded-md transition duration-150">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
 </nav>
 
-<!-- Hero Section with Video -->
-<header class="hero fade-in">
-  <video autoplay muted loop>
-    <source src="dashboards.mp4" type="video/mp4">
-  </video>
-  <div class="hero-content">
-    <h1> Simplify & Scale Your Contact Center.</h1>
-    <p>CallOrbit gives managers full control of contact centers: live dashboards, agent oversight, and analytics—all in one platform.</p>
-    <a href="/features" class="hero-cta">Explore The Orbit</a>
-  </div>
-</header>
+<main>
+    <header class="relative overflow-hidden pt-24 pb-36 text-white text-center rounded-b-2xl shadow-xl fade-in animate-hero">
+        <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-20">
+            <source src="dashboards.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-video-overlay"></div> <div class="relative z-10 max-w-4xl mx-auto px-4">
+            <p class="text-lg font-semibold mb-3 text-blue-200 hero-pre-headline">The Modern Contact Platform</p>
+            <h1 class="text-5xl sm:text-6xl font-extrabold mb-5 leading-tight hero-headline">
+                Simplify, Scale, and Command <span class="block text-blue-300">Your Global Contact Center.</span>
+            </h1>
+            <p class="text-xl mb-10 opacity-90 max-w-3xl mx-auto hero-sub-headline">
+                **CallOrbit** gives managers real-time, 360-degree control: live dashboards, agent oversight, global number management, and deep analytics—all in one intuitive platform.
+            </p>
+            <a href="https://callorbit.vercel.app/reach-us" id="hero-cta-link" class="inline-block px-10 py-4 bg-yellow-400 text-gray-900 font-extrabold text-lg rounded-full shadow-2xl hover:bg-yellow-300 transition duration-300 transform hover:scale-105 hero-cta">
+                Request a Live Demo
+            </a>
+        </div>
+    </header>
 
-<!-- Premium Highlights Horizontal Scroll -->
-<section class="premium-cards-container fade-in">
-  <div class="premium-card">
-    <i class="fas fa-stopwatch"></i>
-    <h3>Reduce Response Time by 50%</h3>
-    <p>Streamline operations with efficient call routing and live monitoring for all agents.</p>
-  </div>
-  <div class="premium-card">
-    <i class="fas fa-users"></i>
-    <h3>Monitor Teams from Anywhere</h3>
-    <p>Check agent activity, call stats, and performance no matter where you are.</p>
-  </div>
-  <div class="premium-card">
-    <i class="fas fa-globe"></i>
-    <h3>Global Number Coverage</h3>
-    <p>Buy and manage numbers in multiple countries with full control.</p>
-  </div>
-</section>
+    <section class="py-12 bg-gray-50 fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-xl font-semibold text-gray-600 mb-8">Trusted by scale-ups and enterprises globally</h2>
+            <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 no-scrollbar overflow-x-auto">
+                
+                <div class="logo-container text-gray-400 hover:text-blue-800">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5V15h2v2.5H11zm-2-4.5V9h6v4H9z"/></svg>
+                    <span class="logo-text">SYNAPSE</span>
+                </div>
+                
+                <div class="logo-container text-gray-400 hover:text-blue-800">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-3.29-3.29-7.42 7.42L3 17.59l5-5 3.29 3.29 4.88-4.88L18 11V6z"/></svg>
+                    <span class="logo-text">ASCEND</span>
+                </div>
+                
+                <div class="logo-container text-gray-400 hover:text-blue-800">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 10h3v7H4zM10.5 10h3v7h-3zM17 10h3v7h-3zM2 22h20V4H2v18zM20 6v14H4V6h16z"/></svg>
+                    <span class="logo-text">QUANTIX</span>
+                </div>
+                
+                <div class="logo-container text-gray-400 hover:text-blue-800">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 3.32 2.69 6 6 6v2c-2.43 0-4.66-.88-6.39-2.37l1.58-1.58c1.37 1.05 3.16 1.68 5.06 1.68v2.09z"/></svg>
+                    <span class="logo-text">NEXUS GLOBAL</span>
+                </div>
 
-<!-- FAQ Accordion -->
-<section class="faq-section fade-in">
-  <div class="faq-item">
-    <div class="faq-question">What is CallOrbit?</div>
-    <div class="faq-answer"><p>CallOrbit is a complete contact center management platform that gives managers full control over numbers, teams, and analytics.</p></div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question">How does analytics work?</div>
-    <div class="faq-answer"><p>Live dashboards provide real-time metrics, and you can generate detailed reports to optimize performance.</p></div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-question">Can I buy numbers globally?</div>
-    <div class="faq-answer"><p>Yes, CallOrbit provides global number coverage, including easy porting and management.</p></div>
-  </div>
-</section>
+                <div class="logo-container text-gray-400 hover:text-blue-800">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3zm0 4.13L15.37 11h-6.74L12 7.13zm-.5 9.87v-3h1v3h-1z"/></svg>
+                    <span class="logo-text">SUMMIT CORP</span>
+                </div>
 
-<section class="cta-banner fade-in">
-  <h2>Take control of your contact center today – Contact Us</h2>
-  <a href="/contact">Contact Us</a>
-</section>
+            </div>
+        </div>
+    </section>
 
-<!-- Footer -->
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  <br>
-  <a href="/privacy-policy">Privacy Policy</a>
-  <a href="/terms-conditions">Terms & Conditions</a>
-  <a href="/refund-policy">Refund Policy</a>
+    <section class="py-20 bg-white fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-base text-blue-600 font-semibold tracking-wide uppercase">Core Capabilities</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-gray-900">Empower Your Managers and Agents</h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">Get the tools to reduce response times, boost agent efficiency, and gain complete operational visibility.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-blue-800">
+                    <i class="fas fa-chart-line text-4xl text-blue-800 mb-4 block"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Real-Time Performance Dashboards</h3>
+                    <p class="text-gray-600">See vital metrics—queue times, agent status, and call volume—as they happen. Make decisions instantly, not retrospectively.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-blue-600">
+                    <i class="fas fa-globe-americas text-4xl text-blue-600 mb-4 block"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Global Number Management</h3>
+                    <p class="text-gray-600">Buy, port, and manage virtual numbers in dozens of countries with a single click. Expand your reach without the complexity.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-yellow-500">
+                    <i class="fas fa-headset text-4xl text-yellow-500 mb-4 block"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Agent Quality & Training</h3>
+                    <p class="text-gray-600">Monitor live calls, provide whisper coaching, and review performance reports to drive continuous improvement for all team members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-blue-900 text-white fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-base text-blue-300 font-semibold tracking-wide uppercase">Your Path to Efficiency</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold">How CallOrbit Transforms Your Operations</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center p-6 border-b-4 border-blue-600">
+                    <div class="text-4xl font-extrabold text-blue-400 mb-2">1. Control</div>
+                    <i class="fas fa-sitemap text-5xl mb-4 text-blue-300"></i>
+                    <h3 class="text-2xl font-bold mb-3">Setup & Centralization</h3>
+                    <p class="text-blue-200">Integrate your existing infrastructure and centralize all global numbers, agents, and routing logic under one 'Orbit' dashboard.</p>
+                </div>
+                
+                <div class="text-center p-6 border-b-4 border-blue-600">
+                    <div class="text-4xl font-extrabold text-blue-400 mb-2">2. Act</div>
+                    <i class="fas fa-cogs text-5xl mb-4 text-blue-300"></i>
+                    <h3 class="text-2xl font-bold mb-3">Optimize & Automate</h3>
+                    <p class="text-blue-200">Use live data to adjust call flows, re-route queues, and deploy smart IVR systems that actively reduce customer wait times.</p>
+                </div>
+                
+                <div class="text-center p-6 border-b-4 border-blue-600">
+                    <div class="text-4xl font-extrabold text-blue-400 mb-2">3. Grow</div>
+                    <i class="fas fa-rocket text-5xl mb-4 text-blue-300"></i>
+                    <h3 class="text-2xl font-bold mb-3">Scale & Analyze</h3>
+                    <p class="text-blue-200">Generate deep analytical reports to identify top performers and bottlenecks, driving sustainable team growth and operational scale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white fade-in">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fas fa-quote-left text-3xl text-blue-500 mb-4"></i>
+            <blockquote class="text-2xl italic font-medium text-gray-700 mb-6">
+                "We dropped our average handle time by 30% in the first quarter. CallOrbit’s live dashboard is a game-changer for monitoring remote teams."
+            </blockquote>
+            <p class="text-lg font-semibold text-gray-800">— Sarah Chen</p>
+            <p class="text-md text-gray-500">VP of Operations, Global Telco Solutions</p>
+        </div>
+    </section>
+
+    <section class="faq-section max-w-3xl mx-auto my-20 px-4 sm:px-6 lg:px-8 fade-in">
+        <h2 class="text-3xl font-bold text-center mb-10 text-gray-900">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4">
+            <div class="faq-item bg-gray-50 rounded-lg shadow-md overflow-hidden">
+                <div id="faq-question-1" class="faq-question cursor-pointer p-5 font-semibold text-lg text-blue-800 relative flex justify-between items-center hover:bg-gray-100 transition duration-150" aria-expanded="false" aria-controls="faq-answer-1">
+                    What is CallOrbit and who is it for?
+                    <span class="text-2xl transform transition-transform duration-300">+</span>
+                </div>
+                <div id="faq-answer-1" class="faq-answer px-5 pb-5 text-gray-600" role="region" aria-labelledby="faq-question-1">
+                    <p>CallOrbit is a complete contact center management platform designed for operations managers, team leads, and business owners who need to centralize, monitor, and optimize their voice and digital contact operations, especially those with global or remote teams.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-lg shadow-md overflow-hidden">
+                <div id="faq-question-2" class="faq-question cursor-pointer p-5 font-semibold text-lg text-blue-800 relative flex justify-between items-center hover:bg-gray-100 transition duration-150" aria-expanded="false" aria-controls="faq-answer-2">
+                    How does the live analytics dashboard work?
+                    <span class="text-2xl transform transition-transform duration-300">+</span>
+                </div>
+                <div id="faq-answer-2" class="faq-answer px-5 pb-5 text-gray-600" role="region" aria-labelledby="faq-question-2">
+                    <p>Our dashboard connects directly to your call queues and agent activity, providing real-time metrics (e.g., AHT, occupancy, queue length). It uses a modern WebSocket connection for instant updates, allowing you to view and act on data with zero delay.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item bg-gray-50 rounded-lg shadow-md overflow-hidden">
+                <div id="faq-question-3" class="faq-question cursor-pointer p-5 font-semibold text-lg text-blue-800 relative flex justify-between items-center hover:bg-gray-100 transition duration-150" aria-expanded="false" aria-controls="faq-answer-3">
+                    Is CallOrbit compliant with global data privacy laws?
+                    <span class="text-2xl transform transition-transform duration-300">+</span>
+                </div>
+                <div id="faq-answer-3" class="faq-answer px-5 pb-5 text-gray-600" role="region" aria-labelledby="faq-question-3">
+                    <p>Yes. CallOrbit is built with a focus on compliance, including GDPR and CCPA readiness. We provide tools for secure data handling, audit logging, and configurable data retention policies to meet your jurisdictional requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-blue-600 text-white text-center py-16 mt-16 rounded-lg mx-4 sm:mx-8 lg:mx-16 shadow-2xl fade-in">
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Ready to Master Your Contact Center?</h2>
+        <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Join the hundreds of businesses gaining unprecedented control over their customer contact operations.</p>
+        <a href="https://callorbit.vercel.app/reach-us" id="cta-banner-link" class="inline-block px-12 py-4 bg-yellow-400 text-gray-900 font-extrabold text-lg rounded-full shadow-2xl hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
+            Request a Free Demo
+        </a>
+    </section>
+
+</main>
+
+<footer class="mt-20 py-10 bg-gray-900 text-gray-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <a href="/" class="text-2xl font-extrabold text-white tracking-tight">CallOrbit</a>
+                <p class="text-gray-500">The platform to centralize, monitor, and scale your global customer contact operations with ease.</p>
+                <div class="flex space-x-4 text-xl">
+                    <a href="https://linkedin.com/company/callorbit" target="_blank" rel="noopener noreferrer" class="hover:text-blue-500 transition"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <h4 class="font-bold text-white uppercase tracking-wider">Product</h4>
+                <a href="https://callorbit.vercel.app/solutions" class="block hover:text-white transition">Features Overview</a>
+                <a href="https://callorbit.vercel.app/get-numbers" id="footer-numbers-link" class="block hover:text-white transition">Global Numbers</a>
+                <a href="/analytics" id="footer-analytics-link" class="block hover:text-white transition">Analytics & Reporting</a>
+            </div>
+            
+            <div class="space-y-3">
+                <h4 class="font-bold text-white uppercase tracking-wider">Company</h4>
+                <a href="https://callorbit.vercel.app/company" class="block hover:text-white transition">About Us</a>
+                <a href="https://callorbit.vercel.app/reach-us" class="block hover:text-white transition">Contact Sales</a>
+                <a href="/blog" id="footer-blog-link" class="block hover:text-white transition">Blog & News</a>
+            </div>
+            
+            <div class="space-y-3">
+                <h4 class="font-bold text-white uppercase tracking-wider">Legal</h4>
+                <a href="https://callorbit.vercel.app/privacy-policy" id="privacy-link" class="block hover:text-white transition">Privacy Policy</a>
+                <a href="https://callorbit.vercel.app/terms-conditions" id="terms-link" class="block hover:text-white transition">Terms & Conditions</a>
+                <a href="/security" id="security-link" class="block hover:text-white transition">Security & Compliance</a>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8 mt-8 text-center">
+            &copy; <span id="year"></span> CallOrbit. All rights reserved.
+        </div>
+    </div>
 </footer>
 
+<a href="#" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 z-50">
+    <i class="fas fa-comment-dots text-xl"></i>
+</a>
+
+
 <script>
-// FAQ Accordion toggle
-const faqQuestions = document.querySelectorAll('.faq-question');
-faqQuestions.forEach(q => {
-  q.addEventListener('click', () => {
-    q.classList.toggle('active');
-    const answer = q.nextElementSibling;
-    if(q.classList.contains('active')) {
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    } else {
-      answer.style.maxHeight = null;
-    }
-  });
-});
+    // FAQ Accordion toggle (Updated to handle 'transform' on the '+' icon)
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = question.querySelector('span');
 
-// Fade-in on scroll
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
+        question.addEventListener('click', () => {
+            const isActive = question.classList.toggle('active');
 
-// Set footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+            // Update content/style based on active state
+            if (isActive) {
+                // Close all other open answers
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherQuestion = otherItem.querySelector('.faq-question');
+                        const otherAnswer = otherItem.querySelector('.faq-answer');
+                        const otherIcon = otherQuestion.querySelector('span');
+
+                        otherQuestion.classList.remove('active');
+                        otherAnswer.style.maxHeight = null;
+                        otherIcon.style.transform = 'rotate(0deg)';
+                        otherQuestion.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Open the current answer
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.style.transform = 'rotate(45deg)';
+                question.setAttribute('aria-expanded', 'true');
+            } else {
+                // Close the current answer
+                answer.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+                question.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+
+    // Fade-in on scroll 
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+        });
+    }, {threshold:0.1});
+    faders.forEach(fader => appearOnScroll.observe(fader));
+    
+    // Set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Trigger hero animations on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const heroSection = document.querySelector('header');
+        heroSection.classList.add('animate-hero'); 
+    });
 </script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function(){
-    // Remove profile picture
-    Tawk_API.setAttributes({ avatar: '' });
-    // Disable Knowledge Base / Help Center
-    Tawk_API.toggleHelpCenter(false);
-};
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>
