@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CallOrbit — Admin Verify Users</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: 'Inter', sans-serif; background:#f3f4f6; padding:40px; }
+  h1 { color:#1e3a8a; text-align:center; margin-bottom:30px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
+  th, td { padding:12px 15px; text-align:left; border-bottom:1px solid #e5e7eb; }
+  th { background:#3b82f6; color:#fff; }
+  tr:last-child td { border-bottom:none; }
+  button { background:#10b981; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
+  button:hover { background:#059669; }
+</style>
+</head>
+<body>
+
+<h1>Pending User Verifications</h1>
+<table id="usersTable">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Plan</th>
+      <th>Phone</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Users will be populated here -->
+  </tbody>
+</table>
+
+<script>
+  async function fetchUsers() {
+    const res = await fetch('/api/pending-users');
+    const data = await res.json();
+    const tbody = document.querySelector('#usersTable tbody');
+    tbody.innerHTML = '';
+    data.users.forEach(user => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${user.email}</td>
+        <td>${user.firstName} ${user.lastName}</td>
+        <td>${user.companyName}</td>
+        <td>${user.plan}</td>
+        <td>${user.phoneNumber}</td>
+        <td><button onclick="verifyUser('${user.email}', this)">Verify</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function verifyUser(email, btn) {
+    btn.disabled = true;
+    btn.textContent = 'Verifying...';
+    try {
+      const res = await fetch('/api/verify-user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.textContent = 'Verified ✅';
+        btn.style.background = '#3b82f6';
+      } else {
+        btn.textContent = 'Error ❌';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      console.error(err);
+      btn.textContent = 'Error ❌';
+      btn.disabled = false;
+    }
+  }
+
+  fetchUsers();
+</script>
+
+</body>
+</html>
