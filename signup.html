@@ -10,6 +10,16 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* Basic styles for form */
+section { max-width:450px; margin:50px auto; padding:40px; background:#fff; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+h1 { text-align:center; color:#1e3a8a; font-size:2rem; margin-bottom:25px; }
+label { display:block; font-weight:600; margin-bottom:5px; color:#1f2937; }
+input, select, textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
+button { width:100%; padding:14px; background:#3b82f6; color:#fff; font-weight:700; border-radius:999px; cursor:pointer; transition:0.2s; }
+button:hover { background:#2563eb; }
+#message { margin-top:20px; text-align:center; font-weight:600; }
+</style>
 </head>
 <body>
 
@@ -31,39 +41,36 @@
 </nav>
 
 <!-- Signup Form Section -->
-<section style="max-width:450px;margin:50px auto;padding:40px;background:#fff;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.1);">
-  <h1 style="text-align:center;color:#1e3a8a;font-size:2rem;margin-bottom:25px;">Create Your CallOrbit Account</h1>
-  <form id="signupForm">
-    <div style="margin-bottom:15px;">
-      <label>Email*</label>
-      <input type="email" name="email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-    </div>
-    <div style="margin-bottom:15px;">
-      <label>First Name*</label>
-      <input type="text" name="firstName" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-    </div>
-    <div style="margin-bottom:15px;">
-      <label>Last Name*</label>
-      <input type="text" name="lastName" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-    </div>
-    <div style="margin-bottom:15px;">
-      <label>Company Name*</label>
-      <input type="text" name="companyName" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-    </div>
-    <div style="margin-bottom:15px;">
-      <label>Phone Number*</label>
-      <input type="tel" name="phoneNumber" required value="+27" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-    </div>
-    <div style="margin-bottom:25px;">
-      <label>Plan*</label>
-      <select name="plan" required style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-        <option value="Basic">Basic</option>
-        <option value="Pro">Pro</option>
-        <option value="Enterprise" selected>Enterprise</option>
-      </select>
-    </div>
-    <button type="submit" style="width:100%;padding:14px;background:#3b82f6;color:#fff;font-weight:700;border-radius:999px;cursor:pointer;">Sign Up</button>
-    <p id="message" style="margin-top:20px;text-align:center;font-weight:600;"></p>
+<section>
+  <h1>Create Your CallOrbit Account</h1>
+
+  <form id="signupForm" method="POST" action="https://formsubmit.co/danelloosthuizen3@gmail.com">
+    <input type="hidden" name="_captcha" value="false">
+
+    <label>Email*</label>
+    <input type="email" name="email" required>
+
+    <label>First Name*</label>
+    <input type="text" name="firstName" required>
+
+    <label>Last Name*</label>
+    <input type="text" name="lastName" required>
+
+    <label>Company Name*</label>
+    <input type="text" name="companyName" required>
+
+    <label>Phone Number*</label>
+    <input type="tel" name="phoneNumber" value="+27" required>
+
+    <label>Plan*</label>
+    <select name="plan" required>
+      <option value="Basic">Basic</option>
+      <option value="Pro">Pro</option>
+      <option value="Enterprise" selected>Enterprise</option>
+    </select>
+
+    <button type="submit">Sign Up</button>
+    <p id="message"></p>
   </form>
 </section>
 
@@ -73,32 +80,39 @@ const messageEl = document.getElementById('message');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const formData = Object.fromEntries(new FormData(form));
+
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
 
   // Show submitting message
   messageEl.style.color = "#2563eb";
   messageEl.textContent = "Submitting your details...";
 
   try {
-    // -----------------------------
-    // FREE FORM TEST MODE
-    // -----------------------------
-    console.log("Signup form submission:", formData);
+    // Submit via fetch to FormSubmit
+    const response = await fetch(form.action, {
+      method: form.method,
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    });
 
-    // Simulate async operation
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Success message
-    messageEl.style.color = "#16a34a";
-    messageEl.innerHTML = `
-      ✅ Signup successful!<br>
-      Your details are saved. (Test mode, no email sent)
-    `;
-    form.reset();
+    if (response.ok) {
+      messageEl.style.color = "#16a34a";
+      messageEl.innerHTML = `
+        ✅ Signup successful!<br>
+        Your details have been sent.<br>
+        We will be in touch shortly.
+      `;
+      form.reset();
+    } else {
+      const result = await response.json();
+      messageEl.style.color = "#dc2626";
+      messageEl.textContent = "❌ Signup failed: " + (result.message || "Try again.");
+    }
   } catch (err) {
     console.error(err);
     messageEl.style.color = "#dc2626";
-    messageEl.textContent = "❌ Signup failed. Try again.";
+    messageEl.textContent = "❌ Signup failed. Please try again later.";
   }
 });
 </script>
