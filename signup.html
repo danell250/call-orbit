@@ -63,87 +63,42 @@
       </select>
     </div>
     <button type="submit" style="width:100%;padding:14px;background:#3b82f6;color:#fff;font-weight:700;border-radius:999px;cursor:pointer;">Sign Up</button>
+    <p id="message" style="margin-top:20px;text-align:center;font-weight:600;"></p>
   </form>
-  <p id="message" style="margin-top:20px;text-align:center;font-weight:600;color:#16a34a;"></p>
 </section>
 
 <script>
 const form = document.getElementById('signupForm');
 const messageEl = document.getElementById('message');
 
-// Hardcoded backend URL for vanilla HTML/JS
-const BACKEND_URL = "https://callorbit-backend-production.up.railway.app/api/signup";
-
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(form));
+
+  // Show submitting message
   messageEl.style.color = "#2563eb";
   messageEl.textContent = "Submitting your details...";
 
   try {
-    const res = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
+    // -----------------------------
+    // FREE FORM TEST MODE
+    // -----------------------------
+    console.log("Signup form submission:", formData);
 
-    const data = await res.json();
-    if (data.success) {
-      messageEl.style.color = "#16a34a";
-      messageEl.innerHTML = `
-        ✅ Signup successful! <br>
-        Your details have been sent for admin verification. <br>
-        You will receive an email once your account is approved.
-      `;
-      form.reset();
-    } else {
-      messageEl.style.color = "#dc2626";
-      messageEl.textContent = "❌ Signup failed: " + data.error;
-    }
+    // Simulate async operation
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Success message
+    messageEl.style.color = "#16a34a";
+    messageEl.innerHTML = `
+      ✅ Signup successful!<br>
+      Your details are saved. (Test mode, no email sent)
+    `;
+    form.reset();
   } catch (err) {
     console.error(err);
     messageEl.style.color = "#dc2626";
-    messageEl.textContent = "❌ Signup failed: " + err.message;
-  }
-});
-</script>
-<script>
-const form = document.getElementById('signupForm');
-const messageEl = document.getElementById('message');
-
-// Use full backend URL directly
-const BACKEND_URL = 'https://callorbit-backend-production.up.railway.app/api/signup';
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = Object.fromEntries(new FormData(form));
-  messageEl.style.color = "#2563eb";
-  messageEl.textContent = "Submitting your details...";
-
-  try {
-    const res = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      messageEl.style.color = "#16a34a";
-      messageEl.innerHTML = `
-        ✅ Signup successful! <br>
-        Your details have been sent for admin verification. <br>
-        You will receive an email once your account is approved.
-      `;
-      form.reset();
-    } else {
-      messageEl.style.color = "#dc2626";
-      messageEl.textContent = "❌ Signup failed: " + data.error;
-    }
-  } catch (err) {
-    console.error(err);
-    messageEl.style.color = "#dc2626";
-    messageEl.textContent = "❌ Signup failed: " + err.message;
+    messageEl.textContent = "❌ Signup failed. Try again.";
   }
 });
 </script>
