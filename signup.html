@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your CallOrbit Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+
+  <body class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 min-h-screen flex items-center justify-center text-white">
+    <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-10 max-w-lg w-full mx-4">
+      <h1 class="text-3xl font-bold mb-6 text-center text-cyan-300">Create Your CallOrbit Account</h1>
+
+      <form id="signupForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">First Name*</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            placeholder="John"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Last Name*</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            placeholder="Doe"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Email Address*</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            placeholder="you@company.com"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Company Name*</label>
+          <input
+            type="text"
+            id="companyName"
+            name="companyName"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            placeholder="My Company Ltd"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Website*</label>
+          <input
+            type="url"
+            id="website"
+            name="website"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            placeholder="https://mycompany.com"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Phone Number*</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            value="+27"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-cyan-200 mb-1">Select Plan*</label>
+          <select
+            id="plan"
+            name="plan"
+            required
+            class="w-full p-3 rounded-lg bg-white/20 text-white border border-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            <option value="Basic">Basic</option>
+            <option value="Pro">Pro</option>
+            <option value="Enterprise" selected>Enterprise</option>
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-2 mt-3">
+          <input type="checkbox" id="terms" required class="accent-cyan-400 w-4 h-4" />
+          <label for="terms" class="text-sm text-gray-200">
+            I agree to the
+            <a href="/terms" class="text-cyan-400 underline">Terms & Conditions</a>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-3 px-4 rounded-lg mt-4 transition"
+        >
+          Create Account
+        </button>
+      </form>
+
+      <p class="text-center text-gray-300 mt-5">
+        Already have an account?
+        <a href="https://callorbit-front.vercel.app/login" class="text-cyan-400 underline">Log in</a>
+      </p>
+    </div>
+
+    <script>
+      const form = document.getElementById("signupForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = {
+          email: form.email.value,
+          firstName: form.firstName.value,
+          lastName: form.lastName.value,
+          companyName: form.companyName.value,
+          website: form.website.value,
+          phoneNumber: form.phoneNumber.value,
+          plan: form.plan.value,
+        };
+
+        try {
+          const res = await axios.post(
+            "https://callorbit-backend-production.up.railway.app/api/signup",
+            formData
+          );
+
+          Swal.fire({
+            icon: "success",
+            title: "Signup successful!",
+            text: "Please check your email for verification and temporary password.",
+            confirmButtonColor: "#06b6d4",
+          }).then(() => {
+            window.location.href = "https://callorbit-front.vercel.app/login";
+          });
+        } catch (err) {
+          console.error("Signup error:", err);
+          Swal.fire({
+            icon: "error",
+            title: "Signup failed",
+            text: err?.response?.data?.error || "Please try again later.",
+            confirmButtonColor: "#06b6d4",
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
