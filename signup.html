@@ -15,20 +15,8 @@
 
 <style>
 /* Navbar */
-nav {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 30px;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  font-family:'Inter',sans-serif;
-  position:sticky;
-  top:0;
-  z-index:200;
-}
-body, input, select, textarea { font-family: 'Inter', sans-serif; }
-
+nav { display:flex; justify-content:space-between; align-items:center; padding:12px 30px; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.05); font-family:'Inter',sans-serif; position:sticky; top:0; z-index:200; }
+body, input, select, textarea { font-family: 'Inter', sans-serif; margin:0; padding:0; }
 h1 { font-size: 3rem; font-weight: 700; color: #1e3a8a; }
 h2 { font-size: 1.8rem; font-weight: 700; color: #fff; text-align: center; margin-bottom: 25px; }
 h3 { font-size: 1.5rem; font-weight: 600; color: #1e3a8a; text-align: center; }
@@ -44,92 +32,34 @@ nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 .login-btn:hover { background:#2563eb; }
 
 /* Hero */
-header.hero {
-  padding:60px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);
-  color:#FFFFFF;
-  border-radius:10px;
-  margin:20px;
-}
+header.hero { padding:60px 20px; text-align:center; background:linear-gradient(135deg,#3b82f6,#60a5fa); color:#FFFFFF; border-radius:10px; margin:20px; }
 header.hero h1 { font-size:2.5rem; margin-bottom:10px; color:#FFFFFF; }
 header.hero p { font-size:1.2rem; }
 
 /* Plans Grid */
-.plans-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:1.5rem;
-  margin:20px;
-}
-.plan {
-  background:#fff;
-  padding:25px 20px;
-  border-radius:15px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  text-align:center;
-  transition:transform 0.3s,box-shadow 0.3s;
-  cursor:pointer;
-}
+.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin:20px; }
+.plan { background:#fff; padding:25px 20px; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); text-align:center; transition:transform 0.3s,box-shadow 0.3s; cursor:pointer; }
 .plan.selected { border:2px solid #2563eb; transform:translateY(-5px); }
 .plan:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
 .plan h3 { color:#1e3a8a; margin-bottom:0.5rem; }
 .plan .price { font-weight:700; font-size:1.2rem; margin-bottom:0.5rem; }
-
-.plan button.buy-now {
-  background: #0000FF;
-  color: #fff;
-  font-weight: 700;
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-.plan button.buy-now:hover {
-  background: #0f9c6e;
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
+.plan button.buy-now { background: #0000FF; color: #fff; font-weight: 700; padding: 12px 28px; border-radius: 999px; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+.plan button.buy-now:hover { background: #0f9c6e; transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
 
 /* Signup Form */
-.signup-form {
-  max-width:520px;
-  margin:60px auto;
-  padding:40px 30px;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  font-family:'Inter',sans-serif;
-}
-.signup-form h2 {
-  margin-bottom:25px;
-  text-align:center;
-  color:#1e3a8a;
-  font-size:1.8rem;
-}
+.signup-form { max-width:520px; margin:60px auto; padding:40px 30px; background:#fff; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); font-family:'Inter',sans-serif; }
+.signup-form h2 { margin-bottom:25px; text-align:center; color:#1e3a8a; font-size:1.8rem; }
 .signup-form label { display:block; margin:10px 0 6px; font-weight:600; text-align:left; color:#374151; }
-.signup-form input, .signup-form select {
-  width:100%;
-  padding:12px 14px;
-  border-radius:8px;
-  border:1px solid #cbd5e1;
-  display:block;
-  font-size:1rem;
-  transition:all 0.2s ease;
-  box-sizing:border-box;
-}
+.signup-form input, .signup-form select { width:100%; padding:12px 14px; border-radius:8px; border:1px solid #cbd5e1; display:block; font-size:1rem; transition:all 0.2s ease; box-sizing:border-box; }
 .signup-form input:focus, .signup-form select:focus { border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,0.2); outline:none; }
 .signup-form button { width:100%; padding:14px; background:#0000FF; color:#fff; font-weight:700; border-radius:999px; cursor:pointer; transition:all 0.3s ease; border:none; margin-top:10px; font-size:1rem; box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
 .signup-form button:hover { background:#0f9c6e; transform: scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
 
 #paypal-button-container { margin-top:15px; display:none; transition:all 0.5s ease; opacity:0; }
-#paypal-button-container.visible { display:block; opacity:1; }
-#payment-breakdown { margin-top:15px; font-weight:600; text-align:center; color:#1e3a8a; }
 
-/* Footer */
+/* Payment Breakdown Card */
+#payment-breakdown-card { display:none; margin-top:20px; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); padding:20px; text-align:center; font-weight:600; }
+
 footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
 footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
@@ -142,15 +72,13 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
 <!-- Navbar -->
 <nav>
- <div class="logo">
-    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
-  </div>
+  <div class="logo"><a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a></div>
   <div class="menu">
     <a href="/">Overview</a>
     <a href="/solutions">Solutions</a>
     <a href="/global-reach">Global Reach</a>
     <a href="/your-orbit">Your Orbit</a>
-    <a href="/get-numbers" class="navbar-buy">Get Numbers</a>
+    <a href="/get-numbers">Get Numbers</a>
     <a href="/reach-us">Reach Us</a>
     <a href="/company.html">Company</a>
   </div>
@@ -163,105 +91,109 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 </header>
 
 <main>
-  <!-- Plans -->
-  <section class="plans-grid fade-in" id="plans-container">
+<section class="plans-grid fade-in" id="plans-container">
+  <!-- Starter Plan -->
+  <div class="plan" data-plan="Starter" data-setup="99" data-training="49" data-price="19">
+    <h3>Starter</h3>
+    <p><strong>Perfect for small teams just starting out</strong></p>
+    <p class="price">$19/month</p>
+    <ul style="text-align:left; margin-bottom:10px;">
+      <li>Up to 3 agents</li>
+      <li>Basic dashboards for team activity</li>
+      <li>Call routing & forwarding</li>
+      <li>Email & chat support</li>
+    </ul>
+    <p>Setup Fee: $99</p>
+    <p>Training Fee: $49</p>
+    <button class="buy-now">Select</button>
+  </div>
+  <!-- Team Plan -->
+  <div class="plan" data-plan="Team" data-setup="149" data-training="49" data-price="29">
+    <h3>Team</h3>
+    <p><strong>Ideal for growing teams and managers</strong></p>
+    <p class="price">$29/month</p>
+    <ul style="text-align:left; margin-bottom:10px;">
+      <li>Up to 20 agents</li>
+      <li>Unlimited dashboards for full visibility</li>
+      <li>Advanced call routing and queue management</li>
+      <li>Team performance tracking</li>
+      <li>Priority onboarding & support</li>
+    </ul>
+    <p>Setup Fee: $149</p>
+    <p>Training Fee: $49</p>
+    <button class="buy-now">Select</button>
+  </div>
+  <!-- Business Plan -->
+  <div class="plan" data-plan="Business" data-setup="199" data-training="49" data-price="49">
+    <h3>Business</h3>
+    <p><strong>Perfect for medium-sized teams scaling operations</strong></p>
+    <p class="price">$49/month</p>
+    <ul style="text-align:left; margin-bottom:10px;">
+      <li>Up to 50 agents</li>
+      <li>Multiple dashboards with detailed reporting</li>
+      <li>Call recording & analytics</li>
+      <li>Custom number management</li>
+      <li>Priority onboarding & support</li>
+    </ul>
+    <p>Setup Fee: $199</p>
+    <p>Training Fee: $49</p>
+    <button class="buy-now">Select</button>
+  </div>
+  <!-- Enterprise Plan -->
+  <div class="plan" data-plan="Enterprise" data-setup="299" data-training="49" data-price="99">
+    <h3>Enterprise</h3>
+    <p><strong>For large or global organizations requiring full control</strong></p>
+    <p class="price">$99/month</p>
+    <ul style="text-align:left; margin-bottom:10px;">
+      <li>Unlimited agents</li>
+      <li>Dedicated account manager</li>
+      <li>Global number coverage & management</li>
+      <li>Full dashboard customization</li>
+      <li>24/7 premium support</li>
+      <li>Advanced security & compliance features</li>
+    </ul>
+    <p>Setup Fee: $299</p>
+    <p>Training Fee: $49</p>
+    <button class="buy-now">Select</button>
+  </div>
+</section>
 
-    <div class="plan" data-plan="Starter" data-setup="99" data-training="49" data-price="19">
-      <h3>Starter</h3>
-      <p><strong>Perfect for small teams just starting out</strong></p>
-      <p class="price">$19/month</p>
-      <ul style="text-align:left; margin-bottom:10px;">
-        <li>Up to 3 agents</li>
-        <li>Basic dashboards for team activity</li>
-        <li>Call routing & forwarding</li>
-        <li>Email & chat support</li>
-      </ul>
-      <p>Setup Fee: $99</p>
-      <p>Training Fee: $49</p>
-      <button class="buy-now">Select</button>
+<section class="signup-form fade-in">
+  <h2>Sign Up</h2>
+  <form id="signupForm">
+    <label for="planSelect">Selected Plan*</label>
+    <input type="text" id="planSelect" name="plan" readonly placeholder="Select a plan above" required>
+
+    <label>Email*</label>
+    <input type="email" name="email" required placeholder="you@example.com">
+
+    <label>First Name*</label>
+    <input type="text" name="firstName" required>
+
+    <label>Last Name*</label>
+    <input type="text" name="lastName" required>
+
+    <label>Company Name*</label>
+    <input type="text" name="companyName" required>
+
+    <label>Phone Number*</label>
+    <input type="tel" name="phoneNumber" required placeholder="+1, +27, +44... (include country code)">
+
+    <div id="payment-breakdown-card">
+      <h3 id="breakdown-plan-name"></h3>
+      <p>Plan Price: <span id="breakdown-plan-price"></span></p>
+      <p>Setup Fee: <span id="breakdown-setup-fee"></span></p>
+      <p>Training Fee: <span id="breakdown-training-fee"></span></p>
+      <hr style="margin:10px 0;">
+      <p><strong>Total: <span id="breakdown-total"></span></strong></p>
     </div>
 
-    <div class="plan" data-plan="Team" data-setup="149" data-training="49" data-price="29">
-      <h3>Team</h3>
-      <p><strong>Ideal for growing teams and managers</strong></p>
-      <p class="price">$29/month</p>
-      <ul style="text-align:left; margin-bottom:10px;">
-        <li>Up to 20 agents</li>
-        <li>Unlimited dashboards for full visibility</li>
-        <li>Advanced call routing and queue management</li>
-        <li>Team performance tracking</li>
-        <li>Priority onboarding & support</li>
-      </ul>
-      <p>Setup Fee: $149</p>
-      <p>Training Fee: $49</p>
-      <button class="buy-now">Select</button>
-    </div>
+    <button type="submit">Proceed to Pay</button>
+    <p id="message"></p>
+  </form>
 
-    <div class="plan" data-plan="Business" data-setup="199" data-training="49" data-price="49">
-      <h3>Business</h3>
-      <p><strong>Perfect for medium-sized teams scaling operations</strong></p>
-      <p class="price">$49/month</p>
-      <ul style="text-align:left; margin-bottom:10px;">
-        <li>Up to 50 agents</li>
-        <li>Multiple dashboards with detailed reporting</li>
-        <li>Call recording & analytics</li>
-        <li>Custom number management</li>
-        <li>Priority onboarding & support</li>
-      </ul>
-      <p>Setup Fee: $199</p>
-      <p>Training Fee: $49</p>
-      <button class="buy-now">Select</button>
-    </div>
-
-    <div class="plan" data-plan="Enterprise" data-setup="299" data-training="49" data-price="99">
-      <h3>Enterprise</h3>
-      <p><strong>For large or global organizations requiring full control</strong></p>
-      <p class="price">$99/month</p>
-      <ul style="text-align:left; margin-bottom:10px;">
-        <li>Unlimited agents</li>
-        <li>Dedicated account manager</li>
-        <li>Global number coverage & management</li>
-        <li>Full dashboard customization</li>
-        <li>24/7 premium support</li>
-        <li>Advanced security & compliance features</li>
-      </ul>
-      <p>Setup Fee: $299</p>
-      <p>Training Fee: $49</p>
-      <button class="buy-now">Select</button>
-    </div>
-
-  </section>
-
-  <!-- Signup Form -->
-  <section class="signup-form fade-in">
-    <h2>Sign Up</h2>
-    <form id="signupForm">
-      <label for="planSelect">Selected Plan*</label>
-      <input type="text" id="planSelect" name="plan" readonly placeholder="Select a plan above" required>
-
-      <label>Email*</label>
-      <input type="email" name="email" required placeholder="you@example.com">
-
-      <label>First Name*</label>
-      <input type="text" name="firstName" required>
-
-      <label>Last Name*</label>
-      <input type="text" name="lastName" required>
-
-      <label>Company Name*</label>
-      <input type="text" name="companyName" required>
-
-      <label>Phone Number*</label>
-      <input type="tel" name="phoneNumber" required placeholder="+1, +27, +44... (include country code)">
-
-      <div id="payment-breakdown"></div>
-
-      <button type="submit">Proceed to Pay</button>
-      <p id="message"></p>
-    </form>
-
-    <div id="paypal-button-container"></div>
-  </section>
+  <div id="paypal-button-container"></div>
+</section>
 </main>
 
 <footer>
@@ -272,103 +204,108 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   <a href="/refund-policy">Refund Policy</a>
 </footer>
 
-<!-- PayPal SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AXxjiGRRXzL0lhWXhz9lUCYnIXg0Sfz-9-kDB7HbdwYPOrlspRzyS6TQWAlwRC2GlYSd4lze25jluDLj&currency=USD"></script>
-
 <script>
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
 
-// Make fade-in elements visible
-document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+  const plans = document.querySelectorAll('.plan');
+  const planSelect = document.getElementById('planSelect');
+  const paymentCard = document.getElementById('payment-breakdown-card');
+  const breakdownPlanName = document.getElementById('breakdown-plan-name');
+  const breakdownPlanPrice = document.getElementById('breakdown-plan-price');
+  const breakdownSetupFee = document.getElementById('breakdown-setup-fee');
+  const breakdownTrainingFee = document.getElementById('breakdown-training-fee');
+  const breakdownTotal = document.getElementById('breakdown-total');
 
-// Select all plan elements
-const plans = document.querySelectorAll('.plan');
-const planSelect = document.getElementById('planSelect');
-const paymentBreakdown = document.getElementById('payment-breakdown');
-let selectedPlanPrice = 0;
-let selectedSetupFee = 0;
-let selectedTrainingFee = 0;
+  let selectedPlanPrice = 0;
+  let selectedSetupFee = 0;
+  let selectedTrainingFee = 0;
+  let formDataGlobal = null;
 
-// Plan click handling
-plans.forEach(plan => {
-  plan.querySelector('.buy-now').addEventListener('click', () => {
-    plans.forEach(p => p.classList.remove('selected'));
-    plan.classList.add('selected');
+  const planColors = {
+    "Starter": "#3b82f6",
+    "Team": "#60a5fa",
+    "Business": "#2563eb",
+    "Enterprise": "#0f9c6e"
+  };
 
-    planSelect.value = plan.dataset.plan;
-    selectedPlanPrice = parseFloat(plan.dataset.price);
-    selectedSetupFee = parseFloat(plan.dataset.setup);
-    selectedTrainingFee = parseFloat(plan.dataset.training);
+  plans.forEach(plan => {
+    plan.querySelector('.buy-now').addEventListener('click', () => {
+      plans.forEach(p => p.classList.remove('selected'));
+      plan.classList.add('selected');
 
-    // Show payment breakdown
-    paymentBreakdown.innerHTML = `
-      <p>Plan Price: $${selectedPlanPrice.toFixed(2)}</p>
-      <p>Setup Fee: $${selectedSetupFee.toFixed(2)}</p>
-      <p>Training Fee: $${selectedTrainingFee.toFixed(2)}</p>
-      <p><strong>Total: $${(selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2)}</strong></p>
-    `;
+      planSelect.value = plan.dataset.plan;
+      selectedPlanPrice = parseFloat(plan.dataset.price);
+      selectedSetupFee = parseFloat(plan.dataset.setup);
+      selectedTrainingFee = parseFloat(plan.dataset.training);
 
-    paymentBreakdown.style.color = "#1e3a8a";
-    paymentBreakdown.style.fontWeight = "600";
+      breakdownPlanName.textContent = `${plan.dataset.plan} Plan`;
+      breakdownPlanPrice.textContent = `$${selectedPlanPrice.toFixed(2)}`;
+      breakdownSetupFee.textContent = `$${selectedSetupFee.toFixed(2)}`;
+      breakdownTrainingFee.textContent = `$${selectedTrainingFee.toFixed(2)}`;
+      breakdownTotal.textContent = `$${(selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2)}`;
 
-    plan.scrollIntoView({ behavior: "smooth" });
+      paymentCard.style.display = "block";
+      paymentCard.style.border = `2px solid ${planColors[plan.dataset.plan]}`;
+      breakdownPlanName.style.color = planColors[plan.dataset.plan];
+
+      plan.scrollIntoView({ behavior: "smooth" });
+    });
   });
-});
 
-// Signup form submission
-const form = document.getElementById('signupForm');
-const messageEl = document.getElementById('message');
-let formDataGlobal = null;
+  const form = document.getElementById('signupForm');
+  const messageEl = document.getElementById('message');
 
-form.addEventListener('submit', e=>{
-  e.preventDefault();
-  formDataGlobal = Object.fromEntries(new FormData(form));
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    formDataGlobal = Object.fromEntries(new FormData(form));
 
-  if(!formDataGlobal.plan){
-    messageEl.style.color="#dc2626";
-    messageEl.textContent="❌ Please select a plan first.";
-    return;
-  }
+    if(!formDataGlobal.plan){
+      messageEl.style.color="#dc2626";
+      messageEl.textContent="❌ Please select a plan first.";
+      return;
+    }
 
-  messageEl.style.color="#2563eb";
-  messageEl.textContent="✅ Form valid! Proceed to Pay below.";
+    messageEl.style.color="#2563eb";
+    messageEl.textContent="✅ Form valid! Proceed to Pay below.";
 
-  document.getElementById('paypal-button-container').classList.add('visible');
-});
+    document.getElementById('paypal-button-container').style.display = 'block';
+  });
 
-// PayPal Buttons
-paypal.Buttons({
-  createOrder: function(data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        description: `CallOrbit ${formDataGlobal?.plan || ""} Plan`,
-        amount: { value: (selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2) }
-      }]
-    });
-  },
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details){
-      alert('Payment completed by '+details.payer.name.given_name);
-      console.log("FORM DATA + PAYMENT INFO:", {
-        ...formDataGlobal,
-        paypalOrderId: details.id,
-        planPrice: selectedPlanPrice,
-        setupFee: selectedSetupFee,
-        trainingFee: selectedTrainingFee,
-        totalPaid: selectedPlanPrice + selectedSetupFee + selectedTrainingFee
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          description: `CallOrbit ${formDataGlobal?.plan || ""} Plan`,
+          amount: { value: (selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2) }
+        }]
       });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details){
+        alert('Payment completed by '+details.payer.name.given_name);
+        console.log("FORM DATA + PAYMENT INFO:", {
+          ...formDataGlobal,
+          paypalOrderId: details.id,
+          planPrice: selectedPlanPrice,
+          setupFee: selectedSetupFee,
+          trainingFee: selectedTrainingFee,
+          totalPaid: selectedPlanPrice + selectedSetupFee + selectedTrainingFee
+        });
 
-      form.reset();
-      planSelect.value='';
-      paymentBreakdown.innerHTML='';
-      plans.forEach(p=>p.classList.remove('selected'));
-      document.getElementById('paypal-button-container').classList.remove('visible');
-      messageEl.style.color="#16a34a";
-      messageEl.textContent='🎉 Payment and signup completed!';
-    });
-  }
-}).render('#paypal-button-container');
+        form.reset();
+        planSelect.value='';
+        paymentCard.style.display='none';
+        plans.forEach(p=>p.classList.remove('selected'));
+        document.getElementById('paypal-button-container').style.display='none';
+        messageEl.style.color="#16a34a";
+        messageEl.textContent='🎉 Payment and signup completed!';
+      });
+    }
+  }).render('#paypal-button-container');
+});
 </script>
 
 </body>
