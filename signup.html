@@ -71,6 +71,9 @@
 const form = document.getElementById('signupForm');
 const messageEl = document.getElementById('message');
 
+// Hardcoded backend URL for vanilla HTML/JS
+const BACKEND_URL = "https://callorbit-backend-production.up.railway.app/api/signup";
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(form));
@@ -78,7 +81,7 @@ form.addEventListener('submit', async (e) => {
   messageEl.textContent = "Submitting your details...";
 
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8080/api/signup'}`, {
+    const res = await fetch(BACKEND_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
