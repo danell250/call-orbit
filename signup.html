@@ -9,7 +9,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -18,18 +18,16 @@
   <div class="logo">
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
- <div class="menu">
-  <a href="/" >Overview</a>
-  <a href="/solutions.html">Solutions</a>
-  <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html">Reach Us</a>
-  <a href="/company.html">Company</a>
-</div>
- <a href="/login.html" id="login-link" class="px-5 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300 transition duration-300 shadow-lg">
-    Login
-</a>
+  <div class="menu">
+    <a href="/" >Overview</a>
+    <a href="/solutions.html">Solutions</a>
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html">Your Orbit</a>
+    <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
+    <a href="/reach-us.html">Reach Us</a>
+    <a href="/company.html">Company</a>
+  </div>
+  <a href="/login.html" class="px-5 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300 transition duration-300 shadow-lg">Login</a>
 </nav>
 
 <!-- Signup Form Section -->
@@ -76,22 +74,25 @@ const messageEl = document.getElementById('message');
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = Object.fromEntries(new FormData(form));
+
   messageEl.style.color = "#2563eb";
   messageEl.textContent = "Submitting your details...";
 
   try {
-    const res = await fetch('/api/signup', {
+    // Send form data to backend signup endpoint
+    const res = await fetch('https://callorbit-backend-production.up.railway.app/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
+
     const data = await res.json();
 
     if (data.success) {
       messageEl.style.color = "#16a34a";
       messageEl.innerHTML = `
         ✅ Signup successful! <br>
-        Your details have been sent for admin verification. <br>
+        An email with your signup details has been sent to the admin. <br>
         You will receive an email once your account is approved.
       `;
       form.reset();
