@@ -1,121 +1,361 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CallOrbit — Sign Up</title>
-<link rel="stylesheet" href="style.css">
+<title>CallOrbit — Sign Up & Payment</title>
+
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
-/* Basic styles for form */
-section { max-width:450px; margin:50px auto; padding:40px; background:#fff; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
-h1 { text-align:center; color:#1e3a8a; font-size:2rem; margin-bottom:25px; }
-label { display:block; font-weight:600; margin-bottom:5px; color:#1f2937; }
-input, select, textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
-button { width:100%; padding:14px; background:#3b82f6; color:#fff; font-weight:700; border-radius:999px; cursor:pointer; transition:0.2s; }
-button:hover { background:#2563eb; }
-#message { margin-top:20px; text-align:center; font-weight:600; }
+/* Navbar */
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 30px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  font-family:'Inter',sans-serif;
+  position:sticky;
+  top:0;
+  z-index:200;
+}
+nav .logo a {
+  font-weight:700;
+  font-size:1.5rem;
+  color:#1e3a8a;
+  text-decoration:none;
+}
+nav .menu a {
+  margin:0 12px;
+  text-decoration:none;
+  color:#1f2937;
+  font-weight:500;
+}
+.login-btn {
+  padding:10px 18px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  background:#3b82f6;
+  color:#fff;
+  transition:0.2s;
+}
+.login-btn:hover { background:#2563eb; }
+
+/* Hero */
+header.hero {
+  padding:60px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:#fff;
+  border-radius:10px;
+  margin:20px;
+}
+header.hero h1 {
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+header.hero p {
+  font-size:1.2rem;
+}
+
+/* Plans Grid */
+.plans-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.5rem;
+  margin:20px;
+}
+.plan {
+  background:#fff;
+  padding:25px 20px;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:transform 0.3s,box-shadow 0.3s;
+  cursor:pointer;
+}
+.plan.selected {
+  border:2px solid #2563eb;
+  transform:translateY(-5px);
+}
+.plan:hover {
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+.plan h3 {
+  color:#1e3a8a;
+  margin-bottom:0.5rem;
+}
+.plan .price {
+  font-weight:700;
+  font-size:1.2rem;
+  margin-bottom:0.5rem;
+}
+
+/* Signup Form */
+.signup-form {
+  max-width:520px;
+  margin:60px auto;
+  padding:40px 30px;
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  font-family:'Inter',sans-serif;
+}
+.signup-form h2 {
+  margin-bottom:25px;
+  text-align:center;
+  color:#1e3a8a;
+  font-size:1.8rem;
+}
+.signup-form label {
+  display:block;
+  margin:10px 0 6px;
+  font-weight:600;
+  text-align:left;
+  color:#374151;
+}
+.signup-form input,
+.signup-form select {
+  width:100%;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid #cbd5e1;
+  display:block;
+  font-size:1rem;
+  transition:all 0.2s ease;
+  box-sizing:border-box;
+}
+.signup-form input:focus,
+.signup-form select:focus {
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
+  outline:none;
+}
+.signup-form button {
+  width:100%;
+  padding:14px;
+  background:#3b82f6;
+  color:#fff;
+  font-weight:700;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background 0.2s;
+  border:none;
+  margin-top:10px;
+}
+.signup-form button:hover {
+  background:#2563eb;
+}
+#paypal-button-container {
+  margin-top:15px;
+  display:none;
+  transition:all 0.5s ease;
+  opacity:0;
+}
+#paypal-button-container.visible {
+  display:block;
+  opacity:1;
+}
+#message {
+  font-weight:600;
+  margin-top:10px;
+}
+
+/* Footer */
+footer {
+  text-align:center;
+  padding:2.5rem 20px;
+  background:#f3f4f6;
+  margin-top:60px;
+  font-size:0.9rem;
+}
+footer a {
+  margin:0 10px;
+  color:#3b82f6;
+  text-decoration:none;
+}
 </style>
+
 </head>
+
 <body>
 
 <!-- Navbar -->
 <nav>
-  <div class="logo">
-    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
-  </div>
+  <div class="logo"><a href="/">CallOrbit</a></div>
   <div class="menu">
-    <a href="/">Overview</a>
-    <a href="/solutions.html">Solutions</a>
-    <a href="/global-reach.html">Global Reach</a>
-    <a href="/your-orbit.html">Your Orbit</a>
-    <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-    <a href="/reach-us.html">Reach Us</a>
-    <a href="/company.html">Company</a>
+    <a href="/">Home</a>
+    <a href="/features">Features</a>
+    <a href="/coverage">Coverage</a>
+    <a href="/platform">Platform</a>
+    <a href="/buy" class="navbar-buy">Buy Numbers</a>
+    <a href="/contact">Contact</a>
+    <a href="/about">About</a>
   </div>
-  <a href="/login.html" class="px-5 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300">Login</a>
+  <a href="/signup.html" class="login-btn">Sign Up</a>
 </nav>
 
-<!-- Signup Form Section -->
-<section>
-  <h1>Create Your CallOrbit Account</h1>
+<header class="hero fade-in">
+  <h1>Choose Your Plan & Sign Up</h1>
+  <p>Pick a plan, fill your details, and pay — all on one page.</p>
+</header>
 
-  <form id="signupForm" method="POST" action="https://formsubmit.co/danelloosthuizen3@gmail.com">
-    <input type="hidden" name="_captcha" value="false">
+<main>
+  <!-- Plans -->
+  <section class="plans-grid fade-in" id="plans-container">
+    <div class="plan" data-plan="Starter" data-setup="99" data-training="49" data-price="19">
+      <h3>Starter</h3>
+      <p>Dashboards + 3 agents included</p>
+      <p class="price">$19</p>
+      <p>Setup Fee: $99</p>
+      <p>Training Fee: $49</p>
+      <button class="buy-now">Select</button>
+    </div>
+    <div class="plan" data-plan="Team" data-setup="149" data-training="49" data-price="29">
+      <h3>Team</h3>
+      <p>Unlimited dashboards, up to 20 agents</p>
+      <p class="price">$29</p>
+      <p>Setup Fee: $149</p>
+      <p>Training Fee: $49</p>
+      <button class="buy-now">Select</button>
+    </div>
+    <div class="plan" data-plan="Business" data-setup="199" data-training="49" data-price="49">
+      <h3>Business</h3>
+      <p>Advanced analytics, AI insights, 50 agents</p>
+      <p class="price">$49</p>
+      <p>Setup Fee: $199</p>
+      <p>Training Fee: $49</p>
+      <button class="buy-now">Select</button>
+    </div>
+    <div class="plan" data-plan="Enterprise" data-setup="299" data-training="49" data-price="99">
+      <h3>Enterprise</h3>
+      <p>Global scale, unlimited agents, dedicated manager</p>
+      <p class="price">$99</p>
+      <p>Setup Fee: $299</p>
+      <p>Training Fee: $49</p>
+      <button class="buy-now">Select</button>
+    </div>
+  </section>
 
-    <label>Email*</label>
-    <input type="email" name="email" required>
+  <!-- Signup Form -->
+  <section class="signup-form fade-in">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <label for="planSelect">Selected Plan*</label>
+      <input type="text" id="planSelect" name="plan" readonly placeholder="Select a plan above" required>
 
-    <label>First Name*</label>
-    <input type="text" name="firstName" required>
+      <label>Email*</label>
+      <input type="email" name="email" required placeholder="you@example.com">
 
-    <label>Last Name*</label>
-    <input type="text" name="lastName" required>
+      <label>First Name*</label>
+      <input type="text" name="firstName" required>
 
-    <label>Company Name*</label>
-    <input type="text" name="companyName" required>
+      <label>Last Name*</label>
+      <input type="text" name="lastName" required>
 
-    <label>Phone Number*</label>
-    <input type="tel" name="phoneNumber" value="+27" required>
+      <label>Company Name*</label>
+      <input type="text" name="companyName" required>
 
-    <label>Plan*</label>
-    <select name="plan" required>
-      <option value="Basic">Basic</option>
-      <option value="Pro">Pro</option>
-      <option value="Enterprise" selected>Enterprise</option>
-    </select>
+      <label>Phone Number*</label>
+      <input type="tel" name="phoneNumber" required placeholder="+1, +27, +44... (include country code)">
 
-    <button type="submit">Sign Up</button>
-    <p id="message"></p>
-  </form>
-</section>
+      <button type="submit">Proceed to Pay</button>
+      <p id="message"></p>
+    </form>
+
+    <div id="paypal-button-container"></div>
+  </section>
+</main>
+
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  <br>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-conditions">Terms & Conditions</a>
+  <a href="/refund-policy">Refund Policy</a>
+</footer>
+
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AXxjiGRRXzL0lhWXhz9lUCYnIXg0Sfz-9-kDB7HbdwYPOrlspRzyS6TQWAlwRC2GlYSd4lze25jluDLj&currency=USD"></script>
 
 <script>
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Plan selection
+const plans = document.querySelectorAll('.plan');
+const planSelect = document.getElementById('planSelect');
+let selectedPlanPrice = 0;
+
+plans.forEach(plan=>{
+  plan.querySelector('.buy-now').addEventListener('click',()=>{
+    plans.forEach(p=>p.classList.remove('selected'));
+    plan.classList.add('selected');
+    planSelect.value = plan.dataset.plan;
+
+    const price = parseFloat(plan.dataset.price);
+    const setup = parseFloat(plan.dataset.setup);
+    const training = parseFloat(plan.dataset.training);
+    selectedPlanPrice = price + setup + training;
+
+    plan.scrollIntoView({behavior:"smooth"});
+  });
+});
+
+// Signup form submission
 const form = document.getElementById('signupForm');
 const messageEl = document.getElementById('message');
+let formDataGlobal = null;
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit', e=>{
   e.preventDefault();
+  formDataGlobal = Object.fromEntries(new FormData(form));
 
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  // Show submitting message
-  messageEl.style.color = "#2563eb";
-  messageEl.textContent = "Submitting your details...";
-
-  try {
-    // Submit via fetch to FormSubmit
-    const response = await fetch(form.action, {
-      method: form.method,
-      headers: { 'Accept': 'application/json' },
-      body: formData
-    });
-
-    if (response.ok) {
-      messageEl.style.color = "#16a34a";
-      messageEl.innerHTML = `
-        ✅ Signup successful!<br>
-        Your details have been sent.<br>
-        We will be in touch shortly.
-      `;
-      form.reset();
-    } else {
-      const result = await response.json();
-      messageEl.style.color = "#dc2626";
-      messageEl.textContent = "❌ Signup failed: " + (result.message || "Try again.");
-    }
-  } catch (err) {
-    console.error(err);
-    messageEl.style.color = "#dc2626";
-    messageEl.textContent = "❌ Signup failed. Please try again later.";
+  if(!formDataGlobal.plan){
+    messageEl.style.color="#dc2626";
+    messageEl.textContent="❌ Please select a plan first.";
+    return;
   }
-});
-</script>
 
+  messageEl.style.color="#2563eb";
+  messageEl.textContent="✅ Form valid! Proceed to Pay below.";
+
+  const paypalContainer = document.getElementById('paypal-button-container');
+  paypalContainer.classList.add('visible');
+});
+
+// PayPal Buttons
+paypal.Buttons({
+  createOrder: function(data, actions) {
+    return actions.order.create({
+      purchase_units: [{
+        description: `CallOrbit ${formDataGlobal?.plan || ""} Plan`,
+        amount: { value: selectedPlanPrice.toFixed(2) }
+      }]
+    });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function(details){
+      alert('Payment completed by '+details.payer.name.given_name);
+      console.log("FORM DATA + PAYMENT INFO:", {...formDataGlobal, paypalOrderId: details.id, totalPaid: selectedPlanPrice});
+      form.reset();
+      planSelect.value='';
+      plans.forEach(p=>p.classList.remove('selected'));
+      document.getElementById('paypal-button-container').classList.remove('visible');
+      messageEl.style.color="#16a34a";
+      messageEl.textContent='🎉 Payment and signup completed!';
+    });
+  }
+}).render('#paypal-button-container');
+</script>
 </body>
 </html>
