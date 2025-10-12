@@ -107,6 +107,46 @@ form.addEventListener('submit', async (e) => {
   }
 });
 </script>
+<script>
+const form = document.getElementById('signupForm');
+const messageEl = document.getElementById('message');
+
+// Use full backend URL directly
+const BACKEND_URL = 'https://callorbit-backend-production.up.railway.app/api/signup';
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(form));
+  messageEl.style.color = "#2563eb";
+  messageEl.textContent = "Submitting your details...";
+
+  try {
+    const res = await fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      messageEl.style.color = "#16a34a";
+      messageEl.innerHTML = `
+        ✅ Signup successful! <br>
+        Your details have been sent for admin verification. <br>
+        You will receive an email once your account is approved.
+      `;
+      form.reset();
+    } else {
+      messageEl.style.color = "#dc2626";
+      messageEl.textContent = "❌ Signup failed: " + data.error;
+    }
+  } catch (err) {
+    console.error(err);
+    messageEl.style.color = "#dc2626";
+    messageEl.textContent = "❌ Signup failed: " + err.message;
+  }
+});
+</script>
 
 </body>
 </html>
