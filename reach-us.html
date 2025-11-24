@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CallOrbit — Contact</title>
-<link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
@@ -27,77 +26,262 @@ nav {
   top:0;
   z-index:200;
 }
-nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
+nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:none; }
 nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
 nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 .navbar-buy { background: none; color: #3b82f6; padding: 10px 20px; border-radius: 999px; font-weight: 700; margin-left: 10px; text-decoration:none; transition: all 0.2s; border: 2px solid #3b82f6; }
 .navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
 
-
+/* Login/Signup Button */
+.login-btn {
+  background: #3b82f6;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration:none;
+  transition: all 0.2s;
+  margin-left: 10px;
+}
+.login-btn:hover { 
+  background:#2563eb; 
+  transform:scale(1.05); 
+}
 
 /* Hero / Banner */
 header.hero {
   margin:0 auto;
-  padding:80px 20px;
+  padding:100px 20px;
   text-align:center;
   color:#fff;
   border-radius:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
   position:relative;
   overflow:hidden;
-  background: linear-gradient(135deg,#3b82f6,#60a5fa);
+  background: #3b82f6;
+}
+header.hero::before {
+  content: '💬';
+  position: absolute;
+  font-size: 15rem;
+  opacity: 0.1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-15deg) translateY(0); }
+  50% { transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px); }
 }
 header.hero .hero-content { position:relative; z-index:1; }
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
+header.hero h1 { margin-bottom:1rem; font-size:3.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+header.hero p { margin-bottom:0; font-size:1.4rem; max-width:700px; margin-left:auto; margin-right:auto; line-height:1.6; }
+
+/* Contact Container */
+.contact-container {
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:start;
+}
+
+/* Contact Info */
+.contact-info {
+  padding:40px 30px;
+}
+.contact-info h2 {
+  font-size:2.5rem;
+  color:#1e3a8a;
+  margin-bottom:20px;
+}
+.contact-info p {
+  font-size:1.2rem;
+  color:#6b7280;
+  line-height:1.8;
+  margin-bottom:40px;
+}
+.contact-methods {
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+.contact-method {
+  display:flex;
+  align-items:center;
+  padding:25px;
+  background:#f9fafb;
+  border-radius:15px;
+  transition: all 0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+.contact-method:hover {
+  transform:translateX(10px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  background:#fff;
+}
+.contact-method i {
+  font-size:2.5rem;
+  color:#3b82f6;
+  margin-right:20px;
+  min-width:50px;
+}
+.contact-method div h3 {
+  font-size:1.3rem;
+  color:#1e3a8a;
+  margin-bottom:8px;
+}
+.contact-method div p {
+  font-size:1.05rem;
+  color:#6b7280;
+  margin:0;
+  line-height:1.5;
+}
 
 /* Contact Form */
 .contact-form {
-  max-width:600px;
-  margin:3rem auto;
   background:#fff;
-  padding:2.5rem;
-  border-radius:1rem;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 .contact-form:hover {
   transform: translateY(-5px);
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  box-shadow:0 15px 50px rgba(0,0,0,0.15);
 }
-.contact-form label { display:block; font-weight:600; margin-bottom:0.5rem; color:#1f2937; }
+.contact-form h3 {
+  font-size:2rem;
+  color:#1e3a8a;
+  margin-bottom:10px;
+}
+.contact-form .subtitle {
+  color:#6b7280;
+  margin-bottom:30px;
+  font-size:1.05rem;
+}
+.contact-form label { 
+  display:block; 
+  font-weight:600; 
+  margin-bottom:8px; 
+  color:#1f2937;
+  font-size:1rem;
+}
 .contact-form input,
 .contact-form textarea {
   width:100%;
-  padding:0.85rem;
-  margin-bottom:1.5rem;
-  border:1px solid #d1d5db;
-  border-radius:0.5rem;
+  padding:14px 16px;
+  margin-bottom:20px;
+  border:2px solid #e5e7eb;
+  border-radius:10px;
   font-size:1rem;
   background:#f9fafb;
   color:#111827;
-  transition:border-color 0.3s, box-shadow 0.3s;
+  transition:all 0.3s;
+  font-family: inherit;
 }
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline:none;
   border-color:#3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,0.3);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(59,130,246,0.1);
+  transform:translateY(-2px);
+}
+.contact-form textarea {
+  resize:vertical;
+  min-height:120px;
 }
 .contact-form button {
-  background:#3b82f6;
+  background:#ff8800;
   color:#fff;
-  padding:0.85rem 1.75rem;
+  padding:14px 32px;
   border:none;
-  border-radius:0.5rem;
+  border-radius:999px;
   font-size:1.1rem;
-  font-weight:600;
+  font-weight:700;
   cursor:pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s;
+  width:100%;
+  box-shadow:0 4px 15px rgba(255,136,0,0.3);
 }
 .contact-form button:hover {
-  background:#2563eb;
-  transform:translateY(-2px);
+  background:#e67700;
+  transform:translateY(-3px);
+  box-shadow:0 6px 20px rgba(255,136,0,0.4);
+}
+.contact-form button:active {
+  transform:translateY(-1px);
+}
+
+/* FAQ Section */
+.faq-section {
+  max-width:900px;
+  margin:80px auto 60px;
+  padding:0 20px;
+}
+.faq-section h2 {
+  text-align:center;
+  font-size:2.5rem;
+  color:#1e3a8a;
+  margin-bottom:40px;
+}
+.faq-item { 
+  background:#f9fafb; 
+  margin-bottom:15px; 
+  border-radius:15px; 
+  overflow:hidden; 
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+}
+.faq-item:hover {
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+.faq-question {
+  cursor:pointer;
+  padding:20px 25px;
+  font-weight:600;
+  color:#1e3a8a;
+  position:relative;
+  font-size:1.1rem;
+}
+.faq-question::after {
+  content: '+';
+  position:absolute;
+  right:25px;
+  font-size:1.8rem;
+  transition: transform 0.3s;
+  color:#3b82f6;
+}
+.faq-question.active::after { transform:rotate(45deg); }
+.faq-answer {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.5s ease;
+  padding:0 25px;
+  background:#fff;
+  font-size:1.05rem;
+  color:#374151;
 }
 
 /* Fade-in animation */
@@ -105,8 +289,18 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
 .fade-in.visible { opacity:1; transform:translateY(0); }
 
 /* Footer */
-footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
+footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:80px; font-size:0.9rem; }
 footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+  header.hero h1 { font-size:2.5rem; }
+  header.hero p { font-size:1.1rem; }
+}
 </style>
 </head>
 <body>
@@ -116,32 +310,69 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   <div class="logo">
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
-<div class="menu">
-  <a href="/">Overview</a>
-  <a href="/solutions.html">Solutions</a>
-  <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html" class="active-page">Reach Us</a>
-  <a href="/company.html">Company</a>
-</div>
-
+  <div class="menu">
+    <a href="/">Overview</a>
+    <a href="/solutions.html">Solutions</a>
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html">Your Orbit</a>
+    <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
+    <a href="/reach-us.html" class="active-page">Reach Us</a>
+    <a href="/company.html">Company</a>
   </div>
-  <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
-
-  </div>
+  <a href="/signup.html" class="login-btn">Sign Up</a>
 </nav>
 
 <!-- Hero Section -->
 <header class="hero fade-in">
   <div class="hero-content">
-    <h1>Contact Us</h1>
-    <p>We’d love to hear from you. Fill in your details and we’ll be in touch shortly.</p>
+    <h1>Let's Start a Conversation 💬</h1>
+    <p>Have questions? Need help? Want to learn more? We're here for you. Drop us a message and our team will get back to you faster than you can say "CallOrbit"!</p>
   </div>
 </header>
 
-<!-- Contact Form -->
-<section class="fade-in">
+<!-- Contact Container -->
+<section class="contact-container fade-in">
+  <!-- Contact Info -->
+  <div class="contact-info">
+    <h2>Get in Touch</h2>
+    <p>Whether you're curious about features, pricing, or anything else, our team is ready to answer all your questions.</p>
+    
+    <div class="contact-methods">
+      <div class="contact-method">
+        <i class="fas fa-comments"></i>
+        <div>
+          <h3>Live Chat</h3>
+          <p>Click the chat bubble in the corner for instant help. We're online and ready to chat!</p>
+        </div>
+      </div>
+      
+      <div class="contact-method">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <h3>Email Us</h3>
+          <p>Prefer email? Send us a message using the form and we'll respond within 24 hours.</p>
+        </div>
+      </div>
+      
+      <div class="contact-method">
+        <i class="fas fa-clock"></i>
+        <div>
+          <h3>Response Time</h3>
+          <p>We typically respond within 2-4 hours during business hours. Need urgent help? Use our live chat!</p>
+        </div>
+      </div>
+      
+      <div class="contact-method">
+        <i class="fas fa-globe"></i>
+        <div>
+          <h3>Global Support</h3>
+          <p>We support customers across 150+ countries in multiple languages and time zones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
   <form 
     class="contact-form"
     action="https://formsubmit.co/danelloosthuizen3@gmail.com" 
@@ -150,17 +381,41 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html">
     <input type="hidden" name="_captcha" value="false">
 
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required />
+    <h3>Send Us a Message</h3>
+    <p class="subtitle">Fill out the form below and we'll be in touch shortly</p>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required />
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" placeholder="John Doe" required />
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="john@company.com" required />
 
-    <button type="submit">Send Message</button>
+    <label for="message">What can we help you with?</label>
+    <textarea id="message" name="message" rows="5" placeholder="Tell us about your contact center needs, questions, or how we can help..." required></textarea>
+
+    <button type="submit">Send Message 🚀</button>
   </form>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section fade-in">
+  <h2>Quick Answers</h2>
+  <div class="faq-item">
+    <div class="faq-question">How quickly will I hear back?</div>
+    <div class="faq-answer"><p>We aim to respond to all inquiries within 2-4 hours during business hours (Monday-Friday, 9 AM - 6 PM). For urgent matters, use our live chat for immediate assistance.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Can I schedule a demo?</div>
+    <div class="faq-answer"><p>Absolutely! Mention in your message that you'd like a personalized demo, and our team will arrange a time that works for you to showcase CallOrbit's features.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Do you offer phone support?</div>
+    <div class="faq-answer"><p>Currently, we provide support via email and live chat. Our live chat is the fastest way to get help, and our team can handle most issues in real-time.</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">What if I need technical support?</div>
+    <div class="faq-answer"><p>For technical issues, our support team is available 24/7 through live chat. You can also submit a detailed ticket via this form, and our technical team will prioritize it.</p></div>
+  </div>
 </section>
 
 <!-- Footer -->
@@ -182,6 +437,20 @@ const appearOnScroll = new IntersectionObserver(function(entries){
 }, {threshold:0.1});
 faders.forEach(fader => appearOnScroll.observe(fader));
 
+// FAQ Accordion toggle
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(q => {
+  q.addEventListener('click', () => {
+    q.classList.toggle('active');
+    const answer = q.nextElementSibling;
+    if(q.classList.contains('active')) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    } else {
+      answer.style.maxHeight = null;
+    }
+  });
+});
+
 // Set footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
@@ -189,6 +458,12 @@ document.getElementById('year').textContent = new Date().getFullYear();
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+Tawk_API.onLoad = function(){
+    // Remove profile picture
+    Tawk_API.setAttributes({ avatar: '' });
+    // Disable Knowledge Base / Help Center
+    Tawk_API.toggleHelpCenter(false);
+};
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;

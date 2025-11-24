@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Platform</title>
-<link rel="stylesheet" href="style.css">
+<title>CallOrbit — Your Orbit Platform</title>
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
@@ -25,7 +24,7 @@ nav {
   top:0;
   z-index:200;
 }
-nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
+nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:none; }
 nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
 nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 
@@ -43,7 +42,21 @@ nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 }
 .navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
 
-
+/* Login/Signup Button */
+.login-btn {
+  background: #3b82f6;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration:none;
+  transition: all 0.2s;
+  margin-left: 10px;
+}
+.login-btn:hover { 
+  background:#2563eb; 
+  transform:scale(1.05); 
+}
 
 /* Hero */
 header.hero {
@@ -51,6 +64,7 @@ header.hero {
   padding:80px 20px;
   text-align:center;
   color:#fff;
+  background:#3b82f6;
   border-radius:10px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
   position:relative;
@@ -66,49 +80,185 @@ header.hero video {
 }
 header.hero .hero-content { position:relative; z-index:1; }
 header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
+header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:700px; margin-left:auto; margin-right:auto; line-height:1.6; }
+
+/* Section Headers */
+.section-header {
+  text-align:center;
+  margin:60px auto 40px;
+  max-width:900px;
+  padding:0 20px;
+}
+.section-header h2 {
+  font-size:2.5rem;
+  color:#1e3a8a;
+  margin-bottom:15px;
+}
+.section-header p {
+  font-size:1.2rem;
+  color:#6b7280;
+  line-height:1.6;
+}
+
+/* Platform Overview Section */
+.platform-overview {
+  max-width:1200px;
+  margin:60px auto;
+  padding:40px 20px;
+  background:#f9fafb;
+  border-radius:15px;
+}
+.overview-content {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:2rem;
+  margin-top:30px;
+}
+.overview-item h3 {
+  font-size:1.4rem;
+  color:#1e3a8a;
+  margin-bottom:15px;
+  display:flex;
+  align-items:center;
+}
+.overview-item h3 i {
+  color:#3b82f6;
+  margin-right:12px;
+  font-size:1.6rem;
+}
+.overview-item p {
+  color:#374151;
+  line-height:1.8;
+  font-size:1.05rem;
+}
 
 /* Features Cards */
 .features-cards-container {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:2rem;
   padding:40px 20px;
+  max-width:1400px;
+  margin:0 auto;
 }
 .feature-card {
   background:#fff;
   border-radius:15px;
-  padding:30px 20px;
+  padding:35px 25px;
   box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor:pointer;
 }
 .feature-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
-.feature-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
+.feature-card i { font-size:3rem; color:#3b82f6; margin-bottom:20px; transition: transform 0.3s; display:block; }
 .feature-card:hover i { transform:rotate(15deg) scale(1.1); }
-.feature-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
-.feature-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
+.feature-card h3 { margin-bottom:15px; font-size:1.6rem; color:#1e3a8a; }
+.feature-card p { font-size:1.05rem; color:#374151; line-height:1.7; margin-bottom:20px; }
+.feature-card ul {
+  list-style:none;
+  padding:0;
+  margin-top:15px;
+}
+.feature-card ul li {
+  padding:8px 0;
+  color:#6b7280;
+  font-size:0.95rem;
+  display:flex;
+  align-items:center;
+}
+.feature-card ul li i {
+  color:#3b82f6;
+  margin-right:10px;
+  font-size:0.9rem;
+}
 
-/* Floating Chat Button */
-.chat-btn {
-  position:fixed;
-  bottom:20px;
-  right:20px;
+/* Detailed Features Section */
+.detailed-features {
+  max-width:1200px;
+  margin:60px auto;
+  padding:40px 20px;
+}
+.feature-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  margin-bottom:4rem;
+  align-items:center;
+}
+.feature-row:nth-child(even) {
+  direction:rtl;
+}
+.feature-row:nth-child(even) > * {
+  direction:ltr;
+}
+.feature-text h3 {
+  font-size:2rem;
+  color:#1e3a8a;
+  margin-bottom:20px;
+}
+.feature-text p {
+  font-size:1.1rem;
+  color:#374151;
+  line-height:1.8;
+  margin-bottom:15px;
+}
+.feature-text ul {
+  list-style:none;
+  padding:0;
+  margin-top:20px;
+}
+.feature-text ul li {
+  padding:10px 0;
+  color:#6b7280;
+  font-size:1.05rem;
+  display:flex;
+  align-items:flex-start;
+}
+.feature-text ul li i {
+  color:#3b82f6;
+  margin-right:12px;
+  margin-top:4px;
+  font-size:1rem;
+}
+.feature-visual {
+  background:#f9fafb;
+  border-radius:15px;
+  padding:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:300px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+.feature-visual i {
+  font-size:8rem;
+  color:#3b82f6;
+  opacity:0.2;
+}
+
+/* CTA Banner */
+.cta-banner {
   background:#3b82f6;
   color:#fff;
-  border:none;
-  padding:12px 16px;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-  z-index:500;
-  transition:0.2s;
+  text-align:center;
+  padding:50px 20px;
+  margin:60px auto;
+  border-radius:15px;
+  max-width:1200px;
 }
-.chat-btn:hover { background:#2563eb; }
+.cta-banner h2 { font-size:2rem; margin-bottom:15px; }
+.cta-banner p { font-size:1.1rem; margin-bottom:30px; }
+.cta-banner a {
+  display:inline-block;
+  padding:16px 36px;
+  background:#ff8800;
+  color:#fff;
+  font-weight:700;
+  border-radius:999px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.cta-banner a:hover { background:#e67700; transform:scale(1.05); }
 
 /* Footer */
 footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
@@ -117,6 +267,16 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 /* Fade-in */
 .fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
 .fade-in.visible { opacity:1; transform:translateY(0); }
+
+@media (max-width: 768px) {
+  .feature-row {
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+  .feature-row:nth-child(even) {
+    direction:ltr;
+  }
+}
 </style>
 </head>
 <body>
@@ -126,19 +286,16 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   <div class="logo">
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
-<div class="menu">
-  <a href="/">Overview</a>
-  <a href="/solutions.html">Solutions</a>
-  <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html" class="active-page">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html">Reach Us</a>
-  <a href="/company.html">Company</a>
-</div>
+  <div class="menu">
+    <a href="/">Overview</a>
+    <a href="/solutions.html">Solutions</a>
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html" class="active-page">Your Orbit</a>
+    <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
+    <a href="/reach-us.html">Reach Us</a>
+    <a href="/company.html">Company</a>
   </div>
-  <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
-
-  </div>
+  <a href="/signup.html" class="login-btn">Sign Up</a>
 </nav>
 
 <!-- Hero Section -->
@@ -147,46 +304,228 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <source src="dashboards.mp4" type="video/mp4">
   </video>
   <div class="hero-content">
-    <h1>Powerful Platform</h1>
-    <p>All-in-one contact center solution designed to streamline operations, improve efficiency, and enhance customer experience.</p>
+    <h1>Your Orbit: Complete Command Center</h1>
+    <p>Experience the most comprehensive contact center management platform designed for modern teams. Control every aspect of your operations from a single, powerful dashboard that puts you in complete command.</p>
   </div>
 </header>
+
+<!-- Platform Overview -->
+<section class="platform-overview fade-in">
+  <div class="section-header">
+    <h2>Built for Maximum Control & Efficiency</h2>
+    <p>Your Orbit is more than just software—it's a complete ecosystem designed to transform how you manage contact center operations</p>
+  </div>
+  <div class="overview-content">
+    <div class="overview-item">
+      <h3><i class="fas fa-rocket"></i> Instant Setup</h3>
+      <p>Get your entire contact center operational in minutes, not days. No complex infrastructure, no hardware installation, no IT headaches. Just instant access to enterprise-grade features that scale with your business from day one.</p>
+    </div>
+    <div class="overview-item">
+      <h3><i class="fas fa-chart-line"></i> Real-Time Intelligence</h3>
+      <p>Make data-driven decisions with live dashboards that show exactly what's happening across your operation. Monitor agent performance, track call metrics, identify bottlenecks, and optimize on the fly with actionable insights delivered in real-time.</p>
+    </div>
+    <div class="overview-item">
+      <h3><i class="fas fa-shield-alt"></i> Enterprise Security</h3>
+      <p>Your data is protected by military-grade encryption, multi-layer security protocols, and compliance with global standards including GDPR, HIPAA, and SOC 2. Rest easy knowing your customer data and business information are completely secure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section Header -->
+<div class="section-header fade-in">
+  <h2>Core Platform Capabilities</h2>
+  <p>Everything you need to run a world-class contact center operation</p>
+</div>
 
 <!-- Platform Feature Cards -->
 <section class="features-cards-container fade-in">
   <div class="feature-card">
     <i class="fas fa-tachometer-alt"></i>
-    <h3>Unified Dashboard</h3>
-    <p>Manage your agents, calls, and analytics all in one intuitive dashboard, giving you full control at a glance.</p>
+    <h3>Unified Command Dashboard</h3>
+    <p>Your mission control for complete operational oversight. The unified dashboard gives you a bird's-eye view of your entire contact center operation in real-time.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Live agent status and availability tracking</li>
+      <li><i class="fas fa-check-circle"></i> Real-time call queue monitoring</li>
+      <li><i class="fas fa-check-circle"></i> Instant performance metrics and KPIs</li>
+      <li><i class="fas fa-check-circle"></i> Customizable widgets and layouts</li>
+      <li><i class="fas fa-check-circle"></i> Multi-location visibility in one view</li>
+      <li><i class="fas fa-check-circle"></i> Drill-down analytics for deeper insights</li>
+    </ul>
   </div>
+
+  <div class="feature-card">
+    <i class="fas fa-users-cog"></i>
+    <h3>Advanced Agent Management</h3>
+    <p>Empower your team with tools that make them more productive, efficient, and effective at delivering exceptional customer service.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Intelligent skill-based routing</li>
+      <li><i class="fas fa-check-circle"></i> Automated shift scheduling and planning</li>
+      <li><i class="fas fa-check-circle"></i> Performance tracking and coaching tools</li>
+      <li><i class="fas fa-check-circle"></i> Real-time call whisper and barge-in</li>
+      <li><i class="fas fa-check-circle"></i> Gamification and leaderboards</li>
+      <li><i class="fas fa-check-circle"></i> Individual and team goal setting</li>
+    </ul>
+  </div>
+
   <div class="feature-card">
     <i class="fas fa-robot"></i>
-    <h3>AI Insights</h3>
-    <p>Leverage AI-powered analytics to optimize team performance and identify opportunities for growth.</p>
+    <h3>AI-Powered Analytics</h3>
+    <p>Leverage cutting-edge artificial intelligence to uncover insights, predict trends, and optimize your contact center performance automatically.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Sentiment analysis on customer interactions</li>
+      <li><i class="fas fa-check-circle"></i> Call outcome prediction and optimization</li>
+      <li><i class="fas fa-check-circle"></i> Automated quality scoring</li>
+      <li><i class="fas fa-check-circle"></i> Trend detection and alerting</li>
+      <li><i class="fas fa-check-circle"></i> Smart recommendations for improvement</li>
+      <li><i class="fas fa-check-circle"></i> Predictive staffing requirements</li>
+    </ul>
   </div>
+
   <div class="feature-card">
-    <i class="fas fa-headset"></i>
-    <h3>Call Recording & Monitoring</h3>
-    <p>Monitor, record, and analyze calls to maintain high-quality support and training standards.</p>
+    <i class="fas fa-phone-volume"></i>
+    <h3>Intelligent Call Routing</h3>
+    <p>Ensure every call reaches the perfect agent at the perfect time with advanced routing algorithms that maximize both efficiency and customer satisfaction.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Skills-based routing to expert agents</li>
+      <li><i class="fas fa-check-circle"></i> Priority queue management</li>
+      <li><i class="fas fa-check-circle"></i> Time-based routing rules</li>
+      <li><i class="fas fa-check-circle"></i> Geographic routing options</li>
+      <li><i class="fas fa-check-circle"></i> VIP customer prioritization</li>
+      <li><i class="fas fa-check-circle"></i> Overflow and failover handling</li>
+    </ul>
   </div>
+
+  <div class="feature-card">
+    <i class="fas fa-microphone-alt"></i>
+    <h3>Call Recording & Quality</h3>
+    <p>Maintain excellence with comprehensive recording, monitoring, and quality assurance tools that ensure every interaction meets your standards.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Automatic call recording with secure storage</li>
+      <li><i class="fas fa-check-circle"></i> Searchable call transcripts</li>
+      <li><i class="fas fa-check-circle"></i> Quality scoring frameworks</li>
+      <li><i class="fas fa-check-circle"></i> Call tagging and categorization</li>
+      <li><i class="fas fa-check-circle"></i> Compliance recording features</li>
+      <li><i class="fas fa-check-circle"></i> Screen recording capabilities</li>
+    </ul>
+  </div>
+
   <div class="feature-card">
     <i class="fas fa-plug"></i>
     <h3>Seamless Integrations</h3>
-    <p>Connect with your favorite CRM, ticketing, and messaging platforms for a truly unified workflow.</p>
+    <p>Connect Your Orbit with your existing tech stack for a truly unified business communication platform that works with your favorite tools.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Salesforce, HubSpot, Zendesk CRM sync</li>
+      <li><i class="fas fa-check-circle"></i> Microsoft Teams & Slack integration</li>
+      <li><i class="fas fa-check-circle"></i> Google Workspace compatibility</li>
+      <li><i class="fas fa-check-circle"></i> Custom API access</li>
+      <li><i class="fas fa-check-circle"></i> Webhook support for automation</li>
+      <li><i class="fas fa-check-circle"></i> Pre-built connectors for popular apps</li>
+    </ul>
   </div>
+
+  <div class="feature-card">
+    <i class="fas fa-chart-bar"></i>
+    <h3>Advanced Reporting Suite</h3>
+    <p>Generate comprehensive reports that give you deep visibility into every aspect of your contact center's performance and operations.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> 100+ pre-built report templates</li>
+      <li><i class="fas fa-check-circle"></i> Custom report builder</li>
+      <li><i class="fas fa-check-circle"></i> Scheduled automated reports</li>
+      <li><i class="fas fa-check-circle"></i> Export to PDF, Excel, CSV</li>
+      <li><i class="fas fa-check-circle"></i> Historical trend analysis</li>
+      <li><i class="fas fa-check-circle"></i> Comparative performance metrics</li>
+    </ul>
+  </div>
+
   <div class="feature-card">
     <i class="fas fa-cogs"></i>
-    <h3>Customizable Workflows</h3>
-    <p>Automate routine tasks and design workflows tailored to your team’s needs without any coding required.</p>
+    <h3>Workflow Automation</h3>
+    <p>Eliminate manual tasks and streamline operations with powerful automation tools that let you build custom workflows without writing code.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Visual workflow builder</li>
+      <li><i class="fas fa-check-circle"></i> Automated call distribution</li>
+      <li><i class="fas fa-check-circle"></i> Custom IVR menu creation</li>
+      <li><i class="fas fa-check-circle"></i> Trigger-based actions</li>
+      <li><i class="fas fa-check-circle"></i> Automated follow-up sequences</li>
+      <li><i class="fas fa-check-circle"></i> Time-saving templates</li>
+    </ul>
   </div>
+
   <div class="feature-card">
-    <i class="fas fa-globe"></i>
-    <h3>Global Connectivity</h3>
-    <p>Reliable coverage across regions, ensuring your teams stay connected to customers wherever they are.</p>
+    <i class="fas fa-headset"></i>
+    <h3>Omnichannel Support</h3>
+    <p>Meet your customers where they are with unified communication across voice, email, chat, social media, and more—all managed from one platform.</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Voice calls with HD quality</li>
+      <li><i class="fas fa-check-circle"></i> Live chat integration</li>
+      <li><i class="fas fa-check-circle"></i> Email ticketing system</li>
+      <li><i class="fas fa-check-circle"></i> Social media messaging</li>
+      <li><i class="fas fa-check-circle"></i> Video call capabilities</li>
+      <li><i class="fas fa-check-circle"></i> Unified conversation history</li>
+    </ul>
   </div>
 </section>
 
+<!-- Detailed Features Section -->
+<section class="detailed-features fade-in">
+  <div class="feature-row">
+    <div class="feature-text">
+      <h3>Real-Time Performance Monitoring</h3>
+      <p>Stay ahead of issues before they become problems. Your Orbit's real-time monitoring gives you instant visibility into every metric that matters for your contact center success.</p>
+      <ul>
+        <li><i class="fas fa-chart-line"></i> Watch call volumes, wait times, and service levels update in real-time</li>
+        <li><i class="fas fa-chart-line"></i> Get instant alerts when KPIs fall below thresholds</li>
+        <li><i class="fas fa-chart-line"></i> Monitor agent availability and status across all locations</li>
+        <li><i class="fas fa-chart-line"></i> Track customer satisfaction scores as they happen</li>
+        <li><i class="fas fa-chart-line"></i> View detailed call statistics and patterns</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <i class="fas fa-chart-area"></i>
+    </div>
+  </div>
 
+  <div class="feature-row">
+    <div class="feature-text">
+      <h3>Complete Number Management</h3>
+      <p>Take full control of your phone numbers across the globe. Buy, port, configure, and manage local and toll-free numbers in 150+ countries with just a few clicks.</p>
+      <ul>
+        <li><i class="fas fa-phone"></i> Instant number provisioning in minutes</li>
+        <li><i class="fas fa-phone"></i> Easy number porting from existing carriers</li>
+        <li><i class="fas fa-phone"></i> Flexible routing and forwarding rules</li>
+        <li><i class="fas fa-phone"></i> Custom caller ID configuration</li>
+        <li><i class="fas fa-phone"></i> Number pooling and load balancing</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <i class="fas fa-globe-americas"></i>
+    </div>
+  </div>
+
+  <div class="feature-row">
+    <div class="feature-text">
+      <h3>Team Collaboration Tools</h3>
+      <p>Break down silos and foster collaboration with integrated tools that keep your team connected, informed, and working together seamlessly.</p>
+      <ul>
+        <li><i class="fas fa-comments"></i> Internal messaging and chat</li>
+        <li><i class="fas fa-comments"></i> Knowledge base sharing</li>
+        <li><i class="fas fa-comments"></i> Team announcements and broadcasts</li>
+        <li><i class="fas fa-comments"></i> Shift handoff notes</li>
+        <li><i class="fas fa-comments"></i> Collaborative problem-solving</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <i class="fas fa-users"></i>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner fade-in">
+  <h2>Ready to Experience Your Orbit?</h2>
+  <p>Join thousands of businesses already managing their contact centers with CallOrbit</p>
+  <a href="/signup.html">Start Your Free Trial</a>
+</section>
 
 <!-- Footer -->
 <footer>
@@ -216,6 +555,12 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+Tawk_API.onLoad = function(){
+    // Remove profile picture
+    Tawk_API.setAttributes({ avatar: '' });
+    // Disable Knowledge Base / Help Center
+    Tawk_API.toggleHelpCenter(false);
+};
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
