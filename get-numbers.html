@@ -70,6 +70,23 @@
       transform: scale(1.05);
     }
 
+    /* Login/Signup Button */
+    .login-btn {
+      background: #3b82f6;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-left: 10px;
+    }
+
+    .login-btn:hover {
+      background: #2563eb;
+      transform: scale(1.05);
+    }
+
     /* Hero Section */
     header.hero {
       margin: 20px auto;
@@ -534,7 +551,7 @@
     </div>
     <div class="menu">
       <a href="/">Overview</a>
-     
+      
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Your Orbit</a>
       <a href="/get-numbers.html" class="navbar-buy active-page">Get Numbers</a>
@@ -542,7 +559,7 @@
       <a href="/company.html">Company</a>
     </div>
     <div class="actions" style="display:flex; align-items:center; gap:12px;">
-      <a href="/signup.html" class="login-btn" style="text-decoration:none; color:#374151; font-weight:600;">Sign Up</a>
+      <a href="/signup.html" class="login-btn">Sign Up</a>
     </div>
   </nav>
 
@@ -773,24 +790,24 @@
       }
     }
 
-    function populateAreas() {
-      const country = countrySelectEl.value;
-      const numberType = numberTypeEl.value;
+ function populateAreas() {
+  const country = countrySelectEl.value;
+  const numberType = numberTypeEl.value.toLowerCase();
 
-      if (numberType === 'local' && country && localAreas[country]) {
-        areaContainerEl.style.display = 'block';
-        areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
-        localAreas[country].forEach(area => {
-          const opt = document.createElement('option');
-          opt.value = area;
-          opt.textContent = area;
-          areaSelectEl.appendChild(opt);
-        });
-      } else {
-        areaContainerEl.style.display = 'none';
-        areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
-      }
-    }
+    if (numberType === 'local' && country && localAreas[country]) {
+    areaContainerEl.style.display = 'block';
+    areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
+    localAreas[country].forEach(area => {
+      const opt = document.createElement('option');
+      opt.value = area;
+      opt.textContent = area;
+      areaSelectEl.appendChild(opt);
+    });
+  } else {
+    areaContainerEl.style.display = 'none';
+    areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
+  }
+}
 
     function generatePlans() {
       const country = countrySelectEl.value;
@@ -941,7 +958,7 @@
 
     function renderPaypalButton(subtotal) {
       paypalContainerEl.innerHTML = '';
-      if (cart.length === 0 || !checkboxesValid()) return;
+      if (cart.length === 0) return;
 
       paypal.Buttons({
         style: { layout: 'vertical', color: 'blue', shape: 'pill', label: 'paypal' },
@@ -957,8 +974,6 @@
           return actions.order.capture().then(details => {
             alert('Transaction completed by ' + details.payer.name.given_name + '! Your call recording service is now active.');
             cart = [];
-            subscriptionConfirmEl.checked = false;
-            termsConfirmEl.checked = false;
             updateCartUI();
             cartPopup.style.display = 'none';
           });
@@ -970,17 +985,20 @@
       }).render('#paypal-button-container');
     }
 
+    // Initialize
+    initializeCountries();
+    populateAreas();
+    generatePlans();
+
     // Event Listeners
     countrySelectEl.addEventListener('change', () => {
       populateAreas();
       generatePlans();
     });
-
     numberTypeEl.addEventListener('change', () => {
       populateAreas();
       generatePlans();
     });
-
     areaSelectEl.addEventListener('change', generatePlans);
 
     plansContainerEl.addEventListener('click', e => {
@@ -989,6 +1007,7 @@
 
     cartIcon.addEventListener('click', () => cartPopup.style.display = 'block');
     closeCartBtn.addEventListener('click', () => cartPopup.style.display = 'none');
+
     subscriptionConfirmEl.addEventListener('change', updateCheckboxValidation);
     termsConfirmEl.addEventListener('change', updateCheckboxValidation);
 
