@@ -1,537 +1,651 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CallOrbit — Company</title>
-<link rel="icon" href="data:image/svg+xml,
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CallOrbit — Company</title>
+  <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<style>
-/* Navbar */
-nav {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 30px;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  font-family:'Inter',sans-serif;
-  position:sticky;
-  top:0;
-  z-index:200;
-}
-nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:none; }
-nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
-nav .menu a.active-page { color:#3b82f6; font-weight:700; }
-.navbar-buy { background:none; color:#3b82f6; padding:10px 20px; border-radius:999px; font-weight:700; margin-left:10px; text-decoration:none; transition:all 0.2s; border:2px solid #3b82f6; }
-.navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
+  <style>
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      font-family: 'Inter', sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
 
-/* Login/Signup Button */
-.login-btn {
-  background: #3b82f6;
-  color: #fff;
-  padding: 10px 24px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration:none;
-  transition: all 0.2s;
-  margin-left: 10px;
-}
-.login-btn:hover { 
-  background:#2563eb; 
-  transform:scale(1.05); 
-}
+    nav .logo a {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #3b82f6;
+      text-decoration: none;
+    }
 
-/* Hero Section */
-header.hero {
-  margin:0 auto;
-  padding:100px 20px;
-  text-align:center;
-  color:#fff;
-  border-radius:10px;
-  position:relative;
-  overflow:hidden;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
-}
-header.hero::before {
-  content: '🚀';
-  position: absolute;
-  font-size: 15rem;
-  opacity: 0.1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-15deg);
-  animation: float 6s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translate(-50%, -50%) rotate(-15deg) translateY(0); }
-  50% { transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px); }
-}
-header.hero h1 { 
-  margin-bottom:1rem; 
-  font-size:3.5rem; 
-  position: relative;
-  z-index: 1;
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-}
-header.hero p { 
-  font-size:1.4rem; 
-  max-width:700px; 
-  margin-left:auto; 
-  margin-right:auto; 
-  position: relative;
-  z-index: 1;
-  line-height: 1.6;
-}
+    nav .menu a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: 500;
+    }
 
-/* Fun Stats Section */
-.fun-stats {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-  gap:2rem;
-  margin:60px auto;
-  max-width:1200px;
-  padding:0 20px;
-}
-.stat-box {
-  text-align:center;
-  padding:30px 20px;
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.stat-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-}
-.stat-box:hover {
-  transform: translateY(-10px) rotate(2deg);
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
-}
-.stat-box .emoji {
-  font-size:4rem;
-  margin-bottom:15px;
-  display:block;
-  animation: bounce 2s ease-in-out infinite;
-}
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.stat-box h3 {
-  font-size:2.5rem;
-  color:#3b82f6;
-  margin-bottom:10px;
-  font-weight:800;
-}
-.stat-box p {
-  color:#6b7280;
-  font-size:1.1rem;
-  font-weight:600;
-}
+    nav .menu a.active-page {
+      color: #3b82f6;
+      font-weight: 700;
+    }
 
-/* Story Section */
-.story-section {
-  max-width:1000px;
-  margin:80px auto;
-  padding:50px 30px;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  border-radius:20px;
-  color:#fff;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
-  position: relative;
-  overflow: hidden;
-}
-.story-section::before {
-  content: '💡';
-  position: absolute;
-  font-size: 12rem;
-  opacity: 0.1;
-  right: -30px;
-  top: 50%;
-  transform: translateY(-50%) rotate(20deg);
-}
-.story-section h2 {
-  font-size:2.5rem;
-  margin-bottom:25px;
-  text-align:center;
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-}
-.story-section p {
-  font-size:1.2rem;
-  line-height:1.8;
-  margin-bottom:20px;
-  position: relative;
-  z-index: 1;
-}
+    .navbar-buy {
+      background: none;
+      color: #3b82f6;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-left: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 2px solid #3b82f6;
+    }
 
-/* Values Grid */
-.values-section {
-  margin:80px auto;
-  max-width:1200px;
-  padding:0 20px;
-}
-.values-section h2 {
-  text-align:center;
-  font-size:2.5rem;
-  color:#1e3a8a;
-  margin-bottom:50px;
-}
-.values-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:2rem;
-}
-.value-card {
-  background:#fff;
-  padding:35px 25px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  text-align:center;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.value-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
-  transform: scale(0);
-  transition: transform 0.5s;
-}
-.value-card:hover::before {
-  transform: scale(1);
-}
-.value-card:hover {
-  transform: translateY(-10px);
-  box-shadow:0 20px 50px rgba(0,0,0,0.15);
-}
-.value-card .icon {
-  font-size:4rem;
-  margin-bottom:20px;
-  display:inline-block;
-  position: relative;
-  z-index: 1;
-}
-.value-card h3 {
-  font-size:1.6rem;
-  color:#1e3a8a;
-  margin-bottom:15px;
-  position: relative;
-  z-index: 1;
-}
-.value-card p {
-  color:#374151;
-  line-height:1.7;
-  font-size:1.05rem;
-  position: relative;
-  z-index: 1;
-}
+    .navbar-buy:hover {
+      background: #3b82f6;
+      color: #fff;
+      transform: scale(1.05);
+    }
 
-/* Team Section */
-.team-section {
-  max-width:1200px;
-  margin:80px auto;
-  padding:50px 20px;
-  text-align:center;
-  background:#f9fafb;
-  border-radius:20px;
-}
-.team-section h2 {
-  font-size:2.5rem;
-  color:#1e3a8a;
-  margin-bottom:20px;
-}
-.team-section p {
-  font-size:1.2rem;
-  color:#6b7280;
-  margin-bottom:40px;
-  max-width:700px;
-  margin-left:auto;
-  margin-right:auto;
-  line-height:1.6;
-}
-.team-emojis {
-  font-size:3rem;
-  margin:30px 0;
-  letter-spacing:20px;
-}
+    /* Login/Signup Button */
+    .login-btn {
+      background: #3b82f6;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-left: 10px;
+    }
 
-/* CTA Section */
-.cta-section {
-  max-width:900px;
-  margin:80px auto;
-  padding:60px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius:20px;
-  text-align:center;
-  color:#fff;
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
-  position: relative;
-  overflow: hidden;
-}
-.cta-section::before {
-  content: '✨';
-  position: absolute;
-  font-size: 10rem;
-  opacity: 0.15;
-  top: -20px;
-  left: -20px;
-  animation: sparkle 3s ease-in-out infinite;
-}
-.cta-section::after {
-  content: '🎉';
-  position: absolute;
-  font-size: 10rem;
-  opacity: 0.15;
-  bottom: -20px;
-  right: -20px;
-  animation: sparkle 3s ease-in-out infinite 1.5s;
-}
-@keyframes sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(10deg); }
-}
-.cta-section h2 {
-  font-size:2.5rem;
-  margin-bottom:20px;
-  position: relative;
-  z-index: 1;
-}
-.cta-section p {
-  font-size:1.2rem;
-  margin-bottom:30px;
-  position: relative;
-  z-index: 1;
-}
-.cta-section a {
-  display:inline-block;
-  background:#ff8800;
-  color:#fff;
-  padding:16px 40px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:1.1rem;
-  text-decoration:none;
-  transition:all 0.3s;
-  position: relative;
-  z-index: 1;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-}
-.cta-section a:hover {
-  background:#e67700;
-  transform:scale(1.1);
-  box-shadow:0 8px 30px rgba(0,0,0,0.3);
-}
+    .login-btn:hover {
+      background: #2563eb;
+      transform: scale(1.05);
+    }
 
-/* Footer */
-footer { 
-  text-align:center; 
-  padding:3rem 20px; 
-  background:#1e3a8a; 
-  margin-top:80px; 
-  font-size:0.95rem;
-  color:#fff;
-}
-footer a { 
-  margin:0 15px; 
-  color:#93c5fd; 
-  text-decoration:none;
-  transition: color 0.2s;
-}
-footer a:hover {
-  color:#fff;
-}
+    /* Hero Section */
+    header.hero {
+      margin: 0 auto;
+      padding: 100px 20px;
+      text-align: center;
+      color: #fff;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
+    }
 
-/* Fade-in */
-.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-</style>
+    header.hero::before {
+      content: '🚀';
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px);
+      }
+    }
+
+    header.hero h1 {
+      margin-bottom: 1rem;
+      font-size: 3.5rem;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header.hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+      line-height: 1.6;
+    }
+
+    /* Fun Stats Section */
+    .fun-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 60px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 30px 20px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    }
+
+    .stat-box:hover {
+      transform: translateY(-10px) rotate(2deg);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-box .emoji {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      display: block;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .stat-box h3 {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .stat-box p {
+      color: #6b7280;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Story Section */
+    .story-section {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 50px 30px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 20px;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-section::before {
+      content: '💡';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%) rotate(20deg);
+    }
+
+    .story-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .story-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Values Grid */
+    .values-section {
+      margin: 80px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .values-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 50px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .value-card {
+      background: #fff;
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s;
+    }
+
+    .value-card:hover::before {
+      transform: scale(1);
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .value-card .icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Style for Option 3: Minimalist Typography Numbers */
+    .value-card .icon.number {
+      font-weight: 800;
+      color: #e5e7eb;
+      /* Light gray styling */
+      line-height: 1;
+    }
+
+    .value-card h3 {
+      font-size: 1.6rem;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .value-card p {
+      color: #374151;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Team Section */
+    .team-section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 50px 20px;
+      text-align: center;
+      background: #f9fafb;
+      border-radius: 20px;
+    }
+
+    .team-section h2 {
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
+
+    .team-section p {
+      font-size: 1.2rem;
+      color: #6b7280;
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .team-emojis {
+      font-size: 3rem;
+      margin: 30px 0;
+      letter-spacing: 20px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 60px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '✨';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.15;
+      top: -20px;
+      left: -20px;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    .cta-section::after {
+      content: '🎉';
+      position: absolute;
+      font-size: 10rem;
+      opacity: 0.15;
+      bottom: -20px;
+      right: -20px;
+      animation: sparkle 3s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.1) rotate(10deg);
+      }
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section a {
+      display: inline-block;
+      background: #ff8800;
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-section a:hover {
+      background: #e67700;
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 20px;
+      background: #1e3a8a;
+      margin-top: 80px;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    footer a {
+      margin: 0 15px;
+      color: #93c5fd;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    /* Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">
-    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
-  </div>
-  <div class="menu">
-    <a href="/">Overview</a>
-   
-    <a href="/global-reach">Global Reach</a>
-    <a href="/your-orbit">Your Orbit</a>
-    <a href="/get-numbers" class="navbar-buy">Get Numbers</a>
-    <a href="/reach-us">Reach Us</a>
-    <a href="/company.html" class="active-page">Company</a>
-  </div>
-  <div class="actions" style="display:flex; align-items:center; gap:12px;">
-    <a href="/signup.html" class="login-btn">Sign Up</a>
-  </div>
-</nav>
-
-<!-- Hero -->
-<header class="hero fade-in">
-  <h1>We're Building the Future of Contact Centers 🚀</h1>
-  <p>At CallOrbit, we believe managing a contact center shouldn't feel like rocket science. That's why we're on a mission to make it simple, powerful, and dare we say... fun!</p>
-</header>
-
-<!-- Fun Stats -->
-<section class="fun-stats fade-in">
-  <div class="stat-box">
-    <span class="emoji">☕</span>
-    <h3>10,000+</h3>
-    <p>Cups of Coffee Consumed</p>
-  </div>
-  <div class="stat-box">
-    <span class="emoji">🎉</span>
-    <h3>50,000+</h3>
-    <p>Happy Customers Served</p>
-  </div>
-  <div class="stat-box">
-    <span class="emoji">🌍</span>
-    <h3>150+</h3>
-    <p>Countries We Cover</p>
-  </div>
-  <div class="stat-box">
-    <span class="emoji">💪</span>
-    <h3>99.9%</h3>
-    <p>Uptime (We Don't Sleep)</p>
-  </div>
-</section>
-
-<!-- Story Section -->
-<section class="story-section fade-in">
-  <h2>Our Story: It Started With a Problem 💡</h2>
-  <p>
-    Picture this: A team of contact center managers pulling their hair out trying to juggle multiple platforms, confusing dashboards, and systems that seemed designed by people who never actually used them. Sound familiar?
-  </p>
-  <p>
-    That's when we had our lightbulb moment. What if there was a platform that actually understood what contact center teams needed? One that was powerful enough for enterprises but simple enough that you wouldn't need a PhD to use it?
-  </p>
-  <p>
-    So we rolled up our sleeves, grabbed some coffee (okay, a lot of coffee), and built CallOrbit. Today, we're helping thousands of teams around the world manage their contact centers with confidence, clarity, and maybe even a smile.
-  </p>
-</section>
-
-<!-- Values Section -->
-<section class="values-section fade-in">
-  <h2>What Drives Us Every Day</h2>
-  <div class="values-grid">
-    <div class="value-card">
-      <div class="icon">🎯</div>
-      <h3>Simplicity First</h3>
-      <p>We believe powerful software doesn't have to be complicated. If it takes more than 5 clicks, we're doing it wrong.</p>
+  <nav>
+    <div class="logo">
+      <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
     </div>
-    <div class="value-card">
-      <div class="icon">❤️</div>
-      <h3>Customer Obsessed</h3>
-      <p>Your success is our success. We celebrate every milestone with you and lose sleep over your challenges.</p>
+    <div class="menu">
+      <a href="/">Overview</a>
+
+      <a href="/global-reach">Global Reach</a>
+      <a href="/your-orbit">Your Orbit</a>
+      <a href="/get-numbers" class="navbar-buy">Get Numbers</a>
+      <a href="/reach-us">Reach Us</a>
+      <a href="/company.html" class="active-page">Company</a>
     </div>
-    <div class="value-card">
-      <div class="icon">⚡</div>
-      <h3>Innovation Always</h3>
-      <p>The contact center world moves fast. We move faster. Always improving, always innovating, never settling.</p>
+    <div class="actions" style="display:flex; align-items:center; gap:12px;">
+      <a href="/signup.html" class="login-btn">Sign Up</a>
     </div>
-    <div class="value-card">
-      <div class="icon">🤝</div>
-      <h3>Built on Trust</h3>
-      <p>Your data, your business, your success. We take that responsibility seriously and earn your trust every single day.</p>
+  </nav>
+
+  <header class="hero fade-in">
+    <h1>We're Building the Future of Contact Centers 🚀</h1>
+    <p>At CallOrbit, we believe managing a contact center shouldn't feel like rocket science. That's why we're on a
+      mission to make it simple, powerful, and dare we say... fun!</p>
+  </header>
+
+  <section class="fun-stats fade-in">
+    <div class="stat-box">
+      <span class="emoji">☕</span>
+      <h3>10,000+</h3>
+      <p>Cups of Coffee Consumed</p>
     </div>
-    <div class="value-card">
-      <div class="icon">🌟</div>
-      <h3>Excellence, Not Perfection</h3>
-      <p>We strive for excellence in everything we do, but we're not afraid to learn from mistakes and get better.</p>
+    <div class="stat-box">
+      <span class="emoji">🎉</span>
+      <h3>50,000+</h3>
+      <p>Happy Customers Served</p>
     </div>
-    <div class="value-card">
-      <div class="icon">🌈</div>
-      <h3>Make Work Enjoyable</h3>
-      <p>Work doesn't have to be boring. We inject joy into our product because happy teams deliver better customer experiences.</p>
+    <div class="stat-box">
+      <span class="emoji">🌍</span>
+      <h3>150+</h3>
+      <p>Countries We Cover</p>
     </div>
-  </div>
-</section>
+    <div class="stat-box">
+      <span class="emoji">💪</span>
+      <h3>99.9%</h3>
+      <p>Uptime (We Don't Sleep)</p>
+    </div>
+  </section>
 
-<!-- Team Section -->
-<section class="team-section fade-in">
-  <h2>Our Amazing Team</h2>
-  <p>
-    We're a diverse group of engineers, designers, customer success heroes, and coffee enthusiasts from around the world. 
-    What brings us together? A shared passion for making contact center management better for everyone.
-  </p>
-  <div class="team-emojis">👨‍💻 👩‍💼 👨‍🎨 👩‍🔧 👨‍🚀 👩‍💻 👨‍🏫 👩‍🎨</div>
-  <p style="margin-top:20px; font-size:1.1rem; color:#3b82f6; font-weight:600;">
-    We're always looking for talented people to join our mission. Want to help shape the future of contact centers?
-  </p>
-</section>
+  <section class="story-section fade-in">
+    <h2>Our Story: It Started With a Problem 💡</h2>
+    <p>
+      Picture this: A team of contact center managers pulling their hair out trying to juggle multiple platforms,
+      confusing dashboards, and systems that seemed designed by people who never actually used them. Sound familiar?
+    </p>
+    <p>
+      That's when we had our lightbulb moment. What if there was a platform that actually understood what contact center
+      teams needed? One that was powerful enough for enterprises but simple enough that you wouldn't need a PhD to use
+      it?
+    </p>
+    <p>
+      So we rolled up our sleeves, grabbed some coffee (okay, a lot of coffee), and built CallOrbit. Today, we're
+      helping thousands of teams around the world manage their contact centers with confidence, clarity, and maybe even
+      a smile.
+    </p>
+  </section>
 
-<!-- CTA Section -->
-<section class="cta-section fade-in">
-  <h2>Ready to Join the CallOrbit Family? 🎉</h2>
-  <p>Join thousands of teams who've already discovered a better way to manage their contact centers. Let's make something amazing together!</p>
-  <a href="/signup.html">Start Your Free Trial</a>
-</section>
+  <section class="values-section fade-in">
+    <h2>What Drives Us Every Day</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="icon number">01</div>
+        <h3>Simplicity First</h3>
+        <p>We believe powerful software doesn't have to be complicated. If it takes more than 5 clicks, we're doing it
+          wrong.</p>
+      </div>
 
-<!-- Footer -->
-<footer>
-  <div style="margin-bottom:20px; font-size:1.2rem;">
-    Made with ❤️ by the CallOrbit Team
-  </div>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  <br><br>
-  <a href="/privacy-policy">Privacy Policy</a>
-  <a href="/terms-conditions">Terms & Conditions</a>
-  <a href="/refund-policy">Refund Policy</a>
-</footer>
+      <div class="value-card">
+        <div class="icon number">02</div>
+        <h3>Customer Obsessed</h3>
+        <p>Your success is our success. We celebrate every milestone with you and lose sleep over your challenges.</p>
+      </div>
 
-<script>
-// Fade-in
-const faders = document.querySelectorAll('.fade-in');
-const appearOnScroll = new IntersectionObserver(function(entries){
-  entries.forEach(entry => {
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
-  });
-}, {threshold:0.1});
-faders.forEach(fader => appearOnScroll.observe(fader));
+      <div class="value-card">
+        <div class="icon number">03</div>
+        <h3>Innovation Always</h3>
+        <p>The contact center world moves fast. We move faster. Always improving, always innovating, never settling.</p>
+      </div>
 
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+      <div class="value-card">
+        <div class="icon number">04</div>
+        <h3>Built on Trust</h3>
+        <p>Your data, your business, your success. We take that responsibility seriously and earn your trust every
+          single day.</p>
+      </div>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function(){
-    // Remove profile picture
-    Tawk_API.setAttributes({ avatar: '' });
-    // Disable Knowledge Base / Help Center
-    Tawk_API.toggleHelpCenter(false);
-};
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+      <div class="value-card">
+        <div class="icon number">05</div>
+        <h3>Excellence, Not Perfection</h3>
+        <p>We strive for excellence in everything we do, but we're not afraid to learn from mistakes and get better.</p>
+      </div>
 
+      <div class="value-card">
+        <div class="icon number">06</div>
+        <h3>Make Work Enjoyable</h3>
+        <p>Work doesn't have to be boring. We inject joy into our product because happy teams deliver better customer
+          experiences.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section fade-in">
+    <h2>Our Amazing Team</h2>
+    <p>
+      We're a diverse group of engineers, designers, customer success heroes, and coffee enthusiasts from around the
+      world.
+      What brings us together? A shared passion for making contact center management better for everyone.
+    </p>
+    <div class="team-emojis">👨‍💻 👩‍💼 👨‍🎨 👩‍🔧 👨‍🚀 👩‍💻 👨‍🏫 👩‍🎨</div>
+    <p style="margin-top:20px; font-size:1.1rem; color:#3b82f6; font-weight:600;">
+      We're always looking for talented people to join our mission. Want to help shape the future of contact centers?
+    </p>
+  </section>
+
+  <section class="cta-section fade-in">
+    <h2>Ready to Join the CallOrbit Family? 🎉</h2>
+    <p>Join thousands of teams who've already discovered a better way to manage their contact centers. Let's make
+      something amazing together!</p>
+    <a href="/signup.html">Start Your Free Trial</a>
+  </section>
+
+  <footer>
+    <div style="margin-bottom:20px; font-size:1.2rem;">
+      Made with ❤️ by the CallOrbit Team
+    </div>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+    <br><br>
+    <a href="/privacy-policy">Privacy Policy</a>
+    <a href="/terms-conditions">Terms & Conditions</a>
+    <a href="/refund-policy">Refund Policy</a>
+  </footer>
+
+  <script>
+    // Fade-in
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function (entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    Tawk_API.onLoad = function () {
+      // Remove profile picture
+      Tawk_API.setAttributes({ avatar: '' });
+      // Disable Knowledge Base / Help Center
+      Tawk_API.toggleHelpCenter(false);
+    };
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
 </body>
+
 </html>
