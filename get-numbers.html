@@ -81,7 +81,7 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
   <div class="menu">
     <a href="/">Overview</a>
-  
+    <a href="/solutions.html">Solutions</a>
     <a href="/global-reach.html">Global Reach</a>
     <a href="/your-orbit.html">Your Orbit</a>
     <a href="/get-numbers.html" class="navbar-buy active-page">Get Numbers</a>
@@ -170,7 +170,53 @@ const countryNames = {
 };
 
 const localAreas = {
-    US: ["New York", "Los Angeles", "Chicago", "Houston", "Miami"], GB: ["London", "Manchester", "Birmingham"], CA: ["Toronto", "Vancouver", "Montreal"], AU: ["Sydney", "Melbourne", "Brisbane"], DE: ["Berlin", "Munich", "Hamburg"], FR: ["Paris", "Lyon", "Marseille"], IN: ["Mumbai", "Delhi", "Bangalore"], ZA: ["Johannesburg", "Cape Town", "Durban"], BR: ["Sao Paulo", "Rio de Janeiro", "Brasilia"], MX: ["Mexico City", "Guadalajara", "Monterrey"], JP: ["Tokyo", "Osaka", "Nagoya"], IT: ["Rome", "Milan", "Naples"], ES: ["Madrid", "Barcelona", "Valencia"], NL: ["Amsterdam", "Rotterdam", "The Hague"], CH: ["Zurich", "Geneva"], SE: ["Stockholm", "Gothenburg"], SG: ["Singapore"], IE: ["Dublin", "Cork"], NZ: ["Auckland", "Wellington"], NO: ["Oslo", "Bergen"], PT: ["Lisbon", "Porto"], BE: ["Brussels", "Antwerp"], KR: ["Seoul", "Busan"], TR: ["Istanbul", "Ankara"], TH: ["Bangkok", "Chiang Mai"], PH: ["Manila", "Cebu"], TW: ["Taipei", "Kaohsiung"], PL: ["Warsaw", "Krakow"], RO: ["Bucharest", "Cluj"], HU: ["Budapest", "Debrecen"]
+    // Existing Top 30 Countries
+    US: ["New York", "Los Angeles", "Chicago", "Houston", "Miami"], GB: ["London", "Manchester", "Birmingham"], CA: ["Toronto", "Vancouver", "Montreal"], AU: ["Sydney", "Melbourne", "Brisbane"], DE: ["Berlin", "Munich", "Hamburg"], FR: ["Paris", "Lyon", "Marseille"], IN: ["Mumbai", "Delhi", "Bangalore"], ZA: ["Johannesburg", "Cape Town", "Durban"], BR: ["Sao Paulo", "Rio de Janeiro", "Brasilia"], MX: ["Mexico City", "Guadalajara", "Monterrey"], JP: ["Tokyo", "Osaka", "Nagoya"], IT: ["Rome", "Milan", "Naples"], ES: ["Madrid", "Barcelona", "Valencia"], NL: ["Amsterdam", "Rotterdam", "The Hague"], CH: ["Zurich", "Geneva"], SE: ["Stockholm", "Gothenburg"], SG: ["Singapore"], IE: ["Dublin", "Cork"], NZ: ["Auckland", "Wellington"], NO: ["Oslo", "Bergen"], PT: ["Lisbon", "Porto"], BE: ["Brussels", "Antwerp"], KR: ["Seoul", "Busan"], TR: ["Istanbul", "Ankara"], TH: ["Bangkok", "Chiang Mai"], PH: ["Manila", "Cebu"], TW: ["Taipei", "Kaohsiung"], PL: ["Warsaw", "Krakow"], RO: ["Bucharest", "Cluj"], HU: ["Budapest", "Debrecen"],
+    
+    // Additional Countries with Local Areas
+    AE: ["Dubai", "Abu Dhabi", "Sharjah"],
+    AR: ["Buenos Aires", "Cordoba", "Rosario"],
+    AT: ["Vienna", "Salzburg", "Graz"],
+    BA: ["Sarajevo", "Banja Luka"], // Added for Bosnia and Herzegovina
+    BG: ["Sofia", "Plovdiv", "Varna"], // Added for Bulgaria
+    CL: ["Santiago", "Valparaíso", "Concepción"],
+    CN: ["Beijing", "Shanghai", "Guangzhou"],
+    CO: ["Bogotá", "Medellín", "Cali"],
+    CR: ["San José", "Limón", "Heredia"],
+    CY: ["Nicosia", "Limassol"], // Added for Cyprus
+    CZ: ["Prague", "Brno", "Ostrava"],
+    DK: ["Copenhagen", "Aarhus", "Odense"],
+    DO: ["Santo Domingo", "Santiago de los Caballeros"], // Added for Dominican Republic
+    EE: ["Tallinn", "Tartu"], // Added for Estonia
+    EG: ["Cairo", "Alexandria", "Giza"],
+    FI: ["Helsinki", "Tampere", "Turku"],
+    GR: ["Athens", "Thessaloniki"], // Added for Greece
+    GT: ["Guatemala City", "Quetzaltenango"], // Added for Guatemala
+    HK: ["Hong Kong Island", "Kowloon", "New Territories"],
+    ID: ["Jakarta", "Surabaya", "Bandung"],
+    IL: ["Tel Aviv", "Jerusalem", "Haifa"],
+    JO: ["Amman", "Zarqa"], // Added for Jordan
+    KW: ["Kuwait City", "Hawalli"], // Added for Kuwait
+    LV: ["Riga", "Daugavpils"], // Added for Latvia
+    LT: ["Vilnius", "Kaunas"], // Added for Lithuania
+    LU: ["Luxembourg City"], // Added for Luxembourg
+    MY: ["Kuala Lumpur", "George Town", "Johor Bahru"],
+    MT: ["Valletta", "Birkirkara"], // Added for Malta
+    MD: ["Chișinău", "Bălți"], // Added for Moldova
+    OM: ["Muscat", "Salalah"], // Added for Oman
+    PA: ["Panama City", "Colón", "David"],
+    PY: ["Asunción", "Ciudad del Este"], // Added for Paraguay
+    PE: ["Lima", "Arequipa", "Cusco"],
+    PR: ["San Juan", "Bayamón", "Ponce"],
+    QA: ["Doha", "Al Rayyan"], // Added for Qatar
+    RS: ["Belgrade", "Novi Sad"], // Added for Serbia
+    SA: ["Riyadh", "Jeddah", "Dammam"],
+    SK: ["Bratislava", "Košice", "Prešov"],
+    SI: ["Ljubljana", "Maribor"],
+    UA: ["Kyiv", "Kharkiv", "Odesa"],
+    UY: ["Montevideo", "Salto"],
+    UZ: ["Tashkent", "Samarkand", "Bukhara"],
+    VN: ["Hanoi", "Ho Chi Minh City", "Da Nang"]
 };
 
 const packages = { Basic: 100, Plus: 500, Pro: 1000, Max: 2500 };
