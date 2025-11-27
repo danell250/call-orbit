@@ -70,12 +70,10 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
 <body>
 
-<!-- Navbar -->
 <nav>
   <div class="logo"><a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a></div>
   <div class="menu">
     <a href="/">Overview</a>
-
     <a href="/global-reach">Global Reach</a>
     <a href="/your-orbit">Your Orbit</a>
     <a href="/get-numbers">Get Numbers</a>
@@ -92,7 +90,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
 <main>
 <section class="plans-grid fade-in" id="plans-container">
-  <!-- Starter Plan -->
   <div class="plan" data-plan="Starter" data-setup="99" data-training="49" data-price="19">
     <h3>Starter</h3>
     <p><strong>Perfect for small teams just starting out</strong></p>
@@ -107,7 +104,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <p>Training Fee: $49</p>
     <button class="buy-now">Select</button>
   </div>
-  <!-- Team Plan -->
   <div class="plan" data-plan="Team" data-setup="149" data-training="49" data-price="29">
     <h3>Team</h3>
     <p><strong>Ideal for growing teams and managers</strong></p>
@@ -123,7 +119,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <p>Training Fee: $49</p>
     <button class="buy-now">Select</button>
   </div>
-  <!-- Business Plan -->
   <div class="plan" data-plan="Business" data-setup="199" data-training="49" data-price="49">
     <h3>Business</h3>
     <p><strong>Perfect for medium-sized teams scaling operations</strong></p>
@@ -139,7 +134,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <p>Training Fee: $49</p>
     <button class="buy-now">Select</button>
   </div>
-  <!-- Enterprise Plan -->
   <div class="plan" data-plan="Enterprise" data-setup="299" data-training="49" data-price="99">
     <h3>Enterprise</h3>
     <p><strong>For large or global organizations requiring full control</strong></p>
@@ -161,6 +155,10 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 <section class="signup-form fade-in">
   <h2>Sign Up</h2>
   <form id="signupForm">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="New CallOrbit Signup & Payment">
+
     <label for="planSelect">Selected Plan*</label>
     <input type="text" id="planSelect" name="plan" readonly placeholder="Select a plan above" required>
 
@@ -207,6 +205,9 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 <script src="https://www.paypal.com/sdk/js?client-id=AXxjiGRRXzL0lhWXhz9lUCYnIXg0Sfz-9-kDB7HbdwYPOrlspRzyS6TQWAlwRC2GlYSd4lze25jluDLj&currency=USD"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // *** YOUR FORMSUBMIT EMAIL ***
+  const FORMSUBMIT_EMAIL = "danelloosthuizen3@gmail.com"; 
+
   document.getElementById('year').textContent = new Date().getFullYear();
   document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
 
@@ -285,23 +286,41 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details){
-        alert('Payment completed by '+details.payer.name.given_name);
-        console.log("FORM DATA + PAYMENT INFO:", {
-          ...formDataGlobal,
-          paypalOrderId: details.id,
-          planPrice: selectedPlanPrice,
-          setupFee: selectedSetupFee,
-          trainingFee: selectedTrainingFee,
-          totalPaid: selectedPlanPrice + selectedSetupFee + selectedTrainingFee
+        // --- PAYMENT SUCCESSFUL ---
+        
+        // 1. Prepare Data for FormSubmit
+        const formSubmitData = new FormData(form);
+        // Add extra payment details so they appear in your email
+        formSubmitData.append("Total Paid", `$${(selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2)}`);
+        formSubmitData.append("PayPal Order ID", details.id);
+        formSubmitData.append("Payer Name", details.payer.name.given_name + " " + details.payer.name.surname);
+        formSubmitData.append("Payment Status", "COMPLETED");
+
+        // 2. Send to FormSubmit via AJAX (Background)
+        // This ensures the email is sent WITHOUT leaving the page
+        fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
+            method: "POST",
+            body: formSubmitData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("FormSubmit Success:", data);
+        })
+        .catch(error => {
+            console.error("FormSubmit Error:", error);
         });
 
+        // 3. UI Updates
+        alert('Payment completed by ' + details.payer.name.given_name);
+        
         form.reset();
         planSelect.value='';
         paymentCard.style.display='none';
         plans.forEach(p=>p.classList.remove('selected'));
         document.getElementById('paypal-button-container').style.display='none';
+        
         messageEl.style.color="#16a34a";
-        messageEl.textContent='🎉 Payment and signup completed!';
+        messageEl.textContent='🎉 Payment and signup completed! A confirmation email has been sent to the admin.';
       });
     }
   }).render('#paypal-button-container');
