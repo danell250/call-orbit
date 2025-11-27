@@ -286,41 +286,42 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details){
-        // --- PAYMENT SUCCESSFUL ---
+        alert('Payment completed by '+details.payer.name.given_name);
         
-        // 1. Prepare Data for FormSubmit
-        const formSubmitData = new FormData(form);
-        // Add extra payment details so they appear in your email
-        formSubmitData.append("Total Paid", `$${(selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2)}`);
-        formSubmitData.append("PayPal Order ID", details.id);
-        formSubmitData.append("Payer Name", details.payer.name.given_name + " " + details.payer.name.surname);
-        formSubmitData.append("Payment Status", "COMPLETED");
+        // Send form data + payment info to FormSubmit
+        const submissionData = {
+          ...formDataGlobal,
+          paypalOrderId: details.id,
+          payerName: details.payer.name.given_name + ' ' + details.payer.name.surname,
+          payerEmail: details.payer.email_address,
+          planPrice: selectedPlanPrice,
+          setupFee: selectedSetupFee,
+          trainingFee: selectedTrainingFee,
+          totalPaid: (selectedPlanPrice + selectedSetupFee + selectedTrainingFee).toFixed(2)
+        };
 
-        // 2. Send to FormSubmit via AJAX (Background)
-        // This ensures the email is sent WITHOUT leaving the page
-        fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
-            method: "POST",
-            body: formSubmitData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("FormSubmit Success:", data);
-        })
-        .catch(error => {
-            console.error("FormSubmit Error:", error);
+        // Submit to FormSubmit
+        fetch('https://formsubmit.co/YOUR_EMAIL@example.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submissionData)
+        }).then(response => {
+          if(response.ok) {
+            console.log('Customer data sent successfully:', submissionData);
+          } else {
+            console.error('Failed to send customer data');
+          }
+        }).catch(error => {
+          console.error('Error sending data:', error);
         });
 
-        // 3. UI Updates
-        alert('Payment completed by ' + details.payer.name.given_name);
-        
         form.reset();
         planSelect.value='';
         paymentCard.style.display='none';
         plans.forEach(p=>p.classList.remove('selected'));
         document.getElementById('paypal-button-container').style.display='none';
-        
         messageEl.style.color="#16a34a";
-        messageEl.textContent='🎉 Payment and signup completed! A confirmation email has been sent to the admin.';
+        messageEl.textContent='🎉 Payment and signup completed!';
       });
     }
   }).render('#paypal-button-container');
