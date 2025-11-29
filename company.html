@@ -208,7 +208,7 @@
       max-width: 1000px;
       margin: 80px auto;
       padding: 50px 30px;
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: #3b82f6;
       border-radius: 20px;
       color: #fff;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
@@ -351,10 +351,53 @@
       line-height: 1.6;
     }
 
-    .team-emojis {
-      font-size: 3rem;
-      margin: 30px 0;
-      letter-spacing: 20px;
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+      margin-top: 50px;
+      padding: 0 20px;
+    }
+
+    .team-card {
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .team-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-card h3 {
+      font-size: 1.3rem;
+      color: #1e3a8a;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .team-card .job-title {
+      color: #6b7280;
+      font-size: 1rem;
+      font-weight: 500;
     }
 
     /* CTA Section */
@@ -591,8 +634,65 @@
       world.
       What brings us together? A shared passion for making contact center management better for everyone.
     </p>
-    <div class="team-emojis">👨‍💻 👩‍💼 👨‍🎨 👩‍🔧 👨‍🚀 👩‍💻 👨‍🏫 👩‍🎨</div>
-    <p style="margin-top:20px; font-size:1.1rem; color:#3b82f6; font-weight:600;">
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=12" alt="James Patterson">
+        </div>
+        <h3>James Patterson</h3>
+        <p class="job-title">Chief Technology Officer</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=47" alt="Maria Chen">
+        </div>
+        <h3>Maria Chen</h3>
+        <p class="job-title">Head of Product Design</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=51" alt="David Kumar">
+        </div>
+        <h3>David Kumar</h3>
+        <p class="job-title">Lead Software Engineer</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=44" alt="Emily Rodriguez">
+        </div>
+        <h3>Emily Rodriguez</h3>
+        <p class="job-title">Customer Success Manager</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=59" alt="Marcus Thompson">
+        </div>
+        <h3>Marcus Thompson</h3>
+        <p class="job-title">Senior DevOps Engineer</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=32" alt="Lisa Nguyen">
+        </div>
+        <h3>Lisa Nguyen</h3>
+        <p class="job-title">Head of Marketing</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=52" alt="Alexander Johnson">
+        </div>
+        <h3>Alexander Johnson</h3>
+        <p class="job-title">UX Research Lead</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://i.pravatar.cc/160?img=45" alt="Rachel Williams">
+        </div>
+        <h3>Rachel Williams</h3>
+        <p class="job-title">Quality Assurance Lead</p>
+      </div>
+    </div>
+    <p style="margin-top:40px; font-size:1.1rem; color:#3b82f6; font-weight:600;">
       We're always looking for talented people to join our mission. Want to help shape the future of contact centers?
     </p>
   </section>
