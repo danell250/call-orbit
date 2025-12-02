@@ -676,7 +676,7 @@
 
     <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
       <!-- FormSubmit Configuration -->
-      <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup-success.html">
+      <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup.html?submitted=true">
       <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
@@ -704,8 +704,14 @@
       <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567">
 
       <button type="submit">Start Free Trial</button>
-      <p class="message" id="message"></p>
     </form>
+
+    <div class="next-steps-note" id="success-message" style="display:none;">
+      <strong>✓ Thank You!</strong><br>
+      Your free trial request has been submitted. Check your email for login details within 24 hours. Then visit our <a
+        href="/get-numbers.html" style="color:#3b82f6;font-weight:600;">Get Numbers</a> page to purchase phone numbers
+      with minutes.
+    </div>
   </section>
 
   <footer>
