@@ -753,9 +753,9 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const formData = Object.fromEntries(new FormData(form));
+        const formData = new FormData(form);
 
-        if (!formData.plan) {
+        if (!planInput.value) {
           messageEl.style.color = '#dc2626';
           messageEl.textContent = '❌ Please select a plan first';
           return;
@@ -764,36 +764,76 @@
         messageEl.style.color = '#3b82f6';
         messageEl.textContent = '⏳ Creating your account...';
 
+        // Add additional hidden fields for tracking
+        const trialStart = new Date().toISOString();
+        const trialEnd = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
+
+        // Create hidden inputs for additional data
+        const hiddenFields = {
+          'Submitted At': trialStart,
+          'Trial Start Date': trialStart,
+          'Trial End Date': trialEnd,
+          'Signup Type': 'Portal Plan Trial'
+        };
+
+        Object.entries(hiddenFields).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+
         try {
-          // Submit to FormSubmit
-          const response = await fetch(`https://formsubmit.co/${FORMSUBMIT_EMAIL}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              ...formData,
-              submittedAt: new Date().toISOString(),
-              trialStartDate: new Date().toISOString(),
-              trialEndDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-              signupType: 'Portal Plan Trial'
-            })
+          // FormSubmit works best with regular form submission, not fetch
+          const form2 = document.createElement('form');
+          form2.method = 'POST';
+          form2.action = `https://formsubmit.co/${FORMSUBMIT_EMAIL}`;
+          form2.style.display = 'none';
+
+          // Add all form data
+          for (let [key, value] of formData.entries()) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            form2.appendChild(input);
+          }
+
+          // Add FormSubmit configuration
+          const configs = {
+            '_subject': 'New CallOrbit Free Trial Signup',
+            '_captcha': 'false',
+            '_template': 'table',
+            '_next': window.location.href + '?success=true'
+          };
+
+          Object.entries(configs).forEach(([key, value]) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            form2.appendChild(input);
           });
 
-          if (response.ok) {
-            messageEl.style.color = '#10b981';
-            messageEl.textContent = '🎉 Success! Check your email to access your account.';
-            nextStepsEl.style.display = 'block';
-            form.reset();
-            planDisplay.style.display = 'none';
-            plans.forEach(p => p.classList.remove('selected'));
-          } else {
-            throw new Error('Submission failed');
-          }
+          document.body.appendChild(form2);
+          form2.submit();
+
         } catch (error) {
           messageEl.style.color = '#dc2626';
           messageEl.textContent = '❌ Something went wrong. Please try again or contact support.';
           console.error('Error:', error);
         }
       });
+
+      // Check if returning from successful submission
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        messageEl.style.color = '#10b981';
+        messageEl.textContent = '🎉 Success! Check your email to access your account.';
+        nextStepsEl.style.display = 'block';
+        form.reset();
+        planDisplay.style.display = 'none';
+        plans.forEach(p => p.classList.remove('selected'));
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
     });
   </script>
 
