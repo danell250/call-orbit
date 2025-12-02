@@ -10,7 +10,9 @@
     { "source": "/pricing", "destination": "/pricing.html" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
-    { "source": "/refund-policy", "destination": "/refund-policy.html" }
+    { "source": "/refund-policy", "destination": "/refund-policy.html" },
+    { "source": "/signup", "destination": "/signup.html" }
+    
   ],
   "redirects": [
     { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
@@ -21,6 +23,10 @@
     { "source": "/your-orbit.html", "destination": "/your-orbit", "permanent": true },
     { "source": "/get-numbers.html", "destination": "/get-numbers", "permanent": true },
     { "source": "/reach-us.html", "destination": "/reach-us", "permanent": true },
-    { "source": "/company.html", "destination": "/company", "permanent": true }
+    { "source": "/company.html", "destination": "/company", "permanent": true },
+        {
+          "source": "/signup",
+          "destination": "/signup.html"
+        }
   ]
 }
