@@ -104,6 +104,62 @@
       margin-top: 10px;
     }
 
+    /* How It Works Section */
+    .how-it-works {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px 20px;
+      background: #f0f9ff;
+      border-radius: 15px;
+    }
+
+    .how-it-works h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #1e3a8a;
+      margin-bottom: 30px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .step {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-number {
+      background: #3b82f6;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 0 auto 15px;
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
     /* Plans Grid - UPDATED */
     .plans-section {
       max-width: 1200px;
@@ -115,14 +171,24 @@
       text-align: center;
       font-size: 2rem;
       color: #1e3a8a;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
-    .plans-section .pricing-note {
+    .plans-section .section-subtitle {
       text-align: center;
       color: #6b7280;
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-bottom: 35px;
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.95rem;
+      margin-bottom: 35px;
+      background: #fef3c7;
+      padding: 12px;
+      border-radius: 8px;
     }
 
     .plans-grid {
@@ -238,7 +304,7 @@
       background: #10b981;
     }
 
-    /* FREE TRIAL SECTION - NEW */
+    /* FREE TRIAL SECTION */
     .trial-section {
       background: #f0f9ff;
       padding: 60px 20px;
@@ -368,7 +434,17 @@
       font-weight: 600;
     }
 
-    /* Features Grid - NEW */
+    .next-steps-note {
+      background: #fef3c7;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #92400e;
+      text-align: center;
+    }
+
+    /* Features Grid */
     .features-section {
       max-width: 1100px;
       margin: 60px auto;
@@ -461,6 +537,28 @@
     </div>
   </header>
 
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works fade-in">
+    <h2>How CallOrbit Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Choose Portal Plan</h3>
+        <p>Select a plan below based on how many agents you need. Start with a 14-day free trial.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Get Phone Numbers</h3>
+        <p>After signup, purchase phone numbers with minutes packages from our Get Numbers page.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Start Calling</h3>
+        <p>Set up call routing, manage queues, and track performance—all from your dashboard.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- FREE TRIAL CTA SECTION -->
   <section class="trial-section fade-in">
     <h2>Try CallOrbit Free for 14 Days</h2>
@@ -499,19 +597,23 @@
 
   <!-- PRICING PLANS -->
   <section class="plans-section fade-in">
-    <h2>Choose Your Plan</h2>
-    <p class="pricing-note">Start with 14 days free. Cancel anytime. No setup fees.</p>
+    <h2>Choose Your Portal Plan</h2>
+    <p class="section-subtitle">Access to the CallOrbit platform and agent management</p>
+    <div class="pricing-note">
+      <strong>⚠️ Note:</strong> Phone numbers with minutes are purchased separately after signup. Portal plans give you
+      access to manage your call center.
+    </div>
 
     <div class="plans-grid" id="plans-container">
       <div class="plan" data-plan="Starter" data-price="29">
         <h3>Starter</h3>
         <div class="price">$29<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">~$10 per agent</p>
+        <p class="price-note">Perfect for small teams</p>
         <ul>
           <li>Up to 3 agents</li>
-          <li>1,000 minutes included</li>
           <li>Basic call routing</li>
           <li>Real-time dashboard</li>
+          <li>Call activity tracking</li>
           <li>Email support</li>
         </ul>
         <button class="select-plan">Select Plan</button>
@@ -520,11 +622,11 @@
       <div class="plan popular" data-plan="Team" data-price="79">
         <h3>Team</h3>
         <div class="price">$79<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">~$4 per agent</p>
+        <p class="price-note">Best for growing teams</p>
         <ul>
           <li>Up to 20 agents</li>
-          <li>5,000 minutes included</li>
           <li>Advanced call routing & queues</li>
+          <li>Unlimited dashboards</li>
           <li>Call recording</li>
           <li>Performance analytics</li>
           <li>Priority support</li>
@@ -535,12 +637,12 @@
       <div class="plan" data-plan="Business" data-price="199">
         <h3>Business</h3>
         <div class="price">$199<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">~$4 per agent</p>
+        <p class="price-note">For scaling operations</p>
         <ul>
           <li>Up to 50 agents</li>
-          <li>15,000 minutes included</li>
           <li>Custom call flows</li>
           <li>Advanced analytics & reporting</li>
+          <li>Multiple dashboards</li>
           <li>API access</li>
           <li>Dedicated support</li>
         </ul>
@@ -550,14 +652,14 @@
       <div class="plan" data-plan="Enterprise" data-price="custom">
         <h3>Enterprise</h3>
         <div class="price">Custom</div>
-        <p class="price-note">Contact for pricing</p>
+        <p class="price-note">For large organizations</p>
         <ul>
           <li>Unlimited agents</li>
-          <li>Unlimited minutes</li>
           <li>Dedicated account manager</li>
           <li>Custom integrations</li>
           <li>SLA guarantees</li>
           <li>24/7 premium support</li>
+          <li>Advanced security features</li>
         </ul>
         <button class="select-plan">Contact Sales</button>
       </div>
@@ -593,6 +695,12 @@
 
       <button type="submit">Start Free Trial</button>
       <p class="message" id="message"></p>
+
+      <div class="next-steps-note" id="next-steps" style="display:none;">
+        <strong>✓ Account Created!</strong><br>
+        Check your email for login details. Then visit our <a href="/get-numbers"
+          style="color:#3b82f6;font-weight:600;">Get Numbers</a> page to purchase phone numbers with minutes.
+      </div>
     </form>
   </section>
 
@@ -617,6 +725,7 @@
       const planNameDisplay = document.getElementById('plan-name-display');
       const form = document.getElementById('signupForm');
       const messageEl = document.getElementById('message');
+      const nextStepsEl = document.getElementById('next-steps');
 
       // Plan selection
       plans.forEach(plan => {
@@ -632,7 +741,7 @@
           plan.classList.add('selected');
 
           planInput.value = planName;
-          planNameDisplay.textContent = `${planName} Plan`;
+          planNameDisplay.textContent = `${planName} Plan - $${plan.dataset.price}/month`;
           planDisplay.style.display = 'block';
 
           // Scroll to form
@@ -664,13 +773,15 @@
               ...formData,
               submittedAt: new Date().toISOString(),
               trialStartDate: new Date().toISOString(),
-              trialEndDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+              trialEndDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+              signupType: 'Portal Plan Trial'
             })
           });
 
           if (response.ok) {
             messageEl.style.color = '#10b981';
             messageEl.textContent = '🎉 Success! Check your email to access your account.';
+            nextStepsEl.style.display = 'block';
             form.reset();
             planDisplay.style.display = 'none';
             plans.forEach(p => p.classList.remove('selected'));
