@@ -1,777 +1,360 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CallOrbit — Start Your Free Trial</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CallOrbit — Start Your Free Trial</title>
 
-  <link rel="icon" href="data:image/svg+xml,
+<link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body,
-    input,
-    select,
-    textarea {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 30px;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      font-family: 'Inter', sans-serif;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-    }
-
-    nav .logo a {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #3b82f6;
-      text-decoration: none;
-    }
-
-    nav .menu a {
-      margin: 0 12px;
-      text-decoration: none;
-      color: #1f2937;
-      font-weight: 500;
-    }
-
-    nav .menu a.active-page {
-      color: #3b82f6;
-      font-weight: 700;
-    }
-
-    .login-btn {
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-weight: 600;
-      text-decoration: none;
-      background: #3b82f6;
-      color: #fff;
-      transition: 0.2s;
-    }
-
-    .login-btn:hover {
-      background: #2563eb;
-    }
-
-    /* Hero - UPDATED */
-    header.hero {
-      padding: 80px 20px 60px;
-      text-align: center;
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
-      color: #FFFFFF;
-    }
-
-    header.hero h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #FFFFFF;
-      font-weight: 700;
-    }
-
-    header.hero .subtitle {
-      font-size: 1.3rem;
-      margin-bottom: 25px;
-      opacity: 0.95;
-    }
-
-    .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      margin-top: 10px;
-    }
-
-    /* How It Works Section */
-    .how-it-works {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 40px 20px;
-      background: #f0f9ff;
-      border-radius: 15px;
-    }
-
-    .how-it-works h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #1e3a8a;
-      margin-bottom: 30px;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .step {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .step-number {
-      background: #3b82f6;
-      color: #fff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin: 0 auto 15px;
-    }
-
-    .step h3 {
-      font-size: 1.2rem;
-      color: #1e3a8a;
-      margin-bottom: 10px;
-    }
-
-    .step p {
-      color: #6b7280;
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    /* Plans Grid - UPDATED */
-    .plans-section {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .plans-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #1e3a8a;
-      margin-bottom: 10px;
-    }
-
-    .plans-section .section-subtitle {
-      text-align: center;
-      color: #6b7280;
-      font-size: 1.1rem;
-      margin-bottom: 35px;
-    }
-
-    .pricing-note {
-      text-align: center;
-      color: #6b7280;
-      font-size: 0.95rem;
-      margin-bottom: 35px;
-      background: #fef3c7;
-      padding: 12px;
-      border-radius: 8px;
-    }
-
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 40px;
-    }
-
-    .plan {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      position: relative;
-      border: 2px solid transparent;
-    }
-
-    .plan.popular {
-      border-color: #3b82f6;
-    }
-
-    .plan.popular::before {
-      content: "MOST POPULAR";
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #3b82f6;
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .plan.selected {
-      border-color: #2563eb;
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(37, 99, 235, 0.25);
-    }
-
-    .plan:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .plan h3 {
-      color: #1e3a8a;
-      margin-bottom: 8px;
-      font-size: 1.6rem;
-    }
-
-    .plan .price {
-      font-weight: 700;
-      font-size: 2.2rem;
-      margin: 15px 0;
-      color: #1e3a8a;
-    }
-
-    .plan .price-note {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 20px;
-    }
-
-    .plan ul {
-      text-align: left;
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-    }
-
-    .plan ul li {
-      padding: 8px 0;
-      color: #374151;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .plan ul li::before {
-      content: "✓";
-      color: #10b981;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .plan button.select-plan {
-      background: #3b82f6;
-      color: #fff;
-      font-weight: 700;
-      padding: 14px 32px;
-      border-radius: 999px;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-      width: 100%;
-    }
-
-    .plan button.select-plan:hover {
-      background: #2563eb;
-      transform: scale(1.02);
-      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
-    }
-
-    .plan.selected button.select-plan {
-      background: #10b981;
-    }
-
-    /* FREE TRIAL SECTION */
-    .trial-section {
-      background: #f0f9ff;
-      padding: 60px 20px;
-      text-align: center;
-      margin: 40px 0;
-    }
-
-    .trial-section h2 {
-      font-size: 2.2rem;
-      color: #1e3a8a;
-      margin-bottom: 15px;
-    }
-
-    .trial-section p {
-      font-size: 1.1rem;
-      color: #374151;
-      max-width: 700px;
-      margin: 0 auto 30px;
-    }
-
-    .trial-cta {
-      background: #10b981;
-      color: #fff;
-      padding: 16px 40px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-      transition: all 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .trial-cta:hover {
-      background: #059669;
-      transform: scale(1.05);
-    }
-
-    /* Signup Form - SIMPLIFIED */
-    .signup-form {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 40px 30px;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .signup-form h2 {
-      margin-bottom: 10px;
-      text-align: center;
-      color: #1e3a8a;
-      font-size: 1.8rem;
-    }
-
-    .signup-form .form-subtitle {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 25px;
-      font-size: 0.95rem;
-    }
-
-    .signup-form label {
-      display: block;
-      margin: 15px 0 6px;
-      font-weight: 600;
-      text-align: left;
-      color: #374151;
-    }
-
-    .signup-form input,
-    .signup-form select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      display: block;
-      font-size: 1rem;
-      transition: all 0.2s ease;
-      box-sizing: border-box;
-    }
-
-    .signup-form input:focus,
-    .signup-form select:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      outline: none;
-    }
-
-    .signup-form button {
-      width: 100%;
-      padding: 16px;
-      background: #10b981;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      margin-top: 20px;
-      font-size: 1.1rem;
-      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    .signup-form button:hover {
-      background: #059669;
-      transform: scale(1.02);
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-    }
-
-    .signup-form .selected-plan-badge {
-      background: #eff6ff;
-      border: 1px solid #3b82f6;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #1e3a8a;
-      font-weight: 600;
-    }
-
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      font-weight: 600;
-    }
-
-    .next-steps-note {
-      background: #fef3c7;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #92400e;
-      text-align: center;
-    }
-
-    /* Features Grid */
-    .features-section {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    .features-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      color: #1e3a8a;
-      margin-bottom: 40px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .feature {
-      text-align: center;
-      padding: 20px;
-    }
-
-    .feature i {
-      font-size: 2.5rem;
-      color: #3b82f6;
-      margin-bottom: 15px;
-    }
-
-    .feature h3 {
-      font-size: 1.2rem;
-      color: #1e3a8a;
-      margin-bottom: 10px;
-    }
-
-    .feature p {
-      color: #6b7280;
-      line-height: 1.6;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem 20px;
-      background: #f3f4f6;
-      margin-top: 60px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      margin: 0 10px;
-      color: #3b82f6;
-      text-decoration: none;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body, input, select, textarea { font-family: 'Inter', sans-serif; margin:0; padding:0; }
+
+/* Navbar */
+nav { display:flex; justify-content:space-between; align-items:center; padding:12px 30px; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.05); font-family:'Inter',sans-serif; position:sticky; top:0; z-index:200; }
+nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:none; }
+nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
+nav .menu a.active-page { color:#3b82f6; font-weight:700; }
+.login-btn { padding:10px 18px; border-radius:999px; font-weight:600; text-decoration:none; background:#3b82f6; color:#fff; transition:0.2s; }
+.login-btn:hover { background:#2563eb; }
+
+/* Hero - UPDATED */
+header.hero { padding:80px 20px 60px; text-align:center; background:linear-gradient(135deg,#3b82f6,#60a5fa); color:#FFFFFF; }
+header.hero h1 { font-size:3rem; margin-bottom:15px; color:#FFFFFF; font-weight:700; }
+header.hero .subtitle { font-size:1.3rem; margin-bottom:25px; opacity:0.95; }
+.trust-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.2); padding:8px 16px; border-radius:999px; font-size:0.9rem; margin-top:10px; }
+
+/* How It Works Section */
+.how-it-works { max-width:900px; margin:40px auto; padding:40px 20px; background:#f0f9ff; border-radius:15px; }
+.how-it-works h2 { text-align:center; font-size:2rem; color:#1e3a8a; margin-bottom:30px; }
+.steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+.step { background:#fff; padding:25px; border-radius:10px; text-align:center; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.step-number { background:#3b82f6; color:#fff; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.3rem; margin:0 auto 15px; }
+.step h3 { font-size:1.2rem; color:#1e3a8a; margin-bottom:10px; }
+.step p { color:#6b7280; line-height:1.6; font-size:0.95rem; }
+
+/* Plans Grid - UPDATED */
+.plans-section { max-width:1200px; margin:40px auto; padding:0 20px; }
+.plans-section h2 { text-align:center; font-size:2rem; color:#1e3a8a; margin-bottom:10px; }
+.plans-section .section-subtitle { text-align:center; color:#6b7280; font-size:1.1rem; margin-bottom:35px; }
+.pricing-note { text-align:center; color:#6b7280; font-size:0.95rem; margin-bottom:35px; background:#fef3c7; padding:12px; border-radius:8px; }
+.plans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-bottom:40px; }
+.plan { background:#fff; padding:30px 25px; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.08); text-align:center; transition:transform 0.3s,box-shadow 0.3s; cursor:pointer; position:relative; border:2px solid transparent; }
+.plan.popular { border-color:#3b82f6; }
+.plan.popular::before { content:"MOST POPULAR"; position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#3b82f6; color:#fff; padding:4px 16px; border-radius:999px; font-size:0.75rem; font-weight:700; }
+.plan.selected { border-color:#2563eb; transform:translateY(-8px); box-shadow:0 15px 40px rgba(37,99,235,0.25); }
+.plan:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
+.plan h3 { color:#1e3a8a; margin-bottom:8px; font-size:1.6rem; }
+.plan .price { font-weight:700; font-size:2.2rem; margin:15px 0; color:#1e3a8a; }
+.plan .price-note { font-size:0.9rem; color:#6b7280; margin-bottom:20px; }
+.plan ul { text-align:left; list-style:none; padding:0; margin:20px 0; }
+.plan ul li { padding:8px 0; color:#374151; display:flex; align-items:flex-start; gap:8px; }
+.plan ul li::before { content:"✓"; color:#10b981; font-weight:700; flex-shrink:0; }
+.plan button.select-plan { background:#3b82f6; color:#fff; font-weight:700; padding:14px 32px; border-radius:999px; font-size:1rem; border:none; cursor:pointer; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(59,130,246,0.3); width:100%; }
+.plan button.select-plan:hover { background:#2563eb; transform:scale(1.02); box-shadow:0 6px 18px rgba(37,99,235,0.4); }
+.plan.selected button.select-plan { background:#10b981; }
+
+/* FREE TRIAL SECTION */
+.trial-section { background:#f0f9ff; padding:60px 20px; text-align:center; margin:40px 0; }
+.trial-section h2 { font-size:2.2rem; color:#1e3a8a; margin-bottom:15px; }
+.trial-section p { font-size:1.1rem; color:#374151; max-width:700px; margin:0 auto 30px; }
+.trial-cta { background:#10b981; color:#fff; padding:16px 40px; border-radius:999px; font-weight:700; font-size:1.1rem; border:none; cursor:pointer; box-shadow:0 6px 20px rgba(16,185,129,0.3); transition:all 0.3s; text-decoration:none; display:inline-block; }
+.trial-cta:hover { background:#059669; transform:scale(1.05); }
+
+/* Signup Form - SIMPLIFIED */
+.signup-form { max-width:500px; margin:60px auto; padding:40px 30px; background:#fff; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,0.1); }
+.signup-form h2 { margin-bottom:10px; text-align:center; color:#1e3a8a; font-size:1.8rem; }
+.signup-form .form-subtitle { text-align:center; color:#6b7280; margin-bottom:25px; font-size:0.95rem; }
+.signup-form label { display:block; margin:15px 0 6px; font-weight:600; text-align:left; color:#374151; }
+.signup-form input, .signup-form select { width:100%; padding:12px 14px; border-radius:8px; border:1px solid #cbd5e1; display:block; font-size:1rem; transition:all 0.2s ease; box-sizing:border-box; }
+.signup-form input:focus, .signup-form select:focus { border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,0.1); outline:none; }
+.signup-form button { width:100%; padding:16px; background:#10b981; color:#fff; font-weight:700; border-radius:999px; cursor:pointer; transition:all 0.3s ease; border:none; margin-top:20px; font-size:1.1rem; box-shadow:0 6px 15px rgba(16,185,129,0.3); }
+.signup-form button:hover { background:#059669; transform:scale(1.02); box-shadow:0 8px 20px rgba(16,185,129,0.4); }
+.signup-form .selected-plan-badge { background:#eff6ff; border:1px solid #3b82f6; padding:12px; border-radius:8px; text-align:center; margin-bottom:20px; color:#1e3a8a; font-weight:600; }
+.message { text-align:center; margin-top:15px; font-weight:600; }
+.next-steps-note { background:#fef3c7; padding:15px; border-radius:8px; margin-top:20px; font-size:0.9rem; color:#92400e; text-align:center; }
+
+/* Features Grid */
+.features-section { max-width:1100px; margin:60px auto; padding:0 20px; }
+.features-section h2 { text-align:center; font-size:2rem; color:#1e3a8a; margin-bottom:40px; }
+.features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+.feature { text-align:center; padding:20px; }
+.feature i { font-size:2.5rem; color:#3b82f6; margin-bottom:15px; }
+.feature h3 { font-size:1.2rem; color:#1e3a8a; margin-bottom:10px; }
+.feature p { color:#6b7280; line-height:1.6; }
+
+footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
+footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+
+.fade-in { opacity:0; transform:translateY(20px); transition:all 0.8s ease-out; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+</style>
 </head>
 
 <body>
 
-  <nav>
-    <div class="logo"><a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a></div>
-    <div class="menu">
-      <a href="/">Overview</a>
-      <a href="/global-reach">Global Reach</a>
-      <a href="/your-orbit">Your Orbit</a>
-      <a href="/get-numbers">Get Numbers</a>
-      <a href="/reach-us">Reach Us</a>
-      <a href="/company.html">Company</a>
+<nav>
+  <div class="logo"><a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a></div>
+  <div class="menu">
+    <a href="/">Overview</a>
+    <a href="/global-reach">Global Reach</a>
+    <a href="/your-orbit">Your Orbit</a>
+    <a href="/get-numbers">Get Numbers</a>
+    <a href="/reach-us">Reach Us</a>
+    <a href="/company.html">Company</a>
+  </div>
+  <a href="/signup.html" class="login-btn">Sign Up</a>
+</nav>
+
+<header class="hero fade-in">
+  <h1>Start Your Call Center in Minutes</h1>
+  <p class="subtitle">Professional call routing, queue management, and analytics.<br>No setup fees. No credit card required.</p>
+  <div class="trust-badge">
+    <i class="fas fa-check-circle"></i> 14-Day Free Trial
+  </div>
+</header>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works fade-in">
+  <h2>How CallOrbit Works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Choose Portal Plan</h3>
+      <p>Select a plan below based on how many agents you need. Start with a 14-day free trial.</p>
     </div>
-    <a href="/signup.html" class="login-btn">Sign Up</a>
-  </nav>
-
-  <header class="hero fade-in">
-    <h1>Start Your Call Center in Minutes</h1>
-    <p class="subtitle">Professional call routing, queue management, and analytics.<br>No setup fees. No credit card
-      required.</p>
-    <div class="trust-badge">
-      <i class="fas fa-check-circle"></i> 14-Day Free Trial
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Get Phone Numbers</h3>
+      <p>After signup, purchase phone numbers with minutes packages from our Get Numbers page.</p>
     </div>
-  </header>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works fade-in">
-    <h2>How CallOrbit Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Choose Portal Plan</h3>
-        <p>Select a plan below based on how many agents you need. Start with a 14-day free trial.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Get Phone Numbers</h3>
-        <p>After signup, purchase phone numbers with minutes packages from our Get Numbers page.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Start Calling</h3>
-        <p>Set up call routing, manage queues, and track performance—all from your dashboard.</p>
-      </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Start Calling</h3>
+      <p>Set up call routing, manage queues, and track performance—all from your dashboard.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FREE TRIAL CTA SECTION -->
-  <section class="trial-section fade-in">
-    <h2>Try CallOrbit Free for 14 Days</h2>
-    <p>No credit card required. Full access to all features. Set up your entire call center, test with your team, and
-      see results before you pay anything.</p>
-    <button class="trial-cta" onclick="document.getElementById('signupForm').scrollIntoView({behavior:'smooth'})">Start
-      Free Trial Now</button>
-  </section>
+<!-- FREE TRIAL CTA SECTION -->
+<section class="trial-section fade-in">
+  <h2>Try CallOrbit Free for 14 Days</h2>
+  <p>No credit card required. Full access to all features. Set up your entire call center, test with your team, and see results before you pay anything.</p>
+  <button class="trial-cta" onclick="document.getElementById('signupForm').scrollIntoView({behavior:'smooth'})">Start Free Trial Now</button>
+</section>
 
-  <!-- FEATURES SECTION -->
-  <section class="features-section fade-in">
-    <h2>Everything You Need to Run a Professional Call Center</h2>
-    <div class="features-grid">
-      <div class="feature">
-        <i class="fas fa-phone-volume"></i>
-        <h3>Smart Call Routing</h3>
-        <p>Route calls to the right agents automatically with customizable queue management</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-chart-line"></i>
-        <h3>Real-Time Analytics</h3>
-        <p>Track team performance with live dashboards and detailed reporting</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-globe"></i>
-        <h3>Global Numbers</h3>
-        <p>Get local numbers in 50+ countries to establish a local presence anywhere</p>
-      </div>
-      <div class="feature">
-        <i class="fas fa-users"></i>
-        <h3>Team Management</h3>
-        <p>Easily add agents, assign roles, and monitor activity from one dashboard</p>
-      </div>
+<!-- FEATURES SECTION -->
+<section class="features-section fade-in">
+  <h2>Everything You Need to Run a Professional Call Center</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <i class="fas fa-phone-volume"></i>
+      <h3>Smart Call Routing</h3>
+      <p>Route calls to the right agents automatically with customizable queue management</p>
     </div>
-  </section>
-
-  <!-- PRICING PLANS -->
-  <section class="plans-section fade-in">
-    <h2>Choose Your Portal Plan</h2>
-    <p class="section-subtitle">Access to the CallOrbit platform and agent management</p>
-    <div class="pricing-note">
-      <strong>⚠️ Note:</strong> Phone numbers with minutes are purchased separately after signup. Portal plans give you
-      access to manage your call center.
+    <div class="feature">
+      <i class="fas fa-chart-line"></i>
+      <h3>Real-Time Analytics</h3>
+      <p>Track team performance with live dashboards and detailed reporting</p>
     </div>
-
-    <div class="plans-grid" id="plans-container">
-      <div class="plan" data-plan="Starter" data-price="29">
-        <h3>Starter</h3>
-        <div class="price">$29<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">Perfect for small teams</p>
-        <ul>
-          <li>Up to 3 agents</li>
-          <li>Basic call routing</li>
-          <li>Real-time dashboard</li>
-          <li>Call activity tracking</li>
-          <li>Email support</li>
-        </ul>
-        <button class="select-plan">Select Plan</button>
-      </div>
-
-      <div class="plan popular" data-plan="Team" data-price="79">
-        <h3>Team</h3>
-        <div class="price">$79<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">Best for growing teams</p>
-        <ul>
-          <li>Up to 20 agents</li>
-          <li>Advanced call routing & queues</li>
-          <li>Unlimited dashboards</li>
-          <li>Performance analytics</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="select-plan">Select Plan</button>
-      </div>
-
-      <div class="plan" data-plan="Business" data-price="199">
-        <h3>Business</h3>
-        <div class="price">$199<span style="font-size:1rem;font-weight:400;">/month</span></div>
-        <p class="price-note">For scaling operations</p>
-        <ul>
-          <li>Up to 50 agents</li>
-          <li>Custom call flows</li>
-          <li>Advanced analytics & reporting</li>
-          <li>Multiple dashboards</li>
-          <li>API access</li>
-          <li>Dedicated support</li>
-        </ul>
-        <button class="select-plan">Select Plan</button>
-      </div>
-
-      <div class="plan" data-plan="Enterprise" data-price="custom">
-        <h3>Enterprise</h3>
-        <div class="price">Custom</div>
-        <p class="price-note">For large organizations</p>
-        <ul>
-          <li>Unlimited agents</li>
-          <li>Dedicated account manager</li>
-          <li>Custom integrations</li>
-          <li>SLA guarantees</li>
-          <li>24/7 premium support</li>
-          <li>Advanced security features</li>
-        </ul>
-        <button class="select-plan">Contact Sales</button>
-      </div>
+    <div class="feature">
+      <i class="fas fa-globe"></i>
+      <h3>Global Numbers</h3>
+      <p>Get local numbers in 50+ countries to establish a local presence anywhere</p>
     </div>
-  </section>
+    <div class="feature">
+      <i class="fas fa-users"></i>
+      <h3>Team Management</h3>
+      <p>Easily add agents, assign roles, and monitor activity from one dashboard</p>
+    </div>
+  </div>
+</section>
 
-  <!-- SIGNUP FORM -->
-  <section class="signup-form fade-in">
-    <h2>Start Your Free Trial</h2>
-    <p class="form-subtitle">No credit card required for trial period</p>
-
-    <div id="selected-plan-display" class="selected-plan-badge" style="display:none;">
-      Selected: <strong><span id="plan-name-display"></span></strong>
+<!-- PRICING PLANS -->
+<section class="plans-section fade-in">
+  <h2>Choose Your Portal Plan</h2>
+  <p class="section-subtitle">Access to the CallOrbit platform and agent management</p>
+  <div class="pricing-note">
+    <strong>⚠️ Note:</strong> Phone numbers with minutes are purchased separately after signup. Portal plans give you access to manage your call center.
+  </div>
+  
+  <div class="plans-grid" id="plans-container">
+    <div class="plan" data-plan="Starter" data-price="29">
+      <h3>Starter</h3>
+      <div class="price">$29<span style="font-size:1rem;font-weight:400;">/month</span></div>
+      <p class="price-note">Perfect for small teams</p>
+      <ul>
+        <li>Up to 3 agents</li>
+        <li>Basic call routing</li>
+        <li>Real-time dashboard</li>
+        <li>Call activity tracking</li>
+        <li>Email support</li>
+      </ul>
+      <button class="select-plan">Select Plan</button>
     </div>
 
-    <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
-      <!-- FormSubmit Configuration -->
-      <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup-success.html">
-      <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
+    <div class="plan popular" data-plan="Team" data-price="79">
+      <h3>Team</h3>
+      <div class="price">$79<span style="font-size:1rem;font-weight:400;">/month</span></div>
+      <p class="price-note">Best for growing teams</p>
+      <ul>
+        <li>Up to 20 agents</li>
+        <li>Advanced call routing & queues</li>
+        <li>Unlimited dashboards</li>
+        <li>Performance analytics</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="select-plan">Select Plan</button>
+    </div>
 
-      <!-- Hidden fields for tracking -->
-      <input type="hidden" name="Signup Type" value="Portal Plan Trial">
-      <input type="hidden" id="trialStartInput" name="Trial Start Date">
-      <input type="hidden" id="trialEndInput" name="Trial End Date">
+    <div class="plan" data-plan="Business" data-price="199">
+      <h3>Business</h3>
+      <div class="price">$199<span style="font-size:1rem;font-weight:400;">/month</span></div>
+      <p class="price-note">For scaling operations</p>
+      <ul>
+        <li>Up to 50 agents</li>
+        <li>Custom call flows</li>
+        <li>Advanced analytics & reporting</li>
+        <li>Multiple dashboards</li>
+        <li>API access</li>
+        <li>Dedicated support</li>
+      </ul>
+      <button class="select-plan">Select Plan</button>
+    </div>
 
-      <input type="hidden" name="Selected Plan" id="planInput">
+    <div class="plan" data-plan="Enterprise" data-price="custom">
+      <h3>Enterprise</h3>
+      <div class="price">Custom</div>
+      <p class="price-note">For large organizations</p>
+      <ul>
+        <li>Unlimited agents</li>
+        <li>Dedicated account manager</li>
+        <li>Custom integrations</li>
+        <li>SLA guarantees</li>
+        <li>24/7 premium support</li>
+        <li>Advanced security features</li>
+      </ul>
+      <button class="select-plan">Contact Sales</button>
+    </div>
+  </div>
+</section>
 
-      <label for="email">Work Email*</label>
-      <input type="email" id="email" name="Email" required placeholder="you@company.com">
+<!-- SIGNUP FORM -->
+<section class="signup-form fade-in">
+  <h2>Start Your Free Trial</h2>
+  <p class="form-subtitle">No credit card required for trial period</p>
+  
+  <div id="selected-plan-display" class="selected-plan-badge" style="display:none;">
+    Selected: <strong><span id="plan-name-display"></span></strong>
+  </div>
 
-      <label for="firstName">First Name*</label>
-      <input type="text" id="firstName" name="First Name" required>
+  <form 
+    id="signupForm"
+    action="https://formsubmit.co/danelloosthuizen3@gmail.com" 
+    method="POST"
+  >
+    <!-- FormSubmit Configuration -->
+    <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup-success.html">
+    <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    
+    <!-- Hidden fields for tracking -->
+    <input type="hidden" name="Signup Type" value="Portal Plan Trial">
+    <input type="hidden" id="trialStartInput" name="Trial Start Date">
+    <input type="hidden" id="trialEndInput" name="Trial End Date">
+    
+    <input type="hidden" name="Selected Plan" id="planInput">
+    
+    <label for="email">Work Email*</label>
+    <input type="email" id="email" name="Email" required placeholder="you@company.com">
 
-      <label for="lastName">Last Name*</label>
-      <input type="text" id="lastName" name="Last Name" required>
+    <label for="firstName">First Name*</label>
+    <input type="text" id="firstName" name="First Name" required>
 
-      <label for="companyName">Company Name*</label>
-      <input type="text" id="companyName" name="Company Name" required>
+    <label for="lastName">Last Name*</label>
+    <input type="text" id="lastName" name="Last Name" required>
 
-      <label for="phoneNumber">Phone Number*</label>
-      <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567">
+    <label for="companyName">Company Name*</label>
+    <input type="text" id="companyName" name="Company Name" required>
 
-      <button type="submit">Start Free Trial</button>
-      <p class="message" id="message"></p>
-    </form>
-  </section>
+    <label for="phoneNumber">Phone Number*</label>
+    <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567">
 
-  <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-    <br>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-conditions">Terms & Conditions</a>
-    <a href="/refund-policy">Refund Policy</a>
-  </footer>
+    <button type="submit">Start Free Trial</button>
+    <p class="message" id="message"></p>
+  </form>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const FORMSUBMIT_EMAIL = "danelloosthuizen3@gmail.com";
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.
+  <br>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/terms-conditions">Terms & Conditions</a>
+  <a href="/refund-policy">Refund Policy</a>
+</footer>
 
-      document.getElementById('year').textContent = new Date().getFullYear();
-      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const FORMSUBMIT_EMAIL = "danelloosthuizen3@gmail.com";
+  
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
 
-      const plans = document.querySelectorAll('.plan');
-      const planInput = document.getElementById('planInput');
-      const planDisplay = document.getElementById('selected-plan-display');
-      const planNameDisplay = document.getElementById('plan-name-display');
-      const form = document.getElementById('signupForm');
-      const messageEl = document.getElementById('message');
-      const trialStartInput = document.getElementById('trialStartInput');
-      const trialEndInput = document.getElementById('trialEndInput');
+  const plans = document.querySelectorAll('.plan');
+  const planInput = document.getElementById('planInput');
+  const planDisplay = document.getElementById('selected-plan-display');
+  const planNameDisplay = document.getElementById('plan-name-display');
+  const form = document.getElementById('signupForm');
+  const messageEl = document.getElementById('message');
+  const trialStartInput = document.getElementById('trialStartInput');
+  const trialEndInput = document.getElementById('trialEndInput');
 
-      // Set trial dates
-      const now = new Date();
-      const trialEnd = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
-      trialStartInput.value = now.toISOString().split('T')[0];
-      trialEndInput.value = trialEnd.toISOString().split('T')[0];
+  // Set trial dates
+  const now = new Date();
+  const trialEnd = new Date(now.getTime() + 14*24*60*60*1000);
+  trialStartInput.value = now.toISOString().split('T')[0];
+  trialEndInput.value = trialEnd.toISOString().split('T')[0];
 
-      // Plan selection
-      plans.forEach(plan => {
-        plan.querySelector('.select-plan').addEventListener('click', () => {
-          const planName = plan.dataset.plan;
+  // Plan selection
+  plans.forEach(plan => {
+    plan.querySelector('.select-plan').addEventListener('click', () => {
+      const planName = plan.dataset.plan;
+      
+      if(planName === 'Enterprise') {
+        window.location.href = '/reach-us'; // Redirect to contact page
+        return;
+      }
 
-          if (planName === 'Enterprise') {
-            window.location.href = '/reach-us'; // Redirect to contact page
-            return;
-          }
+      plans.forEach(p => p.classList.remove('selected'));
+      plan.classList.add('selected');
 
-          plans.forEach(p => p.classList.remove('selected'));
-          plan.classList.add('selected');
+      planInput.value = `${planName} - ${plan.dataset.price}/month`;
+      planNameDisplay.textContent = `${planName} Plan - ${plan.dataset.price}/month`;
+      planDisplay.style.display = 'block';
 
-          planInput.value = `${planName} - ${plan.dataset.price}/month`;
-          planNameDisplay.textContent = `${planName} Plan - ${plan.dataset.price}/month`;
-          planDisplay.style.display = 'block';
-
-          // Scroll to form
-          document.getElementById('signupForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      });
-
-      // Form validation before submit
-      form.addEventListener('submit', (e) => {
-        if (!planInput.value) {
-          e.preventDefault();
-          messageEl.style.color = '#dc2626';
-          messageEl.textContent = '❌ Please select a plan first';
-          document.querySelector('.plans-section').scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+      // Scroll to form
+      document.getElementById('signupForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
-  </script>
+  });
+
+  // Form validation before submit
+  form.addEventListener('submit', (e) => {
+    if(!planInput.value) {
+      e.preventDefault();
+      messageEl.style.color = '#dc2626';
+      messageEl.textContent = '❌ Please select a plan first';
+      document.querySelector('.plans-section').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
 
 </body>
-
 </html>

@@ -627,7 +627,6 @@
           <li>Up to 20 agents</li>
           <li>Advanced call routing & queues</li>
           <li>Unlimited dashboards</li>
-          <li>Call recording</li>
           <li>Performance analytics</li>
           <li>Priority support</li>
         </ul>
@@ -675,32 +674,37 @@
       Selected: <strong><span id="plan-name-display"></span></strong>
     </div>
 
-    <form id="signupForm">
-      <input type="hidden" name="plan" id="planInput">
+    <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
+      <!-- FormSubmit Configuration -->
+      <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup-success.html">
+      <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- Hidden fields for tracking -->
+      <input type="hidden" name="Signup Type" value="Portal Plan Trial">
+      <input type="hidden" id="trialStartInput" name="Trial Start Date">
+      <input type="hidden" id="trialEndInput" name="Trial End Date">
+
+      <input type="hidden" name="Selected Plan" id="planInput">
 
       <label for="email">Work Email*</label>
-      <input type="email" id="email" name="email" required placeholder="you@company.com">
+      <input type="email" id="email" name="Email" required placeholder="you@company.com">
 
       <label for="firstName">First Name*</label>
-      <input type="text" id="firstName" name="firstName" required>
+      <input type="text" id="firstName" name="First Name" required>
 
       <label for="lastName">Last Name*</label>
-      <input type="text" id="lastName" name="lastName" required>
+      <input type="text" id="lastName" name="Last Name" required>
 
       <label for="companyName">Company Name*</label>
-      <input type="text" id="companyName" name="companyName" required>
+      <input type="text" id="companyName" name="Company Name" required>
 
       <label for="phoneNumber">Phone Number*</label>
-      <input type="tel" id="phoneNumber" name="phoneNumber" required placeholder="+1 555-123-4567">
+      <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567">
 
       <button type="submit">Start Free Trial</button>
       <p class="message" id="message"></p>
-
-      <div class="next-steps-note" id="next-steps" style="display:none;">
-        <strong>✓ Account Created!</strong><br>
-        Check your email for login details. Then visit our <a href="/get-numbers"
-          style="color:#3b82f6;font-weight:600;">Get Numbers</a> page to purchase phone numbers with minutes.
-      </div>
     </form>
   </section>
 
@@ -725,7 +729,14 @@
       const planNameDisplay = document.getElementById('plan-name-display');
       const form = document.getElementById('signupForm');
       const messageEl = document.getElementById('message');
-      const nextStepsEl = document.getElementById('next-steps');
+      const trialStartInput = document.getElementById('trialStartInput');
+      const trialEndInput = document.getElementById('trialEndInput');
+
+      // Set trial dates
+      const now = new Date();
+      const trialEnd = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+      trialStartInput.value = now.toISOString().split('T')[0];
+      trialEndInput.value = trialEnd.toISOString().split('T')[0];
 
       // Plan selection
       plans.forEach(plan => {
@@ -740,8 +751,8 @@
           plans.forEach(p => p.classList.remove('selected'));
           plan.classList.add('selected');
 
-          planInput.value = planName;
-          planNameDisplay.textContent = `${planName} Plan - $${plan.dataset.price}/month`;
+          planInput.value = `${planName} - ${plan.dataset.price}/month`;
+          planNameDisplay.textContent = `${planName} Plan - ${plan.dataset.price}/month`;
           planDisplay.style.display = 'block';
 
           // Scroll to form
@@ -749,91 +760,15 @@
         });
       });
 
-      // Form submission
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
+      // Form validation before submit
+      form.addEventListener('submit', (e) => {
         if (!planInput.value) {
+          e.preventDefault();
           messageEl.style.color = '#dc2626';
           messageEl.textContent = '❌ Please select a plan first';
-          return;
-        }
-
-        messageEl.style.color = '#3b82f6';
-        messageEl.textContent = '⏳ Creating your account...';
-
-        // Add additional hidden fields for tracking
-        const trialStart = new Date().toISOString();
-        const trialEnd = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
-
-        // Create hidden inputs for additional data
-        const hiddenFields = {
-          'Submitted At': trialStart,
-          'Trial Start Date': trialStart,
-          'Trial End Date': trialEnd,
-          'Signup Type': 'Portal Plan Trial'
-        };
-
-        Object.entries(hiddenFields).forEach(([key, value]) => {
-          formData.append(key, value);
-        });
-
-        try {
-          // FormSubmit works best with regular form submission, not fetch
-          const form2 = document.createElement('form');
-          form2.method = 'POST';
-          form2.action = `https://formsubmit.co/${FORMSUBMIT_EMAIL}`;
-          form2.style.display = 'none';
-
-          // Add all form data
-          for (let [key, value] of formData.entries()) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = value;
-            form2.appendChild(input);
-          }
-
-          // Add FormSubmit configuration
-          const configs = {
-            '_subject': 'New CallOrbit Free Trial Signup',
-            '_captcha': 'false',
-            '_template': 'table',
-            '_next': window.location.href + '?success=true'
-          };
-
-          Object.entries(configs).forEach(([key, value]) => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = value;
-            form2.appendChild(input);
-          });
-
-          document.body.appendChild(form2);
-          form2.submit();
-
-        } catch (error) {
-          messageEl.style.color = '#dc2626';
-          messageEl.textContent = '❌ Something went wrong. Please try again or contact support.';
-          console.error('Error:', error);
+          document.querySelector('.plans-section').scrollIntoView({ behavior: 'smooth' });
         }
       });
-
-      // Check if returning from successful submission
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('success') === 'true') {
-        messageEl.style.color = '#10b981';
-        messageEl.textContent = '🎉 Success! Check your email to access your account.';
-        nextStepsEl.style.display = 'block';
-        form.reset();
-        planDisplay.style.display = 'none';
-        plans.forEach(p => p.classList.remove('selected'));
-        // Clean URL
-        window.history.replaceState({}, document.title, window.location.pathname);
-      }
     });
   </script>
 
