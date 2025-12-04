@@ -792,11 +792,24 @@
         // Collect form data
         const formData = new FormData(form);
         
-        // Convert FormData to URL parameters for redirect
+        // Convert FormData to object
         const formDataObj = {};
         for (const [key, value] of formData.entries()) {
           formDataObj[key] = value;
         }
+        
+        // Store in localStorage as backup
+        const signupRecord = {
+          ...formDataObj,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Get existing signups or initialize array
+        const existingSignups = JSON.parse(localStorage.getItem('callorbit_signups') || '[]');
+        existingSignups.push(signupRecord);
+        localStorage.setItem('callorbit_signups', JSON.stringify(existingSignups));
+        
+        // Convert FormData to URL parameters for redirect
         const params = new URLSearchParams(formDataObj).toString();
         
         // Try to submit via FormSubmit with a timeout
