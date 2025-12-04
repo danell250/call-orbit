@@ -525,7 +525,8 @@
       <a href="/reach-us">Reach Us</a>
       <a href="/company.html">Company</a>
     </div>
-    <a href="/signup.html" class="login-btn">Sign Up</a>
+  <a href="/signup" class="login-btn">Sign Up</a>
+
   </nav>
 
   <header class="hero fade-in">
@@ -674,39 +675,36 @@
       Selected: <strong><span id="plan-name-display"></span></strong>
     </div>
 
-    <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
-      <!-- FormSubmit Configuration -->
-      <input type="hidden" name="_next" value="https://callorbit.vercel.app/contact-success.html">
-      <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" style="display:none">
+   <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
+    <!-- FormSubmit Configuration -->
+    <input type="hidden" name="_next" value="https://callorbit.vercel.app/contact-success.html">
+    <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
+    <input type="hidden" name="_captcha" value="false">
 
-      <!-- Hidden fields for tracking -->
-      <input type="hidden" name="Signup Type" value="Portal Plan Trial">
-      <input type="hidden" id="trialStartInput" name="Trial Start Date">
-      <input type="hidden" id="trialEndInput" name="Trial End Date">
+    <label>Full Name</label>
+    <input type="text" name="name" required />
 
-      <input type="hidden" name="Selected Plan" id="planInput">
+    <label>Email Address</label>
+    <input type="email" name="email" required />
 
-      <label for="email">Work Email*</label>
-      <input type="email" id="email" name="Email" required placeholder="you@company.com" autocomplete="email">
+    <label>Company Name</label>
+    <input type="text" name="company" required />
 
-      <label for="firstName">First Name*</label>
-      <input type="text" id="firstName" name="First Name" required autocomplete="given-name">
+    <label>Number of Agents</label>
+    <select name="agents" required>
+      <option value="">Select...</option>
+      <option value="1-3">1–3</option>
+      <option value="3-20">3–20</option>
+      <option value="20-50">20–50</option>
+      <option value="50+">50+</option>
+    </select>
 
-      <label for="lastName">Last Name*</label>
-      <input type="text" id="lastName" name="Last Name" required autocomplete="family-name">
+    <label>Selected Plan</label>
+    <input id="selected-plan-input" type="text" name="plan" readonly required />
 
-      <label for="companyName">Company Name*</label>
-      <input type="text" id="companyName" name="Company Name" required autocomplete="organization">
+    <button type="submit">Start Free Trial</button>
+</form>
 
-      <label for="phoneNumber">Phone Number*</label>
-      <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567" autocomplete="tel">
-
-      <button type="submit">Start Free Trial</button>
-      <p class="message" id="message"></p>
-    </form>
 
     <div class="next-steps-note" id="success-message" style="display:none;">
       <strong>✓ Thank You!</strong><br>
