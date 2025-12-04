@@ -143,6 +143,11 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   <h2>Next Steps</h2>
   <p>Thank you for starting your free 14-day trial with CallOrbit. You should receive a welcome email with login credentials within 24 hours. If you don't receive it, please check your spam folder or contact us.</p>
   
+  <div id="signup-data" style="background: #f0f9ff; border-radius: 10px; padding: 20px; margin: 25px 0; display: none;">
+    <h3 style="color: #1e3a8a; margin-top: 0;">Your Signup Information:</h3>
+    <div id="signup-details" style="text-align: left;"></div>
+  </div>
+  
   <div class="steps">
     <h3>Getting Started:</h3>
     <ol>
@@ -196,6 +201,31 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+
+  <script>
+    // Display signup data if available in URL parameters
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const signupDataDiv = document.getElementById('signup-data');
+      const signupDetailsDiv = document.getElementById('signup-details');
+      
+      let hasData = false;
+      let detailsHtml = '<ul style="padding-left: 20px;">';
+      
+      for (const [key, value] of urlParams) {
+        if (key !== '_next' && key !== '_subject' && key !== '_captcha' && key !== '_template') {
+          hasData = true;
+          detailsHtml += `<li><strong>${key}:</strong> ${value}</li>`;
+        }
+      }
+      detailsHtml += '</ul>';
+      
+      if (hasData) {
+        signupDetailsDiv.innerHTML = detailsHtml;
+        signupDataDiv.style.display = 'block';
+      }
+    });
+  </script>
 
 </body>
 </html>
