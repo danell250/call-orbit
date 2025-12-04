@@ -213,7 +213,7 @@ s0.parentNode.insertBefore(s1,s0);
       let detailsHtml = '<ul style="padding-left: 20px;">';
       
       for (const [key, value] of urlParams) {
-        if (key !== '_next' && key !== '_subject' && key !== '_captcha' && key !== '_template') {
+        if (key !== '_next' && key !== '_subject' && key !== '_captcha' && key !== '_template' && key !== '_honey') {
           hasData = true;
           detailsHtml += `<li><strong>${key}:</strong> ${value}</li>`;
         }
