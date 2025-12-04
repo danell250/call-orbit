@@ -602,27 +602,32 @@
         // Collect form data
         const formData = new FormData(contactForm);
         
-        // Submit form via fetch API
-        fetch(contactForm.action, {
+        // Convert FormData to URL parameters for redirect
+        const formDataObj = {};
+        for (const [key, value] of formData.entries()) {
+          formDataObj[key] = value;
+        }
+        
+        // Try to submit via FormSubmit with a timeout
+        const submitToFormSubmit = fetch(contactForm.action, {
           method: 'POST',
           body: formData,
           headers: {
             'Accept': 'application/json'
           }
-        })
-        .then(response => {
-          if (response.ok) {
-            // Redirect to success page
-            window.location.href = '/contact-success.html';
-          } else {
-            throw new Error('Network response was not ok');
-          }
-        })
-        .catch(error => {
-          console.error('Form submission error:', error);
-          // Even if there's an error, redirect to success page for better UX
-          window.location.href = '/contact-success.html';
+        }).then(response => {
+          // FormSubmit responded, but we'll still redirect normally
+          return true;
+        }).catch(error => {
+          // FormSubmit failed, but we'll still redirect normally
+          console.error('FormSubmit error:', error);
+          return false;
         });
+        
+        // Redirect to success page after 2 seconds max, regardless of FormSubmit response
+        setTimeout(() => {
+          window.location.href = '/contact-success.html';
+        }, 2000);
       });
     }
   </script>
