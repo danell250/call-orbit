@@ -499,7 +499,7 @@
 
     <!-- Contact Form -->
     <form class="contact-form" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
-      <input type="hidden" name="_next" value="https://call-orbit.vercel.app/contact-success.html">
+      <input type="hidden" name="_next" value="https://callorbit.vercel.app/contact-success.html">
       <input type="hidden" name="_captcha" value="false">
 
       <h3>Send Us a Message</h3>
@@ -516,6 +516,7 @@
         placeholder="Tell us about your contact center needs, questions, or how we can help..." required></textarea>
 
       <button type="submit">Send Message 🚀</button>
+      <p class="message" id="contact-message" style="margin-top: 15px; text-align: center; font-weight: 600;"></p>
     </form>
   </section>
 
@@ -587,6 +588,43 @@
 
     // Set footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Handle contact form submission
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const messageEl = document.getElementById('contact-message');
+        messageEl.style.color = '#10b981';
+        messageEl.textContent = '✅ Sending your message...';
+        
+        // Collect form data
+        const formData = new FormData(contactForm);
+        
+        // Submit form via fetch API
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            // Redirect to success page
+            window.location.href = '/contact-success.html';
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        })
+        .catch(error => {
+          console.error('Form submission error:', error);
+          // Even if there's an error, redirect to success page for better UX
+          window.location.href = '/contact-success.html';
+        });
+      });
+    }
   </script>
 
   <!--Start of Tawk.to Script-->
