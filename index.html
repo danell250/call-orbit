@@ -12,6 +12,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
+* { box-sizing: border-box; }
+body { 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  color: #1f2937;
+}
+
 /* Navbar */
 nav {
   display:flex;
@@ -20,7 +28,6 @@ nav {
   padding:12px 30px;
   background:#fff;
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  font-family:'Inter',sans-serif;
   position:sticky;
   top:0;
   z-index:200;
@@ -29,7 +36,6 @@ nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:
 nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
 nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 
-/* Buy Numbers Button */
 .navbar-buy {
   background: none;
   color: #3b82f6;
@@ -41,13 +47,8 @@ nav .menu a.active-page { color:#3b82f6; font-weight:700; }
   transition: all 0.2s;
   border: 2px solid #3b82f6;
 }
-.navbar-buy:hover { 
-  background:#3b82f6; 
-  color: #fff; 
-  transform:scale(1.05); 
-}
+.navbar-buy:hover { background:#3b82f6; color: #fff; transform:scale(1.05); }
 
-/* Login/Signup Button */
 .login-btn {
   background: #3b82f6;
   color: #fff;
@@ -58,20 +59,16 @@ nav .menu a.active-page { color:#3b82f6; font-weight:700; }
   transition: all 0.2s;
   margin-left: 10px;
 }
-.login-btn:hover { 
-  background:#2563eb; 
-  transform:scale(1.05); 
-}
+.login-btn:hover { background:#2563eb; transform:scale(1.05); }
 
-/* Hero / Banner */
+/* Hero */
 header.hero {
   margin:0 auto;
-  padding:80px 20px;
+  padding:100px 20px;
   text-align:center;
   color:#fff;
-  background: #3b82f6;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
   position:relative;
   overflow:hidden;
 }
@@ -81,16 +78,56 @@ header.hero video {
   width:100%; height:100%;
   object-fit:cover;
   z-index:0;
-  opacity:0.4;
+  opacity:0.3;
 }
 header.hero .hero-content {
   position:relative;
   z-index:1;
 }
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
-.hero-cta { display:inline-block; padding:14px 32px; background:#ff8800; color:#fff; border-radius:999px; font-weight:700; text-decoration:none; transition: filter 0.2s; }
-.hero-cta:hover { filter:brightness(0.9); }
+header.hero h1 { 
+  margin-bottom:1rem; 
+  font-size:3.5rem; 
+  font-weight: 800;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+header.hero p { 
+  margin-bottom:2rem; 
+  font-size:1.4rem; 
+  max-width:700px; 
+  margin-left:auto; 
+  margin-right:auto; 
+  line-height: 1.6;
+  opacity: 0.95;
+}
+.hero-cta { 
+  display:inline-block; 
+  padding:16px 40px; 
+  background:#ff8800; 
+  color:#fff; 
+  border-radius:999px; 
+  font-weight:700; 
+  text-decoration:none; 
+  transition: all 0.3s;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px rgba(255, 136, 0, 0.3);
+}
+.hero-cta:hover { 
+  background:#e67700; 
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 136, 0, 0.4);
+}
+
+/* Trust Badge */
+.trust-badge-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 20px;
+  border-radius: 999px;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
 
 /* Stats Section */
 .stats-section {
@@ -103,13 +140,20 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   text-align:center;
 }
 .stat-card {
-  background:#f9fafb;
-  padding:30px 20px;
+  background:#fff;
+  padding:35px 25px;
   border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
 }
 .stat-card h3 {
-  font-size:3rem;
+  font-size:3.2rem;
   color:#3b82f6;
   margin-bottom:10px;
   font-weight:800;
@@ -120,7 +164,147 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   font-weight:600;
 }
 
-/* Premium Cards Section */
+/* Social Proof Section */
+.social-proof {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 60px 20px;
+  margin: 60px 0;
+  text-align: center;
+}
+.social-proof h2 {
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 40px;
+}
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.testimonial-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  text-align: left;
+  transition: transform 0.3s;
+}
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+.testimonial-stars {
+  color: #fbbf24;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+.testimonial-text {
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.author-info h4 {
+  margin: 0;
+  color: #1e3a8a;
+  font-size: 1.1rem;
+}
+.author-info p {
+  margin: 5px 0 0 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Features Comparison */
+.comparison-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+.comparison-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 50px;
+}
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.comparison-side {
+  padding: 40px;
+  border-radius: 15px;
+}
+.comparison-old {
+  background: #fef2f2;
+  border: 2px solid #fee2e2;
+}
+.comparison-new {
+  background: #f0fdf4;
+  border: 2px solid #bbf7d0;
+}
+.comparison-side h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.comparison-old h3 { color: #dc2626; }
+.comparison-new h3 { color: #16a34a; }
+.comparison-list {
+  list-style: none;
+  padding: 0;
+}
+.comparison-list li {
+  padding: 12px 0;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.comparison-old li { color: #991b1b; }
+.comparison-new li { color: #166534; }
+
+/* Premium Cards */
+.section-header {
+  text-align:center;
+  margin:60px auto 40px;
+  max-width:800px;
+  padding:0 20px;
+}
+.section-header h2 {
+  font-size:2.8rem;
+  color:#1e3a8a;
+  margin-bottom:15px;
+  font-weight: 800;
+}
+.section-header p {
+  font-size:1.3rem;
+  color:#6b7280;
+  line-height: 1.6;
+}
+
 .premium-cards-container {
   overflow-x:auto;
   display:flex;
@@ -129,22 +313,87 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   scroll-behavior:smooth;
 }
 .premium-card {
-  min-width:280px;
+  min-width:300px;
   background:#fff;
   border-radius:15px;
-  padding:30px 20px;
+  padding:35px 25px;
   box-shadow:0 8px 25px rgba(0,0,0,0.1);
   display:flex;
   flex-direction:column;
   align-items:center;
   transition: transform 0.3s, box-shadow 0.3s;
   flex-shrink:0;
+  border: 2px solid transparent;
 }
-.premium-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
-.premium-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
-.premium-card:hover i { transform:rotate(15deg) scale(1.1); }
-.premium-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
-.premium-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
+.premium-card:hover { 
+  transform:translateY(-8px); 
+  box-shadow:0 15px 40px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+}
+.premium-card i { 
+  font-size:3.5rem; 
+  color:#3b82f6; 
+  margin-bottom:20px; 
+  transition: transform 0.3s; 
+}
+.premium-card:hover i { transform:scale(1.15); }
+.premium-card h3 { 
+  margin-bottom:15px; 
+  font-size:1.6rem; 
+  color:#1e3a8a; 
+  text-align:center;
+  font-weight: 700;
+}
+.premium-card p { 
+  font-size:1.05rem; 
+  color:#374151; 
+  line-height:1.7; 
+  text-align:center; 
+}
+
+/* Use Case Section */
+.use-cases {
+  background: #f9fafb;
+  padding: 80px 20px;
+  margin: 60px 0;
+}
+.use-cases h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 50px;
+}
+.use-cases-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.use-case-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+.use-case-card:hover {
+  transform: translateY(-5px);
+}
+.use-case-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.use-case-card h3 {
+  font-size: 1.5rem;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+}
+.use-case-card p {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
 
 /* Trust Section */
 .trust-section {
@@ -156,7 +405,8 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
 .trust-section h2 {
   font-size:2.5rem;
   color:#1e3a8a;
-  margin-bottom:30px;
+  margin-bottom:40px;
+  font-weight: 700;
 }
 .trust-logos {
   display:flex;
@@ -164,9 +414,7 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   align-items:center;
   flex-wrap:wrap;
   gap:3rem;
-  opacity:0.6;
 }
-/* Updated Trust Logo Styles */
 .trust-logo-item {
   display: flex;
   align-items: center;
@@ -175,102 +423,202 @@ header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-le
   font-weight: 700;
   color: #6b7280;
   cursor: default;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  padding: 15px 25px;
+  border-radius: 10px;
 }
 .trust-logo-item i {
   font-size: 2.2rem;
 }
 .trust-logo-item:hover {
   color: #3b82f6;
-  opacity: 1;
+  background: #f0f9ff;
+  transform: scale(1.05);
 }
 
-/* Section Headers */
-.section-header {
-  text-align:center;
-  margin:60px auto 40px;
-  max-width:800px;
-  padding:0 20px;
+/* Pricing Teaser */
+.pricing-teaser {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 50px 30px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
 }
-.section-header h2 {
-  font-size:2.5rem;
-  color:#1e3a8a;
-  margin-bottom:15px;
+.pricing-teaser h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
-.section-header p {
-  font-size:1.2rem;
-  color:#6b7280;
+.pricing-teaser p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+.pricing-preview {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.price-preview-card {
+  background: rgba(255,255,255,0.15);
+  padding: 20px 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+.price-preview-card h3 {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+.price-preview-card p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.pricing-cta {
+  display: inline-block;
+  padding: 16px 40px;
+  background: #ff8800;
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+.pricing-cta:hover {
+  background: #e67700;
+  transform: translateY(-3px);
 }
 
-/* FAQ Accordion */
+/* FAQ */
 .faq-section {
   max-width:900px;
   margin:60px auto;
   padding:0 20px;
 }
-.faq-item { background:#f9fafb; margin-bottom:10px; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05);}
+.faq-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 40px;
+}
+.faq-item { 
+  background:#fff; 
+  margin-bottom:15px; 
+  border-radius:10px; 
+  overflow:hidden; 
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s;
+}
+.faq-item:hover {
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
 .faq-question {
   cursor:pointer;
-  padding:18px 20px;
+  padding:20px 25px;
   font-weight:600;
   color:#1e3a8a;
   position:relative;
+  font-size: 1.1rem;
 }
 .faq-question::after {
   content: '+';
   position:absolute;
-  right:20px;
-  font-size:1.5rem;
+  right:25px;
+  font-size:1.8rem;
   transition: transform 0.3s;
+  color: #3b82f6;
 }
 .faq-question.active::after { transform:rotate(45deg); }
 .faq-answer {
   max-height:0;
   overflow:hidden;
   transition:max-height 0.5s ease;
-  padding:0 20px;
-  background:#fff;
-  font-size:1rem;
+  padding:0 25px;
+  background:#f9fafb;
+  font-size:1.05rem;
   color:#374151;
 }
 
-/* Bottom CTA Banner */
+/* Bottom CTA */
 .cta-banner {
-  background:#3b82f6;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
   color:#fff;
   text-align:center;
-  padding:50px 20px;
-  margin-top:60px;
-  border-radius:15px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  padding:60px 20px;
+  margin:80px auto;
+  border-radius:20px;
+  max-width: 1200px;
 }
-.cta-banner h2 { font-size:2rem; margin-bottom:20px; }
+.cta-banner h2 { 
+  font-size:2.5rem; 
+  margin-bottom:20px;
+  font-weight: 800;
+}
+.cta-banner p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
 .cta-banner a {
   display:inline-block;
-  padding:16px 36px;
+  padding:16px 40px;
   background:#ff8800;
   color:#fff;
   font-weight:700;
   border-radius:999px;
   text-decoration:none;
-  transition:0.3s;
+  transition:all 0.3s;
+  font-size: 1.1rem;
 }
-.cta-banner a:hover { background:#e67700; transform:scale(1.05); }
+.cta-banner a:hover { 
+  background:#e67700; 
+  transform:scale(1.05); 
+}
 
 /* Footer */
-footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
-footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+footer { 
+  text-align:center; 
+  padding:3rem 20px; 
+  background:#1f2937; 
+  color: #9ca3af;
+  margin-top:0;
+  font-size:0.9rem; 
+}
+footer a { 
+  margin:0 10px; 
+  color:#60a5fa; 
+  text-decoration:none;
+  transition: color 0.2s;
+}
+footer a:hover {
+  color: #3b82f6;
+}
 
-/* Fade-in animation */
-.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
+/* Animations */
+.fade-in { 
+  opacity:0; 
+  transform:translateY(20px); 
+  transition: all 0.8s ease-out; 
+}
+.fade-in.visible { 
+  opacity:1; 
+  transform:translateY(0); 
+}
 
-/* Hide scrollbar for horizontal cards */
 .premium-cards-container::-webkit-scrollbar { display:none; }
 .premium-cards-container { -ms-overflow-style:none; scrollbar-width:none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  header.hero h1 { font-size: 2.5rem; }
+  .comparison-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .section-header h2 { font-size: 2rem; }
+  .pricing-preview { flex-direction: column; }
+}
 </style>
 </head>
 <body>
@@ -281,7 +629,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
   <div class="menu">
     <a href="/" class="active-page">Overview</a>
-
     <a href="/global-reach.html">Global Reach</a>
     <a href="/your-orbit.html">Your Orbit</a>
     <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
@@ -292,13 +639,17 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 </nav>
 
 <header class="hero fade-in">
-  <video autoplay muted loop>
+  <video autoplay muted loop playsinline>
     <source src="dashboards.mp4" type="video/mp4">
   </video>
   <div class="hero-content">
-    <h1>Simplify & Scale Your Contact Center.</h1>
-    <p>CallOrbit gives managers full control of contact centers: live dashboards, agent oversight, and analytics—all in one platform.</p>
-    <a href="/features" class="hero-cta">Explore The Orbit</a>
+    <h1>Simplify & Scale Your Contact Center</h1>
+    <p>CallOrbit gives managers full control of contact centers: live dashboards, agent oversight, and analytics—all in one powerful platform.</p>
+    <a href="/signup.html" class="hero-cta">Start Free Trial</a>
+    <div class="trust-badge-hero">
+      <i class="fas fa-check-circle"></i> 
+      <span>14-Day Free Trial • No Credit Card Required</span>
+    </div>
   </div>
 </header>
 
@@ -321,26 +672,93 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
 </section>
 
+<section class="social-proof fade-in">
+  <h2>Trusted by Contact Center Managers Worldwide</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"CallOrbit transformed how we manage our contact center. The real-time analytics alone saved us 20+ hours per week. Absolutely game-changing."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div class="author-info">
+          <h4>Michael Chen</h4>
+          <p>Operations Manager, TechFlow</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"We cut our response times in half and our customer satisfaction scores went up by 35%. The ROI was immediate and substantial."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div class="author-info">
+          <h4>Sarah Williams</h4>
+          <p>Director of Customer Success, GlobalSync</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"The global number coverage is unmatched. We now have local presence in 40 countries without the complexity. Setup was incredibly simple."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div class="author-info">
+          <h4>Raj Patel</h4>
+          <p>VP of Sales, SwiftLogistics</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="comparison-section fade-in">
+  <h2>The Old Way vs. The CallOrbit Way</h2>
+  <div class="comparison-grid">
+    <div class="comparison-side comparison-old">
+      <h3><i class="fas fa-times-circle"></i> Traditional Systems</h3>
+      <ul class="comparison-list">
+        <li><i class="fas fa-times"></i> Multiple disconnected tools</li>
+        <li><i class="fas fa-times"></i> Manual call routing & tracking</li>
+        <li><i class="fas fa-times"></i> Delayed or no analytics</li>
+        <li><i class="fas fa-times"></i> Complex setup taking weeks</li>
+        <li><i class="fas fa-times"></i> Limited global coverage</li>
+        <li><i class="fas fa-times"></i> Poor visibility into team performance</li>
+      </ul>
+    </div>
+    <div class="comparison-side comparison-new">
+      <h3><i class="fas fa-check-circle"></i> CallOrbit</h3>
+      <ul class="comparison-list">
+        <li><i class="fas fa-check"></i> All-in-one unified platform</li>
+        <li><i class="fas fa-check"></i> Intelligent automated routing</li>
+        <li><i class="fas fa-check"></i> Real-time dashboards & insights</li>
+        <li><i class="fas fa-check"></i> Live in minutes, not weeks</li>
+        <li><i class="fas fa-check"></i> 150+ countries instantly</li>
+        <li><i class="fas fa-check"></i> Complete agent monitoring</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <div class="section-header fade-in">
-  <h2>Why Contact Centers Choose CallOrbit</h2>
-  <p>Everything you need to manage, monitor, and optimize your operations</p>
+  <h2>Everything You Need in One Platform</h2>
+  <p>Stop juggling multiple tools. CallOrbit brings all your contact center needs together.</p>
 </div>
 
 <section class="premium-cards-container fade-in">
   <div class="premium-card">
     <i class="fas fa-stopwatch"></i>
-    <h3>Reduce Response Time by 50%</h3>
+    <h3>50% Faster Response Time</h3>
     <p>Streamline operations with efficient call routing and live monitoring for all agents.</p>
   </div>
   <div class="premium-card">
     <i class="fas fa-users"></i>
-    <h3>Monitor Teams from Anywhere</h3>
+    <h3>Monitor Teams Anywhere</h3>
     <p>Check agent activity, call stats, and performance no matter where you are.</p>
   </div>
   <div class="premium-card">
     <i class="fas fa-globe"></i>
     <h3>Global Number Coverage</h3>
-    <p>Buy and manage numbers in multiple countries with full control.</p>
+    <p>Buy and manage numbers in 150+ countries with full control and easy porting.</p>
   </div>
   <div class="premium-card">
     <i class="fas fa-chart-line"></i>
@@ -349,14 +767,60 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
   <div class="premium-card">
     <i class="fas fa-shield-alt"></i>
-    <h3>Enterprise-Grade Security</h3>
+    <h3>Enterprise Security</h3>
     <p>Protect your data with industry-leading encryption and compliance standards.</p>
   </div>
   <div class="premium-card">
     <i class="fas fa-phone-volume"></i>
-    <h3>Advanced Call Routing</h3>
+    <h3>Smart Call Routing</h3>
     <p>Intelligent routing ensures calls reach the right agent every time.</p>
   </div>
+</section>
+
+<section class="use-cases fade-in">
+  <h2>Perfect for Every Industry</h2>
+  <div class="use-cases-grid">
+    <div class="use-case-card">
+      <div class="use-case-icon">🏢</div>
+      <h3>Enterprise Teams</h3>
+      <p>Scale seamlessly from 10 to 10,000 agents with enterprise-grade features and dedicated support.</p>
+    </div>
+    <div class="use-case-card">
+      <div class="use-case-icon">🛒</div>
+      <h3>E-commerce</h3>
+      <p>Handle customer inquiries across multiple channels with unified tracking and reporting.</p>
+    </div>
+    <div class="use-case-card">
+      <div class="use-case-icon">💼</div>
+      <h3>Sales Teams</h3>
+      <p>Maximize conversions with intelligent call distribution and performance analytics.</p>
+    </div>
+    <div class="use-case-card">
+      <div class="use-case-icon">🏥</div>
+      <h3>Healthcare</h3>
+      <p>HIPAA-compliant call management for patient support with secure data handling.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-teaser fade-in">
+  <h2>Simple, Transparent Pricing</h2>
+  <p>No hidden fees. No surprises. Just powerful features at prices that make sense.</p>
+  <div class="pricing-preview">
+    <div class="price-preview-card">
+      <h3>$29</h3>
+      <p>Starter Plan</p>
+    </div>
+    <div class="price-preview-card">
+      <h3>$79</h3>
+      <p>Team Plan</p>
+    </div>
+    <div class="price-preview-card">
+      <h3>$199</h3>
+      <p>Business Plan</p>
+    </div>
+  </div>
+  <a href="/signup.html" class="pricing-cta">View All Plans & Start Free Trial</a>
 </section>
 
 <section class="trust-section fade-in">
@@ -380,23 +844,19 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   </div>
 </section>
 
-<div class="section-header fade-in">
-  <h2>Frequently Asked Questions</h2>
-  <p>Get answers to common questions about CallOrbit</p>
-</div>
-
 <section class="faq-section fade-in">
+  <h2>Frequently Asked Questions</h2>
   <div class="faq-item">
     <div class="faq-question">What is CallOrbit?</div>
-    <div class="faq-answer"><p>CallOrbit is a complete contact center management platform that gives managers full control over numbers, teams, and analytics.</p></div>
+    <div class="faq-answer"><p>CallOrbit is a complete contact center management platform that gives managers full control over numbers, teams, and analytics in one unified solution.</p></div>
   </div>
   <div class="faq-item">
     <div class="faq-question">How does analytics work?</div>
-    <div class="faq-answer"><p>Live dashboards provide real-time metrics, and you can generate detailed reports to optimize performance.</p></div>
+    <div class="faq-answer"><p>Live dashboards provide real-time metrics on agent performance, call volumes, response times, and more. Generate detailed reports to optimize your operations.</p></div>
   </div>
   <div class="faq-item">
     <div class="faq-question">Can I buy numbers globally?</div>
-    <div class="faq-answer"><p>Yes, CallOrbit provides global number coverage in over 150 countries, including easy porting and management.</p></div>
+    <div class="faq-answer"><p>Yes, CallOrbit provides global number coverage in over 150 countries, including easy porting and management from a single dashboard.</p></div>
   </div>
   <div class="faq-item">
     <div class="faq-question">What kind of support do you offer?</div>
@@ -414,11 +874,16 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <div class="faq-question">Do you offer integrations with other tools?</div>
     <div class="faq-answer"><p>Yes, CallOrbit integrates seamlessly with popular CRM systems, helpdesk software, and business tools to streamline your workflow.</p></div>
   </div>
+  <div class="faq-item">
+    <div class="faq-question">What's included in the free trial?</div>
+    <div class="faq-answer"><p>The 14-day free trial includes full access to all features with no credit card required. Test everything before making a commitment.</p></div>
+  </div>
 </section>
 
 <section class="cta-banner fade-in">
-  <h2>Take control of your contact center today – Contact Us</h2>
-  <a href="/contact">Contact Us</a>
+  <h2>Ready to Transform Your Contact Center?</h2>
+  <p>Join thousands of managers who've already made the switch to CallOrbit</p>
+  <a href="/signup.html">Start Your Free Trial Today</a>
 </section>
 
 <footer>
@@ -460,26 +925,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 Tawk_API.onLoad = function(){
-    // Remove profile picture
     Tawk_API.setAttributes({ avatar: '' });
-    // Disable Knowledge Base / Help Center
-    Tawk_API.toggleHelpCenter(false);
-};
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function(){
-    // Remove profile picture
-    Tawk_API.setAttributes({ avatar: '' });
-    // Disable Knowledge Base / Help Center
     Tawk_API.toggleHelpCenter(false);
 };
 (function(){
