@@ -15,6 +15,17 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+
     /* Navbar */
     nav {
       display: flex;
@@ -108,12 +119,9 @@
     }
 
     @keyframes float {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
       }
-
       50% {
         transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px);
       }
@@ -234,12 +242,9 @@
     }
 
     @keyframes gradientShift {
-
-      0%,
-      100% {
+      0%, 100% {
         background-position: 0% 50%;
       }
-
       50% {
         background-position: 100% 50%;
       }
@@ -320,6 +325,18 @@
 
     .contact-form button:active {
       transform: translateY(-1px);
+    }
+
+    .contact-form button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 600;
     }
 
     /* FAQ Section */
@@ -422,6 +439,10 @@
       header.hero p {
         font-size: 1.1rem;
       }
+
+      nav .menu {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -435,7 +456,6 @@
     </div>
     <div class="menu">
       <a href="/">Overview</a>
-
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Your Orbit</a>
       <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
@@ -498,25 +518,28 @@
     </div>
 
     <!-- Contact Form -->
-    <form class="contact-form" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
+    <form class="contact-form" id="contactForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
       <input type="hidden" name="_next" value="https://callorbit.vercel.app/contact-success.html">
+      <input type="hidden" name="_subject" value="New Contact Form Message - CallOrbit">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
 
       <h3>Send Us a Message</h3>
       <p class="subtitle">Fill out the form below and we'll be in touch shortly</p>
 
       <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" placeholder="John Doe" required />
+      <input type="text" id="name" name="Name" placeholder="John Doe" required />
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="john@company.com" required />
+      <input type="email" id="email" name="Email" placeholder="john@company.com" required />
 
       <label for="message">What can we help you with?</label>
-      <textarea id="message" name="message" rows="5"
+      <textarea id="message" name="Message" rows="5"
         placeholder="Tell us about your contact center needs, questions, or how we can help..." required></textarea>
 
-      <button type="submit">Send Message 🚀</button>
-      <p class="message" id="contact-message" style="margin-top: 15px; text-align: center; font-weight: 600;"></p>
+      <button type="submit" id="submitBtn">Send Message 🚀</button>
+      <p class="message" id="contact-message"></p>
     </form>
   </section>
 
@@ -567,7 +590,9 @@
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function (entries) {
       entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        if (entry.isIntersecting) { 
+          entry.target.classList.add('visible'); 
+        }
       });
     }, { threshold: 0.1 });
     faders.forEach(fader => appearOnScroll.observe(fader));
@@ -590,44 +615,41 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     
     // Handle contact form submission
-    const contactForm = document.querySelector('.contact-form');
+    const contactForm = document.getElementById('contactForm');
+    const messageEl = document.getElementById('contact-message');
+    const submitBtn = document.getElementById('submitBtn');
+
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const messageEl = document.getElementById('contact-message');
+        // Show processing message
         messageEl.style.color = '#10b981';
         messageEl.textContent = '✅ Sending your message...';
-        
-        // Collect form data
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        // Store in localStorage as backup
         const formData = new FormData(contactForm);
-        
-        // Convert FormData to URL parameters for redirect
         const formDataObj = {};
         for (const [key, value] of formData.entries()) {
-          formDataObj[key] = value;
-        }
-        
-        // Try to submit via FormSubmit with a timeout
-        const submitToFormSubmit = fetch(contactForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
+          if (key !== '_honey' && !key.startsWith('_')) {
+            formDataObj[key] = value;
           }
-        }).then(response => {
-          // FormSubmit responded, but we'll still redirect normally
-          return true;
-        }).catch(error => {
-          // FormSubmit failed, but we'll still redirect normally
-          console.error('FormSubmit error:', error);
-          return false;
-        });
-        
-        // Redirect to success page after 2 seconds max, regardless of FormSubmit response
-        setTimeout(() => {
-          window.location.href = '/contact-success.html';
-        }, 2000);
+        }
+
+        const contactRecord = {
+          ...formDataObj,
+          timestamp: new Date().toISOString()
+        };
+
+        try {
+          const existingContacts = JSON.parse(localStorage.getItem('callorbit_contacts') || '[]');
+          existingContacts.push(contactRecord);
+          localStorage.setItem('callorbit_contacts', JSON.stringify(existingContacts));
+        } catch (error) {
+          console.error('LocalStorage error:', error);
+        }
+
+        // Let the form submit normally - FormSubmit will handle the redirect via _next field
       });
     }
   </script>
