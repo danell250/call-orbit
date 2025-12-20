@@ -65,7 +65,6 @@
       transform: scale(1.05);
     }
 
-    /* Login/Signup Button */
     .login-btn {
       background: #3b82f6;
       color: #fff;
@@ -95,23 +94,23 @@
     }
 
     header.hero::before {
-      content: '🚀';
+      content: '';
       position: absolute;
       font-size: 15rem;
       opacity: 0.1;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotate(-15deg);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
       animation: float 6s ease-in-out infinite;
     }
 
     @keyframes float {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
       }
-
       50% {
         transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px);
       }
@@ -179,12 +178,9 @@
     }
 
     @keyframes bounce {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0);
       }
-
       50% {
         transform: translateY(-10px);
       }
@@ -293,20 +289,15 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     }
 
-    .value-card .icon {
+    .value-card .icon.number {
       font-size: 4rem;
+      font-weight: 800;
+      color: #e5e7eb;
+      line-height: 1;
       margin-bottom: 20px;
       display: inline-block;
       position: relative;
       z-index: 1;
-    }
-
-    /* Style for Option 3: Minimalist Typography Numbers */
-    .value-card .icon.number {
-      font-weight: 800;
-      color: #e5e7eb;
-      /* Light gray styling */
-      line-height: 1;
     }
 
     .value-card h3 {
@@ -323,81 +314,6 @@
       font-size: 1.05rem;
       position: relative;
       z-index: 1;
-    }
-
-    /* Team Section */
-    .team-section {
-      max-width: 1200px;
-      margin: 80px auto;
-      padding: 50px 20px;
-      text-align: center;
-      background: #f9fafb;
-      border-radius: 20px;
-    }
-
-    .team-section h2 {
-      font-size: 2.5rem;
-      color: #1e3a8a;
-      margin-bottom: 20px;
-    }
-
-    .team-section p {
-      font-size: 1.2rem;
-      color: #6b7280;
-      margin-bottom: 40px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2.5rem;
-      margin-top: 50px;
-      padding: 0 20px;
-    }
-
-    .team-card {
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .team-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .team-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s;
-      overflow: hidden;
-    }
-
-    .team-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .team-card h3 {
-      font-size: 1.3rem;
-      color: #1e3a8a;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .team-card .job-title {
-      color: #6b7280;
-      font-size: 1rem;
-      font-weight: 500;
     }
 
     /* CTA Section */
@@ -435,12 +351,9 @@
     }
 
     @keyframes sparkle {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: scale(1) rotate(0deg);
       }
-
       50% {
         transform: scale(1.1) rotate(10deg);
       }
@@ -524,7 +437,6 @@
     </div>
     <div class="menu">
       <a href="/">Overview</a>
-
       <a href="/global-reach">Global Reach</a>
       <a href="/your-orbit">Your Orbit</a>
       <a href="/get-numbers" class="navbar-buy">Get Numbers</a>
@@ -537,176 +449,97 @@
   </nav>
 
   <header class="hero fade-in">
-    <h1>We're Building the Future of Contact Centers 🚀</h1>
+    <h1>Building the Future of Contact Centers</h1>
     <p>At CallOrbit, we believe managing a contact center shouldn't feel like rocket science. That's why we're on a
-      mission to make it simple, powerful, and dare we say... fun!</p>
+      mission to make it simple, powerful, and accessible to everyone.</p>
   </header>
 
   <section class="fun-stats fade-in">
     <div class="stat-box">
-      <span class="emoji">☕</span>
-      <h3>10,000+</h3>
-      <p>Cups of Coffee Consumed</p>
-    </div>
-    <div class="stat-box">
-      <span class="emoji">🎉</span>
-      <h3>50,000+</h3>
-      <p>Happy Customers Served</p>
+      <span class="emoji">⚡</span>
+      <h3>Fast</h3>
+      <p>Setup in Minutes</p>
     </div>
     <div class="stat-box">
       <span class="emoji">🌍</span>
       <h3>150+</h3>
-      <p>Countries We Cover</p>
+      <p>Countries Covered</p>
     </div>
     <div class="stat-box">
       <span class="emoji">💪</span>
       <h3>99.9%</h3>
-      <p>Uptime (We Don't Sleep)</p>
+      <p>Uptime Guarantee</p>
+    </div>
+    <div class="stat-box">
+      <span class="emoji">🔒</span>
+      <h3>Secure</h3>
+      <p>Enterprise-Grade Security</p>
     </div>
   </section>
 
   <section class="story-section fade-in">
-    <h2>Our Story: It Started With a Problem 💡</h2>
+    <h2>Our Mission 💡</h2>
     <p>
-      Picture this: A team of contact center managers pulling their hair out trying to juggle multiple platforms,
-      confusing dashboards, and systems that seemed designed by people who never actually used them. Sound familiar?
+      Contact center management has been dominated by complex, expensive enterprise systems that require extensive training and IT resources. We saw an opportunity to change that.
     </p>
     <p>
-      That's when we had our lightbulb moment. What if there was a platform that actually understood what contact center
-      teams needed? One that was powerful enough for enterprises but simple enough that you wouldn't need a PhD to use
-      it?
+      CallOrbit is built on the principle that powerful software should be simple to use. We're creating a platform that gives businesses of all sizes access to enterprise-grade contact center features without the enterprise complexity.
     </p>
     <p>
-      So we rolled up our sleeves, grabbed some coffee (okay, a lot of coffee), and built CallOrbit. Today, we're
-      helping thousands of teams around the world manage their contact centers with confidence, clarity, and maybe even
-      a smile.
+      Whether you're a startup making your first customer calls or a growing company scaling your support team, CallOrbit provides the tools you need to deliver exceptional customer experiences.
     </p>
   </section>
 
   <section class="values-section fade-in">
-    <h2>What Drives Us Every Day</h2>
+    <h2>What Drives Us</h2>
     <div class="values-grid">
       <div class="value-card">
         <div class="icon number">01</div>
         <h3>Simplicity First</h3>
-        <p>We believe powerful software doesn't have to be complicated. If it takes more than 5 clicks, we're doing it
-          wrong.</p>
+        <p>Powerful software doesn't have to be complicated. We prioritize intuitive design and straightforward functionality.</p>
       </div>
 
       <div class="value-card">
         <div class="icon number">02</div>
-        <h3>Customer Obsessed</h3>
-        <p>Your success is our success. We celebrate every milestone with you and lose sleep over your challenges.</p>
+        <h3>Customer Success</h3>
+        <p>Your success is our success. We're committed to providing tools and support that help you achieve your goals.</p>
       </div>
 
       <div class="value-card">
         <div class="icon number">03</div>
-        <h3>Innovation Always</h3>
-        <p>The contact center world moves fast. We move faster. Always improving, always innovating, never settling.</p>
+        <h3>Continuous Innovation</h3>
+        <p>The communications landscape evolves rapidly. We stay ahead with regular updates and new features.</p>
       </div>
 
       <div class="value-card">
         <div class="icon number">04</div>
-        <h3>Built on Trust</h3>
-        <p>Your data, your business, your success. We take that responsibility seriously and earn your trust every
-          single day.</p>
+        <h3>Transparency & Trust</h3>
+        <p>Clear pricing, honest communication, and reliable service. No hidden fees, no surprises.</p>
       </div>
 
       <div class="value-card">
         <div class="icon number">05</div>
-        <h3>Excellence, Not Perfection</h3>
-        <p>We strive for excellence in everything we do, but we're not afraid to learn from mistakes and get better.</p>
+        <h3>Accessibility</h3>
+        <p>Enterprise-grade features shouldn't require enterprise budgets. We make powerful tools accessible to all.</p>
       </div>
 
       <div class="value-card">
         <div class="icon number">06</div>
-        <h3>Make Work Enjoyable</h3>
-        <p>Work doesn't have to be boring. We inject joy into our product because happy teams deliver better customer
-          experiences.</p>
+        <h3>Global Reach</h3>
+        <p>Business is global, and so are we. Connect with customers anywhere with our worldwide coverage.</p>
       </div>
     </div>
-  </section>
-
-  <section class="team-section fade-in">
-    <h2>Our Amazing Team</h2>
-    <p>
-      We're a diverse group of engineers, designers, customer success heroes, and coffee enthusiasts from around the
-      world.
-      What brings us together? A shared passion for making contact center management better for everyone.
-    </p>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=12" alt="James Patterson">
-        </div>
-        <h3>James Patterson</h3>
-        <p class="job-title">Chief Technology Officer</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=47" alt="Maria Chen">
-        </div>
-        <h3>Maria Chen</h3>
-        <p class="job-title">Head of Product Design</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=51" alt="David Kumar">
-        </div>
-        <h3>David Kumar</h3>
-        <p class="job-title">Lead Software Engineer</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=44" alt="Emily Rodriguez">
-        </div>
-        <h3>Emily Rodriguez</h3>
-        <p class="job-title">Customer Success Manager</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=59" alt="Marcus Thompson">
-        </div>
-        <h3>Marcus Thompson</h3>
-        <p class="job-title">Senior DevOps Engineer</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=32" alt="Lisa Nguyen">
-        </div>
-        <h3>Lisa Nguyen</h3>
-        <p class="job-title">Head of Marketing</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=52" alt="Alexander Johnson">
-        </div>
-        <h3>Alexander Johnson</h3>
-        <p class="job-title">UX Research Lead</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://i.pravatar.cc/160?img=45" alt="Rachel Williams">
-        </div>
-        <h3>Rachel Williams</h3>
-        <p class="job-title">Quality Assurance Lead</p>
-      </div>
-    </div>
-    <p style="margin-top:40px; font-size:1.1rem; color:#3b82f6; font-weight:600;">
-      We're always looking for talented people to join our mission. Want to help shape the future of contact centers?
-    </p>
   </section>
 
   <section class="cta-section fade-in">
-    <h2>Ready to Join the CallOrbit Family? 🎉</h2>
-    <p>Join thousands of teams who've already discovered a better way to manage their contact centers. Let's make
-      something amazing together!</p>
+    <h2>Ready to Transform Your Communications? 🎉</h2>
+    <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
     <a href="/signup.html">Start Your Free Trial</a>
   </section>
 
   <footer>
     <div style="margin-bottom:20px; font-size:1.2rem;">
-      Made with ❤️ by the CallOrbit Team
+      Made with ❤️ by CallOrbit
     </div>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.
     <br><br>
@@ -716,7 +549,6 @@
   </footer>
 
   <script>
-    // Fade-in
     const faders = document.querySelectorAll('.fade-in');
     const appearOnScroll = new IntersectionObserver(function (entries) {
       entries.forEach(entry => {
@@ -725,16 +557,13 @@
     }, { threshold: 0.1 });
     faders.forEach(fader => appearOnScroll.observe(fader));
 
-    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
   <script type="text/javascript">
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     Tawk_API.onLoad = function () {
-      // Remove profile picture
       Tawk_API.setAttributes({ avatar: '' });
-      // Disable Knowledge Base / Help Center
       Tawk_API.toggleHelpCenter(false);
     };
     (function () {
