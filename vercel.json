@@ -95,6 +95,13 @@
       "destination": "/company",
       "permanent": true
     },
+    
+    {
+  "routes": [
+    { "src": "/(.*)", "dest": "/maintenance.html" }
+  ]
+}
+
     {
       "source": "/signup.html",
       "destination": "/signup",
