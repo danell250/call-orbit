@@ -1,111 +1,29 @@
 {
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/solutions",
-      "destination": "/solutions.html"
-    },
-    {
-      "source": "/global-reach",
-      "destination": "/global-reach.html"
-    },
-    {
-      "source": "/your-orbit",
-      "destination": "/your-orbit.html"
-    },
-    {
-      "source": "/get-numbers",
-      "destination": "/get-numbers.html"
-    },
-    {
-      "source": "/reach-us",
-      "destination": "/reach-us.html"
-    },
-    {
-      "source": "/company",
-      "destination": "/company.html"
-    },
-    {
-      "source": "/pricing",
-      "destination": "/pricing.html"
-    },
-    {
-      "source": "/privacy-policy",
-      "destination": "/privacy-policy.html"
-    },
-    {
-      "source": "/terms-conditions",
-      "destination": "/terms-conditions.html"
-    },
-    {
-      "source": "/refund-policy",
-      "destination": "/refund-policy.html"
-    },
-    {
-      "source": "/signup",
-      "destination": "/signup.html"
-    }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/solutions", "destination": "/solutions.html" },
+    { "source": "/global-reach", "destination": "/global-reach.html" },
+    { "source": "/your-orbit", "destination": "/your-orbit.html" },
+    { "source": "/get-numbers", "destination": "/get-numbers.html" },
+    { "source": "/reach-us", "destination": "/reach-us.html" },
+    { "source": "/company", "destination": "/company.html" },
+    { "source": "/pricing", "destination": "/pricing.html" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms-conditions", "destination": "/terms-conditions.html" },
+    { "source": "/refund-policy", "destination": "/refund-policy.html" },
+    { "source": "/signup", "destination": "/signup.html" }
   ],
   "redirects": [
-    {
-      "source": "/privacy-policy.html",
-      "destination": "/privacy-policy",
-      "permanent": true
-    },
-    {
-      "source": "/terms-conditions.html",
-      "destination": "/terms-conditions",
-      "permanent": true
-    },
-    {
-      "source": "/refund-policy.html",
-      "destination": "/refund-policy",
-      "permanent": true
-    },
-    {
-      "source": "/solutions.html",
-      "destination": "/solutions",
-      "permanent": true
-    },
-    {
-      "source": "/global-reach.html",
-      "destination": "/global-reach",
-      "permanent": true
-    },
-    {
-      "source": "/your-orbit.html",
-      "destination": "/your-orbit",
-      "permanent": true
-    },
-    {
-      "source": "/get-numbers.html",
-      "destination": "/get-numbers",
-      "permanent": true
-    },
-    {
-      "source": "/reach-us.html",
-      "destination": "/reach-us",
-      "permanent": true
-    },
-    {
-      "source": "/company.html",
-      "destination": "/company",
-      "permanent": true
-    },
-    
-    {
-  "routes": [
-    { "src": "/(.*)", "dest": "/maintenance.html" }
+    { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/terms-conditions.html", "destination": "/terms-conditions", "permanent": true },
+    { "source": "/refund-policy.html", "destination": "/refund-policy", "permanent": true },
+    { "source": "/solutions.html", "destination": "/solutions", "permanent": true },
+    { "source": "/global-reach.html", "destination": "/global-reach", "permanent": true },
+    { "source": "/your-orbit.html", "destination": "/your-orbit", "permanent": true },
+    { "source": "/get-numbers.html", "destination": "/get-numbers", "permanent": true },
+    { "source": "/reach-us.html", "destination": "/reach-us", "permanent": true },
+    { "source": "/company.html", "destination": "/company", "permanent": true },
+    { "source": "/pricing.html", "destination": "/pricing", "permanent": true },
+    { "source": "/signup.html", "destination": "/signup", "permanent": true }
   ]
-
-
-    {
-      "source": "/signup.html",
-      "destination": "/signup",
-      "permanent": true
-    
-  
 }
