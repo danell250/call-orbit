@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CallOrbit — Buy Numbers & Plans</title>
+  <title>CallOrbit — Provision Numbers & Plans</title>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 
@@ -52,29 +52,11 @@
       font-weight: 700;
     }
 
-    .navbar-buy {
-      background: none;
-      color: #3b82f6;
-      padding: 10px 24px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-left: 10px;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 2px solid #3b82f6;
-    }
-
-    .navbar-buy:hover {
-      background: #3b82f6;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
     /* Login/Signup Button */
     .login-btn {
       background: #3b82f6;
       color: #fff;
-      padding: 10px 24px;
+      padding: 12px 24px;
       border-radius: 999px;
       font-weight: 600;
       text-decoration: none;
@@ -84,7 +66,7 @@
 
     .login-btn:hover {
       background: #2563eb;
-      transform: scale(1.05);
+      transform: translateY(-2px);
     }
 
     /* Hero Section */
@@ -544,6 +526,10 @@
       gap: 6px;
     }
 
+    .trust-strip i {
+      color: #10b981;
+    }
+
     /* Enterprise Pricing */
     .enterprise-pricing {
       text-align: center;
@@ -601,20 +587,20 @@
     </div>
     <div class="menu">
       <a href="/">Overview</a>
-      
+
       <a href="/global-reach.html">Global Reach</a>
-      <a href="/your-orbit.html">Your Orbit</a>
-      <a href="/get-numbers.html" class="navbar-buy active-page">Get Numbers</a>
-      <a href="/reach-us.html">Reach Us</a>
-      <a href="/company.html">Company</a>
+      <a href="/your-orbit.html">Platform Overview</a>
+      <a href="/get-numbers.html" class="active-page">Provision Numbers</a>
+      <a href="/reach-us.html">Contact Sales</a>
+      <a href="/company.html">The CallOrbit Way</a>
     </div>
     <div class="actions" style="display:flex; align-items:center; gap:12px;">
-      <a href="/signup.html" class="login-btn">Sign Up</a>
+      <a href="/signup.html" class="login-btn">Get Started</a>
     </div>
   </nav>
 
   <header class="hero">
-    <h1>Get Started with CallOrbit</h1>
+    <h1>Provision numbers with CallOrbit</h1>
     <p>Select your plan, country, number type, area (for local numbers), and forwarding number to start using your
       CallOrbit portal.</p>
   </header>
@@ -662,11 +648,12 @@
   </main>
 
   <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+    <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
     <br><br>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-conditions">Terms & Conditions</a>
-    <a href="/refund-policy">Refund Policy</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
   </footer>
 
   <div id="cart-icon" title="View Cart">
@@ -684,6 +671,7 @@
         <span>
           <p>Full monthly amount is due upfront to activate your number.</p>
           <p>Pricing already includes number allocation and standard carrier costs.</p>
+          <p style="margin-top:6px; opacity:0.85; font-size:0.75rem;">GDPR-aligned data handling. Data processed in accordance with applicable regulations.</p>
         </span>
       </div>
 
@@ -695,14 +683,14 @@
         </div>
         <div class="cart-checkbox-item">
           <input type="checkbox" id="terms-confirm" />
-          <label for="terms-confirm">I accept CallOrbit's <a href="/terms-conditions" target="_blank">Terms and
+          <label for="terms-confirm">I accept CallOrbit's <a href="/terms-conditions.html" target="_blank">Terms and
               Conditions</a>.</label>
         </div>
       </div>
     </div>
 
     <div id="paypal-button-container"></div>
-    
+
     <div class="trust-strip" style="margin-top: 15px; border-top: 1px solid #f3f4f6; padding-top: 15px;">
       <span><i class="fa-solid fa-lock"></i> Secure Payments</span>
       <span><i class="fa-solid fa-globe"></i> Global Coverage</span>
@@ -858,82 +846,82 @@
       }
     }
 
- function populateAreas() {
-  const country = countrySelectEl.value;
-  const numberType = numberTypeEl.value.toLowerCase();
+    function populateAreas() {
+      const country = countrySelectEl.value;
+      const numberType = numberTypeEl.value.toLowerCase();
 
-    if (numberType === 'local' && country && localAreas[country]) {
-    areaContainerEl.style.display = 'block';
-    areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
-    localAreas[country].forEach(area => {
-      const opt = document.createElement('option');
-      opt.value = area;
-      opt.textContent = area;
-      areaSelectEl.appendChild(opt);
-    });
-  } else {
-    areaContainerEl.style.display = 'none';
-    areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
-  }
-}
+      if (numberType === 'local' && country && localAreas[country]) {
+        areaContainerEl.style.display = 'block';
+        areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
+        localAreas[country].forEach(area => {
+          const opt = document.createElement('option');
+          opt.value = area;
+          opt.textContent = area;
+          areaSelectEl.appendChild(opt);
+        });
+      } else {
+        areaContainerEl.style.display = 'none';
+        areaSelectEl.innerHTML = '<option value="">-- Select Area --</option>';
+      }
+    }
 
-   // --- NEW: typed, deterministic fees (no duplicates across countries/types) ---
+    // --- NEW: typed, deterministic fees (no duplicates across countries/types) ---
 
-   // Add a small platform fee per tier so plans don't collide
-   const TIER_FEES = { Basic: 1.99, Plus: 3.49, Pro: 5.99, Max: 8.99 };
+    // Add a small platform fee per tier so plans don't collide
+    const TIER_FEES = { Basic: 1.99, Plus: 3.49, Pro: 5.99, Max: 8.99 };
 
-   const COUNTRY_MULTIPLIER = {
-     US: 1.0,
-     GB: 1.1,
-     CA: 1.05,
-     AU: 1.1,
-     DE: 1.15,
-     FR: 1.15,
-     ZA: 0.9,
-     IN: 0.75,
-     BR: 0.85,
-     MX: 0.85,
-     JP: 1.25,
-     default: 1.0
-   };
+    const COUNTRY_MULTIPLIER = {
+      US: 1.0,
+      GB: 1.1,
+      CA: 1.05,
+      AU: 1.1,
+      DE: 1.15,
+      FR: 1.15,
+      ZA: 0.9,
+      IN: 0.75,
+      BR: 0.85,
+      MX: 0.85,
+      JP: 1.25,
+      default: 1.0
+    };
 
-   // Deterministic country factor (stable for each country code)
-   function countryFactor(countryCode) {
-     // e.g., "US" => stable 0..19
-     const a = countryCode.charCodeAt(0);
-     const b = countryCode.charCodeAt(1);
-     return (a + b) % 20; // 0..19
-   }
+    // Deterministic country factor (stable for each country code)
+    function countryFactor(countryCode) {
+      // e.g., "US" => stable 0..19
+      const a = countryCode.charCodeAt(0);
+      const b = countryCode.charCodeAt(1);
+      return (a + b) % 20; // 0..19
+    }
 
-   // Deterministic monthly number rental fee by country + number type
-   function monthlyNumberRental(countryCode, numberType) {
-     const f = countryFactor(countryCode);
+    // Deterministic monthly number rental fee by country + number type
+    function monthlyNumberRental(countryCode, numberType) {
+      const f = countryFactor(countryCode);
 
-     // Base by number type (toll-free usually higher)
-     const typeBase =
-       numberType === "TollFree" ? 9.99 :
-       numberType === "National" ? 6.99 :
-       4.99; // Local
+      // Base by number type (toll-free usually higher)
+      const typeBase =
+        numberType === "TollFree" ? 9.99 :
+          numberType === "National" ? 6.99 :
+            4.99; // Local
 
-     // Country variation: adds $0.40 .. $8.00 depending on country
-     const countryAdd = 0.40 + (f * 0.40);
+      // Country variation: adds $0.40 .. $8.00 depending on country
+      const countryAdd = 0.40 + (f * 0.40);
 
-     // Extra nudge so number types differ even more
-     const typeAdd =
-       numberType === "TollFree" ? 2.00 :
-       numberType === "National" ? 1.00 :
-       0.50;
+      // Extra nudge so number types differ even more
+      const typeAdd =
+        numberType === "TollFree" ? 2.00 :
+          numberType === "National" ? 1.00 :
+            0.50;
 
-     return +(typeBase + countryAdd + typeAdd).toFixed(2);
-   }
+      return +(typeBase + countryAdd + typeAdd).toFixed(2);
+    }
 
-   // Nice "marketing" rounding (optional)
-   function roundTo99(x) {
-     const dollars = Math.floor(x);
-     return +(dollars + 0.99).toFixed(2);
-   }
+    // Nice "marketing" rounding (optional)
+    function roundTo99(x) {
+      const dollars = Math.floor(x);
+      return +(dollars + 0.99).toFixed(2);
+    }
 
-   // --- REPLACE generatePlans() WITH THIS ---
+    // --- REPLACE generatePlans() WITH THIS ---
     function generatePlans() {
       const country = countrySelectEl.value;
       const numberType = numberTypeEl.value;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CallOrbit — Welcome Aboard</title>
+<title>CallOrbit — Welcome</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
@@ -29,8 +29,6 @@ nav {
 nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
 nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
 nav .menu a.active-page { color:#3b82f6; font-weight:700; }
-.navbar-buy { background:none; color:#3b82f6; padding:10px 20px; border-radius:999px; font-weight:700; margin-left:10px; text-decoration:none; transition:all 0.2s; border:2px solid #3b82f6; }
-.navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
 
 
 /* Hero Section */
@@ -87,7 +85,7 @@ header.hero p { font-size:1.3rem; max-width:600px; margin-left:auto; margin-righ
 }
 .thank-you-message a {
   display:inline-block;
-  padding:14px 36px;
+  padding:12px 24px;
   background:#3b82f6;
   color:#fff;
   font-weight:700;
@@ -96,15 +94,13 @@ header.hero p { font-size:1.3rem; max-width:600px; margin-left:auto; margin-righ
   transition:0.2s;
   margin: 10px;
 }
-.thank-you-message a:hover { background:#2563eb; transform:scale(1.05); }
+.thank-you-message a:hover { background:#2563eb; transform:translateY(-2px); }
 .thank-you-message a.secondary {
   background: #6b7280;
 }
 .thank-you-message a.secondary:hover { background: #4b5563; }
 
 /* Footer */
-footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
-footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
 /* Fade-in */
 .fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
@@ -122,19 +118,19 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
   <a href="/">Overview</a>
  
   <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html">Reach Us</a>
-  <a href="/company.html">Company</a>
+  <a href="/your-orbit.html">Platform Overview</a>
+  <a href="/get-numbers.html">Provision Numbers</a>
+    <a href="/reach-us.html">Contact Sales</a>
+    <a href="/company.html">The CallOrbit Way</a>
   </div>
- <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
+  <a href="/signup.html" class="login-btn">Get Started</a>
 
   </div>
 </nav>
 
 <!-- Hero Section -->
 <header class="hero fade-in">
-  <h1>Welcome Aboard!</h1>
+  <h1>Welcome to CallOrbit</h1>
   <p>Your free trial signup has been received. You're just moments away from launching your call center.</p>
 </header>
 
@@ -153,7 +149,7 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
     <ol>
       <li><strong>Check Your Email</strong> - Look for a welcome email with your login credentials (check spam/junk folders)</li>
       <li><strong>Login to Dashboard</strong> - Access your account using the credentials sent to you</li>
-      <li><strong>Get Phone Numbers</strong> - Visit our <a href="/get-numbers.html">Get Numbers</a> page to purchase local or international numbers</li>
+      <li><strong>Get Phone Numbers</strong> - Visit our <a href="/get-numbers.html">Provision Numbers</a> page to purchase local or international numbers</li>
       <li><strong>Configure Settings</strong> - Set up your call routing, queues, and team members</li>
       <li><strong>Start Calling</strong> - Begin using your professional call center platform</li>
     </ol>
@@ -167,11 +163,12 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 
 <!-- Footer -->
 <footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  <br>
-  <a href="/privacy-policy">Privacy Policy</a>
-  <a href="/terms-conditions">Terms & Conditions</a>
-  <a href="/refund-policy">Refund Policy</a>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+  <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
+  <br><br>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+  <a href="/terms-conditions.html">Terms & Conditions</a>
+  <a href="/refund-policy.html">Refund Policy</a>
 </footer>
 
 <script>

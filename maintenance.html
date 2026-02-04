@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CallOrbit — Offline</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-      body { font-family: system-ui, Arial; background:#f7f7fb; color:#111; display:flex; height:100vh; align-items:center; justify-content:center; }
-      .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:28px; max-width:520px; box-shadow:0 10px 25px rgba(0,0,0,0.06); }
+      .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:28px; max-width:520px; box-shadow:0 10px 25px rgba(0,0,0,0.06); margin:auto; }
       h1 { margin:0 0 10px; font-size:22px; }
       p { margin:0; line-height:1.5; color:#444; }
       .small { margin-top:14px; font-size:13px; color:#666; }
@@ -18,5 +18,16 @@
       <p>We’re doing maintenance and improvements. Please check back soon.</p>
       <div class="small">— CallOrbit Team</div>
     </div>
+    <footer>
+      &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+      <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
+      <br><br>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-conditions.html">Terms & Conditions</a>
+        <a href="/refund-policy.html">Refund Policy</a>
+    </footer>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>

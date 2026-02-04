@@ -14,60 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    /* Navbar */
-    nav {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 30px;
-      background:#fff;
-      box-shadow:0 2px 10px rgba(0,0,0,0.05);
-      font-family:'Inter',sans-serif;
-      position:sticky;
-      top:0;
-      z-index:200;
-    }
-    nav .logo a { font-weight:700; font-size:1.5rem; color:#1e3a8a; text-decoration:none; }
-    nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
-    nav .menu a.active-page { color:#3b82f6; font-weight:700; }
-
-    /* Buy Numbers Button */
-    .navbar-buy {
-      background: none;
-      color: #3b82f6;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-left: 10px;
-      text-decoration:none;
-      transition: all 0.2s;
-      border: 2px solid #3b82f6;
-    }
-    .navbar-buy:hover { background:#3b82f6; color: #fff; transform:scale(1.05); }
-
-    /* Login Button */
-    .login-btn {
-      padding:10px 18px;
-      border-radius:999px;
-      font-weight:600;
-      text-decoration:none;
-      background:#3b82f6;
-      color:#fff;
-      transition:0.2s;
-    }
-    .login-btn:hover { background:#2563eb; }
-
     /* Hero / Banner */
-    header.hero {
-      margin:0 auto;
-      padding:80px 20px;
-      text-align:center;
-      color:#fff;
-      border-radius:10px;
-      box-shadow:0 5px 20px rgba(0,0,0,0.1);
-      position:relative;
-      overflow:hidden;
-    }
     header.hero video {
       position:absolute;
       top:0; left:0;
@@ -80,8 +27,6 @@
       position:relative;
       z-index:1;
     }
-    header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-    header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
 
     /* Features Cards Section */
     .features-cards-container {
@@ -100,11 +45,21 @@
       align-items:center;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .feature-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
     .feature-card i { font-size:3rem; color:#3b82f6; margin-bottom:15px; transition: transform 0.3s; }
     .feature-card:hover i { transform:rotate(15deg) scale(1.1); }
-    .feature-card h3 { margin-bottom:10px; font-size:1.5rem; color:#1e3a8a; text-align:center; }
-    .feature-card p { font-size:1rem; color:#374151; line-height:1.5; text-align:center; }
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+    .feature-card p {
+      color: #4b5563;
+      line-height: 1.6;
+    }
 
     /* Floating Chat Button */
     .chat-btn {
@@ -124,39 +79,31 @@
     }
     .chat-btn:hover { background:#2563eb; }
 
-    /* Bottom CTA Banner */
+    /* CTA Banner */
     .cta-banner {
-      background:#3b82f6;
-      color:#fff;
-      text-align:center;
-      padding:50px 20px;
-      margin-top:60px;
-      border-radius:15px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      padding: 4rem 1rem;
+      margin-top: 4rem;
     }
-    .cta-banner h2 { font-size:2rem; margin-bottom:20px; }
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
     .cta-banner a {
-      display:inline-block;
-      padding:16px 36px;
-      background:#10b981;
-      color:#fff;
-      font-weight:700;
-      border-radius:999px;
-      text-decoration:none;
-      transition:0.3s;
+      display: inline-block;
+      padding: 12px 24px;
+      background: #10b981;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: 0.3s;
     }
-    .cta-banner a:hover { background:#0f9c6e; transform:scale(1.05); }
 
-    /* Footer */
-    footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
-    footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+    
 
-    /* Fade-in animation */
-    .fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body>
@@ -166,17 +113,15 @@
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
 <div class="menu">
-  <a href="/">Overview</a>
+    <a href="/">Overview</a>
 
-  <a href="/global-reach.html">Global Reach</a>
-  <a href="/your-orbit.html">Your Orbit</a>
-  <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-  <a href="/reach-us.html">Reach Us</a>
-  <a href="/company.html">Company</a>
-</div>
-    </div>
-  <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
-
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html">Platform Overview</a>
+    <a href="/get-numbers.html">Provision Numbers</a>
+    <a href="/reach-us.html">Contact Sales</a>
+    <a href="/company.html">The CallOrbit Way</a>
+  </div>
+  <a href="/signup.html" class="login-btn">Get Started</a>
   </nav>
 
   <!-- Hero Section -->
@@ -185,7 +130,7 @@
       <source src="dashboards.mp4" type="video/mp4">
     </video>
     <div class="hero-content">
-      <h1>Powerful Features for Contact Center Managers</h1>
+      <h1>Powerful features for contact center managers</h1>
       <p>Live dashboards, analytics, number management, and multi-center control—all in one platform.</p>
     </div>
   </header>
@@ -194,42 +139,46 @@
   <section class="features-cards-container fade-in">
     <div class="feature-card">
       <i class="fas fa-tachometer-alt"></i>
-      <h3>Live Dashboards</h3>
+      <h3>Live dashboards</h3>
       <p>Monitor agent activity and performance in real-time with visually rich dashboards.</p>
     </div>
     <div class="feature-card">
       <i class="fas fa-users-cog"></i>
-      <h3>Manage Contact Centers</h3>
+      <h3>Manage contact centers</h3>
       <p>Role-based access, team management, and multi-center control to streamline operations.</p>
     </div>
     <div class="feature-card">
       <i class="fas fa-phone-volume"></i>
-      <h3>Number Management & Porting</h3>
-      <p>Buy, port, and control global numbers easily with zero downtime.</p>
+      <h3>Number management & porting</h3>
+      <p>Provision, port, and control global numbers easily with zero downtime.</p>
     </div>
     <div class="feature-card">
       <i class="fas fa-chart-line"></i>
-      <h3>Analytics & Reporting</h3>
+      <h3>Analytics & reporting</h3>
       <p>Generate custom reports and insights to make data-driven decisions faster.</p>
     </div>
   </section>
 
   <!-- Floating Chat Button -->
-  <button class="chat-btn" onclick="window.location='/contact'">Need help?</button>
+  <button class="chat-btn" onclick="window.location='/reach-us.html'">Need help?</button>
 
   <!-- Bottom CTA Banner -->
   <section class="cta-banner fade-in">
     <h2>Take control of your contact center today</h2>
-    <a href="/pricing">See Pricing</a>
+    <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+      <a href="/pricing.html">See Pricing</a>
+      <a href="/reach-us.html" style="background:transparent; border:2px solid #fff; box-sizing:border-box;">Contact Sales</a>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+    <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
     <br><br>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-conditions">Terms & Conditions</a>
-    <a href="/refund-policy">Refund Policy</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
   </footer>
 
   <script>

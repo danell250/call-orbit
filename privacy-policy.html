@@ -10,82 +10,25 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
-<style>
-/* Navbar Buy Numbers button */
-.navbar-buy {
-  background: transparent;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-.navbar-buy:hover {
-  background: #3b82f6;
-  color: #fff;
-  transform: scale(1.05);
-}
 
-/* Hero */
-header.hero {
-  margin: 20px auto;
-  padding: 60px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-header.hero h1 { margin-bottom: 1rem; font-size: 3rem; }
-header.hero p { margin-bottom: 2rem; font-size: 1.2rem; }
 
-/* Privacy Policy Content */
-.privacy-content {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-  line-height: 1.7;
-  font-size: 1rem;
-  color: #1f2937;
-}
-.privacy-content h2 { margin-top: 1.5rem; color: #1e3a8a; }
-.privacy-content p { margin-bottom: 1rem; }
-.privacy-content a { color: #3b82f6; text-decoration: underline; }
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #f3f4f6;
-  margin-top: 40px;
-  color: #1f2937;
-  font-size: 0.95rem;
-}
-
-/* Fade-in */
-.fade-in { opacity:0; transform:translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-</style>
 </head>
 
 <body>
+<!-- Navbar -->
 <nav>
-  <div><a href="/"><strong>CallOrbit</strong></a></div>
-  <div>
-    <a href="/" class="active-page">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-    <a href="/orders" class="navbar-buy">Buy Numbers</a>
-    <a href="/contact">Contact</a>
-    <a href="/about">About</a>
+  <div class="logo">
+    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
+  <div class="menu">
+    <a href="/">Overview</a>
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html">Platform Overview</a>
+    <a href="/get-numbers.html">Provision Numbers</a>
+    <a href="/reach-us.html">Contact Sales</a>
+    <a href="/company.html">The CallOrbit Way</a>
+  </div>
+  <a href="/signup.html" class="login-btn">Get Started</a>
 </nav>
 
 <header class="hero fade-in">
@@ -93,7 +36,8 @@ footer {
   <p>Your privacy is important to us. This page explains what data we collect, how we use it, and your rights regarding your information.</p>
 </header>
 
-<section class="privacy-content fade-in">
+<!-- Legal Content -->
+<section class="legal-content fade-in">
   <h2>Information We Collect</h2>
   <p>We may collect information that you provide directly to us when using our services, such as your name, email address, and contact preferences. Additionally, we may collect technical data automatically through your use of our website, such as IP address, browser type, and usage patterns.</p>
 
@@ -107,7 +51,7 @@ footer {
   <p>We use cookies and similar technologies to enhance user experience, remember your preferences, and collect analytical data to improve our platform. You can manage your cookie preferences through your browser settings.</p>
 
   <h2>Your Rights</h2>
-  <p>You have the right to access, update, or delete your personal information. You may also opt-out of marketing communications. To exercise any of these rights, please <a href="/contact">contact us</a>.</p>
+  <p>You have the right to access, update, or delete your personal information. You may also opt-out of marketing communications. To exercise any of these rights, please <a href="/reach-us.html">contact us</a>.</p>
 
   <h2>Data Security</h2>
   <p>We implement reasonable security measures to protect your information from unauthorized access, alteration, or disclosure. However, no online platform can guarantee 100% security.</p>
@@ -116,15 +60,16 @@ footer {
   <p>We may update this Privacy Policy from time to time. Changes will be reflected on this page with the effective date. We encourage you to review this page periodically.</p>
 
   <h2>Contact Us</h2>
-  <p>If you have questions or concerns regarding this policy, please <a href="/contact">contact our team</a> via the Contact page.</p>
+  <p>If you have questions or concerns regarding this policy, please <a href="/reach-us.html">contact our team</a> via the Contact page.</p>
 </section>
 
-<footer style="text-align:center;padding:2rem;background:#f3f4f6;margin-top:20px;">
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+<footer>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+  <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
   <br><br>
-  <a href="/privacy-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Privacy Policy</a>
-  <a href="/terms-conditions" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Terms & Conditions</a>
-  <a href="/refund-policy" style="margin:0 10px;color:#3b82f6;text-decoration:none;">Refund Policy</a>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+  <a href="/terms-conditions.html">Terms & Conditions</a>
+  <a href="/refund-policy.html">Refund Policy</a>
 </footer>
 
 <script>

@@ -1,445 +1,535 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CallOrbit — Global Reach</title>
-<link rel="icon" href="data:image/svg+xml,
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CallOrbit — Global Reach</title>
+  <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
-<!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<style>
-/* Navbar */
-nav {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 30px;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  font-family:'Inter',sans-serif;
-  position:sticky;
-  top:0;
-  z-index:200;
-}
-nav .logo a { font-weight:700; font-size:1.5rem; color:#3b82f6; text-decoration:none; }
-nav .menu a { margin:0 12px; text-decoration:none; color:#1f2937; font-weight:500; }
-nav .menu a.active-page { color:#3b82f6; font-weight:700; }
+  <style>
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      font-family: 'Inter', sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
 
-/* Buy Numbers Button */
-.navbar-buy {
-  background: none;
-  color: #3b82f6;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-weight: 700;
-  margin-left: 10px;
-  text-decoration:none;
-  transition: all 0.2s;
-  border: 2px solid #3b82f6;
-}
-.navbar-buy:hover { background:#3b82f6; color:#fff; transform:scale(1.05); }
+    nav .logo a {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #3b82f6;
+      text-decoration: none;
+    }
 
-/* Login/Signup Button */
-.login-btn {
-  background: #3b82f6;
-  color: #fff;
-  padding: 10px 24px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration:none;
-  transition: all 0.2s;
-  margin-left: 10px;
-}
-.login-btn:hover { 
-  background:#2563eb; 
-  transform:scale(1.05); 
-}
+    nav .menu a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: 500;
+    }
 
-/* Hero / Banner */
-header.hero {
-  margin:0 auto;
-  padding:80px 20px;
-  text-align:center;
-  color:#fff;
-  background:#3b82f6;
-  border-radius:10px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-  position:relative;
-  overflow:hidden;
-}
-header.hero video {
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  z-index:0;
-  opacity:0.4;
-}
-header.hero .hero-content { position:relative; z-index:1; }
-header.hero h1 { margin-bottom:1rem; font-size:3rem; }
-header.hero p { margin-bottom:2rem; font-size:1.3rem; max-width:600px; margin-left:auto; margin-right:auto; }
+    nav .menu a.active-page {
+      color: #3b82f6;
+      font-weight: 700;
+    }
 
-/* Stats Section */
-.stats-section {
-  max-width:1200px;
-  margin:60px auto;
-  padding:40px 20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-  gap:2rem;
-  text-align:center;
-}
-.stat-card {
-  background:#f9fafb;
-  padding:30px 20px;
-  border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.05);
-}
-.stat-card h3 {
-  font-size:3rem;
-  color:#3b82f6;
-  margin-bottom:10px;
-  font-weight:800;
-}
-.stat-card p {
-  font-size:1.1rem;
-  color:#374151;
-  font-weight:600;
-}
+    /* Login/Signup Button */
+    .login-btn {
+      background: #3b82f6;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-left: 10px;
+      font-size: 0.95rem;
+    }
 
-/* Section Headers */
-.section-header {
-  text-align:center;
-  margin:60px auto 40px;
-  max-width:800px;
-  padding:0 20px;
-}
-.section-header h2 {
-  font-size:2.5rem;
-  color:#1e3a8a;
-  margin-bottom:15px;
-}
-.section-header p {
-  font-size:1.2rem;
-  color:#6b7280;
-}
+    .login-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
 
-/* Coverage Cards */
-.features-cards-container {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:1.5rem;
-  padding:40px 20px;
-  max-width:1400px;
-  margin:0 auto;
-}
-.feature-card {
-  background:#fff;
-  border-radius:15px;
-  padding:30px 20px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.1);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.feature-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
-.feature-card h3 { margin-bottom:15px; font-size:1.8rem; color:#1e3a8a; text-align:center; }
-.feature-card p { font-size:1rem; color:#374151; line-height:1.6; text-align:center; }
-.feature-card ul {
-  list-style:none;
-  padding:0;
-  margin-top:15px;
-  width:100%;
-}
-.feature-card ul li {
-  padding:8px 0;
-  color:#6b7280;
-  font-size:0.95rem;
-  border-bottom:1px solid #f3f4f6;
-}
-.feature-card ul li:last-child {
-  border-bottom:none;
-}
-.feature-card ul li i {
-  color:#3b82f6;
-  margin-right:8px;
-}
+    /* Hero / Banner */
+    header.hero {
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+      color: #fff;
+      background: #3b82f6;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Benefits Section */
-.benefits-section {
-  max-width:1200px;
-  margin:60px auto;
-  padding:40px 20px;
-  background:#f9fafb;
-  border-radius:15px;
-}
-.benefits-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-  gap:2rem;
-  margin-top:30px;
-}
-.benefit-item {
-  text-align:center;
-  padding:20px;
-}
-.benefit-item i {
-  font-size:2.5rem;
-  color:#3b82f6;
-  margin-bottom:15px;
-}
-.benefit-item h3 {
-  font-size:1.3rem;
-  color:#1e3a8a;
-  margin-bottom:10px;
-}
-.benefit-item p {
-  color:#6b7280;
-  line-height:1.6;
-}
+    header.hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.4;
+    }
 
-/* CTA Banner */
-.cta-banner {
-  background:#3b82f6;
-  color:#fff;
-  text-align:center;
-  padding:50px 20px;
-  margin:60px auto;
-  border-radius:15px;
-  max-width:1200px;
-}
-.cta-banner h2 { font-size:2rem; margin-bottom:20px; }
-.cta-banner a {
-  display:inline-block;
-  padding:16px 36px;
-  background:#ff8800;
-  color:#fff;
-  font-weight:700;
-  border-radius:999px;
-  text-decoration:none;
-  transition:0.3s;
-}
-.cta-banner a:hover { background:#e67700; transform:scale(1.05); }
+    header.hero .hero-content {
+      position: relative;
+      z-index: 1;
+    }
 
-/* Footer */
-footer { text-align:center; padding:2.5rem 20px; background:#f3f4f6; margin-top:60px; font-size:0.9rem; }
-footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
+    header.hero h1 {
+      margin-bottom: 1rem;
+      font-size: 3rem;
+    }
 
-/* Fade-in animation */
-.fade-in { opacity:0; transform:translateY(20px); transition: all 0.8s ease-out; }
-.fade-in.visible { opacity:1; transform:translateY(0); }
-</style>
+    header.hero p {
+      margin-bottom: 2rem;
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-card {
+      background: #f9fafb;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-card h3 {
+      font-size: 3rem;
+      color: #3b82f6;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .stat-card p {
+      font-size: 1.1rem;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin: 60px auto 40px;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: #6b7280;
+    }
+
+    /* Coverage Cards */
+    .features-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 40px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #1e3a8a;
+      text-align: center;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: #374151;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .feature-card ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .feature-card ul li {
+      padding: 8px 0;
+      color: #6b7280;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .feature-card ul li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-card ul li i {
+      color: #3b82f6;
+      margin-right: 8px;
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      background: #f9fafb;
+      border-radius: 15px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 30px;
+    }
+
+    .benefit-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .benefit-item i {
+      font-size: 2.5rem;
+      color: #3b82f6;
+      margin-bottom: 15px;
+    }
+
+    .benefit-item h3 {
+      font-size: 1.3rem;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+
+    .benefit-item p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: #3b82f6;
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+      margin: 60px auto;
+      border-radius: 15px;
+      max-width: 1200px;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-banner a {
+      display: inline-block;
+      padding: 16px 36px;
+      background: #ff8800;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .cta-banner a:hover {
+      background: #e67700;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 20px;
+      background: #f3f4f6;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">
-    <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
-  </div>
-  <div class="menu">
-    <a href="/">Overview</a>
-   
-    <a href="/global-reach.html" class="active-page">Global Reach</a>
-    <a href="/your-orbit.html">Your Orbit</a>
-    <a href="/get-numbers.html" class="navbar-buy">Get Numbers</a>
-    <a href="/reach-us.html">Reach Us</a>
-    <a href="/company.html">Company</a>
-  </div>
-  <a href="/signup.html" class="login-btn">Sign Up</a>
-</nav>
-
-<!-- Hero Section -->
-<header class="hero fade-in">
-  <video autoplay muted loop>
-    <source src="dashboards.mp4" type="video/mp4">
-  </video>
-  <div class="hero-content">
-    <h1>Global Coverage, Local Presence</h1>
-    <p>Connect with customers worldwide through our extensive network of local and toll-free numbers across 150+ countries.</p>
-  </div>
-</header>
-
-<!-- Stats Section -->
-<section class="stats-section fade-in">
-  <div class="stat-card">
-    <h3>150+</h3>
-    <p>Countries Covered</p>
-  </div>
-  <div class="stat-card">
-    <h3>5,000+</h3>
-    <p>Cities Worldwide</p>
-  </div>
-  <div class="stat-card">
-    <h3>99.9%</h3>
-    <p>Network Uptime</p>
-  </div>
-  <div class="stat-card">
-    <h3>24/7</h3>
-    <p>Global Support</p>
-  </div>
-</section>
-
-<!-- Section Header -->
-<div class="section-header fade-in">
-  <h2>Regional Coverage & Capabilities</h2>
-  <p>Comprehensive telephony solutions tailored to each region's unique requirements</p>
-</div>
-
-<!-- Coverage Cards -->
-<section class="features-cards-container fade-in">
-  <div class="feature-card">
-    <h3>🇺🇸 🇨🇦 North America</h3>
-    <p>Extensive coverage across the United States and Canada with premium voice quality and instant provisioning.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> Local numbers in all 50 states</li>
-      <li><i class="fas fa-check"></i> Toll-free numbers (800, 888, 877, etc.)</li>
-      <li><i class="fas fa-check"></i> Canadian local & toll-free</li>
-      <li><i class="fas fa-check"></i> Instant number provisioning</li>
-    </ul>
-  </div>
-  
-  <div class="feature-card">
-    <h3>🇬🇧 🇩🇪 🇫🇷 Europe</h3>
-    <p>Full coverage across European Union and UK with local numbers and GDPR-compliant infrastructure.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> 40+ European countries</li>
-      <li><i class="fas fa-check"></i> Local city numbers available</li>
-      <li><i class="fas fa-check"></i> GDPR compliant data centers</li>
-      <li><i class="fas fa-check"></i> Multi-language support</li>
-    </ul>
-  </div>
-  
-  <div class="feature-card">
-    <h3>🇯🇵 🇦🇺 🇸🇬 Asia-Pacific</h3>
-    <p>Seamless connectivity across major APAC markets with local presence and 24/7 regional support.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> Japan, Australia, Singapore</li>
-      <li><i class="fas fa-check"></i> India, Philippines, Thailand</li>
-      <li><i class="fas fa-check"></i> China, Hong Kong, Taiwan</li>
-      <li><i class="fas fa-check"></i> Regional data centers</li>
-    </ul>
-  </div>
-  
-  <div class="feature-card">
-    <h3>🇧🇷 🇲🇽 🇦🇷 Latin America</h3>
-    <p>Growing coverage across LATAM with local numbers and Spanish/Portuguese support teams.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> Brazil, Mexico, Argentina</li>
-      <li><i class="fas fa-check"></i> Chile, Colombia, Peru</li>
-      <li><i class="fas fa-check"></i> Bilingual support teams</li>
-      <li><i class="fas fa-check"></i> Local payment options</li>
-    </ul>
-  </div>
-  
-  <div class="feature-card">
-    <h3>🇿🇦 🇳🇬 🇪🇬 Africa</h3>
-    <p>Expanding presence in key African markets with reliable infrastructure and local expertise.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> South Africa, Nigeria, Egypt</li>
-      <li><i class="fas fa-check"></i> Kenya, Ghana, Morocco</li>
-      <li><i class="fas fa-check"></i> Mobile-first solutions</li>
-      <li><i class="fas fa-check"></i> Regional partnerships</li>
-    </ul>
-  </div>
-  
-  <div class="feature-card">
-    <h3>🇦🇪 🇸🇦 🇶🇦 Middle East</h3>
-    <p>Reliable connectivity across GCC countries and key Middle Eastern markets with premium service.</p>
-    <ul>
-      <li><i class="fas fa-check"></i> UAE, Saudi Arabia, Qatar</li>
-      <li><i class="fas fa-check"></i> Kuwait, Bahrain, Oman</li>
-      <li><i class="fas fa-check"></i> Arabic language support</li>
-      <li><i class="fas fa-check"></i> Regional compliance</li>
-    </ul>
-  </div>
-</section>
-
-<!-- Benefits Section -->
-<section class="benefits-section fade-in">
-  <div class="section-header">
-    <h2>Why Choose CallOrbit for Global Communications</h2>
-    <p>Enterprise-grade features designed for worldwide operations</p>
-  </div>
-  <div class="benefits-grid">
-    <div class="benefit-item">
-      <i class="fas fa-globe-americas"></i>
-      <h3>Instant Global Presence</h3>
-      <p>Establish local presence in any market within minutes without physical infrastructure.</p>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">
+      <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
     </div>
-    <div class="benefit-item">
-      <i class="fas fa-network-wired"></i>
-      <h3>Redundant Infrastructure</h3>
-      <p>Multiple carrier connections and data centers ensure 99.9% uptime globally.</p>
+    <div class="menu">
+      <a href="/">Overview</a>
+
+      <a href="/global-reach.html" class="active-page">Global Reach</a>
+      <a href="/your-orbit.html">Platform Overview</a>
+      <a href="/get-numbers.html">Provision Numbers</a>
+      <a href="/reach-us.html">Contact Sales</a>
+      <a href="/company.html">The CallOrbit Way</a>
     </div>
-    <div class="benefit-item">
-      <i class="fas fa-shield-alt"></i>
-      <h3>Compliance Ready</h3>
-      <p>Meet regional regulations including GDPR, HIPAA, and local telecom requirements.</p>
+    <a href="/signup.html" class="login-btn">Get Started</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero fade-in">
+    <video autoplay muted loop>
+      <source src="dashboards.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>Global coverage, local presence</h1>
+      <p>Connect with customers worldwide through our extensive network of local and toll-free numbers across 150+
+        countries.</p>
     </div>
-    <div class="benefit-item">
-      <i class="fas fa-headset"></i>
-      <h3>24/7 Support</h3>
-      <p>Round-the-clock assistance from our global support team in multiple languages.</p>
+  </header>
+
+  <!-- Stats Section -->
+  <section class="stats-section fade-in">
+    <div class="stat-card">
+      <h3>150+</h3>
+      <p>Countries Covered</p>
     </div>
+    <div class="stat-card">
+      <h3>5,000+</h3>
+      <p>Cities Worldwide</p>
+    </div>
+    <div class="stat-card">
+      <h3>99.9%</h3>
+      <p>Network Uptime</p>
+    </div>
+    <div class="stat-card">
+      <h3>24/7</h3>
+      <p>Global Support</p>
+    </div>
+  </section>
+
+  <!-- Section Header -->
+  <div class="section-header fade-in">
+    <h2>Regional coverage & capabilities</h2>
+    <p>Comprehensive telephony solutions tailored to each region's unique requirements</p>
   </div>
-</section>
 
-<!-- CTA Banner -->
-<section class="cta-banner fade-in">
-  <h2>Ready to Expand Your Global Reach?</h2>
-  <p style="margin-bottom:30px; font-size:1.1rem;">Get started with local numbers in 150+ countries today</p>
-  <a href="/get-numbers.html">Browse Available Numbers</a>
-</section>
+  <!-- Coverage Cards -->
+  <section class="features-cards-container fade-in">
+    <div class="feature-card">
+      <h3>🇺🇸 🇨🇦 North America</h3>
+      <p>Extensive coverage across the United States and Canada with premium voice quality and instant provisioning.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Local numbers in all 50 states</li>
+        <li><i class="fas fa-check"></i> Toll-free numbers (800, 888, 877, etc.)</li>
+        <li><i class="fas fa-check"></i> Canadian local & toll-free</li>
+        <li><i class="fas fa-check"></i> Instant number provisioning</li>
+      </ul>
+    </div>
 
-<!-- Footer -->
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
-  <br><br>
-  <a href="/privacy-policy">Privacy Policy</a>
-  <a href="/terms-conditions">Terms & Conditions</a>
-  <a href="/refund-policy">Refund Policy</a>
-</footer>
+    <div class="feature-card">
+      <h3>🇬🇧 🇩🇪 🇫🇷 Europe</h3>
+      <p>Full coverage across European Union and UK with local numbers and GDPR-compliant infrastructure.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> 40+ European countries</li>
+        <li><i class="fas fa-check"></i> Local city numbers available</li>
+        <li><i class="fas fa-check"></i> GDPR compliant data centers</li>
+        <li><i class="fas fa-check"></i> Multi-language support</li>
+      </ul>
+    </div>
 
-<script>
-  // Fade-in on scroll
-  const faders = document.querySelectorAll('.fade-in');
-  const appearOnScroll = new IntersectionObserver(function(entries){
-    entries.forEach(entry => {
-      if(entry.isIntersecting){ entry.target.classList.add('visible'); }
-    });
-  }, {threshold:0.1});
-  faders.forEach(fader => appearOnScroll.observe(fader));
+    <div class="feature-card">
+      <h3>🇯🇵 🇦🇺 🇸🇬 Asia-Pacific</h3>
+      <p>Seamless connectivity across major APAC markets with local presence and 24/7 regional support.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Japan, Australia, Singapore</li>
+        <li><i class="fas fa-check"></i> India, Philippines, Thailand</li>
+        <li><i class="fas fa-check"></i> China, Hong Kong, Taiwan</li>
+        <li><i class="fas fa-check"></i> Regional data centers</li>
+      </ul>
+    </div>
 
-  // Set footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    <div class="feature-card">
+      <h3>🇧🇷 🇲🇽 🇦🇷 Latin America</h3>
+      <p>Growing coverage across LATAM with local numbers and Spanish/Portuguese support teams.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Brazil, Mexico, Argentina</li>
+        <li><i class="fas fa-check"></i> Chile, Colombia, Peru</li>
+        <li><i class="fas fa-check"></i> Bilingual support teams</li>
+        <li><i class="fas fa-check"></i> Local payment options</li>
+      </ul>
+    </div>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-Tawk_API.onLoad = function(){
-    // Remove profile picture
-    Tawk_API.setAttributes({ avatar: '' });
-    // Disable Knowledge Base / Help Center
-    Tawk_API.toggleHelpCenter(false);
-};
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <div class="feature-card">
+      <h3>🇿🇦 🇳🇬 🇪🇬 Africa</h3>
+      <p>Expanding presence in key African markets with reliable infrastructure and local expertise.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> South Africa, Nigeria, Egypt</li>
+        <li><i class="fas fa-check"></i> Kenya, Ghana, Morocco</li>
+        <li><i class="fas fa-check"></i> Mobile-first solutions</li>
+        <li><i class="fas fa-check"></i> Regional partnerships</li>
+      </ul>
+    </div>
+
+    <div class="feature-card">
+      <h3>🇦🇪 🇸🇦 🇶🇦 Middle East</h3>
+      <p>Reliable connectivity across GCC countries and key Middle Eastern markets with premium service.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> UAE, Saudi Arabia, Qatar</li>
+        <li><i class="fas fa-check"></i> Kuwait, Bahrain, Oman</li>
+        <li><i class="fas fa-check"></i> Arabic language support</li>
+        <li><i class="fas fa-check"></i> Regional compliance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section fade-in">
+    <div class="section-header">
+      <h2>Why choose CallOrbit for global communications</h2>
+      <p>Enterprise-grade features designed for worldwide operations</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <i class="fas fa-globe-americas"></i>
+        <h3>Instant global presence</h3>
+        <p>Establish local presence in any market within minutes without physical infrastructure.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-network-wired"></i>
+        <h3>Redundant infrastructure</h3>
+        <p>Multiple carrier connections and data centers ensure 99.9% uptime globally.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Compliance ready</h3>
+        <p>Meet regional regulations including GDPR, HIPAA, and local telecom requirements.</p>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-headset"></i>
+        <h3>24/7 support</h3>
+        <p>Round-the-clock assistance from our global support team in multiple languages.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner fade-in">
+    <h2>Ready to expand your global reach?</h2>
+    <p style="margin-bottom:30px; font-size:1.1rem;">Start provisioning local numbers in 150+ countries today</p>
+    <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+      <a href="/get-numbers.html">Provision Numbers</a>
+      <a href="/reach-us.html" style="background:transparent; border:2px solid #fff; box-sizing:border-box;">Contact Sales</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+    <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
+    <br><br>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver(function (entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    Tawk_API.onLoad = function () {
+      // Remove profile picture
+      Tawk_API.setAttributes({ avatar: '' });
+      // Disable Knowledge Base / Help Center
+      Tawk_API.toggleHelpCenter(false);
+    };
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/68dcce29438b6919521ce16a/1j6f8akmi';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 
 </body>
+
 </html>

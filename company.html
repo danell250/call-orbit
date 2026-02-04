@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CallOrbit — Company</title>
+  <title>CallOrbit — The CallOrbit Way</title>
   <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
@@ -47,28 +47,10 @@
       font-weight: 700;
     }
 
-    .navbar-buy {
-      background: none;
-      color: #3b82f6;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-left: 10px;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 2px solid #3b82f6;
-    }
-
-    .navbar-buy:hover {
-      background: #3b82f6;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
     .login-btn {
       background: #3b82f6;
       color: #fff;
-      padding: 10px 24px;
+      padding: 12px 24px;
       border-radius: 999px;
       font-weight: 600;
       text-decoration: none;
@@ -78,7 +60,7 @@
 
     .login-btn:hover {
       background: #2563eb;
-      transform: scale(1.05);
+      transform: translateY(-2px);
     }
 
     /* Hero Section */
@@ -102,7 +84,7 @@
       left: 50%;
       width: 200px;
       height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
       transform: translate(-50%, -50%);
     }
 
@@ -124,7 +106,7 @@
       line-height: 1.6;
     }
 
-    /* Fun Stats Section */
+    /* Stats Section */
     .fun-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -152,19 +134,20 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+      background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd);
     }
 
     .stat-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-2px);
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     }
 
-    .stat-box .emoji {
-      font-size: 4rem;
+    .stat-box i {
+      font-size: 3.5rem;
       margin-bottom: 15px;
       display: block;
       transition: transform 0.3s;
+      color: #3b82f6;
     }
 
     /* Removed bounce animation for professional feel */
@@ -212,30 +195,8 @@
       z-index: 1;
     }
 
-    /* Operational Reality Section */
-    .operational-section {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 40px 30px;
-      background: #f3f4f6;
-      border-radius: 12px;
-      border-left: 5px solid #6b7280;
-      color: #374151;
-    }
+    /* Operational Reality Section - Moved to style.css */
 
-    .operational-section h2 {
-      font-size: 1.8rem;
-      color: #1f2937;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-
-    .operational-section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
-      color: #4b5563;
-    }
 
     /* Values Grid */
     .values-section {
@@ -268,25 +229,10 @@
       overflow: hidden;
     }
 
-    .value-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-      transform: scale(0);
-      transition: transform 0.5s;
-    }
-
-    .value-card:hover::before {
-      transform: scale(1);
-    }
-
+    /* Subtle hover effect only */
     .value-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
 
     .value-card .icon.number {
@@ -321,7 +267,7 @@
       max-width: 900px;
       margin: 80px auto;
       padding: 60px 30px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
       border-radius: 20px;
       text-align: center;
       color: #fff;
@@ -346,9 +292,9 @@
 
     .cta-section a {
       display: inline-block;
-      background: #ff8800;
-      color: #fff;
-      padding: 14px 32px;
+      background: #ffffff;
+      color: #3b82f6;
+      padding: 12px 24px;
       border-radius: 999px;
       font-weight: 700;
       font-size: 1.1rem;
@@ -360,8 +306,8 @@
     }
 
     .cta-section a:not(.secondary):hover {
-      background: #e67700;
-      transform: scale(1.05);
+      background: #f0f9ff;
+      transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
 
@@ -369,11 +315,11 @@
       background: rgba(255, 255, 255, 0.2);
       border: 2px solid rgba(255, 255, 255, 0.5);
     }
-    
+
     .cta-section a.secondary:hover {
       background: rgba(255, 255, 255, 0.3);
       border-color: #fff;
-      transform: scale(1.05);
+      transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
@@ -401,8 +347,8 @@
     /* Fade-in */
     .fade-in {
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease-out;
+      transform: translateY(5px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
     .fade-in.visible {
@@ -420,126 +366,158 @@
     </div>
     <div class="menu">
       <a href="/">Overview</a>
-      <a href="/global-reach">Global Reach</a>
-      <a href="/your-orbit">Your Orbit</a>
-      <a href="/get-numbers" class="navbar-buy">Get Numbers</a>
-      <a href="/reach-us">Reach Us</a>
-      <a href="/company.html" class="active-page">Company</a>
+      <a href="/global-reach.html">Global Reach</a>
+      <a href="/your-orbit.html">Platform Overview</a>
+      <a href="/get-numbers.html">Provision Numbers</a>
+      <a href="/reach-us.html">Contact Sales</a>
+      <a href="/company.html" class="active-page">The CallOrbit Way</a>
     </div>
     <div class="actions" style="display:flex; align-items:center; gap:12px;">
-      <a href="/signup.html" class="login-btn">Sign Up</a>
+      <a href="/signup.html" class="login-btn">Get Started</a>
     </div>
   </nav>
 
   <header class="hero fade-in">
-    <h1>Building the Future of Contact Centers</h1>
-    <p>At CallOrbit, we believe managing a contact center shouldn't feel like rocket science. That's why we're on a
-      mission to make it simple, powerful, and accessible to everyone.</p>
+    <p style="opacity:.6; font-size:.9rem; margin-bottom:30px;">
+      This page reflects how CallOrbit is built and operated.
+    </p>
+    <h1>The CallOrbit Way</h1>
+    <p>How we design, operate, and scale communications infrastructure.</p>
   </header>
 
-  <section class="fun-stats fade-in">
-    <h2 style="grid-column: 1 / -1; text-align: center; font-size: 2.5rem; color: #1e3a8a; margin-bottom: 10px;">By the Numbers</h2>
-    <div class="stat-box">
-      <span class="emoji">⚡</span>
-      <h3>Fast</h3>
-      <p>Setup in Minutes</p>
+  <section class="values-section fade-in" style="margin-top: 60px;">
+    <div style="text-align: center; max-width: 900px; margin: 0 auto 60px;">
+      <h2 style="font-size: 2.5rem; color: #1e3a8a; margin-bottom: 20px;">We optimize for clarity, reliability, and long-term trust.</h2>
     </div>
-    <div class="stat-box">
-      <span class="emoji">🌍</span>
-      <h3>150+</h3>
-      <p>Countries Covered</p>
-    </div>
-    <div class="stat-box">
-      <span class="emoji">💪</span>
-      <h3>99.9%</h3>
-      <p>Uptime Guarantee</p>
-    </div>
-    <div class="stat-box">
-      <span class="emoji">🔒</span>
-      <h3>Secure</h3>
-      <p>Enterprise-Grade Security</p>
-    </div>
-  </section>
 
-  <section class="story-section fade-in">
-    <h2>Our Mission</h2>
-    <p>
-      Contact center management has been dominated by complex, expensive enterprise systems that require extensive training and IT resources. We saw an opportunity to change that.
-    </p>
-    <p>
-      CallOrbit is built on the principle that powerful software should be simple to use. We're creating a platform that gives businesses of all sizes access to enterprise-grade contact center features without the enterprise complexity.
-    </p>
-    <p>
-      Whether you're a startup making your first customer calls or a growing company scaling your support team, CallOrbit provides the tools you need to deliver exceptional customer experiences.
-    </p>
-  </section>
-
-  <section class="operational-section fade-in">
-    <h2>Operational Focus</h2>
-    <p>
-      CallOrbit is built with reliability, compliance, and global reach in mind.
-    </p>
-    <p>
-      We work with established telecom carriers and infrastructure partners to deliver dependable voice services across regions.
-    </p>
-  </section>
-
-  <section class="values-section fade-in">
-    <h2>Our Core Values</h2>
     <div class="values-grid">
       <div class="value-card">
-        <div class="icon number">01</div>
-        <h3>Simplicity First</h3>
-        <p>Powerful software doesn't have to be complicated. We prioritize intuitive design and straightforward functionality.</p>
+        <div class="icon"><i class="fa-solid fa-eye" style="font-size: 3rem; color: #3b82f6; margin-bottom: 20px;"></i></div>
+        <h3>Clarity</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; color: #374151; line-height: 1.6;">
+          <li style="margin-bottom: 10px;"><strong>Simple pricing</strong><br>No hidden system rules.</li>
+          <li style="margin-bottom: 10px;"><strong>Predictable behavior</strong><br>If something costs money, it’s visible.</li>
+          <li>If something can fail, it’s documented.</li>
+        </ul>
       </div>
 
       <div class="value-card">
-        <div class="icon number">02</div>
-        <h3>Customer Success</h3>
-        <p>Your success is our success. We're committed to providing tools and support that help you achieve your goals.</p>
+        <div class="icon"><i class="fa-solid fa-server" style="font-size: 3rem; color: #3b82f6; margin-bottom: 20px;"></i></div>
+        <h3>Reliability</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; color: #374151; line-height: 1.6;">
+          <li style="margin-bottom: 10px;"><strong>Carrier redundancy</strong><br>Conservative defaults.</li>
+          <li style="margin-bottom: 10px;"><strong>Fewer features, stronger ones</strong><br>We ship fewer features than competitors — on purpose.</li>
+        </ul>
       </div>
 
       <div class="value-card">
-        <div class="icon number">03</div>
-        <h3>Continuous Innovation</h3>
-        <p>The communications landscape evolves rapidly. We stay ahead with regular updates and new features.</p>
+        <div class="icon"><i class="fa-solid fa-handshake" style="font-size: 3rem; color: #3b82f6; margin-bottom: 20px;"></i></div>
+        <h3>Trust</h3>
+        <ul style="list-style: none; padding: 0; text-align: left; color: #374151; line-height: 1.6;">
+          <li style="margin-bottom: 10px;"><strong>No dark patterns</strong><br>No artificial lock-in.</li>
+          <li style="margin-bottom: 10px;"><strong>Easy exits</strong><br>If CallOrbit isn’t right for you, leaving should be painless.</li>
+          <li>No telecom company says this out loud.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="refuse-section fade-in" style="max-width: 800px; margin: 80px auto; padding: 0 20px; text-align: center;">
+    <h2 style="font-size: 2.5rem; color: #1e3a8a; margin-bottom: 40px;">What we don’t do</h2>
+    <ul style="list-style: none; padding: 0; font-size: 1.25rem; line-height: 2; color: #374151; display: inline-block; text-align: left;">
+      <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+        <i class="fa-solid fa-xmark" style="color: #ef4444; position: absolute; left: 0; top: 10px;"></i>
+        We don’t hide costs in fine print
+      </li>
+      <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+        <i class="fa-solid fa-xmark" style="color: #ef4444; position: absolute; left: 0; top: 10px;"></i>
+        We don’t upsell basic functionality
+      </li>
+      <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+        <i class="fa-solid fa-xmark" style="color: #ef4444; position: absolute; left: 0; top: 10px;"></i>
+        We don’t overpromise global coverage
+      </li>
+      <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+        <i class="fa-solid fa-xmark" style="color: #ef4444; position: absolute; left: 0; top: 10px;"></i>
+        We don’t lock customers into long contracts
+      </li>
+      <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+        <i class="fa-solid fa-xmark" style="color: #ef4444; position: absolute; left: 0; top: 10px;"></i>
+        We don’t ship features that compromise call quality
+      </li>
+    </ul>
+  </section>
+
+  <section class="built-for-section fade-in" style="max-width: 1000px; margin: 80px auto; padding: 0 20px;">
+    <div style="text-align: center; margin-bottom: 50px;">
+      <h2 style="font-size: 2.5rem; color: #1e3a8a; margin-bottom: 20px;">Who CallOrbit Is Built For (and Who It Isn’t)</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+      <!-- Built For -->
+      <div style="background: #eff6ff; padding: 40px; border-radius: 20px; border: 2px solid #bfdbfe;">
+        <h3 style="color: #1e40af; font-size: 1.8rem; margin-bottom: 30px; text-align: center;">Built For</h3>
+        <ul style="list-style: none; padding: 0; font-size: 1.1rem; line-height: 1.8; color: #1e3a8a;">
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-check" style="color: #2563eb; position: absolute; left: 0; top: 8px;"></i>
+            Growing support teams
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-check" style="color: #2563eb; position: absolute; left: 0; top: 8px;"></i>
+            Distributed companies
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-check" style="color: #2563eb; position: absolute; left: 0; top: 8px;"></i>
+            Ops-focused founders
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-check" style="color: #2563eb; position: absolute; left: 0; top: 8px;"></i>
+            Teams that value stability over hype
+          </li>
+        </ul>
       </div>
 
-      <div class="value-card">
-        <div class="icon number">04</div>
-        <h3>Transparency & Trust</h3>
-        <p>Clear pricing, honest communication, and reliable service. No hidden fees, no surprises.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="icon number">05</div>
-        <h3>Accessibility</h3>
-        <p>Enterprise-grade features shouldn't require enterprise budgets. We make powerful tools accessible to all.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="icon number">06</div>
-        <h3>Global Reach</h3>
-        <p>Business is global, and so are we. Connect with customers anywhere with our worldwide coverage.</p>
+      <!-- Not Built For -->
+      <div style="background: #fef2f2; padding: 40px; border-radius: 20px; border: 2px solid #fecaca;">
+        <h3 style="color: #991b1b; font-size: 1.8rem; margin-bottom: 30px; text-align: center;">Not Built For</h3>
+        <ul style="list-style: none; padding: 0; font-size: 1.1rem; line-height: 1.8; color: #7f1d1d;">
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-ban" style="color: #ef4444; position: absolute; left: 0; top: 8px;"></i>
+            Spam operations
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-ban" style="color: #ef4444; position: absolute; left: 0; top: 8px;"></i>
+            Grey-area traffic
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-ban" style="color: #ef4444; position: absolute; left: 0; top: 8px;"></i>
+            Businesses looking for the cheapest possible rates
+          </li>
+          <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+            <i class="fa-solid fa-ban" style="color: #ef4444; position: absolute; left: 0; top: 8px;"></i>
+            Teams that want zero responsibility
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
   <section class="cta-section fade-in">
-    <h2>Ready to Transform Your Communications?</h2>
+    <h2>Ready to transform your communications?</h2>
     <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
     <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
-      <a href="/signup.html">Start Your Free Trial</a>
-      <a href="/reach-us.html" class="secondary">Talk to Sales</a>
+      <a href="/signup.html">Get Started</a>
+      <a href="/reach-us.html">Contact Sales</a>
     </div>
   </section>
 
   <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+    <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
     <br><br>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <a href="/terms-conditions">Terms & Conditions</a>
-    <a href="/refund-policy">Refund Policy</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
   </footer>
 
   <script>

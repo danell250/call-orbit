@@ -12,53 +12,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-/* Navbar */
-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 30px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);font-family:'Inter',sans-serif;position:sticky;top:0;z-index:200;}
-nav .logo a{font-weight:700;font-size:1.5rem;color:#1e3a8a;text-decoration:none;}
-nav .menu a{margin:0 12px;text-decoration:none;color:#1f2937;font-weight:500;}
-nav .menu a.active-page{color:#3b82f6;font-weight:700;}
-.navbar-buy{background:none;color:#3b82f6;padding:10px 20px;border-radius:999px;font-weight:700;margin-left:10px;text-decoration:none;transition:all 0.2s;border:2px solid #3b82f6;}
-.navbar-buy:hover{background:#3b82f6;color:#fff;transform:scale(1.05);}
-.login-btn{padding:10px 18px;border-radius:999px;font-weight:600;text-decoration:none;background:#3b82f6;color:#fff;transition:0.2s;}
-.login-btn:hover{background:#2563eb;}
-
-/* Plans Grid */
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:20px 20px 40px 20px;}
-.plan{background:#fff;padding:25px 20px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.1);text-align:center;transition: transform 0.3s, box-shadow 0.3s;}
-.plan:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,0,0,0.15);}
-.plan h3{color:#1e3a8a;margin-bottom:1rem;}
-.plan .price{font-weight:700;font-size:1.2rem;margin-bottom:0.5rem;}
-.buy-now{background:#3b82f6;color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.2s;margin-top:10px;}
-.buy-now:hover{background:#2563eb;transform:scale(1.05);}
-
 /* CTA */
 .cta{background:#fff;padding:40px 20px;text-align:center;border-radius:1rem;box-shadow:0 5px 20px rgba(0,0,0,0.05);margin:40px 20px;}
 .cta h2{margin-bottom:1rem;font-size:2rem;color:#1e3a8a;}
 .cta p{margin-bottom:1.5rem;font-size:1.2rem;color:#374151;}
 .cta a{display:inline-block;background:#3b82f6;color:#fff;padding:12px 24px;border-radius:999px;font-weight:700;text-decoration:none;transition:all 0.2s;}
-.cta a:hover{background:#2563eb;transform:scale(1.05);}
+.cta a:hover{background:#2563eb;transform:translateY(-2px);}
 
-/* Fade-in */
-.fade-in{opacity:0;transform:translateY(20px);transition: all 0.8s ease-out;}
-.fade-in.visible{opacity:1;transform:translateY(0);}
+
+
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo"><a href="/">CallOrbit</a></div>
+  <div class="logo"><a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a></div>
   <div class="menu">
-    <a href="/">Home</a>
-    <a href="/features">Features</a>
-    <a href="/pricing" class="active-page">Pricing</a>
-    <a href="/coverage">Coverage</a>
-    <a href="/platform">Platform</a>
-    <a href="/buy" class="navbar-buy">Buy Numbers</a>
-    <a href="/contact">Contact</a>
-    <a href="/about">About</a>
+    <a href="/">Overview</a>
+    <a href="/global-reach.html">Global Reach</a>
+    <a href="/your-orbit.html">Platform Overview</a>
+    <a href="/get-numbers.html">Provision Numbers</a>
+    <a href="/reach-us.html">Contact Sales</a>
+    <a href="/company.html">The CallOrbit Way</a>
   </div>
-  <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
-" class="login-btn">Login</a>
+  <a href="/signup.html" class="login-btn">Get Started</a>
 </nav>
 
 <header class="hero fade-in">
@@ -98,19 +75,40 @@ nav .menu a.active-page{color:#3b82f6;font-weight:700;}
     </div>
   </section>
 
+  <div class="trust-strip" style="margin-top: 30px; margin-bottom: 50px;">
+    <span><i class="fas fa-lock"></i> Secure billing</span>
+    <span><i class="fas fa-shield-halved"></i> GDPR-ready</span>
+    <span><i class="fas fa-server"></i> Carrier-grade infrastructure</span>
+  </div>
+
   <section class="cta fade-in">
-    <h2>Get Your Numbers Anywhere</h2>
+    <h2>Provision global numbers</h2>
     <p>Start leveraging CallOrbit’s global coverage for your business today.</p>
-    <a href="/buy">Get Started Today</a>
+    <a href="/signup.html">Get Started</a>
+    <div class="trust-strip" style="margin-top: 20px;">
+      <span><i class="fas fa-lock"></i> Secure billing</span>
+      <span><i class="fas fa-shield-halved"></i> GDPR-ready</span>
+      <span><i class="fas fa-server"></i> Carrier-grade infrastructure</span>
+    </div>
+  </section>
+
+  <section class="enterprise-cta fade-in">
+    <h2>Volume Volume & Enterprise Pricing enterprise pricing</h2>
+    <p>
+      Need higher volumes or custom routing?<br>
+      Contact our sales team for enterprise pricing and SLAs.
+    </p>
+    <a href="/reach-us.html" class="enterprise-btn">Contact Sales</a>
   </section>
 </main>
 
 <footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+  &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+  <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
   <br><br>
-  <a href="/privacy-policy">Privacy Policy</a>
-  <a href="/terms-conditions">Terms & Conditions</a>
-  <a href="/refund-policy">Refund Policy</a>
+  <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
 </footer>
 
 <script>
