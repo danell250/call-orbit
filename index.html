@@ -39,7 +39,7 @@ nav .menu a.active-page { color:#3b82f6; font-weight:700; }
 .navbar-buy {
   background: none;
   color: #3b82f6;
-  padding: 10px 20px;
+  padding: 10px 24px;
   border-radius: 999px;
   font-weight: 700;
   margin-left: 10px;
@@ -101,7 +101,7 @@ header.hero p {
 }
 .hero-cta { 
   display:inline-block; 
-  padding:16px 40px; 
+  padding:14px 32px; 
   background:#ff8800; 
   color:#fff; 
   border-radius:999px; 
@@ -115,6 +115,26 @@ header.hero p {
   background:#e67700; 
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(255, 136, 0, 0.4);
+}
+
+.hero-cta-secondary {
+  display:inline-block;
+  padding:14px 32px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.hero-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  transform: translateY(-3px);
 }
 
 /* Trust Badge */
@@ -285,6 +305,47 @@ header.hero p {
 }
 .comparison-old li { color: #991b1b; }
 .comparison-new li { color: #166534; }
+
+/* Who This Is For */
+.who-is-for {
+  padding: 80px 20px;
+  background: #fff;
+  text-align: center;
+}
+.who-is-for h2 {
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  margin-bottom: 50px;
+  font-weight: 800;
+}
+.who-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+.who-card {
+  padding: 30px 20px;
+  background: #f9fafb;
+  border-radius: 15px;
+  transition: transform 0.3s;
+}
+.who-card:hover {
+  transform: translateY(-5px);
+  background: #f0f9ff;
+}
+.who-icon {
+  font-size: 2.5rem;
+  color: #3b82f6;
+  margin-bottom: 20px;
+}
+.who-card h3 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  font-weight: 700;
+  margin: 0;
+}
 
 /* Premium Cards */
 .section-header {
@@ -579,6 +640,18 @@ header.hero p {
   transform:scale(1.05); 
 }
 
+.cta-banner a.cta-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+
+.cta-banner a.cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  transform: scale(1.05);
+}
+
 /* Footer */
 footer { 
   text-align:center; 
@@ -596,6 +669,29 @@ footer a {
 }
 footer a:hover {
   color: #3b82f6;
+}
+
+/* Reliability Anchor */
+.reliability-section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #f8fafc;
+  border-left: 5px solid #3b82f6;
+  border-radius: 8px;
+  text-align: left;
+}
+.reliability-section h2 {
+  font-size: 1.8rem;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+.reliability-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
 }
 
 /* Animations */
@@ -644,8 +740,11 @@ footer a:hover {
   </video>
   <div class="hero-content">
     <h1>Simplify & Scale Your Contact Center</h1>
-    <p>CallOrbit gives managers full control of contact centers: live dashboards, agent oversight, and analytics—all in one powerful platform.</p>
-    <a href="/signup.html" class="hero-cta">Start Free Trial</a>
+    <p>Provision global phone numbers, route calls intelligently, and manage voice operations from a single platform.</p>
+    <div style="display:flex; gap:15px; justify-content:center; align-items:center;">
+      <a href="/signup.html" class="hero-cta">Start Free Trial</a>
+      <a href="/reach-us.html" class="hero-cta-secondary">Talk to Sales</a>
+    </div>
     <div class="trust-badge-hero">
       <i class="fas fa-check-circle"></i> 
       <span>14-Day Free Trial • No Credit Card Required</span>
@@ -711,9 +810,35 @@ footer a:hover {
   </div>
 </section>
 
+<section class="who-is-for fade-in">
+  <h2>Who Uses CallOrbit</h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-icon"><i class="fas fa-cloud"></i></div>
+      <h3>SaaS Companies</h3>
+    </div>
+    <div class="who-card">
+      <div class="who-icon"><i class="fas fa-laptop-house"></i></div>
+      <h3>Remote Teams</h3>
+    </div>
+    <div class="who-card">
+      <div class="who-icon"><i class="fas fa-headset"></i></div>
+      <h3>Customer Support</h3>
+    </div>
+    <div class="who-card">
+      <div class="who-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Sales & Outbound</h3>
+    </div>
+    <div class="who-card">
+      <div class="who-icon"><i class="fas fa-globe"></i></div>
+      <h3>Global Expansion</h3>
+    </div>
+  </div>
+</section>
+
 <section class="comparison-section fade-in">
-  <h2>The Old Way vs. The CallOrbit Way</h2>
-  <div class="comparison-grid">
+    <h2>Traditional Solutions vs. CallOrbit</h2>
+    <div class="comparison-grid">
     <div class="comparison-side comparison-old">
       <h3><i class="fas fa-times-circle"></i> Traditional Systems</h3>
       <ul class="comparison-list">
@@ -737,6 +862,11 @@ footer a:hover {
       </ul>
     </div>
   </div>
+</section>
+
+<section class="reliability-section fade-in">
+  <h2>Built for Reliability</h2>
+  <p>CallOrbit is designed with reliability, scalability, and operational clarity in mind. Our platform integrates with established telecom infrastructure and is built to support growing teams across regions.</p>
 </section>
 
 <div class="section-header fade-in">
@@ -883,12 +1013,15 @@ footer a:hover {
 <section class="cta-banner fade-in">
   <h2>Ready to Transform Your Contact Center?</h2>
   <p>Join thousands of managers who've already made the switch to CallOrbit</p>
-  <a href="/signup.html">Start Your Free Trial Today</a>
+  <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
+    <a href="/signup.html">Start Your Free Trial Today</a>
+    <a href="/reach-us.html" class="cta-secondary">Talk to Sales</a>
+  </div>
 </section>
 
 <footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  <br>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+  <br><br>
   <a href="/privacy-policy">Privacy Policy</a>
   <a href="/terms-conditions">Terms & Conditions</a>
   <a href="/refund-policy">Refund Policy</a>

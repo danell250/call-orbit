@@ -51,7 +51,7 @@ main{max-width:1120px;margin:20px auto;padding:0}
 .plan:hover{transform:translateY(-5px)}
 .plan h3{color:#1e3a8a;margin-bottom:0.75rem}
 .plan .price,.plan .minutes,.plan .overage{margin-bottom:0.5rem}
-.buy-now{ background:#3b82f6; color:#fff; padding:10px 18px; border:none; border-radius:999px; font-weight:700; font-size:1rem; cursor:pointer; transition:filter .2s; margin-top:10px }
+.buy-now{ background:#3b82f6; color:#fff; padding:12px 24px; border:none; border-radius:999px; font-weight:700; font-size:1rem; cursor:pointer; transition:filter .2s; margin-top:10px }
 .buy-now:hover{filter:brightness(0.95)}
 
 /* Cart */
@@ -66,7 +66,7 @@ main{max-width:1120px;margin:20px auto;padding:0}
 .cart-item button { background:#ef4444; border:none; color:#fff; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:0.8rem; }
 .cart-summary { margin-top:10px; font-weight:600; }
 #paypal-button-container { margin-top:15px; }
-.close-cart { margin-top:10px; background:#6b7280; color:#fff; border:none; border-radius:6px; padding:10px 15px; cursor:pointer; font-weight:600; width:100%; }
+.close-cart { margin-top:10px; background:#6b7280; color:#fff; border:none; border-radius:6px; padding:12px 24px; cursor:pointer; font-weight:600; width:100%; }
 .close-cart:hover { filter:brightness(0.9) }
 
 /* Footer */
@@ -91,8 +91,6 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 </div>
   
   <a href="/signup.html" id="signup-link" class="px-5 py-2 bg-yellow-400 text-gray-900 rounded-full">Sign Up</a>
-
-  </div>
 </nav>
 
 <!-- Hero Section -->
@@ -129,8 +127,8 @@ footer a { margin:0 10px; color:#3b82f6; text-decoration:none; }
 </main>
 
 <footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.
-  <br>
+  &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+  <br><br>
   <a href="/privacy-policy">Privacy Policy</a>
   <a href="/terms-conditions">Terms & Conditions</a>
   <a href="/refund-policy">Refund Policy</a>
@@ -203,6 +201,7 @@ function generatePlans(){
   Object.keys(packages).forEach(pkg=>{
     const mins=packages[pkg];
     const rate=countryData[country][numberType];
+    // Apply 25% markup to cover processing fees
     const price=+(rate*mins*1.25).toFixed(2);
     const div=document.createElement('div');
     div.className='plan';

@@ -55,7 +55,7 @@
     .navbar-buy {
       background: none;
       color: #3b82f6;
-      padding: 10px 20px;
+      padding: 10px 24px;
       border-radius: 999px;
       font-weight: 700;
       margin-left: 10px;
@@ -198,7 +198,7 @@
     .buy-now {
       background: #3b82f6;
       color: #fff;
-      padding: 10px 18px;
+      padding: 12px 24px;
       border: none;
       border-radius: 999px;
       font-weight: 700;
@@ -513,7 +513,7 @@
       color: #6b7280;
       border: 1px solid #d1d5db;
       border-radius: 6px;
-      padding: 10px 15px;
+      padding: 12px 24px;
       cursor: pointer;
       font-weight: 600;
       width: 100%;
@@ -524,6 +524,56 @@
     .close-cart:hover {
       background: #f3f4f6;
       color: #374151;
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .trust-strip span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Enterprise Pricing */
+    .enterprise-pricing {
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px;
+      background: #f0f9ff;
+      border-radius: 12px;
+      border: 1px solid #dbeafe;
+    }
+
+    .enterprise-pricing h3 {
+      color: #1e3a8a;
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .enterprise-pricing p {
+      color: #4b5563;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .enterprise-pricing a {
+      color: #3b82f6;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .enterprise-pricing a:hover {
+      text-decoration: underline;
     }
 
     /* Footer */
@@ -598,11 +648,22 @@
     </div>
 
     <div class="plans-grid" id="plans-container"></div>
+
+    <div class="trust-strip" style="margin-bottom: 30px;">
+      <span><i class="fa-solid fa-lock"></i> Secure billing</span>
+      <span><i class="fa-solid fa-shield-halved"></i> GDPR-ready</span>
+      <span><i class="fa-solid fa-server"></i> Carrier-grade infrastructure</span>
+    </div>
+
+    <div class="enterprise-pricing">
+      <h3>Need higher volumes or custom routing?</h3>
+      <p>Contact our sales team for <a href="/reach-us.html">enterprise pricing and SLAs</a>.</p>
+    </div>
   </main>
 
   <footer>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
-    <br>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
+    <br><br>
     <a href="/privacy-policy">Privacy Policy</a>
     <a href="/terms-conditions">Terms & Conditions</a>
     <a href="/refund-policy">Refund Policy</a>
@@ -622,7 +683,7 @@
         <i class="fa-solid fa-info-circle"></i>
         <span>
           <p>Full monthly amount is due upfront to activate your number.</p>
-          <p>Upcoming invoices may include any applicable local fees.</p>
+          <p>Pricing already includes number allocation and standard carrier costs.</p>
         </span>
       </div>
 
@@ -641,6 +702,13 @@
     </div>
 
     <div id="paypal-button-container"></div>
+    
+    <div class="trust-strip" style="margin-top: 15px; border-top: 1px solid #f3f4f6; padding-top: 15px;">
+      <span><i class="fa-solid fa-lock"></i> Secure Payments</span>
+      <span><i class="fa-solid fa-globe"></i> Global Coverage</span>
+      <span><i class="fa-solid fa-shield-halved"></i> Data Protection</span>
+    </div>
+
     <button class="close-cart">Close Cart</button>
   </div>
 
@@ -809,37 +877,108 @@
   }
 }
 
+   // --- NEW: typed, deterministic fees (no duplicates across countries/types) ---
+
+   // Add a small platform fee per tier so plans don't collide
+   const TIER_FEES = { Basic: 1.99, Plus: 3.49, Pro: 5.99, Max: 8.99 };
+
+   const COUNTRY_MULTIPLIER = {
+     US: 1.0,
+     GB: 1.1,
+     CA: 1.05,
+     AU: 1.1,
+     DE: 1.15,
+     FR: 1.15,
+     ZA: 0.9,
+     IN: 0.75,
+     BR: 0.85,
+     MX: 0.85,
+     JP: 1.25,
+     default: 1.0
+   };
+
+   // Deterministic country factor (stable for each country code)
+   function countryFactor(countryCode) {
+     // e.g., "US" => stable 0..19
+     const a = countryCode.charCodeAt(0);
+     const b = countryCode.charCodeAt(1);
+     return (a + b) % 20; // 0..19
+   }
+
+   // Deterministic monthly number rental fee by country + number type
+   function monthlyNumberRental(countryCode, numberType) {
+     const f = countryFactor(countryCode);
+
+     // Base by number type (toll-free usually higher)
+     const typeBase =
+       numberType === "TollFree" ? 9.99 :
+       numberType === "National" ? 6.99 :
+       4.99; // Local
+
+     // Country variation: adds $0.40 .. $8.00 depending on country
+     const countryAdd = 0.40 + (f * 0.40);
+
+     // Extra nudge so number types differ even more
+     const typeAdd =
+       numberType === "TollFree" ? 2.00 :
+       numberType === "National" ? 1.00 :
+       0.50;
+
+     return +(typeBase + countryAdd + typeAdd).toFixed(2);
+   }
+
+   // Nice "marketing" rounding (optional)
+   function roundTo99(x) {
+     const dollars = Math.floor(x);
+     return +(dollars + 0.99).toFixed(2);
+   }
+
+   // --- REPLACE generatePlans() WITH THIS ---
     function generatePlans() {
       const country = countrySelectEl.value;
       const numberType = numberTypeEl.value;
 
       plansContainerEl.innerHTML = '';
 
-      if (!country || !countryData[country]) {
-        plansContainerEl.innerHTML = '<p style="grid-column:1/-1;text-align:center;">Please select a country to view pricing.</p>';
-        return;
-      }
+      if (!country || !countryData[country]) return;
+
+      // map numberType to countryData keys
+      const keyMap = { TollFree: "tollFree", Local: "local", National: "national" };
+      const rate = countryData[country][keyMap[numberType]] || 0.05;
+
+      // INTERNAL COSTS (hidden)
+      const rentalInternal = monthlyNumberRental(country, numberType);
 
       Object.keys(packages).forEach(pkg => {
         const mins = packages[pkg];
-        const rate = countryData[country][numberType] || 0.05;
-        const price = +(rate * mins).toFixed(2);
+        const usage = rate * mins;
+        const tierFee = TIER_FEES[pkg] || 0;
+
+        // FINAL CUSTOMER PRICE
+        let price = usage + rentalInternal + tierFee;
+
+        const multiplier = COUNTRY_MULTIPLIER[country] || COUNTRY_MULTIPLIER.default;
+        price = price * multiplier;
+
+        price = roundTo99(price);
 
         const div = document.createElement('div');
         div.className = 'plan';
-        div.dataset.pkg = pkg;
         div.dataset.price = price;
+        div.dataset.pkg = pkg;
         div.dataset.minutes = mins;
         div.dataset.rate = rate.toFixed(3);
-        div.dataset.numberType = numberType;
         div.dataset.country = country;
+        div.dataset.numberType = numberType;
 
         div.innerHTML = `
-      <h3>${pkg}</h3>
-      <div class="price">$${price}</div>
-      <div class="minutes">${mins} Minutes</div>
-      <div class="overage">Overage: $${rate.toFixed(3)}/min</div>
-      <button class="buy-now">Add to Cart</button>`;
+          <h3>${pkg}</h3>
+          <div class="price">$${price}/mo</div>
+          <div class="minutes">${mins} minutes included</div>
+          <div class="overage">Overage: $${rate.toFixed(3)}/min</div>
+          <div class="overage">Includes ${numberType} number</div>
+          <button class="buy-now">Add to Cart</button>
+        `;
         plansContainerEl.appendChild(div);
       });
     }

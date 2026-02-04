@@ -97,23 +97,13 @@
       content: '';
       position: absolute;
       font-size: 15rem;
-      opacity: 0.1;
+      opacity: 0.05;
       top: 50%;
       left: 50%;
       width: 200px;
       height: 200px;
       background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
       transform: translate(-50%, -50%);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
-      }
-      50% {
-        transform: translate(-50%, -50%) rotate(-15deg) translateY(-20px);
-      }
     }
 
     header.hero h1 {
@@ -166,25 +156,18 @@
     }
 
     .stat-box:hover {
-      transform: translateY(-10px) rotate(2deg);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     }
 
     .stat-box .emoji {
       font-size: 4rem;
       margin-bottom: 15px;
       display: block;
-      animation: bounce 2s ease-in-out infinite;
+      transition: transform 0.3s;
     }
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
+    /* Removed bounce animation for professional feel */
 
     .stat-box h3 {
       font-size: 2.5rem;
@@ -212,15 +195,7 @@
       overflow: hidden;
     }
 
-    .story-section::before {
-      content: '💡';
-      position: absolute;
-      font-size: 12rem;
-      opacity: 0.1;
-      right: -30px;
-      top: 50%;
-      transform: translateY(-50%) rotate(20deg);
-    }
+
 
     .story-section h2 {
       font-size: 2.5rem;
@@ -235,6 +210,31 @@
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
+    }
+
+    /* Operational Reality Section */
+    .operational-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px 30px;
+      background: #f3f4f6;
+      border-radius: 12px;
+      border-left: 5px solid #6b7280;
+      color: #374151;
+    }
+
+    .operational-section h2 {
+      font-size: 1.8rem;
+      color: #1f2937;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .operational-section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      color: #4b5563;
     }
 
     /* Values Grid */
@@ -285,8 +285,8 @@
     }
 
     .value-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
     }
 
     .value-card .icon.number {
@@ -330,35 +330,6 @@
       overflow: hidden;
     }
 
-    .cta-section::before {
-      content: '✨';
-      position: absolute;
-      font-size: 10rem;
-      opacity: 0.15;
-      top: -20px;
-      left: -20px;
-      animation: sparkle 3s ease-in-out infinite;
-    }
-
-    .cta-section::after {
-      content: '🎉';
-      position: absolute;
-      font-size: 10rem;
-      opacity: 0.15;
-      bottom: -20px;
-      right: -20px;
-      animation: sparkle 3s ease-in-out infinite 1.5s;
-    }
-
-    @keyframes sparkle {
-      0%, 100% {
-        transform: scale(1) rotate(0deg);
-      }
-      50% {
-        transform: scale(1.1) rotate(10deg);
-      }
-    }
-
     .cta-section h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
@@ -377,7 +348,7 @@
       display: inline-block;
       background: #ff8800;
       color: #fff;
-      padding: 16px 40px;
+      padding: 14px 32px;
       border-radius: 999px;
       font-weight: 700;
       font-size: 1.1rem;
@@ -388,10 +359,22 @@
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     }
 
-    .cta-section a:hover {
+    .cta-section a:not(.secondary):hover {
       background: #e67700;
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-section a.secondary {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    .cta-section a.secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
     /* Footer */
@@ -455,6 +438,7 @@
   </header>
 
   <section class="fun-stats fade-in">
+    <h2 style="grid-column: 1 / -1; text-align: center; font-size: 2.5rem; color: #1e3a8a; margin-bottom: 10px;">By the Numbers</h2>
     <div class="stat-box">
       <span class="emoji">⚡</span>
       <h3>Fast</h3>
@@ -478,7 +462,7 @@
   </section>
 
   <section class="story-section fade-in">
-    <h2>Our Mission 💡</h2>
+    <h2>Our Mission</h2>
     <p>
       Contact center management has been dominated by complex, expensive enterprise systems that require extensive training and IT resources. We saw an opportunity to change that.
     </p>
@@ -490,8 +474,18 @@
     </p>
   </section>
 
+  <section class="operational-section fade-in">
+    <h2>Operational Focus</h2>
+    <p>
+      CallOrbit is built with reliability, compliance, and global reach in mind.
+    </p>
+    <p>
+      We work with established telecom carriers and infrastructure partners to deliver dependable voice services across regions.
+    </p>
+  </section>
+
   <section class="values-section fade-in">
-    <h2>What Drives Us</h2>
+    <h2>Our Core Values</h2>
     <div class="values-grid">
       <div class="value-card">
         <div class="icon number">01</div>
@@ -532,16 +526,16 @@
   </section>
 
   <section class="cta-section fade-in">
-    <h2>Ready to Transform Your Communications? 🎉</h2>
+    <h2>Ready to Transform Your Communications?</h2>
     <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
-    <a href="/signup.html">Start Your Free Trial</a>
+    <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
+      <a href="/signup.html">Start Your Free Trial</a>
+      <a href="/reach-us.html" class="secondary">Talk to Sales</a>
+    </div>
   </section>
 
   <footer>
-    <div style="margin-bottom:20px; font-size:1.2rem;">
-      Made with ❤️ by CallOrbit
-    </div>
-    &copy; <span id="year"></span> CallOrbit. All rights reserved.
+    &copy; <span id="year"></span> CallOrbit. All rights reserved. Data handled in accordance with applicable privacy regulations.
     <br><br>
     <a href="/privacy-policy">Privacy Policy</a>
     <a href="/terms-conditions">Terms & Conditions</a>
