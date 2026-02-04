@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
 
   <style>
     body {
@@ -71,29 +72,31 @@
 
     /* Hero Section */
     header.hero {
-      margin: 20px auto;
-      padding: 60px 20px;
+      margin: 0 auto;
+      padding: 100px 20px;
       text-align: center;
       color: #fff;
       border-radius: 10px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
       max-width: 1120px;
     }
 
     header.hero h1 {
       margin-bottom: 1rem;
-      font-size: 2.5rem;
+      font-size: 3.5rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     header.hero p {
       margin-bottom: 2rem;
-      font-size: 1.25rem;
-      max-width: 600px;
+      font-size: 1.4rem;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.6;
     }
 
     /* Main content */
@@ -561,21 +564,6 @@
     .enterprise-pricing a:hover {
       text-decoration: underline;
     }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2.5rem 20px;
-      background: #f3f4f6;
-      margin-top: 60px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      margin: 0 10px;
-      color: #3b82f6;
-      text-decoration: none;
-    }
   </style>
 </head>
 
@@ -591,10 +579,10 @@
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Platform Overview</a>
       <a href="/get-numbers.html" class="active-page">Provision Numbers</a>
-      <a href="/reach-us.html">Contact Sales</a>
       <a href="/company.html">The CallOrbit Way</a>
     </div>
     <div class="actions" style="display:flex; align-items:center; gap:12px;">
+      <a href="/reach-us.html" class="login-btn">Contact Sales</a>
       <a href="/signup.html" class="login-btn">Get Started</a>
     </div>
   </nav>
@@ -641,10 +629,14 @@
       <span><i class="fa-solid fa-server"></i> Carrier-grade infrastructure</span>
     </div>
 
-    <div class="enterprise-pricing">
-      <h3>Need higher volumes or custom routing?</h3>
-      <p>Contact our sales team for <a href="/reach-us.html">enterprise pricing and SLAs</a>.</p>
+    <section class="cta-section fade-in">
+      <h2>Ready to transform your communications?</h2>
+      <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
+      <div class="cta-buttons">
+      <a href="/signup.html">Get Started</a>
+      <a href="/reach-us.html">Contact Sales</a>
     </div>
+    </section>
   </main>
 
   <footer>
@@ -1143,6 +1135,15 @@
       initializeCountries();
       populateAreas();
       generatePlans();
+
+      // Fade-in animation
+      const faders = document.querySelectorAll('.fade-in');
+      const appearOnScroll = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        });
+      }, { threshold: 0.1 });
+      faders.forEach(fader => appearOnScroll.observe(fader));
     });
   </script>
 

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
 
   <style>
     * {
@@ -82,7 +83,7 @@
       padding: 100px 20px;
       text-align: center;
       color: #fff;
-      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
       border-radius: 10px;
       position: relative;
       overflow: hidden;
@@ -121,44 +122,7 @@
       opacity: 0.95;
     }
 
-    .hero-cta {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #ffffff;
-      color: #3b82f6;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-      font-size: 1.1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-cta:hover {
-      background: #f0f9ff;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .hero-cta-secondary {
-      display: inline-block;
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-      font-size: 1.1rem;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(5px);
-    }
-
-    .hero-cta-secondary:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: #fff;
-      transform: translateY(-3px);
-    }
+    /* Hero CTA styles moved to style.css */
 
     /* Trust Badge */
     .trust-badge-hero {
@@ -633,8 +597,8 @@
     .pricing-cta {
       display: inline-block;
       padding: 12px 24px;
-      background: #ff8800;
-      color: #fff;
+      background: #ffffff;
+      color: #3b82f6;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
@@ -643,7 +607,7 @@
     }
 
     .pricing-cta:hover {
-      background: #e67700;
+      background: #f0f9ff;
       transform: translateY(-3px);
     }
 
@@ -732,8 +696,8 @@
     .cta-banner a {
       display: inline-block;
       padding: 16px 40px;
-      background: #ff8800;
-      color: #fff;
+      background: #ffffff;
+      color: #3b82f6;
       font-weight: 700;
       border-radius: 999px;
       text-decoration: none;
@@ -742,7 +706,7 @@
     }
 
     .cta-banner a:hover {
-      background: #e67700;
+      background: #f0f9ff;
       transform: scale(1.05);
     }
 
@@ -781,25 +745,7 @@
     }
 
     /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 20px;
-      background: #1f2937;
-      color: #9ca3af;
-      margin-top: 0;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      margin: 0 10px;
-      color: #60a5fa;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: #3b82f6;
-    }
+    /* Footer styles moved to style.css */
 
     /* Reliability Anchor */
     .reliability-section {
@@ -880,10 +826,12 @@
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Platform Overview</a>
       <a href="/get-numbers.html">Provision Numbers</a>
-      <a href="/reach-us.html">Contact Sales</a>
       <a href="/company.html">The CallOrbit Way</a>
     </div>
-    <a href="/signup.html" class="login-btn">Get Started</a>
+    <div class="actions" style="display:flex; align-items:center; gap:12px;">
+      <a href="/reach-us.html" class="login-btn">Contact Sales</a>
+      <a href="/signup.html" class="login-btn">Get Started</a>
+    </div>
   </nav>
 
   <header class="hero fade-in">
@@ -895,7 +843,7 @@
       <p>Provision global phone numbers, route calls intelligently, and manage voice operations from a single platform.</p>
       <div style="display:flex; gap:15px; justify-content:center; align-items:center;">
         <a href="/signup.html" class="hero-cta">Get Started</a>
-        <a href="/reach-us.html" class="hero-cta-secondary">Contact Sales</a>
+        <a href="/reach-us.html" class="hero-cta">Contact Sales</a>
       </div>
       <div class="trust-badge-hero">
         <i class="fas fa-check-circle"></i>
@@ -1190,17 +1138,12 @@
     </div>
   </section>
 
-  <section class="cta-banner fade-in">
-    <h2>Ready to transform your contact center?</h2>
-    <p>Join thousands of managers who've already made the switch to CallOrbit</p>
-    <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
-      <a href="/signup.html">Start Your Free Trial Today</a>
-      <a href="/reach-us.html" class="cta-secondary">Contact Sales</a>
-    </div>
-    <div class="trust-strip">
-      <span><i class="fas fa-lock"></i> Secure billing</span>
-      <span><i class="fas fa-shield-halved"></i> GDPR-ready</span>
-      <span><i class="fas fa-server"></i> Carrier-grade infrastructure</span>
+  <section class="cta-section fade-in">
+    <h2>Ready to transform your communications?</h2>
+    <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
+    <div class="cta-buttons">
+      <a href="/signup.html">Get Started</a>
+      <a href="/reach-us.html">Contact Sales</a>
     </div>
   </section>
 

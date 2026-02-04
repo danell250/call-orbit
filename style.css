@@ -205,7 +205,7 @@ header.hero {
   padding: 100px 20px;
   text-align: center;
   color: #fff;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -229,7 +229,7 @@ header.hero h1 {
 header.hero p {
   margin-bottom: 2rem;
   font-size: 1.4rem;
-  max-width: 800px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
@@ -616,7 +616,7 @@ header.hero .hero-content {
   color: #fff;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 999px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s;
@@ -730,25 +730,95 @@ header.hero .hero-content {
   margin-bottom: 0;
 }
 
+/* --- Standard CTA Section (Bottom Hero) --- */
+.cta-section {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section a {
+  display: inline-block;
+  background: #ffffff;
+  color: #3b82f6;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section a:not(.secondary):hover {
+  background: #f0f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cta-section a.secondary {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  margin-left: 10px;
+}
+
+.cta-section a.secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* --- Footer --- */
 footer {
   text-align: center;
   padding: 3rem 20px;
-  background-color: #1f2937;
-  color: #9ca3af;
-  margin-top: 60px;
-  font-size: 0.9rem;
+  background: #1e3a8a;
+  margin-top: 80px;
+  font-size: 0.95rem;
+  color: #fff;
 }
 
 footer a {
-  margin: 0 10px;
-  color: #60a5fa;
+  margin: 0 15px;
+  color: #93c5fd;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 footer a:hover {
-  color: #3b82f6;
+  color: #fff;
 }
 
 /* --- Fade In Animation --- */

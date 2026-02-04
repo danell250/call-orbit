@@ -10,6 +10,7 @@
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
 </svg>">
 
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -323,26 +324,7 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 20px;
-      background: #1e3a8a;
-      margin-top: 80px;
-      font-size: 0.95rem;
-      color: #fff;
-    }
-
-    footer a {
-      margin: 0 15px;
-      color: #93c5fd;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: #fff;
-    }
+    /* Footer styles moved to style.css */
 
     /* Fade-in */
     .fade-in {
@@ -369,10 +351,10 @@
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Platform Overview</a>
       <a href="/get-numbers.html">Provision Numbers</a>
-      <a href="/reach-us.html">Contact Sales</a>
       <a href="/company.html" class="active-page">The CallOrbit Way</a>
     </div>
     <div class="actions" style="display:flex; align-items:center; gap:12px;">
+      <a href="/reach-us.html" class="login-btn">Contact Sales</a>
       <a href="/signup.html" class="login-btn">Get Started</a>
     </div>
   </nav>
@@ -505,7 +487,7 @@
   <section class="cta-section fade-in">
     <h2>Ready to transform your communications?</h2>
     <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
-    <div style="display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
+    <div class="cta-buttons">
       <a href="/signup.html">Get Started</a>
       <a href="/reach-us.html">Contact Sales</a>
     </div>

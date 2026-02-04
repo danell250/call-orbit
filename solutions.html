@@ -11,7 +11,9 @@
   </svg>">
 
   <!-- Font Awesome 6 CDN for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
 
   <style>
     /* Hero / Banner */
@@ -79,28 +81,7 @@
     }
     .chat-btn:hover { background:#2563eb; }
 
-    /* CTA Banner */
-    .cta-banner {
-      background: #111827;
-      color: #fff;
-      text-align: center;
-      padding: 4rem 1rem;
-      margin-top: 4rem;
-    }
-    .cta-banner h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-    .cta-banner a {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #10b981;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+
 
     
 
@@ -112,16 +93,18 @@
   <div class="logo">
     <a href="/">CallOrbit<span style="font-size:0.6rem; vertical-align:super;">©</span></a>
   </div>
-<div class="menu">
+  <div class="menu">
     <a href="/">Overview</a>
 
     <a href="/global-reach.html">Global Reach</a>
     <a href="/your-orbit.html">Platform Overview</a>
     <a href="/get-numbers.html">Provision Numbers</a>
-    <a href="/reach-us.html">Contact Sales</a>
     <a href="/company.html">The CallOrbit Way</a>
   </div>
-  <a href="/signup.html" class="login-btn">Get Started</a>
+  <div class="actions" style="display:flex; align-items:center; gap:12px;">
+    <a href="/reach-us.html" class="login-btn">Contact Sales</a>
+    <a href="/signup.html" class="login-btn">Get Started</a>
+  </div>
   </nav>
 
   <!-- Hero Section -->
@@ -163,11 +146,12 @@
   <button class="chat-btn" onclick="window.location='/reach-us.html'">Need help?</button>
 
   <!-- Bottom CTA Banner -->
-  <section class="cta-banner fade-in">
-    <h2>Take control of your contact center today</h2>
-    <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
-      <a href="/pricing.html">See Pricing</a>
-      <a href="/reach-us.html" style="background:transparent; border:2px solid #fff; box-sizing:border-box;">Contact Sales</a>
+  <section class="cta-section fade-in">
+    <h2>Ready to transform your communications?</h2>
+    <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
+    <div class="cta-buttons">
+      <a href="/signup.html">Get Started</a>
+      <a href="/reach-us.html">Contact Sales</a>
     </div>
   </section>
 

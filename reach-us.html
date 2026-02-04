@@ -13,6 +13,7 @@
   <!-- Font Awesome 6 CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
 
   <style>
     * {
@@ -86,7 +87,7 @@
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
-      background: #3b82f6;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #60a5fa 100%);
     }
 
     /* Removed constant floating animation */
@@ -109,6 +110,7 @@
     header.hero h1 {
       margin-bottom: 1rem;
       font-size: 3.5rem;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     header.hero p {
@@ -259,7 +261,7 @@
     }
 
     .contact-form button {
-      background: #ff8800;
+      background: #3b82f6;
       color: #fff;
       padding: 12px 24px;
       border: none;
@@ -269,13 +271,13 @@
       cursor: pointer;
       transition: all 0.3s;
       width: 100%;
-      box-shadow: 0 4px 15px rgba(255, 136, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
     }
 
     .contact-form button:hover {
-      background: #e67700;
+      background: #2563eb;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 136, 0, 0.4);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
     }
 
     .contact-form button:active {
@@ -366,19 +368,7 @@
     }
 
     /* Footer */
-    footer {
-      text-align: center;
-      padding: 2.5rem 20px;
-      background: #f3f4f6;
-      margin-top: 80px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      margin: 0 10px;
-      color: #3b82f6;
-      text-decoration: none;
-    }
+    /* Footer styles moved to style.css */
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -414,10 +404,12 @@
       <a href="/global-reach.html">Global Reach</a>
       <a href="/your-orbit.html">Platform Overview</a>
       <a href="/get-numbers.html">Provision Numbers</a>
-      <a href="/reach-us.html" class="active-page">Contact Sales</a>
       <a href="/company.html">The CallOrbit Way</a>
     </div>
-    <a href="/signup.html" class="login-btn">Get Started</a>
+    <div class="actions" style="display:flex; align-items:center; gap:12px;">
+      <a href="/reach-us.html" class="login-btn">Contact Sales</a>
+      <a href="/signup.html" class="login-btn">Get Started</a>
+    </div>
   </nav>
 
   <!-- Hero Section -->
@@ -529,6 +521,16 @@
         <p>For technical issues, our support team is available 24/7 through live chat. You can also submit a detailed
           ticket via this form, and our technical team will prioritize it.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA Banner -->
+  <section class="cta-section fade-in">
+    <h2>Ready to transform your communications?</h2>
+    <p>Join businesses around the world using CallOrbit to manage their customer communications more effectively.</p>
+    <div class="cta-buttons">
+      <a href="/signup.html">Get Started</a>
+      <a href="#contactForm" onclick="document.getElementById('contactForm').scrollIntoView({behavior:'smooth'}); return false;">Contact Sales</a>
     </div>
   </section>
 
