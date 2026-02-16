@@ -36,6 +36,11 @@
 </header>
 
 <main>
+  <div class="billing-toggle">
+    <span>Monthly</span>
+    <input type="checkbox" id="annualToggle">
+    <span>Annual <strong>(Save 20%)</strong></span>
+  </div>
   <section class="plans-grid fade-in" id="plans-container">
     <div class="plan">
       <h3>Starter</h3>
@@ -66,6 +71,59 @@
       <p class="training">Training Fee: $49</p>
     </div>
   </section>
+  
+  <section class="usage-pricing">
+    <h3>Usage-based pricing</h3>
+    <ul>
+      <li><strong>Calls:</strong> from $0.01 per minute</li>
+      <li><strong>Numbers:</strong> included in plan</li>
+      <li><strong>Overages:</strong> billed monthly</li>
+    </ul>
+  </section>
+
+  <table class="comparison-table">
+    <tr>
+      <th>Feature</th><th>Starter</th><th>Team</th><th>Business</th><th>Enterprise</th>
+    </tr>
+    <tr>
+      <td>Included number</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td>
+    </tr>
+    <tr>
+      <td>Global routing</td><td>–</td><td>✓</td><td>✓</td><td>✓</td>
+    </tr>
+    <tr>
+      <td>Unlimited dashboards</td><td>–</td><td>✓</td><td>✓</td><td>✓</td>
+    </tr>
+    <tr>
+      <td>AI analytics</td><td>–</td><td>–</td><td>✓</td><td>✓</td>
+    </tr>
+    <tr>
+      <td>Dedicated manager</td><td>–</td><td>–</td><td>–</td><td>✓</td>
+    </tr>
+    <tr>
+      <td>Priority support</td><td>–</td><td>–</td><td>✓</td><td>✓</td>
+    </tr>
+  </table>
+
+  <section class="cost-calculator" id="pricing-calculator">
+    <h3>Estimated monthly total</h3>
+    <div class="cost-grid">
+      <div>
+        <label for="calc-minutes">Minutes</label>
+        <input type="number" id="calc-minutes" value="1000" min="0">
+      </div>
+      <div>
+        <label for="calc-rate">Rate ($/minute)</label>
+        <input type="number" id="calc-rate" value="0.01" min="0" step="0.001">
+      </div>
+      <div>
+        <label for="calc-quantity">Quantity</label>
+        <input type="number" id="calc-quantity" value="1" min="1">
+      </div>
+    </div>
+    <div class="cost-total" id="calc-total">$0.00</div>
+    <div style="opacity:0.8; font-size:0.9rem; margin-top:6px;">Tip: click a plan above to use its price</div>
+  </section>
 
   <div class="trust-strip" style="margin-top: 30px; margin-bottom: 50px;">
     <span><i class="fas fa-lock"></i> Secure billing</span>
@@ -92,6 +150,19 @@
     <a href="/refund-policy.html">Refund Policy</a>
 </footer>
 
+<!-- Exit Intent Modal -->
+<div id="exitOverlay" class="exit-overlay" style="display:none;"></div>
+<div id="exitModal" class="exit-modal" style="display:none;">
+  <h3>Need help choosing?</h3>
+  <p>Talk to us before you go.</p>
+  <div class="actions">
+    <a href="/reach-us.html" class="hero-cta">Contact Sales</a>
+    <button id="exitClose" class="hero-cta-secondary">Close</button>
+  </div>
+  <div style="margin-top:10px; font-size:0.85rem; color:#6b7280;">We’re here to help you pick the right plan.</div>
+  <div style="margin-top:4px; font-size:0.8rem; color:#9ca3af;">No discounts, just guidance.</div>
+</div>
+
 <script>
 // Fade-in effect
 const faders = document.querySelectorAll('.fade-in');
@@ -102,6 +173,99 @@ faders.forEach(fader => appearOnScroll.observe(fader));
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const toggle = document.getElementById('annualToggle');
+const priceEls = document.querySelectorAll('.plan .price');
+priceEls.forEach(el => {
+  const txt = el.textContent.trim();
+  const m = txt.match(/^\$?([\d.]+)/);
+  if (!m) return;
+  const base = parseFloat(m[1]);
+  el.dataset.basePrice = String(base);
+  el.dataset.suffix = txt.replace(/^\$?[\d.]+/, '');
+});
+function formatPrice(n){ return n % 1 === 0 ? n.toFixed(0) : n.toFixed(2); }
+function updatePrices(){
+  priceEls.forEach(el => {
+    const base = parseFloat(el.dataset.basePrice);
+    const suffix = el.dataset.suffix || '';
+    const price = toggle && toggle.checked ? base * 0.8 : base;
+    el.textContent = '$' + formatPrice(price) + suffix;
+  });
+}
+if (toggle) {
+  updatePrices();
+  toggle.addEventListener('change', updatePrices);
+}
+
+// Plan selection for calculator
+const planCards = document.querySelectorAll('.plan');
+planCards.forEach(card => {
+  card.addEventListener('click', () => {
+    planCards.forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    updateCalcTotal();
+  });
+});
+
+function getSelectedPlanPrice() {
+  const selected = document.querySelector('.plan.selected .price') || document.querySelector('.plan .price');
+  if (!selected) return 0;
+  const txt = selected.textContent.trim();
+  const m = txt.match(/^\$?([\d.]+)/);
+  return m ? parseFloat(m[1]) : 0;
+}
+
+// Calculator logic
+const calcMinutes = document.getElementById('calc-minutes');
+const calcRate = document.getElementById('calc-rate');
+const calcQty = document.getElementById('calc-quantity');
+const calcTotalEl = document.getElementById('calc-total');
+
+function formatCurrency(n){ return '$' + (Math.round(n * 100) / 100).toFixed(2); }
+function updateCalcTotal(){
+  const minutes = parseFloat(calcMinutes.value) || 0;
+  const rate = parseFloat(calcRate.value) || 0;
+  const qty = parseInt(calcQty.value, 10) || 1;
+  const planPrice = getSelectedPlanPrice();
+  const usage = minutes * rate;
+  const total = usage + planPrice * qty;
+  calcTotalEl.textContent = formatCurrency(total);
+}
+
+['input','change'].forEach(evt => {
+  calcMinutes.addEventListener(evt, updateCalcTotal);
+  calcRate.addEventListener(evt, updateCalcTotal);
+  calcQty.addEventListener(evt, updateCalcTotal);
+});
+if (toggle) toggle.addEventListener('change', updateCalcTotal);
+updateCalcTotal();
+
+// --- Exit Intent (once per session) ---
+(function(){
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isTouch) return; // skip on touch devices
+  if (sessionStorage.getItem('exitIntentShown') === '1') return;
+  const overlay = document.getElementById('exitOverlay');
+  const modal = document.getElementById('exitModal');
+  const closeBtn = document.getElementById('exitClose');
+  function showExit(){
+    overlay.style.display = 'block';
+    modal.style.display = 'block';
+    sessionStorage.setItem('exitIntentShown','1');
+    document.removeEventListener('mouseleave', onExit);
+  }
+  function hideExit(){
+    overlay.style.display = 'none';
+    modal.style.display = 'none';
+  }
+  function onExit(e){
+    if (e.clientY <= 0) showExit();
+  }
+  document.addEventListener('mouseleave', onExit);
+  overlay.addEventListener('click', hideExit);
+  closeBtn.addEventListener('click', hideExit);
+})();
 </script>
 
 <!--Start of Tawk.to Script-->
