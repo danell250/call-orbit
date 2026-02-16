@@ -1,102 +1,82 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CallOrbit — Admin Verify Users</title>
-<link rel="stylesheet" href="style.css">
-<style>
-  body { display:flex; flex-direction:column; min-height:100vh; margin:0; font-family:sans-serif; background:#f3f4f6; }
-  main { padding:40px; flex:1; }
-  h1 { color:#1e3a8a; text-align:center; margin-bottom:30px; }
-  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
-  th, td { padding:12px 15px; text-align:left; border-bottom:1px solid #e5e7eb; }
-  th { background:#3b82f6; color:#fff; }
-  tr:last-child td { border-bottom:none; }
-  button { background:#10b981; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-weight:600; }
-  button:hover { background:#059669; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>CallOrbit — Admin Verification</title>
+  <meta name="description" content="Administrative verification console for authorized CallOrbit operators.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #f3f4f6;
+      color: #1f2937;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .admin-notice {
+      width: min(720px, 100%);
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .admin-notice h1 {
+      margin: 0 0 12px;
+      font-size: 1.8rem;
+      color: #1e3a8a;
+    }
+
+    .admin-notice p {
+      margin: 0 0 12px;
+      color: #374151;
+    }
+
+    .admin-list {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: #4b5563;
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <section class="admin-notice" aria-live="polite">
+      <h1>Admin Verification Console</h1>
+      <p>This page is intentionally disabled until secured admin APIs are configured.</p>
+      <p>Before re-enabling, enforce all of the following:</p>
+      <ul class="admin-list">
+        <li>Server-side authentication and role-based access control</li>
+        <li>Input sanitization and output escaping for all user data</li>
+        <li>CSRF protection and audit logging for verification actions</li>
+        <li>Rate limiting and bot abuse protections</li>
+      </ul>
+    </section>
+  </main>
 
-<main>
-<h1>Pending User Verifications</h1>
-<table id="usersTable">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Company</th>
-      <th>Plan</th>
-      <th>Phone</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Users will be populated here -->
-  </tbody>
-</table>
-</main>
+  <footer>
+    &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
+    <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
+    <br><br>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms-conditions.html">Terms & Conditions</a>
+    <a href="/refund-policy.html">Refund Policy</a>
+  </footer>
 
-<footer>
-  &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
-  <span style="opacity:0.8; font-size:0.85rem;">GDPR-aligned data handling • Data processed in accordance with applicable regulations.</span>
-  <br><br>
-  <a href="/privacy-policy.html">Privacy Policy</a>
-  <a href="/terms-conditions.html">Terms & Conditions</a>
-  <a href="/refund-policy.html">Refund Policy</a>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<script>
-  async function fetchUsers() {
-    const res = await fetch('/api/pending-users');
-    const data = await res.json();
-    const tbody = document.querySelector('#usersTable tbody');
-    tbody.innerHTML = '';
-    data.users.forEach(user => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${user.email}</td>
-        <td>${user.firstName} ${user.lastName}</td>
-        <td>${user.companyName}</td>
-        <td>${user.plan}</td>
-        <td>${user.phoneNumber}</td>
-        <td><button onclick="verifyUser('${user.email}', this)">Verify</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  async function verifyUser(email, btn) {
-    btn.disabled = true;
-    btn.textContent = 'Verifying...';
-    try {
-      const res = await fetch('/api/verify-user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
-      });
-      const data = await res.json();
-      if (data.success) {
-        btn.textContent = 'Verified ✅';
-        btn.style.background = '#3b82f6';
-      } else {
-        btn.textContent = 'Error ❌';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      console.error(err);
-      btn.textContent = 'Error ❌';
-      btn.disabled = false;
-    }
-  }
-
-  fetchUsers();
-</script>
-
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

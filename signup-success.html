@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CallOrbit — Welcome</title>
+<meta name="description" content="Your CallOrbit trial request has been received. Follow the next steps to activate your account and provision numbers.">
+<link rel="canonical" href="https://callorbit.vercel.app/signup-success.html">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
@@ -124,8 +126,6 @@ header.hero p { font-size:1.3rem; max-width:600px; margin-left:auto; margin-righ
     <a href="/company.html">The CallOrbit Way</a>
   </div>
   <a href="/signup.html" class="login-btn">Get Started</a>
-
-  </div>
 </nav>
 
 <!-- Hero Section -->
@@ -207,18 +207,24 @@ s0.parentNode.insertBefore(s1,s0);
       const signupDetailsDiv = document.getElementById('signup-details');
       
       let hasData = false;
-      let detailsHtml = '<ul style="padding-left: 20px;">';
+      const detailsList = document.createElement('ul');
+      detailsList.style.paddingLeft = '20px';
       
       for (const [key, value] of urlParams) {
         if (key !== '_next' && key !== '_subject' && key !== '_captcha' && key !== '_template' && key !== '_honey') {
           hasData = true;
-          detailsHtml += `<li><strong>${key}:</strong> ${value}</li>`;
+          const li = document.createElement('li');
+          const strong = document.createElement('strong');
+          strong.textContent = `${key}: `;
+          li.appendChild(strong);
+          li.appendChild(document.createTextNode(value));
+          detailsList.appendChild(li);
         }
       }
-      detailsHtml += '</ul>';
       
       if (hasData) {
-        signupDetailsDiv.innerHTML = detailsHtml;
+        signupDetailsDiv.textContent = '';
+        signupDetailsDiv.appendChild(detailsList);
         signupDataDiv.style.display = 'block';
       }
     });

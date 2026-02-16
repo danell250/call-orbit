@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CallOrbit — Start your free trial</title>
+  <meta name="description" content="Choose your CallOrbit portal plan and start a 14-day free trial in minutes. No credit card required to begin.">
+  <link rel="canonical" href="https://callorbit.vercel.app/signup">
 
   <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
@@ -315,14 +317,105 @@
       background: #10b981;
     }
 
-    /* Signup Form */
-    .signup-form {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 40px 30px;
+    /* Signup Entry + Modal */
+    .signup-entry {
+      max-width: 760px;
+      margin: 30px auto 70px;
+      padding: 28px 22px;
       background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+      text-align: center;
+    }
+
+    .signup-entry h2 {
+      margin: 0 0 8px;
+      color: #1e3a8a;
+      font-size: 1.8rem;
+    }
+
+    .signup-entry p {
+      margin: 0 0 18px;
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    .open-signup-modal-btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.3);
+    }
+
+    .open-signup-modal-btn:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+
+    .open-signup-modal-btn:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signup-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: grid;
+      place-items: center;
+      z-index: 1200;
+      padding: 20px;
+    }
+
+    .signup-modal-overlay[hidden] {
+      display: none;
+    }
+
+    .signup-modal {
+      width: min(560px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+      position: relative;
+      padding: 34px 28px 24px;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border: none;
+      background: #f1f5f9;
+      color: #334155;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .close-modal-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .signup-form {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      max-width: none;
     }
 
     .signup-form h2 {
@@ -410,16 +503,6 @@
       font-weight: 600;
     }
 
-    .next-steps-note {
-      background: #fef3c7;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #92400e;
-      text-align: center;
-    }
-
     /* Features Grid */
     .features-section {
       max-width: 1100px;
@@ -494,7 +577,7 @@
 
   <header class="hero fade-in">
     <h1>Start your call center in minutes</h1>
-    <p class="subtitle">Professional call routing, queue management, and analytics.<br>No setup fees. No credit card
+    <p class="subtitle">Professional call routing, queue management, and analytics.<br>No credit card
       required.</p>
     <div class="trust-badge">
       <i class="fas fa-check-circle"></i> 14-Day Free Trial
@@ -530,7 +613,7 @@
     <p>No credit card required. Full access to all features. Set up your entire call center, test with your team, and
       see results before you pay anything.</p>
     <div class="cta-buttons">
-      <a href="#signupForm" onclick="document.getElementById('signupForm').scrollIntoView({behavior:'smooth'}); return false;">Get Started</a>
+      <a href="#plans-container" onclick="document.getElementById('plans-container').scrollIntoView({behavior:'smooth'}); return false;">Select Plan</a>
       <a href="/reach-us.html">Contact Sales</a>
     </div>
   </section>
@@ -632,70 +715,66 @@
     </div>
   </section>
 
-  <!-- SIGNUP FORM -->
-  <section class="signup-form fade-in">
-    <h2>Start your free trial</h2>
-    <p class="form-subtitle">No credit card required for trial period. You'll receive login credentials within 24 hours.
-    </p>
-
+  <section class="signup-entry fade-in">
+    <h2>Complete trial signup</h2>
+    <p>Select a plan above to unlock the quick signup form.</p>
     <div id="selected-plan-display" class="selected-plan-badge" style="display:none;">
       Selected: <strong><span id="plan-name-display"></span></strong>
     </div>
-
-    <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
-      <!-- FormSubmit Configuration -->
-      <input type="hidden" name="_next" value="https://callorbit.vercel.app/signup-success.html">
-      <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" style="display:none">
-
-      <!-- Hidden fields for tracking -->
-      <input type="hidden" name="Signup Type" value="Portal Plan Trial">
-      <input type="hidden" id="trialStartInput" name="Trial Start Date">
-      <input type="hidden" id="trialEndInput" name="Trial End Date">
-
-      <input type="hidden" name="Selected Plan" id="planInput">
-
-      <label for="email">Work Email*</label>
-      <input type="email" id="email" name="Email" required placeholder="you@company.com" autocomplete="email">
-
-      <label for="firstName">First Name*</label>
-      <input type="text" id="firstName" name="First Name" required autocomplete="given-name">
-
-      <label for="lastName">Last Name*</label>
-      <input type="text" id="lastName" name="Last Name" required autocomplete="family-name">
-
-      <label for="companyName">Company Name*</label>
-      <input type="text" id="companyName" name="Company Name" required autocomplete="organization">
-
-      <label for="phoneNumber">Phone Number*</label>
-      <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567" autocomplete="tel">
-
-      <button type="submit" id="submitBtn">Get Started</button>
-      
-      <div class="trust-strip" style="margin-top: 15px; margin-bottom: 5px;">
-        <span><i class="fas fa-lock"></i> Secure billing</span>
-        <span><i class="fas fa-shield-halved"></i> GDPR-ready</span>
-        <span><i class="fas fa-server"></i> Carrier-grade infrastructure</span>
-      </div>
-
-      <p class="message" id="message"></p>
-      <p style="font-size: 0.8rem; color: #6b7280; text-align: center; margin-top: 10px;">Note: Due to high demand,
-        email delivery may take up to 24 hours. Please check your spam folder if you don't receive it.</p>
-    </form>
-
-    <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-      <p style="color: #6b7280; font-size: 0.95rem;">Need a custom enterprise plan? <a href="/reach-us.html" style="color: #3b82f6; font-weight: 600; text-decoration: none;">Contact Sales</a></p>
-    </div>
-
-    <div class="next-steps-note" id="success-message" style="display:none;">
-      <strong>✓ Thank You!</strong><br>
-      Your free trial request has been submitted. Check your email for login details within 24 hours. Then visit our <a
-        href="/get-numbers.html" style="color:#3b82f6;font-weight:600;">Provision Numbers</a> page to purchase phone numbers
-      with minutes.
-    </div>
+    <button id="openSignupModalBtn" type="button" class="open-signup-modal-btn" disabled>
+      Select a Plan to Continue
+    </button>
   </section>
+
+  <div id="signupModalOverlay" class="signup-modal-overlay" hidden>
+    <div class="signup-modal" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+      <button id="closeSignupModal" type="button" class="close-modal-btn" aria-label="Close signup form">&times;</button>
+      <section class="signup-form">
+        <h2 id="signupModalTitle">Start your free trial</h2>
+        <p class="form-subtitle">No credit card required for the trial period. Login credentials are sent within 24 hours.</p>
+
+        <form id="signupForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com" method="POST">
+          <input type="hidden" name="_next" value="/signup-success.html">
+          <input type="hidden" name="_subject" value="New CallOrbit Free Trial Signup">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none">
+
+          <input type="hidden" name="Signup Type" value="Portal Plan Trial">
+          <input type="hidden" id="trialStartInput" name="Trial Start Date">
+          <input type="hidden" id="trialEndInput" name="Trial End Date">
+          <input type="hidden" name="Selected Plan" id="planInput">
+
+          <label for="email">Work Email*</label>
+          <input type="email" id="email" name="Email" required placeholder="you@company.com" autocomplete="email">
+
+          <label for="firstName">First Name*</label>
+          <input type="text" id="firstName" name="First Name" required autocomplete="given-name">
+
+          <label for="lastName">Last Name*</label>
+          <input type="text" id="lastName" name="Last Name" required autocomplete="family-name">
+
+          <label for="companyName">Company Name*</label>
+          <input type="text" id="companyName" name="Company Name" required autocomplete="organization">
+
+          <label for="phoneNumber">Phone Number*</label>
+          <input type="tel" id="phoneNumber" name="Phone Number" required placeholder="+1 555-123-4567" autocomplete="tel">
+
+          <button type="submit" id="submitBtn">Get Started</button>
+
+          <div class="trust-strip" style="margin-top: 15px; margin-bottom: 5px;">
+            <span><i class="fas fa-lock"></i> Secure billing</span>
+            <span><i class="fas fa-shield-halved"></i> GDPR-ready</span>
+            <span><i class="fas fa-server"></i> Carrier-grade infrastructure</span>
+          </div>
+
+          <p class="message" id="message"></p>
+          <p style="font-size: 0.8rem; color: #6b7280; text-align: center; margin-top: 10px;">
+            Submission is immediate. Check spam/junk folders if your confirmation mail does not appear.
+          </p>
+        </form>
+      </section>
+    </div>
+  </div>
 
   <footer>
     &copy; <span id="year"></span> CallOrbit. All rights reserved.<br>
@@ -720,6 +799,9 @@
       const submitBtn = document.getElementById('submitBtn');
       const trialStartInput = document.getElementById('trialStartInput');
       const trialEndInput = document.getElementById('trialEndInput');
+      const openSignupModalBtn = document.getElementById('openSignupModalBtn');
+      const signupModalOverlay = document.getElementById('signupModalOverlay');
+      const closeSignupModal = document.getElementById('closeSignupModal');
 
       // Set trial dates
       const now = new Date();
@@ -743,9 +825,36 @@
           planInput.value = `${planName} - $${plan.dataset.price}/month`;
           planNameDisplay.textContent = `${planName} Plan - $${plan.dataset.price}/month`;
           planDisplay.style.display = 'block';
-
-          document.getElementById('signupForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          openSignupModalBtn.disabled = false;
+          openSignupModalBtn.textContent = 'Open Signup Form';
+          signupModalOverlay.hidden = false;
+          document.body.style.overflow = 'hidden';
+          messageEl.textContent = '';
         });
+      });
+
+      function closeModal() {
+        signupModalOverlay.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      openSignupModalBtn.addEventListener('click', () => {
+        if (!planInput.value) {
+          messageEl.style.color = '#dc2626';
+          messageEl.textContent = 'Please select a plan first.';
+          document.getElementById('plans-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        signupModalOverlay.hidden = false;
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeSignupModal.addEventListener('click', closeModal);
+      signupModalOverlay.addEventListener('click', (e) => {
+        if (e.target === signupModalOverlay) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !signupModalOverlay.hidden) closeModal();
       });
 
       // Form validation and submission
@@ -757,28 +866,6 @@
           messageEl.textContent = '❌ Please select a plan first';
           document.querySelector('.plans-section').scrollIntoView({ behavior: 'smooth' });
           return false;
-        }
-
-        // Store in localStorage as backup before form submits
-        const formData = new FormData(form);
-        const formDataObj = {};
-        for (const [key, value] of formData.entries()) {
-          if (key !== '_honey' && !key.startsWith('_')) {
-            formDataObj[key] = value;
-          }
-        }
-
-        const signupRecord = {
-          ...formDataObj,
-          timestamp: new Date().toISOString()
-        };
-
-        try {
-          const existingSignups = JSON.parse(localStorage.getItem('callorbit_signups') || '[]');
-          existingSignups.push(signupRecord);
-          localStorage.setItem('callorbit_signups', JSON.stringify(existingSignups));
-        } catch (error) {
-          console.error('LocalStorage error:', error);
         }
 
         // Show processing message

@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CallOrbit — Contact</title>
+  <meta name="description" content="Contact the CallOrbit team for sales guidance, onboarding help, and platform support.">
+  <link rel="canonical" href="https://callorbit.vercel.app/reach-us">
   <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
   <circle cx='32' cy='32' r='30' fill='%233b82f6'/>
@@ -386,7 +388,7 @@
       }
 
       nav .menu {
-        display: none;
+        display: flex;
       }
     }
   </style>
@@ -442,7 +444,7 @@
           <i class="fas fa-envelope"></i>
           <div>
             <h3>Email us</h3>
-            <p>Prefer email? Send us a message using the form and we'll respond within 24 hours.</p>
+            <p>Prefer email? Send us a message using the form and we typically respond within 2-4 business hours.</p>
           </div>
         </div>
 
@@ -467,9 +469,8 @@
     <!-- Contact Form -->
     <form class="contact-form" id="contactForm" action="https://formsubmit.co/danelloosthuizen3@gmail.com"
       method="POST">
-      <input type="hidden" name="_next" value="https://callorbit.vercel.app/contact-success.html">
+      <input type="hidden" name="_next" value="/contact-success.html">
       <input type="hidden" name="_subject" value="New Contact Form Message - CallOrbit">
-      <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       <input type="text" name="_honey" style="display:none">
 
@@ -585,28 +586,6 @@
         messageEl.textContent = '✅ Sending your message...';
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
-
-        // Store in localStorage as backup
-        const formData = new FormData(contactForm);
-        const formDataObj = {};
-        for (const [key, value] of formData.entries()) {
-          if (key !== '_honey' && !key.startsWith('_')) {
-            formDataObj[key] = value;
-          }
-        }
-
-        const contactRecord = {
-          ...formDataObj,
-          timestamp: new Date().toISOString()
-        };
-
-        try {
-          const existingContacts = JSON.parse(localStorage.getItem('callorbit_contacts') || '[]');
-          existingContacts.push(contactRecord);
-          localStorage.setItem('callorbit_contacts', JSON.stringify(existingContacts));
-        } catch (error) {
-          console.error('LocalStorage error:', error);
-        }
 
         // Let the form submit normally - FormSubmit will handle the redirect via _next field
       });

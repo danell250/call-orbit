@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CallOrbit — Provision Numbers & Plans</title>
+  <meta name="description" content="Provision local, national, and toll-free numbers with transparent usage packages and secure checkout.">
+  <link rel="canonical" href="https://callorbit.vercel.app/get-numbers">
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%233b82f6'/></svg>">
 
@@ -828,6 +830,7 @@
 
     function initializeCountries() {
       const sortedCountries = countries.sort((a, b) => countryNames[a].localeCompare(countryNames[b]));
+      countrySelectEl.innerHTML = '<option value="">-- Select Country --</option>';
       sortedCountries.forEach(c => {
         const opt = document.createElement('option');
         opt.value = c;
@@ -975,9 +978,9 @@
       const country = planEl.dataset.country;
       const countryName = countryNames[country];
       const numberType = planEl.dataset.numberType;
-      const area = numberType === 'local' ? areaSelectEl.value : '';
+      const area = numberType === 'Local' ? areaSelectEl.value : '';
 
-      if (numberType === 'local' && !area) {
+      if (numberType === 'Local' && !area) {
         alert("Please select an area for local numbers.");
         return;
       }
@@ -1105,11 +1108,6 @@
         }
       }).render('#paypal-button-container');
     }
-
-    // Initialize
-    initializeCountries();
-    populateAreas();
-    generatePlans();
 
     // Event Listeners
     countrySelectEl.addEventListener('change', () => {
